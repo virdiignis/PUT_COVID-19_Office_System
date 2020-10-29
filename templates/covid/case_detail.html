@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-header"><h2>{{ case.title }}</h2></div>
+        <br>
+        <div style="padding-left: 5em">Status: <b>{% if case.closed %}Closed{% else %}Open{% endif %}</b></div>
+        <div style="padding-left: 5em">Opened: {{ case.date_open }}</div>
+        {% if closed %}
+            <div style="padding-left: 5em">Closed: {{ case.date_close }}</div>{% endif %}
+        <br>
+    </div>
+
+    <div class="card">
+        <div class="card-header"><h3>Involved people</h3></div>
+        <div class="card-body">
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Health state</th>
+                    <th scope="col">Unit</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone number</th>
+                </tr>
+                </thead>
+                {% for person in case.people.all %}
+                    <tr>
+                        <td>
+                            <a href={% url "case_details" person.id %}>
+                                {#TODO: switch that to link to PersonDetail#}
+                                {{ person }}
+                            </a>
+                        </td>
+                        <td>{{ person.get_role_display }}</td>
+                        <td>{{ person.health_state }}</td>
+                        <td>{% if person.unit %}{{ person.unit }}{% endif %}</td>
+                        <td>
+                            {% if person.email %}
+                                <a href="mailto:{{ person.email }}">{{ person.email }}</a>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if person.phone_number %}
+                                {{ person.phone_number }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header"><h3>Isolations in case</h3></div>
+        <div class="card-body">
+            {% if isolations %}
+                <table class="table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Ordered by</th>
+                        <th scope="col">Start date</th>
+                        <th scope="col">End date</th>
+                        <th scope="col">Order date</th>
+                        <th scope="col">Whereabouts</th>
+                        <th scope="col">Health state</th>
+                    </tr>
+                    </thead>
+                    {% for isolation in isolations %}
+                        <tr style="background:
+                                {% if isolation.active %}
+                                    {% if isolation.person.health_state.considered_sick %}
+                                        orangered
+                                    {% elif isolation.person.health_state.considered_suspect %}
+                                        yellow
+                                    {% endif %}
+                                {% else %}
+                                    lightgray
+                                {% endif %}">
+                            <td>
+                                {#                                    <a href={% url "case_details" isolation.id %}>#}
+                                {#TODO: switch that to link to IsolationDetail#}
+                                {{ isolation.person }}
+                                {#                                    </a>#}
+                            </td>
+                            <td>{{ isolation.ordered_by }}</td>
+                            <td>{{ isolation.start_date }}</td>
+                            <td>{{ isolation.end_date }}</td>
+                            <td>{{ isolation.ordered_on }}</td>
+                            <td>{{ isolation.get_whereabouts_display }}</td>
+                            <td>{{ isolation.person.health_state }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                No isolations in the case.
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header"><h3>Actions history</h3></div>
+        <div class="card-body">
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Made by</th>
+                    <th scope="col">Based on</th>
+                    <th scope="col">Description</th>
+                </tr>
+                </thead>
+                {% for action in actions %}
+                    <tr>
+                        <td>
+                            <a href={% url "case_details" action.id %}>
+                                {#TODO: switch that to link to ActionDetail#}
+                                {{ action.datetime }}
+                            </a>
+                        </td>
+                        <td>
+                            <a href={% url "case_details" action.made_by.id %}>
+                                {#TODO: switch that to link to WorkerDetail#}
+                                {{ action.made_by }}
+                            </a>
+                        </td>
+                        <td>{{ action.get_based_on_display }}</td>
+                        <td>{{ action.action_description }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+    {% if case.documents.exists %}
+        <div class="card">
+            <div class="card-header"><h3>Documents</h3></div>
+            <div class="card-body">
+                <table class="table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Upload date</th>
+                    </tr>
+                    </thead>
+                    {% for doc in case.documents.all %}
+                        <tr>
+                            <td>
+                                <a href={{ doc.file.url }}>{{ doc.name }}</a>
+                            </td>
+                            <td>{{ doc.upload_date }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    {% endif %}
+
+
+{% endblock %}
