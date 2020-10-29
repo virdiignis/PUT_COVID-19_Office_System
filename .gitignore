@@ -1,2 +1,42 @@
-# Project exclude paths
-/venv/
+# PyCharm IDE settings files
+.idea/
+
+# Vietualenv files
+venv/
+
+# Pyhon cache files
+**/__pycache__/
+
+# Python eggs
+**/*.egg-info/
+
+# Uploaded files
+/media/
+/media_for_tests/
+
+# Testing framework temporary files
+.pytest_cache/
+.coverage
+
+# Django default database file
+*.sqlite3
+
+# Database backup
+db_backup.json
+
+# Logs
+**/logs/*
+*.log
+
+# Celery schedule
+celerybeat-schedule
+
+# Migrations
+**/migrations/*
+!**/migrations/__init__.py
+
+# Collected static files
+/static/
+/fixtures/
+
+*.lock
