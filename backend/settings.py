@@ -35,8 +35,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'dal',
+    'dal_select2',
+    'bootstrap_modal_forms',
     'apps.office',
-    'apps.covid'
+    'apps.covid',
 ]
 
 MIDDLEWARE = [
@@ -117,6 +120,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / 'static/js',
+                    BASE_DIR / 'static/css']
+
+STATIC_ROOT = 'static'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 MEDIA_ROOT = 'media'

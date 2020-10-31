@@ -2,3 +2,5 @@ django
 django-guardian
 django-phonenumber-field
 phonenumbers
+django-autocomplete-light
+django-bootstrap-modal-forms

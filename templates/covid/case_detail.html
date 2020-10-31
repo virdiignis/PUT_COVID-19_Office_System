@@ -2,12 +2,17 @@
 
 {% block content %}
     <div class="card">
-        <div class="card-header"><h2>{{ case.title }}</h2></div>
+        <div class="card-header d-flex justify-content-between">
+            <h2>{{ case.title }}</h2>
+            <div class="btn-group align-self-center col-sm-1">
+                <a class="btn btn-primary" href="{% url 'case_update' case.id %}">Edit</a>
+            </div>
+        </div>
         <br>
-        <div style="padding-left: 5em">Status: <b>{% if case.closed %}Closed{% else %}Open{% endif %}</b></div>
+        <div style="padding-left: 5em">Status: <b>{% if closed %}Closed{% else %}Open{% endif %}</b></div>
         <div style="padding-left: 5em">Opened: {{ case.date_open }}</div>
         {% if closed %}
-            <div style="padding-left: 5em">Closed: {{ case.date_close }}</div>{% endif %}
+            <div style="padding-left: 5em">Closed: {{ case.date_closed }}</div>{% endif %}
         <br>
     </div>
 
@@ -19,10 +24,10 @@
                 <tr>
                     <th scope="col">Name</th>
                     <th scope="col">Role</th>
-                    <th scope="col">Health state</th>
                     <th scope="col">Unit</th>
                     <th scope="col">Email</th>
                     <th scope="col">Phone number</th>
+                    <th scope="col">Health state</th>
                 </tr>
                 </thead>
                 {% for person in case.people.all %}
@@ -34,7 +39,6 @@
                             </a>
                         </td>
                         <td>{{ person.get_role_display }}</td>
-                        <td>{{ person.health_state }}</td>
                         <td>{% if person.unit %}{{ person.unit }}{% endif %}</td>
                         <td>
                             {% if person.email %}
@@ -46,6 +50,7 @@
                                 {{ person.phone_number }}
                             {% endif %}
                         </td>
+                        <td>{{ person.health_state }}</td>
                     </tr>
                 {% endfor %}
             </table>

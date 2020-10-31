@@ -28,9 +28,9 @@ class HealthState(Model):
     def __str__(self):
         if self.test is not None:
             if self.test:
-                test = " with positive test result."
+                test = " + positive test result."
             else:
-                test = " with negative test result."
+                test = " + negative test result."
         else:
             test = ""
 
@@ -71,7 +71,7 @@ class Person(Model):
     first_name = models.CharField(max_length=32)
     middle_name = models.CharField(max_length=32, null=True, blank=True)
     last_name = models.CharField(max_length=32)
-    email = models.EmailField(null=True, blank=True)
+    email = models.EmailField(null=True, blank=True, unique=True)
     phone_number = PhoneNumberField(null=True, blank=True, unique=True)
     role = models.CharField(max_length=1, default="N", choices=(("S", "Student"),
                                                                 ("E", "Employee"),
@@ -89,16 +89,16 @@ class Person(Model):
     unit = models.ForeignKey(Unit, null=True, blank=True, on_delete=models.SET_NULL)
 
     def __str__(self):
-        title = f"{self.title} " if self.title is not None else ''
+        title = f"{self.get_title_display()} " if self.title is not None else ''
         middle = f" {self.middle_name} " if self.middle_name is not None else ' '
         return f"{title}{self.first_name}{middle}{self.last_name}"
 
 
 class Case(Model):
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=255, unique=True)
     people = models.ManyToManyField(Person, related_name="cases")
     date_open = models.DateField(auto_now_add=True)
-    date_close = models.DateField(null=True, blank=True)
+    date_closed = models.DateField(null=True, blank=True)
 
     def __str__(self):
         return self.title
@@ -123,7 +123,7 @@ class Isolation(Model):
 
 
 class Action(Model):
-    datetime = models.DateTimeField(auto_now_add=True)
+    datetime = models.DateTimeField()
     made_by = models.ForeignKey(Worker, on_delete=models.SET_NULL, null=True, blank=False)
     based_on = models.CharField(max_length=1, default="O", choices=(("O", "Own action"),
                                                                     ("E", "Email"),
