@@ -2,7 +2,7 @@ from bootstrap_modal_forms.generic import BSModalCreateView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import SuspiciousOperation
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.utils import timezone
@@ -73,26 +73,14 @@ class CaseCreateModalView(LoginRequiredMixin, BSModalCreateView):
 class PersonCreateModalView(LoginRequiredMixin, BSModalCreateView):
     template_name = 'covid/person_new_modal.html'
     form_class = PersonCreateModalForm
+    success_url = reverse_lazy('null')  # this is required, but not used
 
-    def get_success_url(self):
-        if self.object.id is not None:
-            return reverse_lazy('person_detail_json', args=(self.object.id,))
+    def form_valid(self, form):
+        super(PersonCreateModalView, self).form_valid(form)
+        if not self.request.is_ajax() or self.request.POST.get('asyncUpdate') == 'True':
+            return JsonResponse({"id": self.object.id, "name": str(self.object)})
         else:
-            return reverse_lazy('null')
-
-    # def form_valid(self, form):
-    #     super(PersonCreateModalView, self).form_valid(form)
-    #     return JsonResponse({"id": self.object.id})
-
-
-@login_required
-def person_detail_json(request, pk):
-    person = get_object_or_404(Person, pk=pk)
-    data = {
-        "id": person.id,
-        "name": str(person)
-    }
-    return JsonResponse(data)
+            return HttpResponse()
 
 
 class CaseUpdateView(LoginRequiredMixin, UpdateView):
