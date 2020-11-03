@@ -6,7 +6,7 @@
             <div class="modal-content"></div>
         </div>
     </div>
-    <h2>Cases</h2>
+    <h2 class="card-title">Cases</h2>
     <div class="d-flex justify-content-between">
         <form id="searchForm" method="get" class="flex-fill">
             <div class="form-group">
@@ -30,7 +30,7 @@
         </div>
     </div>
     <table class="table">
-        <thead class="thead-light">
+        <thead class="thead-dark">
         <tr>
             <th scope="col">Title</th>
             <th scope="col">People involved</th>
@@ -69,6 +69,8 @@
     </div>
 
 
+    {% load static %}
+    <script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $("#newCaseButton").modalForm({

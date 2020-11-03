@@ -1,0 +1,37 @@
+<div class="modal-header">
+    <h3 class="modal-title">Action details</h3>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<div class="modal-body">
+    <div class="d-flex justify-content-between">
+        <b>Datetime:</b>
+        <p>{{ action.datetime }}</p>
+    </div>
+    <div class="d-flex justify-content-between">
+        <b>Made by:</b>
+        <p>{{ action.made_by }}</p>
+    </div>
+    <div class="d-flex justify-content-between">
+        <b>Based on:</b>
+        <p>{{ action.get_based_on_display }}</p>
+    </div>
+    <div class="d-flex justify-content-between">
+        <b>Incoming contact content:</b>
+        <p>{% if action.contact_content %}{{ action.contact_content }}{% else %}—{% endif %}</p>
+    </div>
+    <div class="d-flex justify-content-between">
+        <b>Action description:</b>
+        <p>{{ action.action_description }}</p>
+    </div>
+    <div class="d-flex justify-content-between">
+        <b>Notes:</b>
+        <p> {% if action.notes %}{{ action.notes }}{% else %}—{% endif %}</p>
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>

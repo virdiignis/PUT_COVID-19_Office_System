@@ -1,4 +1,4 @@
-from bootstrap_modal_forms.generic import BSModalCreateView
+from bootstrap_modal_forms.generic import BSModalCreateView, BSModalReadView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import SuspiciousOperation
@@ -10,8 +10,9 @@ from django.utils import timezone
 from django.db.models import Q
 from django.views.generic import ListView, DetailView, UpdateView
 
-from apps.covid.forms import CaseCreateModalForm, PersonCreateModalForm, CaseUpdateForm
-from apps.covid.models import Case, Person
+from apps.covid.automatic_actions import AutomaticLogActions
+from apps.covid.forms import CaseCreateModalForm, PersonCreateModalForm, CaseUpdateForm, IsolationFormSet, ActionFormSet
+from apps.covid.models import Case, Action
 
 
 class CaseListView(LoginRequiredMixin, ListView):
@@ -21,17 +22,21 @@ class CaseListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         open = self.request.GET.get('open', "None")
         if open == "None":
-            q = Case.objects.order_by('date_open', 'date_closed')
+            q = Case.objects.order_by('-date_open', '-date_closed')
         elif open == "true":
-            q = Case.objects.filter(Q(date_closed__isnull=True)).order_by('date_open')
+            q = Case.objects.filter(Q(date_closed__isnull=True)).order_by('-date_open')
         else:
-            q = Case.objects.filter(date_closed__isnull=False).order_by('date_closed')
+            q = Case.objects.filter(date_closed__isnull=False).order_by('-date_closed')
 
         search = self.request.GET.get('search', None)
         if search is not None:
-            q = q.filter(title__icontains=search)
+            q = q.filter(
+                Q(title__icontains=search) |
+                Q(people__first_name__istartswith=search) |
+                Q(people__last_name__istartswith=search)
+            )
 
-        return q
+            return q
 
     def get_context_data(self, **kwargs):
         context = super(CaseListView, self).get_context_data(**kwargs)
@@ -52,7 +57,7 @@ class CaseDetailView(LoginRequiredMixin, DetailView):
         context["closed"] = context["case"].date_closed is not None
         if context["case"].isolations.exists():
             context["isolations"] = list(context["case"].isolations.all())
-            context["isolations"].sort(key=lambda x: x.person.health_state.severity)
+            context["isolations"].sort(key=lambda x: (x.person.health_state.severity, x.end_date))
         else:
             context["isolations"] = []
 
@@ -66,21 +71,13 @@ class CaseCreateModalView(LoginRequiredMixin, BSModalCreateView):
     form_class = CaseCreateModalForm
     template_name = "covid/case_new_modal.html"
 
+    def form_valid(self, form):
+        result = super(CaseCreateModalView, self).form_valid(form)
+        AutomaticLogActions(self.object, self.request.user).create_case()
+        return result
+
     def get_success_url(self):
         return reverse_lazy("case_update", args=(self.object.id,))
-
-
-class PersonCreateModalView(LoginRequiredMixin, BSModalCreateView):
-    template_name = 'covid/person_new_modal.html'
-    form_class = PersonCreateModalForm
-    success_url = reverse_lazy('null')  # this is required, but not used
-
-    def form_valid(self, form):
-        super(PersonCreateModalView, self).form_valid(form)
-        if not self.request.is_ajax() or self.request.POST.get('asyncUpdate') == 'True':
-            return JsonResponse({"id": self.object.id, "name": str(self.object)})
-        else:
-            return HttpResponse()
 
 
 class CaseUpdateView(LoginRequiredMixin, UpdateView):
@@ -91,7 +88,39 @@ class CaseUpdateView(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super(CaseUpdateView, self).get_context_data(**kwargs)
         context["is_open"] = self.object.date_closed is None
+
+        if self.request.POST:
+            context["isolations"] = IsolationFormSet(self.request.POST, instance=self.object)
+            context["actions"] = ActionFormSet(self.request.POST, instance=self.object)
+        else:
+            context["isolations"] = IsolationFormSet(instance=self.object)
+            context["actions"] = ActionFormSet(instance=self.object)
         return context
+
+    def form_valid(self, form):
+        context = self.get_context_data()
+        isolations = context['isolations']
+        actions = context['actions']
+
+        self.object = form.save()
+        valid = True
+
+        if isolations.is_valid():
+            isolations.instance = self.object
+            isolations.save()
+        else:
+            valid = False
+
+        if actions.is_valid():
+            actions.instance = self.object
+            actions.save()
+        else:
+            valid = False
+
+        if valid:
+            return redirect(reverse_lazy("case_details", args=(self.object.id,)))
+        else:
+            return self.render_to_response(self.get_context_data(form=form))
 
     def get_success_url(self):
         return reverse_lazy("case_details", args=(self.object.id,))
@@ -104,6 +133,7 @@ def case_close(request, pk: int):
         raise SuspiciousOperation("Case already closed.")
     case.date_closed = timezone.now().date()
     case.save()
+    AutomaticLogActions(case, request.user).close_case()
 
     return redirect('case_details', pk=pk)
 
@@ -115,5 +145,25 @@ def case_reopen(request, pk: int):
         raise SuspiciousOperation("Case is open.")
     case.date_closed = None
     case.save()
+    AutomaticLogActions(case, request.user).reopen_case()
 
     return redirect('case_update', pk=pk)
+
+
+class PersonCreateModalView(LoginRequiredMixin, BSModalCreateView):
+    template_name = 'covid/person_new_modal.html'
+    form_class = PersonCreateModalForm
+    success_url = reverse_lazy('null')  # this is required, but not used
+
+    def form_valid(self, form):
+        super(PersonCreateModalView, self).form_valid(form)
+        if not self.request.is_ajax() or self.request.POST.get('asyncUpdate') == 'True':
+            AutomaticLogActions(user=self.request.user).add_new_person(self.object)
+            return JsonResponse({"id": self.object.id, "name": str(self.object)})
+        else:
+            return HttpResponse()
+
+
+class ActionDetailModalView(LoginRequiredMixin, BSModalReadView):
+    model = Action
+    template_name = 'covid/action_detail_modal.html'

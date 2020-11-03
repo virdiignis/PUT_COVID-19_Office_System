@@ -14,19 +14,27 @@
             <div class="card-header d-flex justify-content-between">
                 {% if is_open %}
                     <h3>Title: {{ form.title }} </h3>
+                    {{ form.title.errors }}
+
+                    <div class="btn-group align-self-end col-sm-2">
+                        <a class="btn btn-danger" href="{% url 'case_close' case.id %}">Close case</a>
+                    </div>
+
                     <div class="btn-group align-self-center col-sm-2">
                         <a type="submit" class="btn btn-danger" href="{% url 'case_details' case.id %}">Cancel</a>
                         <button type="submit" class="btn btn-success">Save</button>
                     </div>
                 {% else %}
                     <h3>Title: {{ case.title }} </h3>
+                    <div class="btn-group align-self-end col-sm-2">
+                        <a class="btn btn-info" href="{% url 'case_reopen' case.id %}">Reopen case</a>
+                    </div>
                 {% endif %}
-                {{ form.title.errors }}
             </div>
         </div>
         <div class="card">
             <h2 class="card-header">Involved people</h2>
-            <div class="card-body d-flex justify-content-between">
+            <div class="card-body d-flex justify-content-between {% if is_open %}disabled{% endif %}">
                 {{ form.people }}
                 <button id="newPersonButton" class="btn btn-primary text-white" type="button" name="button"
                         style="width: 4%">New
@@ -34,35 +42,123 @@
                 {{ form.people.errors }}
             </div>
         </div>
-        <div class="card">
-            <div class="card-header d-flex justify-content-between">
-                <h3>Actions</h3>
-                <div class="btn-group align-self-center col-sm-2">
-                    {% if is_open %}
-                        <a class="btn btn-danger" href="{% url 'case_close' case.id %}">Close case</a>
-                    {% else %}
-                        <a class="btn btn-info" href="{% url 'case_reopen' case.id %}">Reopen case</a>
-                    {% endif %}
-                </div>
 
-            </div>
-            <div class="card-body d-flex justify-content-between">
-                {% for form in actions.forms %}
-                    <div class="inline-form">
-                        {% for field in form %}
-                            <div class="form-group{% if field.errors %} invalid{% endif %}">
-                                <div>
-                                    {{ field.label_tag }}<br>
+        <div class="card">
+            <div class="card-header isolations-add d-flex justify-content-between"><h3>Isolations</h3></div>
+            <div class="card-body">
+                <table class="table">
+                    {{ isolations.management_form }}
+
+                    {% for form in isolations.forms %}
+                        {% if forloop.first %}
+                            <thead class="thead-dark">
+                            <tr>
+                                {% for field in form.visible_fields %}
+                                    <th>{{ field.label|capfirst }}</th>
+                                {% endfor %}
+                            </tr>
+                            </thead>
+                        {% endif %}
+                        <tr class="formset_row {{ isolations.prefix }}">
+                            {% for field in form.visible_fields %}
+                                <td>
+                                    {% if forloop.first %}
+                                        {% for hidden in form.hidden_fields %}
+                                            {{ hidden }}
+                                        {% endfor %}
+                                    {% endif %}
+                                    {% for error in field.errors %}
+                                        <p class="help-block" style="color: red">{{ error }}</p>
+                                    {% endfor %}
                                     {{ field }}
+                                </td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+
+
+        <div class="card">
+            <div class="card-header actions-add d-flex justify-content-between">
+                <h3>Actions</h3>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    {{ actions.management_form }}
+
+                    {% for form in actions.forms %}
+                        {% if forloop.first %}
+                            <thead class="thead-dark">
+
+                            <tr>
+                                <th>{{ form.datetime.label }} / {{ form.made_by.label }}
+                                    / {{ form.based_on.label }}</th>
+                                <th>{{ form.contact_content.label }}</th>
+                                <th>{{ form.action_description.label }}</th>
+                                <th>{{ form.notes.label }}</th>
+                                <th>delete</th>
+                            </tr>
+
+                            </thead>
+
+                        {% endif %}
+
+                        <tr class="formset_row {{ actions.prefix }}">
+
+                            {% for hidden in form.hidden_fields %}
+                                {{ hidden }}
+                            {% endfor %}
+                            <td class="d-flex flex-column justify-content-around">
+                                <div class="d-flex flex-column justify-content-between">
+                                    <b>{{ form.datetime.label }}</b>
+                                    {% for error in form.datetime.errors %}
+                                        <p class="help-block" style="color: red">{{ error }}</p>
+                                    {% endfor %}
+                                    {{ form.datetime }}
                                 </div>
-                                {% for error in field.errors %}
+                                <br>
+                                <div class="d-flex justify-content-between">
+                                    <b>{{ form.made_by.label }}</b>
+                                    {% for error in form.made_by.errors %}
+                                        <p class="help-block" style="color: red">{{ error }}</p>
+                                    {% endfor %}
+                                    {{ form.made_by }}
+                                </div>
+                                <br>
+                                <div class="d-flex justify-content-between">
+                                    <b>{{ form.based_on.label }}</b>
+                                    {% for error in form.based_on.errors %}
+                                        <p class="help-block" style="color: red">{{ error }}</p>
+                                    {% endfor %}
+                                    {{ form.based_on }}
+                                </div>
+                            </td>
+
+                            <td>
+                                {% for error in form.contact_content.errors %}
                                     <p class="help-block" style="color: red">{{ error }}</p>
                                 {% endfor %}
-                            </div>
-                        {% endfor %}
-                    </div>
-                    {{ form.media }}
-                {% endfor %}
+                                {{ form.contact_content }}
+                            </td>
+                            <td>
+                                {% for error in form.action_description.errors %}
+                                    <p class="help-block" style="color: red">{{ error }}</p>
+                                {% endfor %}
+                                {{ form.action_description }}
+                            </td>
+                            <td>
+                                {% for error in form.notes.errors %}
+                                    <p class="help-block" style="color: red">{{ error }}</p>
+                                {% endfor %}
+                                {{ form.notes }}
+                            </td>
+                            <td></td>
+                        </tr>
+
+                    {% endfor %}
+                </table>
             </div>
         </div>
     </form>
@@ -91,5 +187,29 @@
             addPersonModal();
         });
     </script>
+    <script src="{% static 'js/jquery.formset.js' %}"></script>
+    <script src="{% static 'covid/js/select2.isolations.to.involved.people.js' %}"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $(".formset_row.{{ isolations.prefix }}").formset({
+                addText: 'Add isolation',
+                addCssClass: 'add-row btn btn-primary',
+                addContainerClass: 'isolations-add',
+                deleteText: 'remove',
+                deleteCssClass: 'delete-row',
+                prefix: "{{ isolations.prefix }}",
+            })
+            $(".formset_row.{{ actions.prefix }}").formset({
+                addText: 'Add action',
+                addCssClass: 'add-row btn btn-primary',
+                addContainerClass: 'actions-add',
+                deleteText: 'remove',
+                deleteCssClass: 'delete-row',
+                prefix: "{{ actions.prefix }}",
+            })
+        })
+    </script>
+
     {{ form.media }}
 {% endblock %}

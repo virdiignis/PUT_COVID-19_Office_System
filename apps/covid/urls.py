@@ -1,7 +1,7 @@
 from django.urls import path
 
 from apps.covid import views
-from apps.covid.autocomplete_views import PersonAutocomplete
+from apps.covid.autocomplete_views import PersonAutocomplete, UnitAutocomplete
 
 urlpatterns = [
     path('cases', views.CaseListView.as_view(), name='cases'),
@@ -12,4 +12,6 @@ urlpatterns = [
     path('cases/new', views.CaseCreateModalView.as_view(), name='case_new_modal'),
     path('person-autocomplete', PersonAutocomplete.as_view(), name='person-autocomplete'),
     path('person/new', views.PersonCreateModalView.as_view(), name='person_new_modal'),
+    path('unit-autocomplete', UnitAutocomplete.as_view(), name='unit-autocomplete'),
+    path('actions/<int:pk>', views.ActionDetailModalView.as_view(), name='action_details'),
 ]

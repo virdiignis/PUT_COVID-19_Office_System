@@ -24,7 +24,7 @@ SECRET_KEY = '=oees2o6!f&a33bk0#l2dk!eyo4+c4^hx%)ej#bt()vr1sg9(g'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.89', '127.0.0.1']
+ALLOWED_HOSTS = ['192.168.1.89', '127.0.0.1', 'localhost']
 
 # Application definition
 
@@ -106,14 +106,10 @@ AUTH_USER_MODEL = "office.worker"
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
-
+LANGUAGE_CODE = 'pl-pl'
+TIME_ZONE = 'Europe/Warsaw'
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)

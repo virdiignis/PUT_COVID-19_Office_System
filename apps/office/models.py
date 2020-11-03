@@ -6,8 +6,10 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 
 class Worker(AbstractUser):
-
     phone_number = PhoneNumberField(null=True, blank=True, unique=True)
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
 
 
 class Reminder(Model):

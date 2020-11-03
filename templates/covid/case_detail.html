@@ -1,6 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <div class="modal fade" tabindex="-1" role="dialog" id="modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content"></div>
+        </div>
+    </div>
+
+    <a href="{% url 'cases' %}">back</a>
     <div class="card">
         <div class="card-header d-flex justify-content-between">
             <h2>{{ case.title }}</h2>
@@ -120,7 +127,7 @@
                 {% for action in actions %}
                     <tr>
                         <td>
-                            <a href={% url "case_details" action.id %}>
+                            <a href='#' class="action-detail" id="action-detail-{{ action.id }}" ano="{{ action.id }}">
                                 {#TODO: switch that to link to ActionDetail#}
                                 {{ action.datetime }}
                             </a>
@@ -163,5 +170,22 @@
         </div>
     {% endif %}
 
+    {% load static %}
+    <script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
+
+
+    <script type="text/javascript">
+        $(function () {
+            function addActionModal() {
+                $(".action-detail").each(function () {
+                    $(this).modalForm({
+                        formURL: "{% url 'action_details' 101010 %}".replace("101010", $(this).attr("ano")),
+                    });
+                });
+            }
+
+            addActionModal();
+        });
+    </script>
 
 {% endblock %}

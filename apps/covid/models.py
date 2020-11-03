@@ -108,9 +108,9 @@ class Isolation(Model):
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
     case = models.ForeignKey(Case, on_delete=models.CASCADE, related_name='isolations')
     ordered_by = models.ForeignKey(IsolationIssuer, on_delete=models.SET_NULL, null=True, blank=False)
+    ordered_on = models.DateField()
     start_date = models.DateField()
     end_date = models.DateField()
-    ordered_on = models.DateField()
     whereabouts = models.CharField(max_length=1, null=True, blank=False, default="H", choices=(("H", "Home"),
                                                                                                ("D", "DS4")))
     cause = models.ForeignKey(IsolationCause, on_delete=models.SET_NULL, null=True, blank=False)
@@ -131,7 +131,7 @@ class Action(Model):
     contact_content = models.TextField(null=True, blank=True)
     action_description = models.TextField()
     notes = models.TextField(null=True, blank=True)
-    case = models.ForeignKey(Case, related_name="actions", on_delete=models.CASCADE)
+    case = models.ForeignKey(Case, related_name="actions", on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return f"{self.made_by.get_short_name()} did {self.action_description} in case {self.case}"

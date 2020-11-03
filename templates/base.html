@@ -14,6 +14,7 @@
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="{% static 'js/flatpickr.fields.setup.js' %}"></script>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
@@ -33,33 +34,5 @@
     {% block content %}
     {% endblock %}
 </main>
-<script>
-    // This code activates flatpickr on fields with the 'datetimefield' class when the document has loaded
-    window.addEventListener("DOMContentLoaded", function () {
-        flatpickr(".datetimefield", {
-            enableTime: true,
-            enableSeconds: true,
-            dateFormat: "Y-m-d H:i:S",
-            {#time_24hr: true,#}
-            minDate: "{{ minDate }}",
-        });
-
-        document.getElementById("place").addEventListener("input", function () {
-            let query = document.getElementById("place").value;
-            let mapdiv = document.getElementById("map");
-            let oldmap = mapdiv.children[0]
-            let newmap = document.createElement("iframe");
-            newmap.width = "600";
-            newmap.height = "450";
-            newmap.frameBorder = "0";
-            newmap.style = "border: 0";
-            newmap.src = "https://www.google.com/maps/embed/v1/place?key={{ GOOGLE_MAPS_API_KEY }}&q=" + query;
-            newmap.allowFullscreen = true;
-
-            mapdiv.replaceChild(newmap, oldmap);
-        });
-    });
-
-</script>
 </body>
 </html>
