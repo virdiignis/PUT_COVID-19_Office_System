@@ -24,7 +24,7 @@ SECRET_KEY = '=oees2o6!f&a33bk0#l2dk!eyo4+c4^hx%)ej#bt()vr1sg9(g'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.1.89', '127.0.0.1']
 
 # Application definition
 
@@ -120,10 +120,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'static/js',
-                    BASE_DIR / 'static/css']
+STATICFILES_DIRS = [BASE_DIR / 'static']
 
-STATIC_ROOT = 'static'
+STATIC_ROOT = 'static_root'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 MEDIA_ROOT = 'media'

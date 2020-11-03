@@ -2,6 +2,7 @@ from bootstrap_modal_forms.generic import BSModalCreateView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import SuspiciousOperation
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.utils import timezone
@@ -10,7 +11,7 @@ from django.db.models import Q
 from django.views.generic import ListView, DetailView, UpdateView
 
 from apps.covid.forms import CaseCreateModalForm, PersonCreateModalForm, CaseUpdateForm
-from apps.covid.models import Case
+from apps.covid.models import Case, Person
 
 
 class CaseListView(LoginRequiredMixin, ListView):
@@ -20,7 +21,7 @@ class CaseListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         open = self.request.GET.get('open', "None")
         if open == "None":
-            q = Case.objects.all()
+            q = Case.objects.order_by('date_open', 'date_closed')
         elif open == "true":
             q = Case.objects.filter(Q(date_closed__isnull=True)).order_by('date_open')
         else:
@@ -69,10 +70,29 @@ class CaseCreateModalView(LoginRequiredMixin, BSModalCreateView):
         return reverse_lazy("case_update", args=(self.object.id,))
 
 
-class PersonCreateModalView(BSModalCreateView, LoginRequiredMixin):
+class PersonCreateModalView(LoginRequiredMixin, BSModalCreateView):
     template_name = 'covid/person_new_modal.html'
     form_class = PersonCreateModalForm
-    success_url = reverse_lazy('null')
+
+    def get_success_url(self):
+        if self.object.id is not None:
+            return reverse_lazy('person_detail_json', args=(self.object.id,))
+        else:
+            return reverse_lazy('null')
+
+    # def form_valid(self, form):
+    #     super(PersonCreateModalView, self).form_valid(form)
+    #     return JsonResponse({"id": self.object.id})
+
+
+@login_required
+def person_detail_json(request, pk):
+    person = get_object_or_404(Person, pk=pk)
+    data = {
+        "id": person.id,
+        "name": str(person)
+    }
+    return JsonResponse(data)
 
 
 class CaseUpdateView(LoginRequiredMixin, UpdateView):

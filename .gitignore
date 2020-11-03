@@ -36,7 +36,7 @@ celerybeat-schedule
 !**/migrations/__init__.py
 
 # Collected static files
-/static/
+/static_root/
 /fixtures/
 
 *.lock

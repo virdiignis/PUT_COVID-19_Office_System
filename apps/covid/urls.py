@@ -12,5 +12,5 @@ urlpatterns = [
     path('cases/new', views.CaseCreateModalView.as_view(), name='case_new_modal'),
     path('person-autocomplete', PersonAutocomplete.as_view(), name='person-autocomplete'),
     path('person/new', views.PersonCreateModalView.as_view(), name='person_new_modal'),
+    path('person/<int:pk>/json', views.person_detail_json, name='person_detail_json'),
 ]
-

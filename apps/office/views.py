@@ -9,4 +9,4 @@ def home(request):
 
 
 def null(request):
-    return JsonResponse({"null": ""})
+    return JsonResponse({"null": None})
