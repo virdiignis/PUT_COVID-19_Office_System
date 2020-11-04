@@ -96,7 +96,7 @@ class Person(Model):
 
 class Case(Model):
     title = models.CharField(max_length=255, unique=True)
-    people = models.ManyToManyField(Person, related_name="cases")
+    people = models.ManyToManyField(Person, related_name="cases", blank=True)
     date_open = models.DateField(auto_now_add=True)
     date_closed = models.DateField(null=True, blank=True)
 

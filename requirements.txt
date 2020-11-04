@@ -4,3 +4,5 @@ django-phonenumber-field
 phonenumbers
 django-autocomplete-light
 django-bootstrap-modal-forms
+psycopg2
+django-bootstrap-pagination

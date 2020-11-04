@@ -12,7 +12,7 @@ class ActionFormSet(inlineformset_factory(Case,
                                                   "notes"),
                                           extra=0,
                                           widgets={
-                                              "datetime": DateTimeInput(format='%Y-%m-%d %H:%M:%S',
+                                              "datetime": DateTimeInput(format='%d.%m.%Y %H:%M:%S',
                                                                         attrs={'class': 'form-control datetimefield'}),
                                               "made_by": autocomplete.ModelSelect2(url='worker-autocomplete')
                                           })):
@@ -27,11 +27,11 @@ IsolationFormSet = inlineformset_factory(Case,
                                              "whereabouts", "cause"),
                                          extra=1,
                                          widgets={
-                                             "start_date": DateInput(format='%Y-%m-%d',
+                                             "start_date": DateInput(format='%d.%m.%Y',
                                                                      attrs={'class': 'form-control datefield'}),
-                                             "end_date": DateInput(format='%Y-%m-%d',
+                                             "end_date": DateInput(format='%d.%m.%Y',
                                                                    attrs={'class': 'form-control datefield'}),
-                                             "ordered_on": DateInput(format='%Y-%m-%d',
+                                             "ordered_on": DateInput(format='%d.%m.%Y',
                                                                      attrs={'class': 'form-control datefield'}),
                                              "person": autocomplete.ModelSelect2(url='person-autocomplete')
                                          })

@@ -1,12 +1,13 @@
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.db.models import Model
+from django.db.models import Model, BooleanField
 from phonenumber_field.modelfields import PhoneNumberField
 
 
 class Worker(AbstractUser):
     phone_number = PhoneNumberField(null=True, blank=True, unique=True)
+    write_access = BooleanField(default=False)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"

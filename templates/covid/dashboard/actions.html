@@ -1,0 +1,36 @@
+{% extends 'covid/dashboard/frame.html' %}
+
+{% block table %}
+    <div class="card col-md-12">
+        <div class="card-header"><h3><a href="#" onclick="top.location.href = '{% url 'actions_dashboard' 1 %}';">Actions</a>
+            history</h3></div>
+        <div class="card-body">
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Made by</th>
+                    <th scope="col">Based on</th>
+                    <th scope="col">Description</th>
+                </tr>
+                </thead>
+                {% for action in page_obj %}
+                    <tr>
+                        <td>
+                            {{ action.datetime }}
+                        </td>
+                        <td>
+                            <a href={% url "case_details" action.made_by.id %}>
+                                {{ action.made_by }}
+                            </a>
+                        </td>
+                        <td>{{ action.get_based_on_display }}</td>
+                        <td>{{ action.action_description }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+            {% load bootstrap_pagination %}
+            {% bootstrap_paginate page_obj range=10 url_view_name="actions_dashboard" %}
+        </div>
+    </div>
+{% endblock %}

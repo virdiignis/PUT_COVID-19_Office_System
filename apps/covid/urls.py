@@ -14,4 +14,9 @@ urlpatterns = [
     path('person/new', views.PersonCreateModalView.as_view(), name='person_new_modal'),
     path('unit-autocomplete', UnitAutocomplete.as_view(), name='unit-autocomplete'),
     path('actions/<int:pk>', views.ActionDetailModalView.as_view(), name='action_details'),
+    path('dashboard', views.covid_dashboard, name='covid_dashboard'),
+    path('dashboard/actions/<int:page>', views.ActionDashboardView.as_view(), name='actions_dashboard'),
+    path('dashboard/cases/<int:page>', views.CaseDashboardView.as_view(), name='cases_dashboard'),
+    path('dashboard/isolations/<int:page>', views.IsolationDashboardView.as_view(), name='isolations_dashboard'),
+    path('dashboard/isolationrooms/<int:page>', views.IsolationRoomDashboardView.as_view(), name='isolationrooms_dashboard'),
 ]

@@ -1,15 +1,16 @@
-1. Dodać modale dodawania akcji w wersji z renderowaniem tabelki z tutoriala https://pypi.org/project/django-bootstrap-modal-forms/
+# 1. Dodać modale dodawania akcji w wersji z renderowaniem tabelki z tutoriala https://pypi.org/project/django-bootstrap-modal-forms/
 2. Powyciągać skrypty do staticów
 3. Detail views dla osób, workerów, akcji
 4. Dodać do office zarządzanie grafikiem
 5. Podłączyć celery
-6. Podłączyć postgres
-7. Zmigorować na serwer
+# 6. Podłączyć postgres
+7. Zmigrować na serwer
 8. Dodać wysyłkę maili
-9. Dodać automatyczne tworzenie akcji przy zmianach dotyczących case'a.
+# 9. Dodać automatyczne tworzenie akcji przy zmianach dotyczących case'a.
 10. Dodać akcje niezwiązane + interfejs
-11. Ogarnąć login mixiny
+# 11. Ogarnąć login mixiny
 12. uwsgitop
 13. Mailing (w celery)
+# 14. Dashboard
 
 Testy w biurze

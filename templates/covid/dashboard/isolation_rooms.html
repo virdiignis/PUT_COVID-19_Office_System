@@ -1,0 +1,29 @@
+{% extends 'covid/dashboard/frame.html' %}
+
+{% block table %}
+    <div class="card col-md-12">
+        <div class="card-header"><h3>Occupied <a href="#"
+                                                 onclick="top.location.href = '{% url 'isolations_dashboard' 1 %}';">isolation
+            rooms</a></h3></div>
+        <div class="card-body">
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Number</th>
+                    <th scope="col">Resident</th>
+                </tr>
+                </thead>
+                {% for isolation_room in page_obj %}
+                    <tr>
+                        <td>{{ isolation_room.number }}</td>
+                        <td>
+                            <a href="#">{{ isolation_room.resident }}</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+            {% load bootstrap_pagination %}
+            {% bootstrap_paginate page_obj range=10 url_view_name="isolationrooms_dashboard" %}
+        </div>
+    </div>
+{% endblock %}

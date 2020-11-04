@@ -52,6 +52,7 @@
                     {% for form in isolations.forms %}
                         {% if forloop.first %}
                             <thead class="thead-dark">
+                            {{ form.non_field_errors }}
                             <tr>
                                 {% for field in form.visible_fields %}
                                     <th>{{ field.label|capfirst }}</th>

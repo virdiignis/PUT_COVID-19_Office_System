@@ -1,0 +1,50 @@
+{% extends 'covid/dashboard/frame.html' %}
+
+{% block table %}
+    <div class="card col-md-12">
+        <div class="card-header"><h3><a href="#" onclick="top.location.href = '{% url 'isolations_dashboard' 1 %}';">Isolations</a>
+        </h3></div>
+        <div class="card-body">
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Ordered by</th>
+                    <th scope="col">Start date</th>
+                    <th scope="col">End date</th>
+                    <th scope="col">Order date</th>
+                    <th scope="col">Whereabouts</th>
+                    <th scope="col">Health state</th>
+                </tr>
+                </thead>
+                {% for isolation in page_obj %}
+                    <tr style="background:
+                            {% if isolation.active %}
+                                {% if isolation.person.health_state.considered_sick %}
+                                    orangered
+                                {% elif isolation.person.health_state.considered_suspect %}
+                                    yellow
+                                {% endif %}
+                            {% else %}
+                                lightgray
+                            {% endif %}">
+                        <td>
+                            {#                                    <a href={% url "case_details" isolation.id %}>#}
+                            {#TODO: switch that to link to IsolationDetail#}
+                            {{ isolation.person }}
+                            {#                                    </a>#}
+                        </td>
+                        <td>{{ isolation.ordered_by }}</td>
+                        <td>{{ isolation.start_date }}</td>
+                        <td>{{ isolation.end_date }}</td>
+                        <td>{{ isolation.ordered_on }}</td>
+                        <td>{{ isolation.get_whereabouts_display }}</td>
+                        <td>{{ isolation.person.health_state }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+            {% load bootstrap_pagination %}
+            {% bootstrap_paginate page_obj range=10 url_view_name="isolations_dashboard" %}
+        </div>
+    </div>
+{% endblock %}

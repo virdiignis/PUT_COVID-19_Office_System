@@ -4,13 +4,13 @@ window.addEventListener("DOMContentLoaded", function () {
     flatpickr(".datetimefield", {
         enableTime: true,
         enableSeconds: true,
-        dateFormat: "Y-m-d H:i:S",
+        dateFormat: "d.m.Y H:i:S",
         time_24hr: true,
     });
     flatpickr(".datefield", {
         enableTime: false,
         enableSeconds: false,
-        dateFormat: "Y-m-d",
+        dateFormat: "d.m.Y",
         time_24hr: true,
     });
 });

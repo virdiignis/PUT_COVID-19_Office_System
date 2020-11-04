@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'dal',
     'dal_select2',
     'bootstrap_modal_forms',
+    'bootstrap_pagination',
     'apps.office',
     'apps.covid',
 ]
@@ -78,8 +79,12 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'covid_office',
+        'USER': 'covid_office',
+        'PASSWORD': 'covid_office',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -123,3 +128,5 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 MEDIA_ROOT = 'media'
 MEDIA_URL = '/media/'
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'

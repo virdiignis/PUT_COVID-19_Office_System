@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import SuspiciousOperation
 from django.http import JsonResponse, HttpResponse
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.utils import timezone
 
@@ -12,7 +12,7 @@ from django.views.generic import ListView, DetailView, UpdateView
 
 from apps.covid.automatic_actions import AutomaticLogActions
 from apps.covid.forms import CaseCreateModalForm, PersonCreateModalForm, CaseUpdateForm, IsolationFormSet, ActionFormSet
-from apps.covid.models import Case, Action
+from apps.covid.models import Case, Action, Isolation, IsolationRoom
 
 
 class CaseListView(LoginRequiredMixin, ListView):
@@ -36,7 +36,7 @@ class CaseListView(LoginRequiredMixin, ListView):
                 Q(people__last_name__istartswith=search)
             )
 
-            return q
+        return q
 
     def get_context_data(self, **kwargs):
         context = super(CaseListView, self).get_context_data(**kwargs)
@@ -167,3 +167,42 @@ class PersonCreateModalView(LoginRequiredMixin, BSModalCreateView):
 class ActionDetailModalView(LoginRequiredMixin, BSModalReadView):
     model = Action
     template_name = 'covid/action_detail_modal.html'
+
+
+@login_required()
+def covid_dashboard(request):
+    if not request.user.write_access:
+        return redirect(reverse_lazy('home'))
+
+    return render(request, 'covid/dashboard/dashboard.html')
+
+
+class ActionDashboardView(LoginRequiredMixin, ListView):
+    model = Action
+    paginate_by = 3
+    queryset = Action.objects.order_by("-id")
+    template_name = 'covid/dashboard/actions.html'
+
+
+class CaseDashboardView(LoginRequiredMixin, ListView):
+    model = Case
+    paginate_by = 3
+    queryset = Case.objects.filter(date_closed__isnull=True).order_by("-date_open")
+    allow_empty = True
+    template_name = 'covid/dashboard/cases.html'
+
+
+class IsolationDashboardView(LoginRequiredMixin, ListView):
+    model = Isolation
+    paginate_by = 3
+    queryset = Isolation.objects.order_by("-id")
+    allow_empty = True
+    template_name = 'covid/dashboard/isolations.html'
+
+
+class IsolationRoomDashboardView(LoginRequiredMixin, ListView):
+    model = IsolationRoom
+    paginate_by = 3
+    queryset = IsolationRoom.objects.filter(resident__isnull=False).order_by("number")
+    allow_empty = True
+    template_name = 'covid/dashboard/isolation_rooms.html'
