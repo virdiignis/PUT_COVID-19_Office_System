@@ -19,6 +19,7 @@ from apps.covid.models import Case, Action, Isolation, IsolationRoom
 class CaseListView(LoginRequiredMixin, ListView):
     model = Case
     paginate_by = 10
+    template_name = "covid/cases.html"
 
     def get_queryset(self):
         open = self.request.GET.get('open', "None")

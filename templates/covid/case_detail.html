@@ -7,7 +7,7 @@
         </div>
     </div>
 
-    <a href="{% url 'cases' %}">back</a>
+    <a href="{% url 'cases' %}"><- cases</a>
     <div class="card">
         <div class="card-header d-flex justify-content-between">
             <h2>{{ case.title }}</h2>
@@ -118,19 +118,21 @@
             <table class="table">
                 <thead class="thead-dark">
                 <tr>
-                    <th scope="col">Date</th>
-                    <th scope="col">Made by</th>
-                    <th scope="col">Based on</th>
-                    <th scope="col">Description</th>
+                    <th>Datetime</th>
+                    <th>Made by</th>
+                    <th>Based on</th>
+                    <th>Incoming contact content</th>
+                    <th>Description</th>
+                    <th>Notes</th>
+                    <th>Case</th>
                 </tr>
                 </thead>
+
                 {% for action in actions %}
                     <tr>
                         <td>
-                            <button type="button" class="btn btn-link" class="action-detail"
-                                    id="action-detail-{{ action.id }}" ano="{{ action.id }}">
-                                {{ action.datetime }}
-                            </button>
+                            <button type="button" class="btn btn-link action-detail"
+                                    ano="{{ action.id }}">{{ action.datetime }}</button>
                         </td>
                         <td>
                             <a href={% url "case_details" action.made_by.id %}>
@@ -139,7 +141,26 @@
                             </a>
                         </td>
                         <td>{{ action.get_based_on_display }}</td>
+                        <td>{% if action.contact_content %}
+                            <button type="button" class="action-contact_content btn btn-link" ano="{{ action.id }}">
+                                open
+                            </button>
+                        {% else %}
+                            —
+                        {% endif %}</td>
                         <td>{{ action.action_description }}</td>
+                        <td>{% if action.notes %}
+                            <button type="button" class="action-notes btn btn-link" ano="{{ action.id }}">open</>
+                        {% else %}
+                            —
+                        {% endif %}</td>
+                        <td>
+                            {% if action.case %}
+                                <a href="{% url 'case_details' action.case.id %}">{{ action.case.title }}</a>
+                            {% else %}
+                                —
+                            {% endif %}
+                        </td>
                     </tr>
                 {% endfor %}
             </table>
@@ -180,6 +201,16 @@
                 $(".action-detail").each(function () {
                     $(this).modalForm({
                         formURL: "{% url 'action_details' 101010 %}".replace("101010", $(this).attr("ano")),
+                    });
+                });
+                $(".action-contact_content").each(function () {
+                    $(this).modalForm({
+                        formURL: "{% url 'action_contact_content' 101010 %}".replace("101010", $(this).attr("ano")),
+                    });
+                });
+                $(".action-notes").each(function () {
+                    $(this).modalForm({
+                        formURL: "{% url 'action_notes' 101010 %}".replace("101010", $(this).attr("ano")),
                     });
                 });
             }

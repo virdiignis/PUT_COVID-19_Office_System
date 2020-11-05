@@ -10,7 +10,7 @@
 
     <div class="card">
         <div class="card-header actions-add d-flex justify-content-between">
-            <h3>Actions</h3>
+            <h2>Actions</h2>
             <button type="button" id="addActionButton" class="btn btn-primary">New unlinked action</button>
         </div>
         <div class="card-body">
@@ -29,7 +29,10 @@
 
                 {% for action in page_obj %}
                     <tr>
-                        <td>{{ action.datetime }}</td>
+                        <td>
+                            <button type="button" class="btn btn-link action-detail"
+                                    ano="{{ action.id }}">{{ action.datetime }}</button>
+                        </td>
                         <td>
                             <a href={% url "case_details" action.made_by.id %}>
                                 {#TODO: switch that to link to WorkerDetail#}
@@ -84,6 +87,11 @@
                 });
                 $("#addActionButton").modalForm({
                     formURL: "{% url 'action_new_modal' %}"
+                });
+                $(".action-detail").each(function () {
+                    $(this).modalForm({
+                        formURL: "{% url 'action_details' 101010 %}".replace("101010", $(this).attr("ano")),
+                    });
                 });
             }
 
