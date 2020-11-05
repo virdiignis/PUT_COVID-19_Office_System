@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="border">
 <head>
     <meta charset="utf-8">
     <title>{% block title %}Actions{% endblock %}</title>
@@ -14,10 +14,8 @@
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
-<body>
-<div class="d-flex justify-content-between">
-    {% block table %}
-    {% endblock %}
-</div>
-</body>
+{#<div class="col-md-12">#}
+{% block table %}
+{% endblock %}
+{#</div>#}
 </html>

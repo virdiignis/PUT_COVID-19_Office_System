@@ -1,33 +1,31 @@
 {% extends 'covid/dashboard/frame.html' %}
 
 {% block table %}
-    <div class="card col-md-12">
-        <div class="card-header"><h3>Active <a href="#" onclick="top.location.href = '{% url 'cases' %}';">cases</a>
-        </h3></div>
-        <div class="card-body">
-            <table class="table">
-                <thead class="thead-dark">
+    <div class="card-header"><h3>Active <a href="#" onclick="top.location.href = '{% url 'cases' %}';">cases</a>
+    </h3></div>
+    <div class="card-body">
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">People involved</th>
+                <th scope="col">Date open</th>
+                <th scope="col">Date closed</th>
+            </tr>
+            </thead>
+            {% for case in page_obj %}
                 <tr>
-                    <th scope="col">Title</th>
-                    <th scope="col">People involved</th>
-                    <th scope="col">Date open</th>
-                    <th scope="col">Date closed</th>
+                    {#                <td><a href={% url 'case_details' case.id %}>{{ case }}</a></td>#}
+                    <td><a href={% url "case_details" case.id %}>{{ case }}</a></td>
+                    <td>{% for person in case.people.all %}
+                        {{ person }}<br> {# TODO: add link to person detail view #}
+                    {% endfor %}</td>
+                    <td>{{ case.date_open }}</td>
+                    <td>{{ case.date_closed }}</td>
                 </tr>
-                </thead>
-                {% for case in page_obj %}
-                    <tr>
-                        {#                <td><a href={% url 'case_details' case.id %}>{{ case }}</a></td>#}
-                        <td><a href={% url "case_details" case.id %}>{{ case }}</a></td>
-                        <td>{% for person in case.people.all %}
-                            {{ person }}<br> {# TODO: add link to person detail view #}
-                        {% endfor %}</td>
-                        <td>{{ case.date_open }}</td>
-                        <td>{{ case.date_closed }}</td>
-                    </tr>
-                {% endfor %}
-            </table>
-            {% load bootstrap_pagination %}
-            {% bootstrap_paginate page_obj range=10 url_view_name="cases_dashboard" %}
-        </div>
+            {% endfor %}
+        </table>
+        {% load bootstrap_pagination %}
+        {% bootstrap_paginate page_obj range=10 url_view_name="cases_dashboard" %}
     </div>
 {% endblock %}
