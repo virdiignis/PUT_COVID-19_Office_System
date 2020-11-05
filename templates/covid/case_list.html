@@ -7,25 +7,27 @@
         </div>
     </div>
     <h2 class="card-title">Cases</h2>
-    <div class="d-flex justify-content-between">
-        <form id="searchForm" method="get" class="flex-fill">
-            <div class="form-group">
-                <label class="col-sm-5 col-form-label">
-                    Search:
-                    <input id="searchBar" type="text" name="search" class="col-sm-10" value="{{ search }}"/>
-                </label>
-                <button type="submit" class="btn btn-primary">Search</button>
-            </div>
-        </form>
-        <div class="align-self-center btn-group col-sm-2">
-            <a class="col-sm-5 btn {% if open == None %}btn-success disabled{% else %}btn-primary{% endif %}"
+    <div class="d-flex align-items-center">
+        <div class="col-xl-4 col-6 mr-auto">
+            <form id="searchForm" method="get" class="flex-fill">
+                <div class="form-group">
+                    <label class="col-form-label col-2" for="searchBar">
+                        Search:
+                    </label>
+                    <input id="searchBar" type="text" name="search" class="col-6" value="{{ search }}"/>
+                    <button type="submit" class="btn btn-primary col-xl-2 col-3">Search</button>
+                </div>
+            </form>
+        </div>
+        <div class="btn-group col-xl-2 col-4 pull-right">
+            <a class="col-4 btn {% if open == None %}btn-success disabled{% else %}btn-primary{% endif %}"
                href="{{ request.path }}?open=None&search={{ search }}">All</a>
-            <a class="col-sm-5 btn {% if open == True %}btn-success disabled{% else %}btn-primary{% endif %}"
+            <a class="col-4 btn {% if open == True %}btn-success disabled{% else %}btn-primary{% endif %}"
                href="{{ request.path }}?open=true&search={{ search }}">Open</a>
-            <a class="col-sm-5 btn {% if open == False %}btn-success disabled{% else %}btn-primary{% endif %}"
+            <a class="col-4 btn {% if open == False %}btn-success disabled{% else %}btn-primary{% endif %}"
                href="{{ request.path }}?open=false&search={{ search }}">Closed</a>
         </div>
-        <div class="align-self-center col-sm-1 btn-group">
+        <div class="col-xl-1 col-2 btn-group pull-right">
             <button id="newCaseButton" class="btn btn-danger" type="button" name="button">Open new</button>
         </div>
     </div>

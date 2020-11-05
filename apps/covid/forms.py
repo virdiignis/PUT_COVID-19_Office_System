@@ -59,3 +59,14 @@ class CaseUpdateForm(ModelForm):
         widgets = {
             "people": autocomplete.ModelSelect2Multiple(url='person-autocomplete', attrs={"style": "width:95%"})
         }
+
+
+class ActionCreateModalForm(BSModalModelForm):
+    class Meta:
+        model = Action
+        exclude = ("case",)
+        widgets = {
+            "datetime": DateTimeInput(format='%d.%m.%Y %H:%M:%S',
+                                      attrs={'class': 'form-control datetimefield'}),
+            "made_by": autocomplete.ModelSelect2(url='worker-autocomplete')
+        }

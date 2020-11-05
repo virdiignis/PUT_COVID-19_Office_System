@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="modal fade" tabindex="-1" role="dialog" id="modal">
+    <div class="modal fade" role="dialog" id="modal">
         <div class="modal-dialog" role="document">
             <div class="modal-content"></div>
         </div>
@@ -173,15 +173,13 @@
     <script type="text/javascript">
         $(function () {
             function addPersonModal() {
-                $("#newPersonButton").each(function () {
-                    $(this).modalForm({
-                        formURL: "{% url 'person_new_modal' %}",
-                        asyncUpdate: true,
-                        asyncSettings: {
-                            closeOnSubmit: true,
-                            addModalFormFunction: addPersonModal
-                        }
-                    });
+                $("#newPersonButton").modalForm({
+                    formURL: "{% url 'person_new_modal' %}",
+                    asyncUpdate: true,
+                    asyncSettings: {
+                        closeOnSubmit: true,
+                        addModalFormFunction: addPersonModal
+                    }
                 });
             }
 
@@ -211,6 +209,7 @@
             })
         })
     </script>
+
 
     {{ form.media }}
 {% endblock %}

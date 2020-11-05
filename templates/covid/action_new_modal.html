@@ -1,0 +1,60 @@
+<form method="post" action="">
+    {% csrf_token %}
+
+    <div class="modal-header">
+        <h5 class="modal-title">Add new unlinked action</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-header">
+        <small class="text-muted">To add action linked to case, please go to case edit view.</small>
+    </div>
+
+    <div class="modal-body">
+        {% for field in form %}
+            <div class="form-group{% if field.errors %} invalid{% endif %}">
+                <div class="d-flex justify-content-between">
+                    {{ field.label_tag }}
+                    <div class="col-7">{{ field }}</div>
+                </div>
+                {% for error in field.errors %}
+                    <p class="help-block" style="color: red">{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endfor %}
+        {{ form.media }}
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="submit-btn btn btn-primary">Create</button>
+    </div>
+
+    <script type="text/javascript">
+        flatpickr(".datetimefield", {
+            enableTime: true,
+            enableSeconds: true,
+            dateFormat: "d.m.Y H:i:S",
+            time_24hr: true,
+            defaultDate: new Date()
+        });
+        flatpickr(".datefield", {
+            enableTime: false,
+            enableSeconds: false,
+            dateFormat: "d.m.Y",
+            time_24hr: true,
+            defaultDate: new Date()
+
+        });
+        $('#id_made_by').select2({
+            dropdownParent: $('#modal'),
+            ajax: {
+                url: '{% url 'worker-autocomplete' %}',
+                dataType: 'json'
+                // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
+            }
+        });
+    </script>
+
+</form>

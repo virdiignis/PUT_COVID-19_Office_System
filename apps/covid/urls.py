@@ -18,5 +18,10 @@ urlpatterns = [
     path('dashboard/actions/<int:page>', views.ActionDashboardView.as_view(), name='actions_dashboard'),
     path('dashboard/cases/<int:page>', views.CaseDashboardView.as_view(), name='cases_dashboard'),
     path('dashboard/isolations/<int:page>', views.IsolationDashboardView.as_view(), name='isolations_dashboard'),
-    path('dashboard/isolationrooms/<int:page>', views.IsolationRoomDashboardView.as_view(), name='isolationrooms_dashboard'),
+    path('dashboard/isolationrooms/<int:page>', views.IsolationRoomDashboardView.as_view(),
+         name='isolationrooms_dashboard'),
+    path('actions', views.ActionListView.as_view(), name='actions'),
+    path('actions/<int:pk>/based_on', views.action_contact_content, name='action_contact_content'),
+    path('actions/<int:pk>/notes', views.action_notes, name='action_notes'),
+    path('actions/new', views.ActionCreateModalView.as_view(), name='action_new_modal'),
 ]

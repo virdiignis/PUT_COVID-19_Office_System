@@ -1,9 +1,10 @@
 {% extends 'covid/dashboard/frame.html' %}
 
 {% block table %}
-    <div class="card-header"><h3>Occupied <a href="#"
-                                             onclick="top.location.href = '{% url 'isolations_dashboard' 1 %}';">isolation
-        rooms</a></h3></div>
+    <div class="card-header"><h3>Occupied
+        <a href="#" onclick="top.location.href = '{% url 'isolations_dashboard' 1 %}';">
+            isolation rooms
+        </a></h3></div>
     <div class="card-body">
         <table class="table">
             <thead class="thead-dark">
@@ -16,6 +17,7 @@
                 <tr>
                     <td>{{ isolation_room.number }}</td>
                     <td>
+                        {# TODO: add person link here #}
                         <a href="#">{{ isolation_room.resident }}</a>
                     </td>
                 </tr>

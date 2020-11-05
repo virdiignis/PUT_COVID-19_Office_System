@@ -11,7 +11,8 @@ from django.db.models import Q
 from django.views.generic import ListView, DetailView, UpdateView
 
 from apps.covid.automatic_actions import AutomaticLogActions
-from apps.covid.forms import CaseCreateModalForm, PersonCreateModalForm, CaseUpdateForm, IsolationFormSet, ActionFormSet
+from apps.covid.forms import CaseCreateModalForm, PersonCreateModalForm, CaseUpdateForm, IsolationFormSet, \
+    ActionFormSet, ActionCreateModalForm
 from apps.covid.models import Case, Action, Isolation, IsolationRoom
 
 
@@ -164,12 +165,18 @@ class PersonCreateModalView(LoginRequiredMixin, BSModalCreateView):
             return HttpResponse()
 
 
+class ActionCreateModalView(LoginRequiredMixin, BSModalCreateView):
+    template_name = 'covid/action_new_modal.html'
+    form_class = ActionCreateModalForm
+    success_url = reverse_lazy("actions")  # this is required, but not used
+
+
 class ActionDetailModalView(LoginRequiredMixin, BSModalReadView):
     model = Action
     template_name = 'covid/action_detail_modal.html'
 
 
-@login_required()
+@login_required
 def covid_dashboard(request):
     if not request.user.write_access:
         return redirect(reverse_lazy('home'))
@@ -179,14 +186,14 @@ def covid_dashboard(request):
 
 class ActionDashboardView(LoginRequiredMixin, ListView):
     model = Action
-    paginate_by = 3
+    paginate_by = 5
     queryset = Action.objects.order_by("-id")
     template_name = 'covid/dashboard/actions.html'
 
 
 class CaseDashboardView(LoginRequiredMixin, ListView):
     model = Case
-    paginate_by = 3
+    paginate_by = 5
     queryset = Case.objects.filter(date_closed__isnull=True).order_by("-date_open")
     allow_empty = True
     template_name = 'covid/dashboard/cases.html'
@@ -194,7 +201,7 @@ class CaseDashboardView(LoginRequiredMixin, ListView):
 
 class IsolationDashboardView(LoginRequiredMixin, ListView):
     model = Isolation
-    paginate_by = 3
+    paginate_by = 5
     queryset = Isolation.objects.order_by("-id")
     allow_empty = True
     template_name = 'covid/dashboard/isolations.html'
@@ -202,7 +209,34 @@ class IsolationDashboardView(LoginRequiredMixin, ListView):
 
 class IsolationRoomDashboardView(LoginRequiredMixin, ListView):
     model = IsolationRoom
-    paginate_by = 3
+    paginate_by = 5
     queryset = IsolationRoom.objects.filter(resident__isnull=False).order_by("number")
     allow_empty = True
     template_name = 'covid/dashboard/isolation_rooms.html'
+
+
+class ActionListView(LoginRequiredMixin, ListView):
+    model = Action
+    paginate_by = 10
+    queryset = Action.objects.order_by("-id")
+    template_name = 'covid/actions.html'
+
+
+@login_required
+def action_contact_content(request, pk):
+    action = get_object_or_404(Action, id=pk)
+    context = {
+        "title": "Incoming contact content",
+        "text": action.contact_content
+    }
+    return render(request, 'covid/text_modal.html', context)
+
+
+@login_required
+def action_notes(request, pk):
+    action = get_object_or_404(Action, id=pk)
+    context = {
+        "title": "Notes",
+        "text": action.notes
+    }
+    return render(request, 'covid/text_modal.html', context)

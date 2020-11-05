@@ -127,9 +127,10 @@
                 {% for action in actions %}
                     <tr>
                         <td>
-                            <a href='#' class="action-detail" id="action-detail-{{ action.id }}" ano="{{ action.id }}">
+                            <button type="button" class="btn btn-link" class="action-detail"
+                                    id="action-detail-{{ action.id }}" ano="{{ action.id }}">
                                 {{ action.datetime }}
-                            </a>
+                            </button>
                         </td>
                         <td>
                             <a href={% url "case_details" action.made_by.id %}>

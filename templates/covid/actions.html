@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="modal fade" tabindex="-1" role="dialog" id="modal">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content"></div>
         </div>
     </div>
@@ -11,78 +11,60 @@
     <div class="card">
         <div class="card-header actions-add d-flex justify-content-between">
             <h3>Actions</h3>
+            <button type="button" id="addActionButton" class="btn btn-primary">New unlinked action</button>
         </div>
         <div class="card-body">
             <table class="table">
                 <thead class="thead-dark">
-
                 <tr>
-                    <th>{{ form.datetime.label }} / {{ form.made_by.label }}
-                        / {{ form.based_on.label }}</th>
-                    <th>{{ form.contact_content.label }}</th>
-                    <th>{{ form.action_description.label }}</th>
-                    <th>{{ form.notes.label }}</th>
-                    <th>delete</th>
+                    <th>Datetime</th>
+                    <th>Made by</th>
+                    <th>Based on</th>
+                    <th>Incoming contact content</th>
+                    <th>Description</th>
+                    <th>Notes</th>
+                    <th>Case</th>
                 </tr>
-
                 </thead>
 
-
-                <tr class="formset_row {{ actions.prefix }}">
-
-                    {% for hidden in form.hidden_fields %}
-                        {{ hidden }}
-                    {% endfor %}
-                    <td class="d-flex flex-column justify-content-around">
-                        <div class="d-flex flex-column justify-content-between">
-                            <b>{{ form.datetime.label }}</b>
-                            {% for error in form.datetime.errors %}
-                                <p class="help-block" style="color: red">{{ error }}</p>
-                            {% endfor %}
-                            {{ form.datetime }}
-                        </div>
-                        <br>
-                        <div class="d-flex justify-content-between">
-                            <b>{{ form.made_by.label }}</b>
-                            {% for error in form.made_by.errors %}
-                                <p class="help-block" style="color: red">{{ error }}</p>
-                            {% endfor %}
-                            {{ form.made_by }}
-                        </div>
-                        <br>
-                        <div class="d-flex justify-content-between">
-                            <b>{{ form.based_on.label }}</b>
-                            {% for error in form.based_on.errors %}
-                                <p class="help-block" style="color: red">{{ error }}</p>
-                            {% endfor %}
-                            {{ form.based_on }}
-                        </div>
-                    </td>
-
-                    <td>
-                        {% for error in form.contact_content.errors %}
-                            <p class="help-block" style="color: red">{{ error }}</p>
-                        {% endfor %}
-                        {{ form.contact_content }}
-                    </td>
-                    <td>
-                        {% for error in form.action_description.errors %}
-                            <p class="help-block" style="color: red">{{ error }}</p>
-                        {% endfor %}
-                        {{ form.action_description }}
-                    </td>
-                    <td>
-                        {% for error in form.notes.errors %}
-                            <p class="help-block" style="color: red">{{ error }}</p>
-                        {% endfor %}
-                        {{ form.notes }}
-                    </td>
-                    <td></td>
-                </tr>
-
+                {% for action in page_obj %}
+                    <tr>
+                        <td>{{ action.datetime }}</td>
+                        <td>
+                            <a href={% url "case_details" action.made_by.id %}>
+                                {#TODO: switch that to link to WorkerDetail#}
+                                {{ action.made_by }}
+                            </a>
+                        </td>
+                        <td>{{ action.get_based_on_display }}</td>
+                        <td>{% if action.contact_content %}
+                            <button type="button" class="action-contact_content btn btn-link" ano="{{ action.id }}">
+                                open
+                            </button>
+                        {% else %}
+                            —
+                        {% endif %}</td>
+                        <td>{{ action.action_description }}</td>
+                        <td>{% if action.notes %}
+                            <button type="button" class="action-notes btn btn-link" ano="{{ action.id }}">open</>
+                        {% else %}
+                            —
+                        {% endif %}</td>
+                        <td>
+                            {% if action.case %}
+                                <a href="{% url 'case_details' action.case.id %}">{{ action.case.title }}</a>
+                            {% else %}
+                                —
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
             </table>
+            {% load bootstrap_pagination %}
+            {% bootstrap_paginate page_obj range=10 %}
         </div>
     </div>
+
 
 
     {% load static %}
@@ -90,10 +72,18 @@
     <script type="text/javascript">
         $(function () {
             function addActionModal() {
-                $(".action-detail").each(function () {
+                $(".action-contact_content").each(function () {
                     $(this).modalForm({
-                        formURL: "{% url 'action_details' 101010 %}".replace("101010", $(this).attr("ano")),
+                        formURL: "{% url 'action_contact_content' 101010 %}".replace("101010", $(this).attr("ano")),
                     });
+                });
+                $(".action-notes").each(function () {
+                    $(this).modalForm({
+                        formURL: "{% url 'action_notes' 101010 %}".replace("101010", $(this).attr("ano")),
+                    });
+                });
+                $("#addActionButton").modalForm({
+                    formURL: "{% url 'action_new_modal' %}"
                 });
             }
 
