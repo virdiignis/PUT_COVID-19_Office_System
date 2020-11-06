@@ -14,10 +14,16 @@
 15. Osoby z kontaktu
 # 16. Dokumenty
 # 17. Pozmieniać linki z wewnątrz iframów na top.href.
-18. Może dodać contact-from w akcji.
+# 18. Może dodać contact-from w akcji.
 # 19. Dodać reminders do dashboardu.
 20. Widoki raportów i przyciski edycji uzależnione od uprawnień użytkownika.
 # 21. Dodać do person detail actions-based-on-contact-from.
 # 22. Dodawanie osób przy akcji stand-alone.
+
+Raporty:
+    Liczba nowych zakażonych studentów/doktorantów
+    Liczba nowych zakażonych pracowników                        — liczba zmian stanu zdrowia na positive test
+    Liczba studentów/doktorantów skierowanych na kwarantannę
+    Liczba pracowników skierowanych na kwarantannę              — z isolations z polem official
 
 Testy w biurze

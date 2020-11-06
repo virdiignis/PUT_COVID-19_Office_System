@@ -18,16 +18,20 @@ class AutomaticLogActions:
         )
 
     def create_case(self):
-        self.__create_action(f"{str(self.user)} opened the {self.case.title} case.")
+        self.__create_action(f"Opened the {self.case.title} case.")
 
     def reopen_case(self):
-        self.__create_action(f"{str(self.user)} reopened the {self.case.title} case.")
+        self.__create_action(f"Reopened the {self.case.title} case.")
 
     def close_case(self):
-        self.__create_action(f"{str(self.user)} closed the {self.case.title} case.")
+        self.__create_action(f"Closed the {self.case.title} case.")
 
     def add_new_person(self, person: Person):
-        self.__create_action(f"{str(self.user)} added new person — {str(person)} — to database.")
+        self.__create_action(f"Added new person: {str(person)}.")
 
     def set_reminder(self):
-        self.__create_action(f"{str(self.user)} set new reminder.")
+        self.__create_action(f"Set new reminder.")
+
+    def change_person(self, new, changed_data):
+        self.__create_action(
+            f"Changed the following information: {', '.join(changed_data)} of {str(new)}.")

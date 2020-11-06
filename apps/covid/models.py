@@ -28,9 +28,9 @@ class HealthState(Model):
     def __str__(self):
         if self.test is not None:
             if self.test:
-                test = " + positive test result."
+                test = " (positive test result)"
             else:
-                test = " + negative test result."
+                test = " (negative test result)"
         else:
             test = ""
 
@@ -39,6 +39,7 @@ class HealthState(Model):
 
 class IsolationIssuer(Model):
     name = models.CharField(max_length=16, primary_key=True)
+    official = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
@@ -92,6 +93,16 @@ class Person(Model):
         title = f"{self.get_title_display()} " if self.title is not None else ''
         middle = f" {self.middle_name} " if self.middle_name is not None else ' '
         return f"{title}{self.first_name}{middle}{self.last_name}"
+
+
+class HealthStateChange(Model):
+    datetime = models.DateField(auto_now_add=True)
+    person = models.ForeignKey(Person, on_delete=models.CASCADE)
+    change_from = models.ForeignKey(HealthState, on_delete=models.SET_NULL, null=True, blank=True,
+                                    related_name='healthchanges_from')
+    change_to = models.ForeignKey(HealthState, on_delete=models.SET_NULL, null=True, blank=False,
+                                  related_name='healthchanges_to')
+    changed_by = models.ForeignKey(Worker, on_delete=models.SET_NULL, null=True, blank=True)
 
 
 class Case(Model):

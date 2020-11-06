@@ -22,6 +22,7 @@
             <p>Phone number: {% if person.phone_number %}{{ person.phone_number }}{% endif %}</p>
             <p>Email: {% if person.email %}<a href="mailto:{{ person.email }}">{{ person.email }}</a>{% endif %}</p>
             {% if person.dorm %}<p>Dorm: {{ person.get_dorm_display }}</p>{% endif %}
+            Health state: {{ person.health_state }}
         </div>
     </div>
     <br>

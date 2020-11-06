@@ -13,7 +13,7 @@ from django.views.generic import ListView, DetailView, UpdateView
 from apps.covid.automatic_actions import AutomaticLogActions
 from apps.covid.forms import CaseCreateModalForm, PersonCreateUpdateModalForm, CaseUpdateForm, IsolationFormSet, \
     ActionFormSet, ActionCreateModalForm, IsolationRoomFormSet, DocumentFormSet
-from apps.covid.models import Case, Action, Isolation, IsolationRoom, Person, Document
+from apps.covid.models import Case, Action, Isolation, IsolationRoom, Person, Document, HealthStateChange, HealthState
 
 
 class CaseListView(LoginRequiredMixin, ListView):
@@ -280,6 +280,27 @@ class PersonUpdateModalView(LoginRequiredMixin, BSModalUpdateView):
 
     def get_success_url(self):
         return reverse_lazy('person_details', args=(self.object.id,))
+
+    def form_valid(self, form):
+        if not self.request.is_ajax() or self.request.POST.get('asyncUpdate') == 'True':
+            if form.has_changed():
+                new = form.save(commit=False)
+
+                changed_data = form.changed_data
+                if 'health_state' in changed_data:
+                    HealthStateChange(
+                        person=self.object,
+                        change_from_id=form.initial["health_state"],
+                        change_to=new.health_state,
+                        changed_by=self.request.user
+                    ).save()
+
+                new.save()
+                AutomaticLogActions(user=self.request.user).change_person(new, changed_data)
+
+            return redirect(self.get_success_url())
+        else:
+            return HttpResponse()
 
 
 class IsolationRoomListView(LoginRequiredMixin, ListView):
