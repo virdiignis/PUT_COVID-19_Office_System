@@ -25,7 +25,7 @@
                         </a><br>
                     {% endfor %}</td>
                     <td>{{ case.date_open }}</td>
-                    <td>{{ case.date_closed }}</td>
+                    <td>{% if case.date_closed %}{{ case.date_closed }}{% else %}—{% endif %}</td>
                 </tr>
             {% endfor %}
         </table>

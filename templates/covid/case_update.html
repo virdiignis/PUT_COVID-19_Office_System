@@ -7,7 +7,7 @@
         </div>
     </div>
 
-    <form method="post" action="">
+    <form method="post" enctype="multipart/form-data" action="">
         {% csrf_token %}
         <div class="card">
             {{ form.non_field_errors }}
@@ -165,6 +165,26 @@
                 </table>
             </div>
         </div>
+        <br>
+        <div class="card">
+            <div class="card-header documents-add d-flex justify-content-between">
+                <h3>Documents</h3>
+            </div>
+            {{ documents.management_form }}
+            <div class="card-body container-fluid">
+                <div class="row">
+                    {% for form in documents %}
+                        {% if forloop.counter0|divisibleby:4 %}
+                            <div class="w-100"></div>
+                        {% endif %}
+                        <div class="col formset_row {{ documents.prefix }}">
+                            {{ form.as_p }}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {{ documents.media }}
+        </div>
     </form>
 
 
@@ -201,7 +221,8 @@
                 deleteText: 'remove',
                 deleteCssClass: 'delete-row',
                 prefix: "{{ isolations.prefix }}",
-            })
+                insert_first: true
+            });
             $(".formset_row.{{ actions.prefix }}").formset({
                 addText: 'Add action',
                 addCssClass: 'add-row btn btn-primary',
@@ -209,7 +230,17 @@
                 deleteText: 'remove',
                 deleteCssClass: 'delete-row',
                 prefix: "{{ actions.prefix }}",
-            })
+                insert_first: true,
+            });
+            $(".formset_row.{{ documents.prefix }}").formset({
+                addText: 'Add document',
+                addCssClass: 'add-row btn btn-primary',
+                addContainerClass: 'documents-add',
+                deleteText: 'remove',
+                deleteCssClass: 'delete-row',
+                prefix: "{{ documents.prefix }}",
+                insert_first: false
+            });
         })
     </script>
 

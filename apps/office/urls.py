@@ -7,4 +7,5 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('null', views.null, name='null'),
     path('worker-autocomplete', WorkerAutocomplete.as_view(), name='worker-autocomplete'),
+    path('workers/<int:pk>', views.WorkerDetailView.as_view(), name='worker_details')
 ]

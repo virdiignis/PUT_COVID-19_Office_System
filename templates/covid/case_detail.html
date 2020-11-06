@@ -133,8 +133,7 @@
                                     ano="{{ action.id }}">{{ action.datetime }}</button>
                         </td>
                         <td>
-                            <a href={% url "case_details" action.made_by.id %}>
-                                {#TODO: switch that to link to WorkerDetail#}
+                            <a href={% url "worker_details" action.made_by.id %}>
                                 {{ action.made_by }}
                             </a>
                         </td>
@@ -174,14 +173,24 @@
                     <tr>
                         <th scope="col">Name</th>
                         <th scope="col">Upload date</th>
+                        <th scope="col">Uploaded by</th>
                     </tr>
                     </thead>
-                    {% for doc in case.documents.all %}
+                    {% for doc in case.documents.order_by %}
                         <tr>
                             <td>
                                 <a href={{ doc.file.url }}>{{ doc.name }}</a>
                             </td>
                             <td>{{ doc.upload_date }}</td>
+
+                            <td>
+                                {% if doc.uploaded_by %}
+                                    <a href="{% url 'worker_details' doc.uploaded_by_id %}">
+                                        {{ doc.uploaded_by }}
+                                    </a>
+                                {% else %}—{% endif %}
+                            </td>
+
                         </tr>
                     {% endfor %}
                 </table>

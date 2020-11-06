@@ -34,8 +34,7 @@
                                     ano="{{ action.id }}">{{ action.datetime }}</button>
                         </td>
                         <td>
-                            <a href={% url "case_details" action.made_by.id %}>
-                                {#TODO: switch that to link to WorkerDetail#}
+                            <a href={% url "worker_details" action.made_by.id %}>
                                 {{ action.made_by }}
                             </a>
                         </td>

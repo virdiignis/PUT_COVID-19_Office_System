@@ -141,6 +141,7 @@ class Document(Model):
     file = models.FileField(upload_to="docs")
     name = models.CharField(max_length=1024)
     upload_date = models.DateTimeField(auto_now_add=True)
+    uploaded_by = models.ForeignKey(Worker, on_delete=models.SET_NULL, null=True, blank=False)
     case = models.ForeignKey(Case, on_delete=models.CASCADE, related_name='documents')
 
     def __str__(self):

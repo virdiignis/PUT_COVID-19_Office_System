@@ -12,8 +12,8 @@ from django.views.generic import ListView, DetailView, UpdateView
 
 from apps.covid.automatic_actions import AutomaticLogActions
 from apps.covid.forms import CaseCreateModalForm, PersonCreateUpdateModalForm, CaseUpdateForm, IsolationFormSet, \
-    ActionFormSet, ActionCreateModalForm, IsolationRoomFormSet
-from apps.covid.models import Case, Action, Isolation, IsolationRoom, Person
+    ActionFormSet, ActionCreateModalForm, IsolationRoomFormSet, DocumentFormSet
+from apps.covid.models import Case, Action, Isolation, IsolationRoom, Person, Document
 
 
 class CaseListView(LoginRequiredMixin, ListView):
@@ -94,17 +94,21 @@ class CaseUpdateView(LoginRequiredMixin, UpdateView):
         if self.request.POST:
             context["isolations"] = IsolationFormSet(self.request.POST, instance=self.object)
             context["actions"] = ActionFormSet(self.request.POST, instance=self.object)
+            context["documents"] = DocumentFormSet(self.request.POST, self.request.FILES, instance=self.object)
         else:
             context["isolations"] = IsolationFormSet(instance=self.object)
             if self.object.isolations.exists():
                 context["isolations"].extra = 0
             context["actions"] = ActionFormSet(instance=self.object)
+            context["documents"] = DocumentFormSet(instance=self.object)
+
         return context
 
     def form_valid(self, form):
         context = self.get_context_data()
         isolations = context['isolations']
         actions = context['actions']
+        documents = context['documents']
 
         self.object = form.save()
         valid = True
@@ -118,6 +122,17 @@ class CaseUpdateView(LoginRequiredMixin, UpdateView):
         if actions.is_valid():
             actions.instance = self.object
             actions.save()
+        else:
+            valid = False
+
+        if documents.is_valid():
+            documents.instance = self.object
+            for doc in documents:
+                if doc.changed_data:
+                    d = doc.save()
+                    d.uploaded_by = self.request.user
+                    d.save()
+
         else:
             valid = False
 

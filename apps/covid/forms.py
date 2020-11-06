@@ -1,9 +1,7 @@
 from dal import autocomplete
-from django.forms import inlineformset_factory, ModelForm, DateTimeInput, DateInput, modelformset_factory, NumberInput, \
-    HiddenInput
-from rest_framework.fields import HiddenField
+from django.forms import inlineformset_factory, ModelForm, DateTimeInput, DateInput, modelformset_factory, HiddenInput
 
-from apps.covid.models import Case, Action, Person, Isolation, IsolationRoom
+from apps.covid.models import Case, Action, Person, Isolation, IsolationRoom, Document
 from bootstrap_modal_forms.forms import BSModalModelForm
 
 
@@ -46,6 +44,16 @@ IsolationRoomFormSet = modelformset_factory(IsolationRoom, fields="__all__", ext
                                                     attrs={'class': 'disabled', 'readonly': 'readonly'})
                                             }
                                             )
+
+
+class DocumentFormSet(inlineformset_factory(Case,
+                                            Document,
+                                            exclude=("uploaded_by",),
+                                            extra=1,
+                                            can_delete=False
+                                            )):
+    def get_queryset(self):
+        return super(DocumentFormSet, self).get_queryset().order_by("-upload_date")
 
 
 class CaseCreateModalForm(BSModalModelForm):

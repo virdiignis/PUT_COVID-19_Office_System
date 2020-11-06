@@ -1,6 +1,6 @@
 # 1. Dodać modale dodawania akcji w wersji z renderowaniem tabelki z tutoriala https://pypi.org/project/django-bootstrap-modal-forms/
 2. Powyciągać skrypty do staticów
-3. Detail views dla workerów, isolation rooms # akcji, osób
+# 3. Detail views dla workerów, isolation rooms, akcji, osób
 4. Dodać do office zarządzanie grafikiem
 5. Podłączyć celery
 # 6. Podłączyć postgres
@@ -13,8 +13,9 @@
 13. Mailing (w celery)
 # 14. Dashboard
 15. Osoby z kontaktu
-16. Dokumenty
-17. Pozmieniać linki z wewnątrz iframów na top.href.
+# 16. Dokumenty
+# 17. Pozmieniać linki z wewnątrz iframów na top.href.
 18. Może dodać contact-from w akcji.
+19. Dodać reminders do dashboardu.
 
 Testy w biurze
