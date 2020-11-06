@@ -98,7 +98,7 @@
 
                             <tr>
                                 <th>{{ form.datetime.label }} / {{ form.made_by.label }}
-                                    / {{ form.based_on.label }}</th>
+                                    / {{ form.based_on.label }} / {{ form.contact_from.label }}</th>
                                 <th>{{ form.contact_content.label }}</th>
                                 <th>{{ form.action_description.label }}</th>
                                 <th>{{ form.notes.label }}</th>
@@ -137,6 +137,14 @@
                                         <p class="help-block" style="color: red">{{ error }}</p>
                                     {% endfor %}
                                     {{ form.based_on }}
+                                </div>
+                                <br>
+                                <div class="d-flex justify-content-between">
+                                    <b>{{ form.contact_from.label }}</b>
+                                    {% for error in form.contact_from.errors %}
+                                        <p class="help-block" style="color: red">{{ error }}</p>
+                                    {% endfor %}
+                                    {{ form.contact_from }}
                                 </div>
                             </td>
 
@@ -211,7 +219,7 @@
         });
     </script>
     <script src="{% static 'js/jquery.formset.js' %}"></script>
-    <script src="{% static 'covid/js/select2.isolations.to.involved.people.js' %}"></script>
+    <script src="{% static 'covid/js/select2.isolations.actions.to.involved.people.js' %}"></script>
 
     <script type="text/javascript">
         $(function () {

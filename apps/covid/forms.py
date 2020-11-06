@@ -14,7 +14,8 @@ class ActionFormSet(inlineformset_factory(Case,
                                           widgets={
                                               "datetime": DateTimeInput(format='%d.%m.%Y %H:%M:%S',
                                                                         attrs={'class': 'form-control datetimefield'}),
-                                              "made_by": autocomplete.ModelSelect2(url='worker-autocomplete')
+                                              "made_by": autocomplete.ModelSelect2(url='worker-autocomplete'),
+                                              "contact_from": autocomplete.ModelSelect2(url='person-autocomplete'),
                                           })):
     def get_queryset(self):
         return super(ActionFormSet, self).get_queryset().order_by("-datetime")
