@@ -7,6 +7,7 @@ from django.urls import reverse_lazy
 from django.utils import timezone
 from django.views.generic import DetailView, ListView
 
+from apps.covid.automatic_actions import AutomaticLogActions
 from apps.covid.models import Action
 from apps.office.forms import ReminderCreateModalForm
 from apps.office.models import Worker, Reminder
@@ -62,4 +63,14 @@ class ReminderCreateModalView(LoginRequiredMixin, BSModalCreateView):
     model = Reminder
     form_class = ReminderCreateModalForm
     template_name = "office/reminder_new_modal.html"
-    success_url = reverse_lazy('reminders')
+    success_url = reverse_lazy('reminders', args=(1,))
+
+    def form_valid(self, form):
+        if not self.request.is_ajax() or self.request.POST.get('asyncUpdate') == 'True':
+            AutomaticLogActions(user=self.request.user).set_reminder()
+            reminder = form.save(commit=False)
+            reminder.set_by = self.request.user
+            reminder.save()
+            return redirect(self.success_url)
+        else:
+            return HttpResponse()
