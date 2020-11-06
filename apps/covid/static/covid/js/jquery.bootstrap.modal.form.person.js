@@ -77,6 +77,7 @@ https://github.com/trco/django-bootstrap-modal-forms
 
                     let option = new Option(response["name"], response["id"], true, true);
                     $('#id_people').append(option).trigger('change');
+                    $('#id_contact_from').append(option).trigger('change');
 
                 }
             });

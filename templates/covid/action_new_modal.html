@@ -3,7 +3,7 @@
 
     <div class="modal-header">
         <h5 class="modal-title">Add new unlinked action</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" aria-label="Close" onclick="$('#modal').modal('hide')">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
@@ -16,7 +16,16 @@
             <div class="form-group{% if field.errors %} invalid{% endif %}">
                 <div class="d-flex justify-content-between">
                     {{ field.label_tag }}
-                    <div class="col-7">{{ field }}</div>
+                    {% if forloop.counter == 4 %}
+                        <div class="col-7">
+                            {{ field }}
+                            <button id="newPersonButton" class="btn btn-primary text-white" type="button" name="button">
+                                New
+                            </button>
+                        </div>
+                    {% else %}
+                        <div class="col-7">{{ field }}</div>
+                    {% endif %}
                 </div>
                 {% for error in field.errors %}
                     <p class="help-block" style="color: red">{{ error }}</p>
@@ -27,10 +36,12 @@
     </div>
 
     <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="submit-btn btn btn-primary">Create</button>
+        <button type="button" class="btn btn-default" onclick="$('#modal').modal('hide')">Close</button>
+        <button type="button" id="addActionSubmitButton" class="submit-btn btn btn-primary">Create</button>
     </div>
 
+    {% load static %}
+    <script src="{% static 'covid/js/jquery.bootstrap.modal.form.person.js' %}"></script>
     <script type="text/javascript">
         flatpickr(".datetimefield", {
             enableTime: true,
@@ -53,6 +64,32 @@
                 url: '{% url 'worker-autocomplete' %}',
                 dataType: 'json'
             }
+        });
+        $('#id_contact_from').select2({
+            dropdownParent: $('#modal-body'),
+            allowClear: true,
+            ajax: {
+                url: '{% url 'person-autocomplete' %}',
+                dataType: 'json'
+            }
+        });
+        $(function () {
+            function addPersonModal() {
+                $("#newPersonButton").modalForm({
+                    modalID: "#modal-person",
+                    modalContent: "#modal-person-content",
+                    modalForm: "#modal-person-content form",
+                    submitBtn: "#addPersonSubmitButton",
+                    formURL: "{% url 'person_new_modal' %}",
+                    asyncUpdate: true,
+                    asyncSettings: {
+                        closeOnSubmit: true,
+                        addModalFormFunction: addPersonModal
+                    }
+                });
+            }
+
+            addPersonModal();
         });
     </script>
 

@@ -3,7 +3,7 @@
 
     <div class="modal-header">
         <h5 class="modal-title">Add new person</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" onclick="$('#modal-person').modal('hide')" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
@@ -23,7 +23,7 @@
     </div>
 
     <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="submit-btn btn btn-primary">Add</button>
+        <button type="button" class="btn btn-default" onclick="$('#modal-person').modal('hide')">Close</button>
+        <button type="button" id="addPersonSubmitButton" class="submit-btn btn btn-primary">Add</button>
     </div>
 </form>

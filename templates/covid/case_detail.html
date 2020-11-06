@@ -119,6 +119,7 @@
                     <th>Datetime</th>
                     <th>Made by</th>
                     <th>Based on</th>
+                    <th>Contact from</th>
                     <th>Incoming contact content</th>
                     <th>Description</th>
                     <th>Notes</th>
@@ -138,6 +139,11 @@
                             </a>
                         </td>
                         <td>{{ action.get_based_on_display }}</td>
+                        <td>{% if action.contact_from %}
+                            <a href="{% url 'person_details' action.contact_from_id %}">{{ action.contact_from }}</a>
+                        {% else %}
+                            —
+                        {% endif %}</td>
                         <td>{% if action.contact_content %}
                             <button type="button" class="action-contact_content btn btn-link" ano="{{ action.id }}">
                                 open

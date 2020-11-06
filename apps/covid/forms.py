@@ -8,9 +8,8 @@ from bootstrap_modal_forms.forms import BSModalModelForm
 class ActionFormSet(inlineformset_factory(Case,
                                           Action,
                                           fields=(
-                                                  "datetime", "made_by", "based_on", "contact_content",
-                                                  "action_description",
-                                                  "notes"),
+                                                  "datetime", "made_by", "based_on", "contact_from", "contact_content",
+                                                  "action_description", "notes"),
                                           extra=0,
                                           widgets={
                                               "datetime": DateTimeInput(format='%d.%m.%Y %H:%M:%S',
@@ -88,5 +87,6 @@ class ActionCreateModalForm(BSModalModelForm):
         widgets = {
             "datetime": DateTimeInput(format='%d.%m.%Y %H:%M:%S',
                                       attrs={'class': 'form-control datetimefield'}),
-            "made_by": autocomplete.ModelSelect2(url='worker-autocomplete')
+            "made_by": autocomplete.ModelSelect2(url='worker-autocomplete'),
+            "contact_from": autocomplete.ModelSelect2(url='person-autocomplete'),
         }

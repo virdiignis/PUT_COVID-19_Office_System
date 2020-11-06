@@ -128,6 +128,7 @@ class Action(Model):
     based_on = models.CharField(max_length=1, default="O", choices=(("O", "Own action"),
                                                                     ("E", "Email"),
                                                                     ("P", "Phone call")))
+    contact_from = models.ForeignKey(Person, null=True, blank=True, on_delete=models.SET_NULL)
     contact_content = models.TextField(null=True, blank=True)
     action_description = models.TextField()
     notes = models.TextField(null=True, blank=True)

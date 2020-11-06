@@ -15,7 +15,9 @@
 # 16. Dokumenty
 # 17. Pozmieniać linki z wewnątrz iframów na top.href.
 18. Może dodać contact-from w akcji.
-19. Dodać reminders do dashboardu.
+# 19. Dodać reminders do dashboardu.
 20. Widoki raportów i przyciski edycji uzależnione od uprawnień użytkownika.
+# 21. Dodać do person detail actions-based-on-contact-from.
+# 22. Dodawanie osób przy akcji stand-alone.
 
 Testy w biurze

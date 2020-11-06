@@ -254,6 +254,7 @@ class PersonDetailView(LoginRequiredMixin, DetailView):
         person = context["person"]
         context["cases"] = Case.objects.filter(people=person).order_by("-id")
         context["isolations"] = Isolation.objects.filter(person=person).order_by("-ordered_on")
+        context["actions"] = Action.objects.filter(contact_from=person).order_by("-datetime")
 
         return context
 
