@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-header actions-add d-flex justify-content-between align-items-center">
+            <h2>Isolation rooms</h2>
+            <a href="{% url 'isolation_rooms_update' %}" class="btn btn-primary col-1">Edit</a>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th>Number</th>
+                    <th>Resident</th>
+                    <th>Is cleaned</th>
+                </tr>
+                </thead>
+
+                {% for isolation_room in isolationroom_list %}
+                    <tr class="{% if isolation_room.resident %}table-danger{% elif not isolation_room.is_cleaned %}table-warning{% else %}table-success{% endif %}">
+                        <td>{{ isolation_room.number }}</td>
+                        <td>{% if isolation_room.resident %}<a href={% url "person_details" isolation_room.resident_id %}>
+                            {{ isolation_room.resident }}{% else %}—{% endif %}
+                        </a></td>
+                        <td>{% if isolation_room.resident %}{% else %}{{ isolation_room.is_cleaned }}{% endif %}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}

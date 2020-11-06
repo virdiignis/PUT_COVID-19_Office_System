@@ -32,6 +32,7 @@
                 {% endif %}
             </div>
         </div>
+        <br>
         <div class="card">
             <h2 class="card-header">Involved people</h2>
             <div class="card-body d-flex justify-content-between {% if is_open %}disabled{% endif %}">
@@ -42,9 +43,11 @@
                 {{ form.people.errors }}
             </div>
         </div>
-
+        <br>
         <div class="card">
-            <div class="card-header isolations-add d-flex justify-content-between"><h3>Isolations</h3></div>
+            <div class="card-header isolations-add d-flex justify-content-between">
+                <h3>Isolations</h3>
+            </div>
             <div class="card-body">
                 <table class="table">
                     {{ isolations.management_form }}
@@ -80,7 +83,7 @@
             </div>
         </div>
 
-
+        <br>
         <div class="card">
             <div class="card-header actions-add d-flex justify-content-between">
                 <h3>Actions</h3>

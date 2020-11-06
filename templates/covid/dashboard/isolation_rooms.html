@@ -2,7 +2,7 @@
 
 {% block table %}
     <div class="card-header"><h3>Occupied
-        <a href="#" onclick="top.location.href = '{% url 'isolations_dashboard' 1 %}';">
+        <a href="#" onclick="top.location.href = '{% url 'isolation_rooms' %}';">
             isolation rooms
         </a></h3></div>
     <div class="card-body">
@@ -14,11 +14,13 @@
             </tr>
             </thead>
             {% for isolation_room in page_obj %}
-                <tr>
+                <tr class="table-danger">
                     <td>{{ isolation_room.number }}</td>
                     <td>
-                        {# TODO: add person link here #}
-                        <a href="#">{{ isolation_room.resident }}</a>
+                        <a href="#"
+                           onclick="top.location.href = '{% url 'person_details' isolation_room.resident_id %}'">
+                            {{ isolation_room.resident }}
+                        </a>
                     </td>
                 </tr>
             {% endfor %}

@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        <div class="card">
+            <div class="card-header actions-add d-flex justify-content-between align-items-center">
+                <h2>Isolation rooms</h2>
+                <div class="btn-group align-self-center col-sm-2">
+                    <a type="submit" class="btn btn-danger" href="{% url 'isolation_rooms' %}">Cancel</a>
+                    <button type="submit" class="btn btn-success">Save</button>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    {{ formset.management_form }}
+
+                    {% for form in formset %}
+                        {% if forloop.first %}
+                            <thead class="thead-dark">
+                            <tr>
+                                <th>{{ form.number.label }}</th>
+                                <th>{{ form.resident.label }}</th>
+                                <th>{{ form.is_cleaned.label }}</th>
+                            </tr>
+
+                            </thead>
+
+                        {% endif %}
+
+                        <tr class="formset_row">
+                            {% for hidden in form.hidden_fields %}
+                                {{ hidden }}
+                            {% endfor %}
+
+                            <td>
+                                <input type="hidden">{{ form.number }}</input>
+                                {% for error in form.number.errors %}
+                                    <p class="help-block" style="color: red">{{ error }}</p>
+                                {% endfor %}
+                                {{ form.instance.number }}
+                            </td>
+
+                            <td>
+                                {% for error in form.resident.errors %}
+                                    <p class="help-block" style="color: red">{{ error }}</p>
+                                {% endfor %}
+                                {{ form.resident }}
+                            </td>
+                            <td>
+                                {% for error in form.is_cleaned.errors %}
+                                    <p class="help-block" style="color: red">{{ error }}</p>
+                                {% endfor %}
+                                {{ form.is_cleaned }}
+                            </td>
+                        </tr>
+
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+        {{ formset.media }}
+    </form>
+{% endblock %}

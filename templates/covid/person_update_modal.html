@@ -2,7 +2,7 @@
     {% csrf_token %}
 
     <div class="modal-header">
-        <h5 class="modal-title">Add new person</h5>
+        <h5 class="modal-title">Edit person</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -13,7 +13,7 @@
             <div class="form-group{% if field.errors %} invalid{% endif %}">
                 <div class="d-flex justify-content-between">
                     {{ field.label_tag }}
-                    {{ field }}
+                    <div class="col-7">{{ field }}</div>
                 </div>
                 {% for error in field.errors %}
                     <p class="help-block" style="color: red">{{ error }}</p>
@@ -24,6 +24,20 @@
 
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="submit-btn btn btn-primary">Add</button>
+        <button type="button" class="submit-btn btn btn-primary">Update</button>
     </div>
+
+    {{ form.media }}
+
+    <script type="text/javascript">
+        $(function () {
+            $('#id_unit').select2({
+                dropdownParent: $('#modal'),
+                ajax: {
+                    url: '{% url 'unit-autocomplete' %}',
+                    dataType: 'json'
+                }
+            });
+        });
+    </script>
 </form>

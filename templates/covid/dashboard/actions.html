@@ -22,7 +22,7 @@
                         {{ action.datetime }}
                     </td>
                     <td>
-                        <a href={% url "case_details" action.made_by.id %}>
+                        <a href="#" onclick="top.location.href = '{% url "case_details" action.made_by.id %}'">
                             {{ action.made_by }}
                         </a>
                     </td>

@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="modal fade" role="dialog" id="modal">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content"></div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header d-flex justify-content-between">
+            <div class="d-flex align-items-center justify-content-between col-3">
+                <h2>{{ person }}</h2>{% if person.role != 'N' %}
+                <h5 class="text-muted pull-left">({{ person.get_role_display }})</h5> {% endif %}
+            </div>
+            <div class="btn-group align-self-center col-sm-1">
+                <button type="button" id="editPersonButton" class="btn btn-primary">Edit</button>
+            </div>
+        </div>
+        <div class="card-body">
+            {% if person.unit %}<p class="text-muted">{{ person.unit }}</p>{% endif %}
+            <p>Phone number: {% if person.phone_number %}{{ person.phone_number }}{% endif %}</p>
+            <p>Email: {% if person.email %}<a href="mailto:{{ person.email }}">{{ person.email }}</a>{% endif %}</p>
+            {% if person.dorm %}<p>Dorm: {{ person.get_dorm_display }}</p>{% endif %}
+        </div>
+    </div>
+    <br>
+    <div class="card">
+        <div class="card-header"><h3>Involved in cases</h3></div>
+        <div class="card-body">
+            {% if cases %}
+                <table class="table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Title</th>
+                        <th scope="col">People involved</th>
+                        <th scope="col">Date open</th>
+                        <th scope="col">Date closed</th>
+                    </tr>
+                    </thead>
+                    {% for case in cases %}
+                        <tr>
+                            <td><a href={% url "case_details" case.id %}>{{ case }}</a></td>
+                            <td>{% for person in case.people.all %}
+                                <a href="{% url 'person_details' person.id %}">{{ person }}</a><br>
+                            {% endfor %}</td>
+                            <td>{{ case.date_open }}</td>
+                            <td>{% if case.date_closed %}{{ case.date_closed }}{% else %}—{% endif %}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                No cases involving this person found.
+            {% endif %}
+        </div>
+    </div>
+    <br>
+    <div class="card">
+        <div class="card-header"><h3>Isolations</h3></div>
+        <div class="card-body">
+            {% if person.isolationroom %}
+                <p class="text-danger text-center h3">Currently in DS4 room {{ person.isolationroom.number }}.</p><br>
+            {% endif %}
+            {% if isolations %}
+                <table class="table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Ordered by</th>
+                        <th scope="col">Start date</th>
+                        <th scope="col">End date</th>
+                        <th scope="col">Order date</th>
+                        <th scope="col">Whereabouts</th>
+                        <th scope="col">Health state</th>
+                    </tr>
+                    </thead>
+                    {% for isolation in isolations %}
+                        <tr style="background:
+                                {% if isolation.active %}
+                                    {% if isolation.person.health_state.considered_sick %}
+                                        orangered
+                                    {% elif isolation.person.health_state.considered_suspect %}
+                                        yellow
+                                    {% endif %}
+                                {% else %}
+                                    lightgray
+                                {% endif %}">
+                            <td>{{ isolation.ordered_by }}</td>
+                            <td>{{ isolation.start_date }}</td>
+                            <td>{{ isolation.end_date }}</td>
+                            <td>{{ isolation.ordered_on }}</td>
+                            <td>{{ isolation.get_whereabouts_display }}</td>
+                            <td>{{ isolation.person.health_state }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                No isolations underwent.
+            {% endif %}
+        </div>
+    </div>
+
+    {% load static %}
+    <script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            function personEditModal() {
+                $("#editPersonButton").modalForm({
+                    formURL: "{% url 'person_update_modal' person.id %}",
+                });
+            }
+
+            personEditModal();
+        });
+    </script>
+{% endblock %}

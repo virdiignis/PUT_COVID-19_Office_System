@@ -1,6 +1,9 @@
 from dal import autocomplete
-from django.forms import inlineformset_factory, ModelForm, DateTimeInput, DateInput
-from apps.covid.models import Case, Action, Person, Isolation
+from django.forms import inlineformset_factory, ModelForm, DateTimeInput, DateInput, modelformset_factory, NumberInput, \
+    HiddenInput
+from rest_framework.fields import HiddenField
+
+from apps.covid.models import Case, Action, Person, Isolation, IsolationRoom
 from bootstrap_modal_forms.forms import BSModalModelForm
 
 
@@ -36,6 +39,14 @@ IsolationFormSet = inlineformset_factory(Case,
                                              "person": autocomplete.ModelSelect2(url='person-autocomplete')
                                          })
 
+IsolationRoomFormSet = modelformset_factory(IsolationRoom, fields="__all__", extra=0, can_delete=False,
+                                            widgets={
+                                                "resident": autocomplete.ModelSelect2(url='person-autocomplete'),
+                                                "number": HiddenInput(
+                                                    attrs={'class': 'disabled', 'readonly': 'readonly'})
+                                            }
+                                            )
+
 
 class CaseCreateModalForm(BSModalModelForm):
     class Meta:
@@ -43,10 +54,11 @@ class CaseCreateModalForm(BSModalModelForm):
         fields = ("title",)
 
 
-class PersonCreateModalForm(BSModalModelForm):
+class PersonCreateUpdateModalForm(BSModalModelForm):
     class Meta:
         model = Person
-        fields = "__all__"
+        fields = ("title", "first_name", "middle_name", "last_name", "role", "email",
+                  "phone_number", "dorm", "unit", "health_state")
         widgets = {
             "unit": autocomplete.ModelSelect2(url='unit-autocomplete')
         }

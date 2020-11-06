@@ -134,7 +134,7 @@ class Action(Model):
     case = models.ForeignKey(Case, related_name="actions", on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
-        return f"{self.made_by.get_short_name()} did {self.action_description} in case {self.case}"
+        return f"{self.made_by.get_short_name() or self.made_by.username} did {self.action_description} in case {self.case}"
 
 
 class Document(Model):

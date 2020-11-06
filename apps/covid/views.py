@@ -1,4 +1,4 @@
-from bootstrap_modal_forms.generic import BSModalCreateView, BSModalReadView
+from bootstrap_modal_forms.generic import BSModalCreateView, BSModalReadView, BSModalUpdateView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import SuspiciousOperation
@@ -11,9 +11,9 @@ from django.db.models import Q
 from django.views.generic import ListView, DetailView, UpdateView
 
 from apps.covid.automatic_actions import AutomaticLogActions
-from apps.covid.forms import CaseCreateModalForm, PersonCreateModalForm, CaseUpdateForm, IsolationFormSet, \
-    ActionFormSet, ActionCreateModalForm
-from apps.covid.models import Case, Action, Isolation, IsolationRoom
+from apps.covid.forms import CaseCreateModalForm, PersonCreateUpdateModalForm, CaseUpdateForm, IsolationFormSet, \
+    ActionFormSet, ActionCreateModalForm, IsolationRoomFormSet
+from apps.covid.models import Case, Action, Isolation, IsolationRoom, Person
 
 
 class CaseListView(LoginRequiredMixin, ListView):
@@ -96,6 +96,8 @@ class CaseUpdateView(LoginRequiredMixin, UpdateView):
             context["actions"] = ActionFormSet(self.request.POST, instance=self.object)
         else:
             context["isolations"] = IsolationFormSet(instance=self.object)
+            if self.object.isolations.exists():
+                context["isolations"].extra = 0
             context["actions"] = ActionFormSet(instance=self.object)
         return context
 
@@ -152,24 +154,10 @@ def case_reopen(request, pk: int):
     return redirect('case_update', pk=pk)
 
 
-class PersonCreateModalView(LoginRequiredMixin, BSModalCreateView):
-    template_name = 'covid/person_new_modal.html'
-    form_class = PersonCreateModalForm
-    success_url = reverse_lazy('null')  # this is required, but not used
-
-    def form_valid(self, form):
-        super(PersonCreateModalView, self).form_valid(form)
-        if not self.request.is_ajax() or self.request.POST.get('asyncUpdate') == 'True':
-            AutomaticLogActions(user=self.request.user).add_new_person(self.object)
-            return JsonResponse({"id": self.object.id, "name": str(self.object)})
-        else:
-            return HttpResponse()
-
-
 class ActionCreateModalView(LoginRequiredMixin, BSModalCreateView):
     template_name = 'covid/action_new_modal.html'
     form_class = ActionCreateModalForm
-    success_url = reverse_lazy("actions")  # this is required, but not used
+    success_url = reverse_lazy("actions")
 
 
 class ActionDetailModalView(LoginRequiredMixin, BSModalReadView):
@@ -241,3 +229,56 @@ def action_notes(request, pk):
         "text": action.notes
     }
     return render(request, 'covid/text_modal.html', context)
+
+
+class PersonDetailView(LoginRequiredMixin, DetailView):
+    model = Person
+
+    def get_context_data(self, **kwargs):
+        context = super(PersonDetailView, self).get_context_data(**kwargs)
+        person = context["person"]
+        context["cases"] = Case.objects.filter(people=person).order_by("-id")
+        context["isolations"] = Isolation.objects.filter(person=person).order_by("-ordered_on")
+
+        return context
+
+
+class PersonCreateModalView(LoginRequiredMixin, BSModalCreateView):
+    template_name = 'covid/person_new_modal.html'
+    form_class = PersonCreateUpdateModalForm
+    success_url = reverse_lazy('null')  # this is required, but not used
+
+    def form_valid(self, form):
+        super(PersonCreateModalView, self).form_valid(form)
+        if not self.request.is_ajax() or self.request.POST.get('asyncUpdate') == 'True':
+            AutomaticLogActions(user=self.request.user).add_new_person(self.object)
+            return JsonResponse({"id": self.object.id, "name": str(self.object)})
+        else:
+            return HttpResponse()
+
+
+class PersonUpdateModalView(LoginRequiredMixin, BSModalUpdateView):
+    model = Person
+    template_name = 'covid/person_update_modal.html'
+    form_class = PersonCreateUpdateModalForm
+
+    def get_success_url(self):
+        return reverse_lazy('person_details', args=(self.object.id,))
+
+
+class IsolationRoomListView(LoginRequiredMixin, ListView):
+    model = IsolationRoom
+    queryset = IsolationRoom.objects.order_by("number")
+    template_name = 'covid/isolation_rooms.html'
+
+
+@login_required
+def isolation_rooms_update(request):
+    if request.method == 'POST':
+        formset = IsolationRoomFormSet(request.POST, request.FILES)
+        if formset.is_valid():
+            formset.save()
+            return redirect(reverse_lazy('isolation_rooms'))
+    else:
+        formset = IsolationRoomFormSet()
+    return render(request, 'covid/isolation_rooms_update.html', {'formset': formset})

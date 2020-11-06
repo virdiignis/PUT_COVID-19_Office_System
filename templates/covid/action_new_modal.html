@@ -11,7 +11,7 @@
         <small class="text-muted">To add action linked to case, please go to case edit view.</small>
     </div>
 
-    <div class="modal-body">
+    <div id="modal-body" class="modal-body">
         {% for field in form %}
             <div class="form-group{% if field.errors %} invalid{% endif %}">
                 <div class="d-flex justify-content-between">
@@ -48,11 +48,10 @@
 
         });
         $('#id_made_by').select2({
-            dropdownParent: $('#modal'),
+            dropdownParent: $('#modal-body'),
             ajax: {
                 url: '{% url 'worker-autocomplete' %}',
                 dataType: 'json'
-                // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
             }
         });
     </script>
