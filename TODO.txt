@@ -10,12 +10,12 @@
 # 10. Dodać akcje niezwiązane + interfejs
 # 11. Ogarnąć login mixiny
 12. uwsgitop
-13. Mailing (w celery)
 # 14. Dashboard
 15. Osoby z kontaktu
 # 16. Dokumenty
 # 17. Pozmieniać linki z wewnątrz iframów na top.href.
 18. Może dodać contact-from w akcji.
 19. Dodać reminders do dashboardu.
+20. Widoki raportów i przyciski edycji uzależnione od uprawnień użytkownika.
 
 Testy w biurze

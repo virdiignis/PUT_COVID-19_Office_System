@@ -1,0 +1,66 @@
+{% extends 'covid/dashboard/frame.html' %}
+
+{% block table %}
+    <script type="text/javascript">
+        function markResolved(obj) {
+            $.ajax({
+                url: "{% url 'reminders_mark_done' 101010 %}".replace("101010", $(obj).attr("rno")),
+                success: function () {
+                    location.reload();
+                }
+            });
+        }
+    </script>
+    <div class="card-header d-flex justify-content-between">
+        <h3><a href="#" onclick="top.location.href = '{% url 'reminders' 1 %}';">
+            Reminders
+        </a></h3>
+    </div>
+    {% if page_obj %}
+        <div class="card-body">
+            <table class="table table-sm">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Datetime</th>
+                    <th scope="col">Set by</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Note</th>
+                    <th scope="col">Mark done</th>
+                </tr>
+                </thead>
+                {% for reminder in page_obj %}
+                    <tr class="{% if reminder.urgency == 3 %}
+                        table-danger
+                        {% elif reminder.urgency == 2 %}
+                        table-warning
+                        {% elif reminder.urgency == 1 %}
+                        table-primary
+                    {% endif %}">
+                        <td>
+                            {{ reminder.datetime }}
+                        </td>
+                        <td>
+                            <a href="#" onclick="top.location.href = '{% url "worker_details" reminder.set_by_id %}'">
+                                {{ reminder.set_by }}
+                            </a>
+                        </td>
+                        <td>{{ reminder.title }}</td>
+                        <td>{{ reminder.note }}</td>
+                        <td>
+                            <a href="#" type="button" onclick="markResolved(this);" rno="{{ reminder.id }}">done</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+            {% if paginator.num_pages > 1 %}
+                {% load bootstrap_pagination %}
+                {% bootstrap_paginate page_obj range=3 url_view_name="reminders_dashboard" %}
+            {% endif %}
+        </div>
+    {% endif %}
+    <script type="text/javascript">
+        setTimeout(function () {
+            window.location.reload(1);
+        }, 60000);
+    </script>
+{% endblock %}

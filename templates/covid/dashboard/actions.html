@@ -7,7 +7,7 @@
         </h3>
     </div>
     <div class="card-body">
-        <table class="table">
+        <table class="table table-sm">
             <thead class="thead-dark">
             <tr>
                 <th scope="col">Date</th>
@@ -22,7 +22,7 @@
                         {{ action.datetime }}
                     </td>
                     <td>
-                        <a href="#" onclick="top.location.href = '{% url "worker_details" action.made_by.id %}'">
+                        <a href="#" onclick="top.location.href = '{% url "worker_details" action.made_by_id %}'">
                             {{ action.made_by }}
                         </a>
                     </td>
@@ -31,7 +31,9 @@
                 </tr>
             {% endfor %}
         </table>
-        {% load bootstrap_pagination %}
-        {% bootstrap_paginate page_obj range=10 url_view_name="actions_dashboard" %}
+        {% if paginator.num_pages > 1 %}
+            {% load bootstrap_pagination %}
+            {% bootstrap_paginate page_obj range=10 url_view_name="actions_dashboard" %}
+        {% endif %}
     </div>
 {% endblock %}
