@@ -51,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 ]
 
 ROOT_URLCONF = 'backend.urls'
@@ -112,6 +113,27 @@ AUTH_USER_MODEL = "office.worker"
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
 LANGUAGE_CODE = 'pl-pl'
+LANGUAGES = (  # supported languages
+    ('en', 'English'),
+    ('pl', 'Polish'),
+)
+
+LOCALE_PATHS = [
+    BASE_DIR / "apps/covid/locale",
+    BASE_DIR / "apps/office/locale",
+    BASE_DIR / "locale",
+]
+
+DATE_INPUT_FORMATS = [
+    '%d.%m.%Y', '%d.%m.%y'  # '25.10.2006', '25.10.06'
+]
+DATETIME_INPUT_FORMATS = [
+    '%d.%m.%Y %H:%i:%S',
+    '%d.%m.%Y %H:%i:%S:%f',
+    '%d.%m.%y %H:%i:%S',
+    '%d.%m.%y %H:%i:%S:%f',
+]
+
 TIME_ZONE = 'Europe/Warsaw'
 USE_I18N = True
 USE_L10N = True

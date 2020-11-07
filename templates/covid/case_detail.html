@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load i18n %}
 {% block content %}
     <div class="modal fade" tabindex="-1" role="dialog" id="modal">
         <div class="modal-dialog" role="document">
@@ -12,29 +12,30 @@
         <div class="card-header d-flex justify-content-between">
             <h2>{{ case.title }}</h2>
             <div class="btn-group align-self-center col-sm-1">
-                <a class="btn btn-primary" href="{% url 'case_update' case.id %}">Edit</a>
+                <a class="btn btn-primary" href="{% url 'case_update' case.id %}">{% translate "Edit" %}</a>
             </div>
         </div>
         <br>
-        <div style="padding-left: 5em">Status: <b>{% if closed %}Closed{% else %}Open{% endif %}</b></div>
-        <div style="padding-left: 5em">Opened: {{ case.date_open }}</div>
+        <div style="padding-left: 5em">{% translate "Status" %}: <b>{% if closed %}{% translate "Closed" %}{% else %}
+            {% translate "Open" %}{% endif %}</b></div>
+        <div style="padding-left: 5em">{% translate "Opened" %}: {{ case.date_open }}</div>
         {% if closed %}
-            <div style="padding-left: 5em">Closed: {{ case.date_closed }}</div>{% endif %}
+            <div style="padding-left: 5em">{% translate "Closed" %}: {{ case.date_closed }}</div>{% endif %}
         <br>
     </div>
     <br>
     <div class="card">
-        <div class="card-header"><h3>Involved people</h3></div>
+        <div class="card-header"><h3>{% translate "People involved" %}</h3></div>
         <div class="card-body">
             <table class="table">
                 <thead class="thead-dark">
                 <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Role</th>
-                    <th scope="col">Unit</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Phone number</th>
-                    <th scope="col">Health state</th>
+                    <th scope="col">{% translate "Name" %}</th>
+                    <th scope="col">{% translate "Role" %}</th>
+                    <th scope="col">{% translate "Unit" %}</th>
+                    <th scope="col">{% translate "Email" %}</th>
+                    <th scope="col">{% translate "Phone number" %}</th>
+                    <th scope="col">{% translate "Health state" %}</th>
                 </tr>
                 </thead>
                 {% for person in case.people.all %}
@@ -64,19 +65,19 @@
     </div>
     <br>
     <div class="card">
-        <div class="card-header"><h3>Isolations in case</h3></div>
+        <div class="card-header"><h3>{% translate "Isolations in case" %}</h3></div>
         <div class="card-body">
             {% if isolations %}
                 <table class="table">
                     <thead class="thead-dark">
                     <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col">Ordered by</th>
-                        <th scope="col">Start date</th>
-                        <th scope="col">End date</th>
-                        <th scope="col">Order date</th>
-                        <th scope="col">Whereabouts</th>
-                        <th scope="col">Health state</th>
+                        <th scope="col">{% translate "Name" %}</th>
+                        <th scope="col">{% translate "Ordered by" %}</th>
+                        <th scope="col">{% translate "Start date" %}</th>
+                        <th scope="col">{% translate "End date" %}</th>
+                        <th scope="col">{% translate "Order date" %}</th>
+                        <th scope="col">{% translate "Whereabouts" %}</th>
+                        <th scope="col">{% translate "Health state" %}</th>
                     </tr>
                     </thead>
                     {% for isolation in isolations %}
@@ -105,25 +106,25 @@
                     {% endfor %}
                 </table>
             {% else %}
-                No isolations in the case.
+                {% translate "No isolations in the case." %}
             {% endif %}
         </div>
     </div>
     <br>
     <div class="card">
-        <div class="card-header"><h3>Actions history</h3></div>
+        <div class="card-header"><h3>{% translate "Actions history" %}</h3></div>
         <div class="card-body">
             <table class="table">
                 <thead class="thead-dark">
                 <tr>
-                    <th>Datetime</th>
-                    <th>Made by</th>
-                    <th>Based on</th>
-                    <th>Contact from</th>
-                    <th>Incoming contact content</th>
-                    <th>Description</th>
-                    <th>Notes</th>
-                    <th>Case</th>
+                    <th>{% translate "Datetime" %}</th>
+                    <th>{% translate "Made by" %}</th>
+                    <th>{% translate "Based on" %}</th>
+                    <th>{% translate "Contact from" %}</th>
+                    <th>{% translate "Incoming contact content" %}</th>
+                    <th>{% translate "Description" %}</th>
+                    <th>{% translate "Notes" %}</th>
+                    <th>{% translate "Case" %}</th>
                 </tr>
                 </thead>
 
@@ -146,14 +147,14 @@
                         {% endif %}</td>
                         <td>{% if action.contact_content %}
                             <button type="button" class="action-contact_content btn btn-link" ano="{{ action.id }}">
-                                open
+                                {% translate "open" %}
                             </button>
                         {% else %}
                             —
                         {% endif %}</td>
                         <td>{{ action.action_description }}</td>
                         <td>{% if action.notes %}
-                            <button type="button" class="action-notes btn btn-link" ano="{{ action.id }}">open</>
+                            <button type="button" class="action-notes btn btn-link" ano="{{ action.id }}">{% translate "open" %}</button>
                         {% else %}
                             —
                         {% endif %}</td>
@@ -172,14 +173,14 @@
     <br>
     {% if case.documents.exists %}
         <div class="card">
-            <div class="card-header"><h3>Documents</h3></div>
+            <div class="card-header"><h3>{% translate "Documents" %}</h3></div>
             <div class="card-body">
                 <table class="table">
                     <thead class="thead-dark">
                     <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col">Upload date</th>
-                        <th scope="col">Uploaded by</th>
+                        <th scope="col">{% translate "Name" %}</th>
+                        <th scope="col">{% translate "Upload date" %}</th>
+                        <th scope="col">{% translate "Uploaded by" %}</th>
                     </tr>
                     </thead>
                     {% for doc in case.documents.order_by %}

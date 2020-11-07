@@ -19,6 +19,9 @@
 20. Widoki raportów i przyciski edycji uzależnione od uprawnień użytkownika.
 # 21. Dodać do person detail actions-based-on-contact-from.
 # 22. Dodawanie osób przy akcji stand-alone.
+23. Lokalizacja językowa # https://pypi.org/project/django-translations/
+24. Uzupełnić isolation cause w widokach izolacji.
+25. Ustawić w main-header link do zmiany języka.
 
 Raporty:
     Liczba nowych zakażonych studentów/doktorantów

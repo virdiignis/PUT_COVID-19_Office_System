@@ -1,16 +1,16 @@
 {% extends 'covid/dashboard/frame.html' %}
-
+{% load i18n %}
 {% block table %}
-    <div class="card-header"><h3>Occupied
+    <div class="card-header"><h3>{% translate "Occupied" %}
         <a href="#" onclick="top.location.href = '{% url 'isolation_rooms' %}';">
-            isolation rooms
+            {% translate "isolation rooms" %}
         </a></h3></div>
     <div class="card-body">
         <table class="table table-sm">
             <thead class="thead-dark">
             <tr>
-                <th scope="col">Number</th>
-                <th scope="col">Resident</th>
+                <th scope="col">{% translate "Number" %}</th>
+                <th scope="col">{% translate "Resident" %}</th>
             </tr>
             </thead>
             {% for isolation_room in page_obj %}

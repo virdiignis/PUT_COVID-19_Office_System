@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load i18n %}
 {% block content %}
     <div class="modal fade" tabindex="-1" role="dialog" id="modal">
         <div class="modal-dialog" role="document">
@@ -8,29 +8,29 @@
     </div>
     <div class="card">
         <div class="card-header">
-            <h2>Cases</h2>
+            <h2>{% translate "Cases" %}</h2>
             <div class="d-flex align-items-center">
-                <div class="col-xl-4 col-6 mr-auto">
+                <div class="col-xl-4 col-5 mr-auto">
                     <form id="searchForm" method="get" class="flex-fill">
                         <div class="form-group">
                             <label class="col-form-label col-2" for="searchBar">
-                                Search:
+                                {% translate "Search" %}:
                             </label>
                             <input id="searchBar" type="text" name="search" class="col-6" value="{{ search }}"/>
-                            <button type="submit" class="btn btn-primary col-xl-2 col-3">Search</button>
+                            <button type="submit" class="btn btn-primary col-xl-2 col-3">{% translate "Search" %}</button>
                         </div>
                     </form>
                 </div>
-                <div class="btn-group col-xl-2 col-4 pull-right">
+                <div class="btn-group col-xl-3 col-5 pull-right">
                     <a class="col-4 btn {% if open == None %}btn-success disabled{% else %}btn-primary{% endif %}"
-                       href="{{ request.path }}?open=None&search={{ search }}">All</a>
+                       href="{{ request.path }}?open=None&search={{ search }}">{% translate "All" %}</a>
                     <a class="col-4 btn {% if open == True %}btn-success disabled{% else %}btn-primary{% endif %}"
-                       href="{{ request.path }}?open=true&search={{ search }}">Open</a>
+                       href="{{ request.path }}?open=true&search={{ search }}">{% translate "Open" %}</a>
                     <a class="col-4 btn {% if open == False %}btn-success disabled{% else %}btn-primary{% endif %}"
-                       href="{{ request.path }}?open=false&search={{ search }}">Closed</a>
+                       href="{{ request.path }}?open=false&search={{ search }}">{% translate "Closed" %}</a>
                 </div>
                 <div class="col-xl-1 col-2 btn-group pull-right">
-                    <button id="newCaseButton" class="btn btn-danger" type="button" name="button">Open new</button>
+                    <button id="newCaseButton" class="btn btn-danger" type="button" name="button">{% translate "Open new" %}</button>
                 </div>
             </div>
         </div>
@@ -38,10 +38,10 @@
             <table class="table">
                 <thead class="thead-dark">
                 <tr>
-                    <th scope="col">Title</th>
-                    <th scope="col">People involved</th>
-                    <th scope="col">Date open</th>
-                    <th scope="col">Date closed</th>
+                    <th scope="col">{% translate "Title" %}</th>
+                    <th scope="col">{% translate "People involved" %}</th>
+                    <th scope="col">{% translate "Date open" %}</th>
+                    <th scope="col">{% translate "Date closed" %}</th>
                 </tr>
                 </thead>
                 {% for case in page_obj %}

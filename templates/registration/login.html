@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
-
+{% load i18n %}
 {% block content %}
     {% if request.user.is_authenticated %}
-        You are already logged in. <a href="{% url 'logout' %}">Logout</a> to continue.
+        {% translate "You are already logged in." %} <a href="{% url 'logout' %}">{% translate "Logout" %}</a>
+        {% translate "to continue." %}
     {% else %}
         <div class="d-flex justify-content-center">
             <div class="card" style="width: 25rem">
@@ -23,7 +24,7 @@
                             {% endfor %}
                             <p class="d-flex justify-content-between">{{ field.label_tag }}{{ field }}</p>
                         {% endfor %}
-                        <button type="submit" class="btn btn-primary float-right">Login</button>
+                        <button type="submit" class="btn btn-primary float-right">{% translate "Login" %}</button>
                     </form>
                 </div>
             </div>

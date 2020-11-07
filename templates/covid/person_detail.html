@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load i18n %}
 {% block content %}
     <div class="modal fade" role="dialog" id="modal">
         <div class="modal-dialog modal-lg" role="document">
@@ -14,29 +14,30 @@
                 <h5 class="text-muted pull-left">({{ person.get_role_display }})</h5> {% endif %}
             </div>
             <div class="btn-group align-self-center col-sm-1">
-                <button type="button" id="editPersonButton" class="btn btn-primary">Edit</button>
+                <button type="button" id="editPersonButton" class="btn btn-primary">{% translate "Edit" %}</button>
             </div>
         </div>
         <div class="card-body">
             {% if person.unit %}<p class="text-muted">{{ person.unit }}</p>{% endif %}
-            <p>Phone number: {% if person.phone_number %}{{ person.phone_number }}{% endif %}</p>
-            <p>Email: {% if person.email %}<a href="mailto:{{ person.email }}">{{ person.email }}</a>{% endif %}</p>
-            {% if person.dorm %}<p>Dorm: {{ person.get_dorm_display }}</p>{% endif %}
-            Health state: {{ person.health_state }}
+            <p>{% translate "Phone number" %}: {% if person.phone_number %}{{ person.phone_number }}{% endif %}</p>
+            <p>{% translate "Email" %}: {% if person.email %}
+                <a href="mailto:{{ person.email }}">{{ person.email }}</a>{% endif %}</p>
+            {% if person.dorm %}<p>{% translate "Dorm" %}: {{ person.get_dorm_display }}</p>{% endif %}
+            {% translate "Health state" %}: {{ person.health_state }}
         </div>
     </div>
     <br>
     <div class="card">
-        <div class="card-header"><h3>Involved in cases</h3></div>
+        <div class="card-header"><h3>{% translate "Involved in cases" %}</h3></div>
         <div class="card-body">
             {% if cases %}
                 <table class="table">
                     <thead class="thead-dark">
                     <tr>
-                        <th scope="col">Title</th>
-                        <th scope="col">People involved</th>
-                        <th scope="col">Date open</th>
-                        <th scope="col">Date closed</th>
+                        <th scope="col">{% translate "Title" %}</th>
+                        <th scope="col">{% translate "People involved" %}</th>
+                        <th scope="col">{% translate "Date open" %}</th>
+                        <th scope="col">{% translate "Date closed" %}</th>
                     </tr>
                     </thead>
                     {% for case in cases %}
@@ -51,7 +52,7 @@
                     {% endfor %}
                 </table>
             {% else %}
-                No cases involving this person found.
+                {% translate "No cases involving this person found." %}
             {% endif %}
         </div>
     </div>
@@ -60,30 +61,31 @@
         <div class="card-header"><h3>Isolations</h3></div>
         <div class="card-body">
             {% if person.isolationroom %}
-                <p class="text-danger text-center h3">Currently in DS4 room {{ person.isolationroom.number }}.</p><br>
+                <p class="text-danger text-center h3">{% translate "Currently in DS4 room" %} {{ person.isolationroom.number }}.</p>
+                <br>
             {% endif %}
             {% if isolations %}
                 <table class="table">
                     <thead class="thead-dark">
                     <tr>
-                        <th scope="col">Ordered by</th>
-                        <th scope="col">Start date</th>
-                        <th scope="col">End date</th>
-                        <th scope="col">Order date</th>
-                        <th scope="col">Whereabouts</th>
-                        <th scope="col">Health state</th>
+                        <th scope="col">{% translate "Ordered by" %}</th>
+                        <th scope="col">{% translate "Start date" %}</th>
+                        <th scope="col">{% translate "End date" %}</th>
+                        <th scope="col">{% translate "Order date" %}</th>
+                        <th scope="col">{% translate "Whereabouts" %}</th>
+                        <th scope="col">{% translate "Health state" %}</th>
                     </tr>
                     </thead>
                     {% for isolation in isolations %}
-                        <tr style="background:
+                        <tr class="background:
                                 {% if isolation.active %}
                                     {% if isolation.person.health_state.considered_sick %}
-                                        orangered
+                                        table-danger
                                     {% elif isolation.person.health_state.considered_suspect %}
-                                        yellow
+                                        table-warning
                                     {% endif %}
                                 {% else %}
-                                    lightgray
+                                    table-active
                                 {% endif %}">
                             <td>{{ isolation.ordered_by }}</td>
                             <td>{{ isolation.start_date }}</td>
@@ -95,27 +97,27 @@
                     {% endfor %}
                 </table>
             {% else %}
-                No isolations underwent.
+                {% translate "No isolations underwent." %}
             {% endif %}
         </div>
     </div>
     <br>
     <div class="card">
         <div class="card-header actions-add d-flex justify-content-between align-items-center">
-            <h2>Incoming contacts</h2>
+            <h2>{% translate "Incoming contacts" %}</h2>
         </div>
         <div class="card-body">
             {% if actions %}
                 <table class="table">
                     <thead class="thead-dark">
                     <tr>
-                        <th>Datetime</th>
-                        <th>Made by</th>
-                        <th>Based on</th>
-                        <th>Incoming contact content</th>
-                        <th>Description</th>
-                        <th>Notes</th>
-                        <th>Case</th>
+                        <th>{% translate "Datetime" %}</th>
+                        <th>{% translate "Made by" %}</th>
+                        <th>{% translate "Based on" %}</th>
+                        <th>{% translate "Incoming contact content" %}</th>
+                        <th>{% translate "Description" %}</th>
+                        <th>{% translate "Notes" %}</th>
+                        <th>{% translate "Case" %}</th>
                     </tr>
                     </thead>
 
@@ -133,14 +135,15 @@
                             <td>{{ action.get_based_on_display }}</td>
                             <td>{% if action.contact_content %}
                                 <button type="button" class="action-contact_content btn btn-link" ano="{{ action.id }}">
-                                    open
+                                    {% translate "open" %}
                                 </button>
                             {% else %}
                                 —
                             {% endif %}</td>
                             <td>{{ action.action_description }}</td>
                             <td>{% if action.notes %}
-                                <button type="button" class="action-notes btn btn-link" ano="{{ action.id }}">open</>
+                                <button type="button" class="action-notes btn btn-link"
+                                        ano="{{ action.id }}">{% translate "open" %}</button>
                             {% else %}
                                 —
                             {% endif %}</td>
@@ -155,7 +158,7 @@
                     {% endfor %}
                 </table>
             {% else %}
-                No incoming contacts from this person registered.
+                {% translate "No incoming contacts from this person registered." %}
             {% endif %}
         </div>
     </div>

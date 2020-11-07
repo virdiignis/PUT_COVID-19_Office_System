@@ -1,14 +1,15 @@
+{% load i18n %}
 <form method="post" action="">
     {% csrf_token %}
 
     <div class="modal-header">
-        <h5 class="modal-title">Add new unlinked action</h5>
+        <h5 class="modal-title">{% translate "Add new unlinked action" %}</h5>
         <button type="button" class="close" aria-label="Close" onclick="$('#modal').modal('hide')">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="modal-header">
-        <small class="text-muted">To add action linked to case, please go to case edit view.</small>
+        <small class="text-muted">{% translate "To add action linked to case, please go to case edit view." %}</small>
     </div>
 
     <div id="modal-body" class="modal-body">
@@ -36,8 +37,8 @@
     </div>
 
     <div class="modal-footer">
-        <button type="button" class="btn btn-default" onclick="$('#modal').modal('hide')">Close</button>
-        <button type="button" id="addActionSubmitButton" class="submit-btn btn btn-primary">Create</button>
+        <button type="button" class="btn btn-default" onclick="$('#modal').modal('hide')">{% translate "Close" %}</button>
+        <button type="button" id="addActionSubmitButton" class="submit-btn btn btn-primary">{% translate "Create" %}</button>
     </div>
 
     {% load static %}

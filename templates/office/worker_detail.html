@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load i18n %}
 {% block content %}
     <div class="modal fade" tabindex="-1" role="dialog" id="modal">
         <div class="modal-dialog modal-lg" role="document">
@@ -14,24 +14,25 @@
             </div>
         </div>
         <div class="card-body">
-            <p>Phone number: {% if worker.phone_number %}{{ worker.phone_number }}{% endif %}</p>
-            <p>Email: {% if worker.email %}<a href="mailto:{{ worker.email }}">{{ worker.email }}</a>{% endif %}</p>
+            <p>{% translate "Phone number" %}: {% if worker.phone_number %}{{ worker.phone_number }}{% endif %}</p>
+            <p>{% translate "Email" %}: {% if worker.email %}
+                <a href="mailto:{{ worker.email }}">{{ worker.email }}</a>{% endif %}</p>
         </div>
     </div>
     <br>
     <div class="card">
-        <div class="card-header"><h3>Latest actions</h3></div>
+        <div class="card-header"><h3>{% translate "Latest actions" %}</h3></div>
         <div class="card-body">
             {% if actions %}
                 <table class="table">
                     <thead class="thead-dark">
                     <tr>
-                        <th>Datetime</th>
-                        <th>Based on</th>
-                        <th>Incoming contact content</th>
-                        <th>Description</th>
-                        <th>Notes</th>
-                        <th>Case</th>
+                        <th>{% translate "Datetime" %}</th>
+                        <th>{% translate "Based on" %}</th>
+                        <th>{% translate "Incoming contact content" %}</th>
+                        <th>{% translate "Description" %}</th>
+                        <th>{% translate "Notes" %}</th>
+                        <th>{% translate "Case" %}</th>
                     </tr>
                     </thead>
 
@@ -44,14 +45,15 @@
                             <td>{{ action.get_based_on_display }}</td>
                             <td>{% if action.contact_content %}
                                 <button type="button" class="action-contact_content btn btn-link" ano="{{ action.id }}">
-                                    open
+                                    {% translate "open" %}
                                 </button>
                             {% else %}
                                 —
                             {% endif %}</td>
                             <td>{{ action.action_description }}</td>
                             <td>{% if action.notes %}
-                                <button type="button" class="action-notes btn btn-link" ano="{{ action.id }}">open</>
+                                <button type="button" class="action-notes btn btn-link"
+                                        ano="{{ action.id }}">{% translate "open" %}</button>
                             {% else %}
                                 —
                             {% endif %}</td>
@@ -66,7 +68,7 @@
                     {% endfor %}
                 </table>
             {% else %}
-                No cases involving this worker found.
+                {% translate "No cases involving this worker found." %}
             {% endif %}
         </div>
     </div>

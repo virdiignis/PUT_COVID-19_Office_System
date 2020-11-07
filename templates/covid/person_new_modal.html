@@ -1,8 +1,9 @@
+{% load i18n %}
 <form method="post" action="">
     {% csrf_token %}
 
     <div class="modal-header">
-        <h5 class="modal-title">Add new person</h5>
+        <h5 class="modal-title">{% translate "Add new person" %}</h5>
         <button type="button" class="close" onclick="$('#modal-person').modal('hide')" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -23,7 +24,7 @@
     </div>
 
     <div class="modal-footer">
-        <button type="button" class="btn btn-default" onclick="$('#modal-person').modal('hide')">Close</button>
-        <button type="button" id="addPersonSubmitButton" class="submit-btn btn btn-primary">Add</button>
+        <button type="button" class="btn btn-default" onclick="$('#modal-person').modal('hide')">{% translate "Close" %}</button>
+        <button type="button" id="addPersonSubmitButton" class="submit-btn btn btn-primary">{% translate "Add" %}</button>
     </div>
 </form>

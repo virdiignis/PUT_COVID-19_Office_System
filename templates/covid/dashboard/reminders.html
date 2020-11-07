@@ -1,5 +1,5 @@
 {% extends 'covid/dashboard/frame.html' %}
-
+{% load i18n %}
 {% block table %}
     <script type="text/javascript">
         function markResolved(obj) {
@@ -13,7 +13,7 @@
     </script>
     <div class="card-header d-flex justify-content-between">
         <h3><a href="#" onclick="top.location.href = '{% url 'reminders' 1 %}';">
-            Reminders
+            {% translate "Reminders" %}
         </a></h3>
     </div>
     {% if page_obj %}
@@ -21,11 +21,11 @@
             <table class="table table-sm">
                 <thead class="thead-dark">
                 <tr>
-                    <th scope="col">Datetime</th>
-                    <th scope="col">Set by</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Note</th>
-                    <th scope="col">Mark done</th>
+                    <th scope="col">{% translate "Datetime" %}</th>
+                    <th scope="col">{% translate "Set by" %}</th>
+                    <th scope="col">{% translate "Title" %}</th>
+                    <th scope="col">{% translate "Note" %}</th>
+                    <th scope="col">{% translate "Mark done" %}</th>
                 </tr>
                 </thead>
                 {% for reminder in page_obj %}
@@ -47,7 +47,8 @@
                         <td>{{ reminder.title }}</td>
                         <td>{{ reminder.note }}</td>
                         <td>
-                            <a href="#" type="button" onclick="markResolved(this);" rno="{{ reminder.id }}">done</a>
+                            <a href="#" type="button" onclick="markResolved(this);"
+                               rno="{{ reminder.id }}">{% translate "done" %}</a>
                         </td>
                     </tr>
                 {% endfor %}

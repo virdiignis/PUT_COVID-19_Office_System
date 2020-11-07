@@ -9,7 +9,7 @@ class WorkerAutocomplete(autocomplete.Select2QuerySetView):
         if not self.request.user.is_authenticated:
             return Worker.objects.none()
 
-        qs = Worker.objects.all()
+        qs = Worker.objects.order_by("last_name", "first_name")
 
         if self.q:
             qs = qs.filter(
