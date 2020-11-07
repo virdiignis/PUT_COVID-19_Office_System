@@ -22,9 +22,12 @@
             </div>
         {% endfor %}
     </div>
+    {{ form.media }}
 
     <div class="modal-footer">
-        <button type="button" class="btn btn-default" onclick="$('#modal-person').modal('hide')">{% translate "Close" %}</button>
-        <button type="button" id="addPersonSubmitButton" class="submit-btn btn btn-primary">{% translate "Add" %}</button>
+        <button type="button" class="btn btn-default"
+                onclick="$('#modal-person').modal('hide')">{% translate "Close" %}</button>
+        <button type="button" id="addPersonSubmitButton"
+                class="submit-btn btn btn-primary">{% translate "Add" %}</button>
     </div>
 </form>

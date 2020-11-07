@@ -7,3 +7,6 @@ django-bootstrap-modal-forms
 psycopg2
 django-bootstrap-pagination
 uwsgitop
+redis
+celery
+xlsxwriter

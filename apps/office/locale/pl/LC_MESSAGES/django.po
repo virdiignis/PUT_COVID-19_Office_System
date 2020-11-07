@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-07 04:09+0100\n"
+"POT-Creation-Date: 2020-11-07 21:04+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -56,10 +56,14 @@ msgstr "notatki"
 msgid "read by"
 msgstr "odczytane przez"
 
-#: apps/office/models.py:45
+#: apps/office/models.py:32
+msgid "read on"
+msgstr "czas odczytania"
+
+#: apps/office/models.py:49
 msgid "reminder"
 msgstr "przypomnienie"
 
-#: apps/office/models.py:46
+#: apps/office/models.py:50
 msgid "reminders"
 msgstr "przypomnienia"

@@ -20,8 +20,8 @@
 </head>
 <body>
 <div class="card-header d-flex justify-content-between main-header">
-    <a href="{% url "home" %}" class="text-decoration-none align-self-center" style="color: white"><h1>PUT COVID-19
-        Office System</h1>
+    <a href="{% url "home" %}" class="text-decoration-none align-self-center" style="color: white">
+        <h1>PUT COVID-19 Office System</h1>
     </a>
     <div class="d-flex btn-group align-self-center col-sm-2">
         {% get_current_language as LANGUAGE_CODE %}
@@ -40,7 +40,7 @@
         {% endif %}
     </div>
 </div>
-<main class="card-body h-50">
+<main class="card-body">
     {% block content %}
     {% endblock %}
 </main>

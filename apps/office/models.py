@@ -29,6 +29,7 @@ class Reminder(Model):
     notes = models.TextField(null=True, blank=True, verbose_name=_("notes"))
     read_by = models.ForeignKey(Worker, on_delete=models.SET_NULL, null=True, blank=True, related_name='read_reminders',
                                 verbose_name=_("read by"))
+    read_on = models.DateTimeField(null=True, verbose_name=_("read on"))
 
     @property
     def urgency(self):
@@ -40,6 +41,9 @@ class Reminder(Model):
             return 1
         else:
             return 0
+
+    def __str__(self):
+        return self.title
 
     class Meta:
         verbose_name = _("reminder")

@@ -4,6 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
+from django.utils import timezone
 from django.views.generic import DetailView, ListView
 
 from apps.covid.automatic_actions import AutomaticLogActions
@@ -52,7 +53,9 @@ def reminder_mark_done(request, pk):
     reminder = get_object_or_404(Reminder, id=pk)
     if reminder.read_by is None:
         reminder.read_by = request.user
+        reminder.read_on = timezone.now()
         reminder.save()
+        AutomaticLogActions(user=request.user).mark_reminder_done(reminder)
         return HttpResponse()
     else:
         return HttpResponse(status=304)
@@ -66,10 +69,10 @@ class ReminderCreateModalView(LoginRequiredMixin, BSModalCreateView):
 
     def form_valid(self, form):
         if not self.request.is_ajax() or self.request.POST.get('asyncUpdate') == 'True':
-            AutomaticLogActions(user=self.request.user).set_reminder()
             reminder = form.save(commit=False)
             reminder.set_by = self.request.user
             reminder.save()
+            AutomaticLogActions(user=self.request.user).set_reminder(reminder)
             return redirect(self.success_url)
         else:
             return HttpResponse()

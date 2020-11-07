@@ -89,6 +89,8 @@ DATABASES = {
     }
 }
 
+CELERY_BROKER_URL = 'redis://loclahost:6379'
+
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -146,3 +148,10 @@ MEDIA_ROOT = 'media'
 MEDIA_URL = '/media/'
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.mailtrap.io'
+EMAIL_HOST_USER = 'e4e8bfd419eec9'
+EMAIL_HOST_PASSWORD = 'de1b717c1e0bdc'
+EMAIL_PORT = 587
+DEFAULT_FROM_EMAIL = "Biuro Covid <biurocovid@put.poznan.pl>"

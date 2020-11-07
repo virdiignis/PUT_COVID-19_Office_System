@@ -14,6 +14,7 @@ from apps.covid.automatic_actions import AutomaticLogActions
 from apps.covid.forms import CaseCreateModalForm, PersonCreateUpdateModalForm, CaseUpdateForm, IsolationFormSet, \
     ActionFormSet, ActionCreateModalForm, IsolationRoomFormSet, DocumentFormSet, ReportForm
 from apps.covid.models import Case, Action, Isolation, IsolationRoom, Person, HealthStateChange
+from apps.covid.reports import prepare_report_context
 
 
 class CaseListView(LoginRequiredMixin, ListView):
@@ -74,9 +75,12 @@ class CaseCreateModalView(LoginRequiredMixin, BSModalCreateView):
     template_name = "covid/case_new_modal.html"
 
     def form_valid(self, form):
-        result = super(CaseCreateModalView, self).form_valid(form)
-        AutomaticLogActions(self.object, self.request.user).create_case()
-        return result
+        if not self.request.is_ajax() or self.request.POST.get('asyncUpdate') == 'True':
+            result = super(CaseCreateModalView, self).form_valid(form)
+            AutomaticLogActions(self.object, self.request.user).create_case()
+            return result
+        else:
+            return HttpResponse()
 
     def get_success_url(self):
         return reverse_lazy("case_update", args=(self.object.id,))
@@ -321,35 +325,6 @@ def isolation_rooms_update(request):
     return render(request, 'covid/isolation_rooms_update.html', {'formset': formset})
 
 
-def prepare_report(start_date, end_date):
-    return {
-        "students_sick_new": HealthStateChange.objects.filter(change_to__considered_sick=True,
-                                                              datetime__gte=start_date,
-                                                              datetime__lte=end_date,
-                                                              person__role="S").count(),
-        "students_quarantined_new": Isolation.objects.filter(ordered_by__official=True,
-                                                             ordered_on__gte=start_date,
-                                                             ordered_on__lte=end_date,
-                                                             person__role="S").count(),
-        "employees_sick_new": HealthStateChange.objects.filter(change_to__considered_sick=True,
-                                                               datetime__gte=start_date,
-                                                               datetime__lte=end_date,
-                                                               person__role="E").count(),
-        "employees_quarantined_new": Isolation.objects.filter(ordered_by__official=True,
-                                                              ordered_on__gte=start_date,
-                                                              ordered_on__lte=end_date,
-                                                              person__role="E").count(),
-        "isolations": Isolation.objects.filter(ordered_on__gte=start_date,
-                                               ordered_on__lte=end_date).order_by("ordered_on"),
-        "cases_opened": Case.objects.filter(date_open__gte=start_date,
-                                            date_open__lte=end_date).order_by("date_open"),
-        "cases_closed": Case.objects.filter(date_closed__isnull=False,
-                                            date_closed__gte=start_date,
-                                            date_closed__lte=end_date).order_by("date_closed"),
-        "actions": Action.objects.filter(datetime__date__range=(start_date, end_date)).order_by("datetime"),
-    }
-
-
 def reports(request):
     if request.method == 'POST':
         form = ReportForm(request.POST)
@@ -357,7 +332,7 @@ def reports(request):
             start_date = form.cleaned_data["start_date"]
             end_date = form.cleaned_data["end_date"]
 
-            context = prepare_report(start_date, end_date)
+            context = prepare_report_context(start_date, end_date)
             context["show_form"] = False
         else:
             context = {

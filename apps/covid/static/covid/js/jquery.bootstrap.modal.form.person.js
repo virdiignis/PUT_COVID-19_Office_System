@@ -21,6 +21,13 @@ https://github.com/trco/django-bootstrap-modal-forms
         $(settings.submitBtn).on("click", function () {
             isFormValid(settings, submitForm);
         });
+        $(settings.modalForm).on("submit", function (e) {
+            if (e.originalEvent !== undefined) {
+                e.preventDefault();
+                isFormValid(settings, submitForm);
+                return false;
+            }
+        });
         // Modal close handler
         $(settings.modalID).on("hidden.bs.modal", function () {
             $(settings.modalForm).remove();

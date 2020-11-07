@@ -2,7 +2,7 @@
 2. Powyciągać skrypty do staticów
 # 3. Detail views dla workerów, isolation rooms, akcji, osób
 4. Dodać do office zarządzanie grafikiem
-5. Podłączyć celery
+# 5. Podłączyć celery
 # 6. Podłączyć postgres
 7. Zmigrować na serwer
 8. Dodać wysyłkę maili
@@ -16,7 +16,7 @@
 # 17. Pozmieniać linki z wewnątrz iframów na top.href.
 # 18. Może dodać contact-from w akcji.
 # 19. Dodać reminders do dashboardu.
-20.0 Widoki raportów - dodać nowe izolacje, otwarte sprawy, zamknięte sprawy.
+# 20.0 Widoki raportów - dodać nowe izolacje, otwarte sprawy, zamknięte sprawy.
 # 20.1 przyciski edycji uzależnione od uprawnień użytkownika.
 # 21. Dodać do person detail actions-based-on-contact-from.
 # 22. Dodawanie osób przy akcji stand-alone.
@@ -24,7 +24,16 @@
 # 24. Uzupełnić isolation cause w widokach izolacji.
 # 25. Ustawić w main-header link do zmiany języka.
 26. Walidować uprawnienia do edycji po stronie backendu.
-
+# 27. Tworzenie case'ów sie sypie
+# 28. Zapisywać datę i osobę odklikującą reminder
+29. Autoremindery o przejęciu zmian z generowaniem akcji.
+30. Dodać githubowego taga na release
+31. Dodać formularz zmiany hasła
+# 32. Zaktualizować tłumaczenia
+33. Może powrzucać templaty do apek
+34. Automatyczne remindery o wyjściu z izolacji DS4
+35. Raporty w XLSX
+36. Tłumaczenia kontentu dynamicznego
 
 Raporty:
     Liczba nowych zakażonych studentów/doktorantów

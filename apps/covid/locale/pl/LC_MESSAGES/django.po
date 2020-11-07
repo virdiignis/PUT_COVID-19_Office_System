@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-07 04:09+0100\n"
+"POT-Creation-Date: 2020-11-07 21:04+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,6 +19,14 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n"
 "%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n"
 "%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+
+#: apps/covid/forms.py:102
+msgid "Start date"
+msgstr "Data początku"
+
+#: apps/covid/forms.py:104
+msgid "End date"
+msgstr "Data końca"
 
 #: apps/covid/models.py:11 apps/covid/models.py:24 apps/covid/models.py:50
 #: apps/covid/models.py:62 apps/covid/models.py:200
@@ -369,10 +377,10 @@ msgstr "pokój izolacji"
 msgid "isolation rooms"
 msgstr "pokoje izolacji"
 
-#: apps/covid/views.py:233
+#: apps/covid/views.py:236
 msgid "Incoming contact content"
 msgstr "Informacje z kontaktu"
 
-#: apps/covid/views.py:243
+#: apps/covid/views.py:246
 msgid "Notes"
 msgstr "Notatki"
