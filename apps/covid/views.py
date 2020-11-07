@@ -339,7 +339,14 @@ def prepare_report(start_date, end_date):
                                                               ordered_on__gte=start_date,
                                                               ordered_on__lte=end_date,
                                                               person__role="E").count(),
-        "actions": Action.objects.filter(datetime__date__range=(start_date, end_date)),
+        "isolations": Isolation.objects.filter(ordered_on__gte=start_date,
+                                               ordered_on__lte=end_date).order_by("ordered_on"),
+        "cases_opened": Case.objects.filter(date_open__gte=start_date,
+                                            date_open__lte=end_date).order_by("date_open"),
+        "cases_closed": Case.objects.filter(date_closed__isnull=False,
+                                            date_closed__gte=start_date,
+                                            date_closed__lte=end_date).order_by("date_closed"),
+        "actions": Action.objects.filter(datetime__date__range=(start_date, end_date)).order_by("datetime"),
     }
 
 
@@ -357,7 +364,6 @@ def reports(request):
                 "form": form,
                 "show_form": True
             }
-    # if a GET (or any other method) we'll create a blank form
     else:
         context = {
             "form": ReportForm(),

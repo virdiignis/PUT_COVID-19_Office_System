@@ -39,10 +39,10 @@
                 <table class="table table-bordered">
                     <thead class="thead">
                     <tr>
-                        <th scope="col">{% translate "New students' infections" %}</th>
-                        <th scope="col">{% translate "New students' quarantines" %}</th>
-                        <th scope="col">{% translate "New employees' infections" %}</th>
-                        <th scope="col">{% translate "New employees' quarantines" %}</th>
+                        <th class="text-center" scope="col">{% translate "New students' infections" %}</th>
+                        <th class="text-center" scope="col">{% translate "New students' quarantines" %}</th>
+                        <th class="text-center" scope="col">{% translate "New employees' infections" %}</th>
+                        <th class="text-center" scope="col">{% translate "New employees' quarantines" %}</th>
                     </tr>
                     </thead>
                     <tr>
@@ -56,19 +56,123 @@
         </div>
         <br>
         <div class="card">
-            <div class="card-header"><h3>{% translate "Office actions during that time" %}</h3></div>
+            <div class="card-header"><h3>{% translate "Isolations ordered" %}</h3></div>
+            <div class="card-body">
+                {% if isolations %}
+                    <table class="table table-bordered">
+                        <thead class="thead">
+                        <tr>
+                            <th class="text-center" scope="col">{% translate "Name" %}</th>
+                            <th class="text-center" scope="col">{% translate "Ordered by" %}</th>
+                            <th class="text-center" scope="col">{% translate "Order date" %}</th>
+                            <th class="text-center" scope="col">{% translate "Start date" %}</th>
+                            <th class="text-center" scope="col">{% translate "End date" %}</th>
+                            <th class="text-center" scope="col">{% translate "Whereabouts" %}</th>
+                            <th class="text-center" scope="col">{% translate "Cause" %}</th>
+                            <th class="text-center" scope="col">{% translate "Health state" %}</th>
+                        </tr>
+                        </thead>
+                        {% for isolation in isolations %}
+                            <tr>
+                                <td><p class="text-center">
+                                    <a href={% url "person_details" isolation.person_id %}>
+                                        {{ isolation.person }}
+                                    </a>
+                                </p></td>
+                                <td><p class="text-center">{{ isolation.ordered_by }}</p></td>
+                                <td><p class="text-center"><b>{{ isolation.ordered_on }}</b></p></td>
+                                <td><p class="text-center">{{ isolation.start_date }}</p></td>
+                                <td><p class="text-center">{{ isolation.end_date }}</p></td>
+                                <td><p class="text-center">{{ isolation.get_whereabouts_display }}</p></td>
+                                <td><p class="text-center">{{ isolation.cause }}</p></td>
+                                <td><p class="text-center">{{ isolation.person.health_state }}</p></td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                {% else %}
+                    {% translate "No isolations ordered during this period." %}
+                {% endif %}
+            </div>
+        </div>
+        <br>
+        <div class="card">
+            <div class="card-header"><h3>{% translate "New cases opened" %}</h3></div>
             <div class="card-body">
                 <table class="table table-bordered">
                     <thead class="thead">
                     <tr>
-                        <th>{% translate "Datetime" %}</th>
-                        <th>{% translate "Made by" %}</th>
-                        <th>{% translate "Based on" %}</th>
-                        <th>{% translate "Contact from" %}</th>
-                        <th>{% translate "Incoming contact content" %}</th>
-                        <th>{% translate "Description" %}</th>
-                        <th>{% translate "Notes" %}</th>
-                        <th>{% translate "Case" %}</th>
+                        <th class="text-center" scope="col">{% translate "Title" %}</th>
+                        <th class="text-center" scope="col">{% translate "People involved" %}</th>
+                        <th class="text-center" scope="col">{% translate "Date open" %}</th>
+                        <th class="text-center" scope="col">{% translate "Date closed" %}</th>
+                    </tr>
+                    </thead>
+                    {% for case in cases_opened %}
+                        <tr>
+                            <td><p class="text-center"><a href={% url "case_details" case.id %}>{{ case }}</a></p></td>
+                            <td><p class="text-center">{% for person in case.people.all %}
+                                <a href={% url "person_details" person.id %}>
+                                    {{ person }}
+                                </a><br>
+                            {% endfor %}</p></td>
+                            <td><p class="text-center"><b>{{ case.date_open }}</b></p></td>
+                            <td><p class="text-center">
+                                {% if case.date_closed %}
+                                    {{ case.date_closed }}
+                                {% else %}
+                                    —
+                                {% endif %}
+                            </p></td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+        <br>
+        <div class="card">
+            <div class="card-header"><h3>{% translate "Cases closed" %}</h3></div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <thead class="thead">
+                    <tr>
+                        <th class="text-center" scope="col">{% translate "Title" %}</th>
+                        <th class="text-center" scope="col">{% translate "People involved" %}</th>
+                        <th class="text-center" scope="col">{% translate "Date open" %}</th>
+                        <th class="text-center" scope="col">{% translate "Date closed" %}</th>
+                    </tr>
+                    </thead>
+                    {% for case in cases_closed %}
+                        <tr>
+                            <td><p class="text-center"><a href={% url "case_details" case.id %}>{{ case }}</a></p></td>
+                            <td><p class="text-center">{% for person in case.people.all %}
+                                <a href={% url "person_details" person.id %}>
+                                    {{ person }}
+                                </a><br>
+                            {% endfor %}</p></td>
+                            <td><p class="text-center">{{ case.date_open }}</p></td>
+                            <td><p class="text-center">
+                                <b>{{ case.date_closed }}</b>
+                            </p></td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+        <br>
+        <div class="card">
+            <div class="card-header"><h3>{% translate "Office actions during selected time" %}</h3></div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <thead class="thead">
+                    <tr>
+                        <th class="text-center" class="text-center">{% translate "Datetime" %}</th>
+                        <th class="text-center" class="text-center">{% translate "Made by" %}</th>
+                        <th class="text-center" class="text-center">{% translate "Based on" %}</th>
+                        <th class="text-center" class="text-center">{% translate "Contact from" %}</th>
+                        <th class="text-center" class="text-center">{% translate "Incoming contact content" %}</th>
+                        <th class="text-center" class="text-center">{% translate "Description" %}</th>
+                        <th class="text-center" class="text-center">{% translate "Notes" %}</th>
+                        <th class="text-center" class="text-center">{% translate "Case" %}</th>
                     </tr>
                     </thead>
 
