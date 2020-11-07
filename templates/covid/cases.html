@@ -17,7 +17,8 @@
                                 {% translate "Search" %}:
                             </label>
                             <input id="searchBar" type="text" name="search" class="col-6" value="{{ search }}"/>
-                            <button type="submit" class="btn btn-primary col-xl-2 col-3">{% translate "Search" %}</button>
+                            <button type="submit"
+                                    class="btn btn-primary col-xl-2 col-3">{% translate "Search" %}</button>
                         </div>
                     </form>
                 </div>
@@ -29,9 +30,12 @@
                     <a class="col-4 btn {% if open == False %}btn-success disabled{% else %}btn-primary{% endif %}"
                        href="{{ request.path }}?open=false&search={{ search }}">{% translate "Closed" %}</a>
                 </div>
-                <div class="col-xl-1 col-2 btn-group pull-right">
-                    <button id="newCaseButton" class="btn btn-danger" type="button" name="button">{% translate "Open new" %}</button>
-                </div>
+                {% if request.user.write_access %}
+                    <div class="col-xl-1 col-2 btn-group pull-right">
+                        <button id="newCaseButton" class="btn btn-danger" type="button"
+                                name="button">{% translate "Open new" %}</button>
+                    </div>
+                {% endif %}
             </div>
         </div>
         <div class="card-body">

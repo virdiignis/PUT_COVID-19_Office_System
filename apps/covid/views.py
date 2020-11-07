@@ -6,14 +6,14 @@ from django.http import JsonResponse, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.utils import timezone
-
+from django.utils.translation import gettext_lazy as _
 from django.db.models import Q
 from django.views.generic import ListView, DetailView, UpdateView
 
 from apps.covid.automatic_actions import AutomaticLogActions
 from apps.covid.forms import CaseCreateModalForm, PersonCreateUpdateModalForm, CaseUpdateForm, IsolationFormSet, \
-    ActionFormSet, ActionCreateModalForm, IsolationRoomFormSet, DocumentFormSet
-from apps.covid.models import Case, Action, Isolation, IsolationRoom, Person, Document, HealthStateChange, HealthState
+    ActionFormSet, ActionCreateModalForm, IsolationRoomFormSet, DocumentFormSet, ReportForm
+from apps.covid.models import Case, Action, Isolation, IsolationRoom, Person, HealthStateChange
 
 
 class CaseListView(LoginRequiredMixin, ListView):
@@ -182,8 +182,8 @@ class ActionDetailModalView(LoginRequiredMixin, BSModalReadView):
 
 @login_required
 def covid_dashboard(request):
-    if not request.user.write_access:
-        return redirect(reverse_lazy('home'))
+    # if not request.user.write_access:
+    #     return redirect(reverse_lazy('home'))
 
     return render(request, 'covid/dashboard/dashboard.html')
 
@@ -230,7 +230,7 @@ class ActionListView(LoginRequiredMixin, ListView):
 def action_contact_content(request, pk):
     action = get_object_or_404(Action, id=pk)
     context = {
-        "title": "Incoming contact content",
+        "title": _("Incoming contact content"),
         "text": action.contact_content
     }
     return render(request, 'covid/text_modal.html', context)
@@ -240,7 +240,7 @@ def action_contact_content(request, pk):
 def action_notes(request, pk):
     action = get_object_or_404(Action, id=pk)
     context = {
-        "title": "Notes",
+        "title": _("Notes"),
         "text": action.notes
     }
     return render(request, 'covid/text_modal.html', context)
@@ -319,3 +319,47 @@ def isolation_rooms_update(request):
     else:
         formset = IsolationRoomFormSet()
     return render(request, 'covid/isolation_rooms_update.html', {'formset': formset})
+
+
+def prepare_report(start_date, end_date):
+    return {
+        "students_sick_new": HealthStateChange.objects.filter(change_to__considered_sick=True,
+                                                              datetime__gte=start_date,
+                                                              datetime__lte=end_date,
+                                                              person__role="S").count(),
+        "employees_sick_new": HealthStateChange.objects.filter(change_to__considered_sick=True,
+                                                               datetime__gte=start_date,
+                                                               datetime__lte=end_date,
+                                                               person__role="E").count(),
+        "students_quarantined_new": Isolation.objects.filter(ordered_by__official=True,
+                                                             ordered_on__gte=start_date,
+                                                             ordered_on__lte=end_date,
+                                                             person__role="S").count(),
+        "employees_quarantined_new": Isolation.objects.filter(ordered_by__official=True,
+                                                              ordered_on__gte=start_date,
+                                                              ordered_on__lte=end_date,
+                                                              person__role="E").count(),
+    }
+
+
+def reports(request):
+    if request.method == 'POST':
+        form = ReportForm(request.POST)
+        if form.is_valid():
+            start_date = form.cleaned_data["start_date"]
+            end_date = form.cleaned_data["end_date"]
+
+            return JsonResponse(prepare_report(start_date, end_date))
+        else:
+            context = {
+                "form": form,
+                "show_form": True
+            }
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        context = {
+            "form": ReportForm(),
+            "show_form": True
+        }
+
+    return render(request, 'covid/reports.html', context)

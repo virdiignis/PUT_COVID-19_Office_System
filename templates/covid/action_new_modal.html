@@ -15,13 +15,13 @@
     <div id="modal-body" class="modal-body">
         {% for field in form %}
             <div class="form-group{% if field.errors %} invalid{% endif %}">
-                <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-between fieldWrapper">
                     {{ field.label_tag }}
                     {% if forloop.counter == 4 %}
                         <div class="col-7">
                             {{ field }}
                             <button id="newPersonButton" class="btn btn-primary text-white" type="button" name="button">
-                                New
+                                {% translate "New" %}
                             </button>
                         </div>
                     {% else %}
@@ -71,6 +71,14 @@
             allowClear: true,
             ajax: {
                 url: '{% url 'person-autocomplete' %}',
+                dataType: 'json'
+            }
+        });
+        $('#id_unit').select2({
+            dropdownParent: $('#modal-body'),
+            allowClear: true,
+            ajax: {
+                url: '{% url 'unit-autocomplete' %}',
                 dataType: 'json'
             }
         });

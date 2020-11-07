@@ -4,7 +4,9 @@
     <div class="card">
         <div class="card-header actions-add d-flex justify-content-between align-items-center">
             <h2>{% translate "Isolation rooms" %}</h2>
-            <a href="{% url 'isolation_rooms_update' %}" class="btn btn-primary col-1">{% translate "Edit" %}</a>
+            {% if request.user.write_access %}
+                <a href="{% url 'isolation_rooms_update' %}" class="btn btn-primary col-1">{% translate "Edit" %}</a>
+            {% endif %}
         </div>
         <div class="card-body">
             <table class="table">

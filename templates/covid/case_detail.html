@@ -11,9 +11,11 @@
     <div class="card">
         <div class="card-header d-flex justify-content-between">
             <h2>{{ case.title }}</h2>
-            <div class="btn-group align-self-center col-sm-1">
-                <a class="btn btn-primary" href="{% url 'case_update' case.id %}">{% translate "Edit" %}</a>
-            </div>
+            {% if request.user.write_access %}
+                <div class="btn-group align-self-center col-sm-1">
+                    <a class="btn btn-primary" href="{% url 'case_update' case.id %}">{% translate "Edit" %}</a>
+                </div>
+            {% endif %}
         </div>
         <br>
         <div style="padding-left: 5em">{% translate "Status" %}: <b>{% if closed %}{% translate "Closed" %}{% else %}
@@ -73,10 +75,11 @@
                     <tr>
                         <th scope="col">{% translate "Name" %}</th>
                         <th scope="col">{% translate "Ordered by" %}</th>
+                        <th scope="col">{% translate "Order date" %}</th>
                         <th scope="col">{% translate "Start date" %}</th>
                         <th scope="col">{% translate "End date" %}</th>
-                        <th scope="col">{% translate "Order date" %}</th>
                         <th scope="col">{% translate "Whereabouts" %}</th>
+                        <th scope="col">{% translate "Cause" %}</th>
                         <th scope="col">{% translate "Health state" %}</th>
                     </tr>
                     </thead>
@@ -97,10 +100,11 @@
                                 </a>
                             </td>
                             <td>{{ isolation.ordered_by }}</td>
+                            <td>{{ isolation.ordered_on }}</td>
                             <td>{{ isolation.start_date }}</td>
                             <td>{{ isolation.end_date }}</td>
-                            <td>{{ isolation.ordered_on }}</td>
                             <td>{{ isolation.get_whereabouts_display }}</td>
+                            <td>{{ isolation.cause }}</td>
                             <td>{{ isolation.person.health_state }}</td>
                         </tr>
                     {% endfor %}
@@ -154,7 +158,8 @@
                         {% endif %}</td>
                         <td>{{ action.action_description }}</td>
                         <td>{% if action.notes %}
-                            <button type="button" class="action-notes btn btn-link" ano="{{ action.id }}">{% translate "open" %}</button>
+                            <button type="button" class="action-notes btn btn-link"
+                                    ano="{{ action.id }}">{% translate "open" %}</button>
                         {% else %}
                             —
                         {% endif %}</td>
@@ -178,7 +183,7 @@
                 <table class="table">
                     <thead class="thead-dark">
                     <tr>
-                        <th scope="col">{% translate "Name" %}</th>
+                        <th scope="col">{% translate "Name" context "document" %}</th>
                         <th scope="col">{% translate "Upload date" %}</th>
                         <th scope="col">{% translate "Uploaded by" %}</th>
                     </tr>

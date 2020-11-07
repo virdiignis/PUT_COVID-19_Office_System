@@ -23,7 +23,10 @@
             <h3>
                 {% translate "Reminders" %}
             </h3>
-            <button type="button" id="addReminderButton" class="btn btn-primary">{% translate "New reminder" %}</button>
+            {% if request.user.write_access %}
+                <button type="button" id="addReminderButton"
+                        class="btn btn-primary">{% translate "New reminder" %}</button>
+            {% endif %}
         </div>
         {% if page_obj %}
             <div class="card-body">

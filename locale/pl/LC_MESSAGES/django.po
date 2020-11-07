@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-07 03:29+0100\n"
+"POT-Creation-Date: 2020-11-07 04:09+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,35 +33,35 @@ msgid "Action details"
 msgstr "Szczegóły akcji"
 
 #: templates/covid/action_detail_modal.html:11 templates/covid/actions.html:26
-#: templates/covid/case_detail.html:120
+#: templates/covid/case_detail.html:122
 #: templates/covid/dashboard/reminders.html:24
-#: templates/covid/person_detail.html:114 templates/office/reminders.html:33
+#: templates/covid/person_detail.html:116 templates/office/reminders.html:33
 #: templates/office/worker_detail.html:30
 msgid "Datetime"
 msgstr "Data i czas"
 
 #: templates/covid/action_detail_modal.html:15 templates/covid/actions.html:27
-#: templates/covid/case_detail.html:121
+#: templates/covid/case_detail.html:123
 #: templates/covid/dashboard/actions.html:14
-#: templates/covid/person_detail.html:115
+#: templates/covid/person_detail.html:117
 msgid "Made by"
-msgstr "Wykonana przez"
+msgstr "Wykonane przez"
 
 #: templates/covid/action_detail_modal.html:19 templates/covid/actions.html:28
-#: templates/covid/case_detail.html:122
+#: templates/covid/case_detail.html:124
 #: templates/covid/dashboard/actions.html:15
-#: templates/covid/person_detail.html:116
+#: templates/covid/person_detail.html:118
 #: templates/office/worker_detail.html:31
 msgid "Based on"
 msgstr "Na podstawie"
 
 #: templates/covid/action_detail_modal.html:23 templates/covid/actions.html:29
-#: templates/covid/case_detail.html:123
+#: templates/covid/case_detail.html:125
 msgid "Contact from"
 msgstr "Kontaktujący się"
 
 #: templates/covid/action_detail_modal.html:27 templates/covid/actions.html:30
-#: templates/covid/case_detail.html:124 templates/covid/person_detail.html:117
+#: templates/covid/case_detail.html:126 templates/covid/person_detail.html:119
 #: templates/office/worker_detail.html:32
 msgid "Incoming contact content"
 msgstr "Informacje z kontaktu"
@@ -71,7 +71,7 @@ msgid "Action description"
 msgstr "Opis działania"
 
 #: templates/covid/action_detail_modal.html:35 templates/covid/actions.html:32
-#: templates/covid/case_detail.html:126 templates/covid/person_detail.html:119
+#: templates/covid/case_detail.html:128 templates/covid/person_detail.html:121
 #: templates/office/worker_detail.html:34
 msgid "Notes"
 msgstr "Notatki"
@@ -95,6 +95,10 @@ msgid "To add action linked to case, please go to case edit view."
 msgstr ""
 "Aby dodać działanie związane ze sprawą, przejdź do widoku edycji sprawy."
 
+#: templates/covid/action_new_modal.html:24 templates/covid/case_update.html:42
+msgid "New"
+msgstr "Nowa"
+
 #: templates/covid/action_new_modal.html:41
 #: templates/covid/case_new_modal.html:28
 msgid "Create"
@@ -108,23 +112,23 @@ msgstr "Działania"
 msgid "New unlinked action"
 msgstr "Nowe działanie niezwiązane"
 
-#: templates/covid/actions.html:31 templates/covid/case_detail.html:125
+#: templates/covid/actions.html:31 templates/covid/case_detail.html:127
 #: templates/covid/dashboard/actions.html:16
-#: templates/covid/person_detail.html:118
+#: templates/covid/person_detail.html:120
 #: templates/office/worker_detail.html:33
 msgid "Description"
 msgstr "Opis"
 
-#: templates/covid/actions.html:33 templates/covid/case_detail.html:127
-#: templates/covid/person_detail.html:120
+#: templates/covid/actions.html:33 templates/covid/case_detail.html:129
+#: templates/covid/person_detail.html:122
 #: templates/office/worker_detail.html:35
 msgid "Case"
 msgstr "Sprawa"
 
 #: templates/covid/actions.html:56 templates/covid/actions.html:64
-#: templates/covid/case_detail.html:150 templates/covid/case_detail.html:157
-#: templates/covid/person_detail.html:138
-#: templates/covid/person_detail.html:146
+#: templates/covid/case_detail.html:152 templates/covid/case_detail.html:159
+#: templates/covid/person_detail.html:140
+#: templates/covid/person_detail.html:148
 #: templates/office/worker_detail.html:48
 #: templates/office/worker_detail.html:56
 msgid "open"
@@ -159,7 +163,6 @@ msgid "People involved"
 msgstr "Dotyczy osób"
 
 #: templates/covid/case_detail.html:33 templates/covid/case_detail.html:74
-#: templates/covid/case_detail.html:181
 #: templates/covid/dashboard/isolations.html:12
 msgid "Name"
 msgstr "Imię i nazwisko"
@@ -182,9 +185,9 @@ msgstr "Email"
 msgid "Phone number"
 msgstr "Numer telefonu"
 
-#: templates/covid/case_detail.html:38 templates/covid/case_detail.html:80
+#: templates/covid/case_detail.html:38 templates/covid/case_detail.html:81
 #: templates/covid/dashboard/isolations.html:18
-#: templates/covid/person_detail.html:26 templates/covid/person_detail.html:76
+#: templates/covid/person_detail.html:26 templates/covid/person_detail.html:77
 msgid "Health state"
 msgstr "Stan zdrowia"
 
@@ -222,23 +225,32 @@ msgstr "Data nałożenia"
 msgid "Whereabouts"
 msgstr "Miejsce przebywania"
 
-#: templates/covid/case_detail.html:109
+#: templates/covid/case_detail.html:80 templates/covid/person_detail.html:76
+msgid "Cause"
+msgstr "Powód"
+
+#: templates/covid/case_detail.html:111
 msgid "No isolations in the case."
 msgstr "Brak izolacji w sprawie."
 
-#: templates/covid/case_detail.html:115
+#: templates/covid/case_detail.html:117
 msgid "Actions history"
 msgstr "Historia działań"
 
-#: templates/covid/case_detail.html:176 templates/covid/case_update.html:179
+#: templates/covid/case_detail.html:178 templates/covid/case_update.html:179
 msgid "Documents"
 msgstr "Dokumenty"
 
-#: templates/covid/case_detail.html:182
+#: templates/covid/case_detail.html:183
+msgctxt "document"
+msgid "Name"
+msgstr "Nazwa"
+
+#: templates/covid/case_detail.html:184
 msgid "Upload date"
 msgstr "Data przesłania"
 
-#: templates/covid/case_detail.html:183
+#: templates/covid/case_detail.html:185
 msgid "Uploaded by"
 msgstr "Przesłane przez"
 
@@ -270,10 +282,6 @@ msgstr "Zapisz"
 #: templates/covid/case_update.html:31
 msgid "Reopen case"
 msgstr "Ponownie otwórz sprawę"
-
-#: templates/covid/case_update.html:42
-msgid "New"
-msgstr "Nowa"
 
 #: templates/covid/case_update.html:50
 #: templates/covid/dashboard/isolations.html:6
@@ -394,15 +402,15 @@ msgstr "Nie znaleziono spraw dotyczących tej osoby."
 msgid "Currently in DS4 room"
 msgstr "Obecnie w DS4 pokój"
 
-#: templates/covid/person_detail.html:100
+#: templates/covid/person_detail.html:102
 msgid "No isolations underwent."
 msgstr "Nie przechodził(a) izolacji."
 
-#: templates/covid/person_detail.html:107
+#: templates/covid/person_detail.html:109
 msgid "Incoming contacts"
 msgstr "Nawiązania kontaktu"
 
-#: templates/covid/person_detail.html:161
+#: templates/covid/person_detail.html:163
 msgid "No incoming contacts from this person registered."
 msgstr "Nie odnotowano kontaktu ze strony tej osoby."
 

@@ -7,4 +7,3 @@ django-bootstrap-modal-forms
 psycopg2
 django-bootstrap-pagination
 uwsgitop
-gettext

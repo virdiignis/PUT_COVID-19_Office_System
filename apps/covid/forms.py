@@ -1,8 +1,12 @@
 from dal import autocomplete
 from django.forms import inlineformset_factory, ModelForm, DateTimeInput, DateInput, modelformset_factory, HiddenInput
+from django import forms
+from django.utils.translation import gettext_lazy as _
 
 from apps.covid.models import Case, Action, Person, Isolation, IsolationRoom, Document
 from bootstrap_modal_forms.forms import BSModalModelForm
+
+from backend import settings
 
 
 class ActionFormSet(inlineformset_factory(Case,
@@ -91,3 +95,10 @@ class ActionCreateModalForm(BSModalModelForm):
             "made_by": autocomplete.ModelSelect2(url='worker-autocomplete'),
             "contact_from": autocomplete.ModelSelect2(url='person-autocomplete'),
         }
+
+
+class ReportForm(forms.Form):
+    start_date = forms.DateField(widget=forms.DateInput(format='%d.%m.%Y', attrs={'class': 'form-control datefield'}),
+                                 label=_("Start date"))
+    end_date = forms.DateField(widget=forms.DateInput(format='%d.%m.%Y', attrs={'class': 'form-control datefield'}),
+                               label=_("End date"))

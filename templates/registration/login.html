@@ -22,7 +22,7 @@
                             {% for error in field.errors %}
                                 <div class="help-block" style="color: red">{{ error }}</div>
                             {% endfor %}
-                            <p class="d-flex justify-content-between">{{ field.label_tag }}{{ field }}</p>
+                            <p class="d-flex justify-content-between fieldWrapper">{{ field.label_tag }}{{ field }}</p>
                         {% endfor %}
                         <button type="submit" class="btn btn-primary float-right">{% translate "Login" %}</button>
                     </form>

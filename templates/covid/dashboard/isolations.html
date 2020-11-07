@@ -11,9 +11,9 @@
             <tr>
                 <th scope="col">{% translate "Name" %}</th>
                 <th scope="col">{% translate "Ordered by" %}</th>
+                <th scope="col">{% translate "Order date" %}</th>
                 <th scope="col">{% translate "Start date" %}</th>
                 <th scope="col">{% translate "End date" %}</th>
-                <th scope="col">{% translate "Order date" %}</th>
                 <th scope="col">{% translate "Whereabouts" %}</th>
                 <th scope="col">{% translate "Health state" %}</th>
             </tr>
@@ -35,9 +35,9 @@
                         </a><br>
                     </td>
                     <td>{{ isolation.ordered_by }}</td>
+                    <td>{{ isolation.ordered_on }}</td>
                     <td>{{ isolation.start_date }}</td>
                     <td>{{ isolation.end_date }}</td>
-                    <td>{{ isolation.ordered_on }}</td>
                     <td>{{ isolation.get_whereabouts_display }}</td>
                     <td>{{ isolation.person.health_state }}</td>
                 </tr>

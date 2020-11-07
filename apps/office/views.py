@@ -4,7 +4,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
-from django.utils import timezone
 from django.views.generic import DetailView, ListView
 
 from apps.covid.automatic_actions import AutomaticLogActions
@@ -15,12 +14,12 @@ from apps.office.models import Worker, Reminder
 
 @login_required
 def home(request):
-    if request.user.write_access:
-        return redirect(reverse_lazy('covid_dashboard'))
-    else:
-        return redirect(reverse_lazy('reports'))
-
-    return render(request, "home.html")
+    # if request.user.write_access:
+    return redirect(reverse_lazy('covid_dashboard'))
+    # else:
+    #     return redirect(reverse_lazy('reports'))
+    #
+    # return render(request, "home.html")
 
 
 def null(request):

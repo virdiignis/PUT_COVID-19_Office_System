@@ -1,0 +1,3 @@
+#!/bin/bash
+cd locale_scripts
+python ../manage.py compilemessages

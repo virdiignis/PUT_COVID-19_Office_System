@@ -93,7 +93,7 @@ class Person(Model):
     phone_number = PhoneNumberField(null=True, blank=True, unique=True, verbose_name=_("phone number"))
     role = models.CharField(max_length=1, default="N", choices=(("S", _("Student")),
                                                                 ("E", _("Employee")),
-                                                                ("N", _("None"))))
+                                                                ("N", _("None"))), verbose_name=_("role"))
     health_state = models.ForeignKey(HealthState, on_delete=models.SET_NULL, null=True, blank=False,
                                      verbose_name=_("health state"))
     dorm = models.IntegerField(default=0, choices=(

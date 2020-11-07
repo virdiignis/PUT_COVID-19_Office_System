@@ -16,8 +16,10 @@
     <div class="card">
         <div class="card-header actions-add d-flex justify-content-between align-items-center">
             <h2>{% translate "Actions" %}</h2>
-            <button type="button" id="addActionButton"
-                    class="btn btn-primary">{% translate "New unlinked action" %}</button>
+            {% if request.user.write_access %}
+                <button type="button" id="addActionButton"
+                        class="btn btn-primary">{% translate "New unlinked action" %}</button>
+            {% endif %}
         </div>
         <div class="card-body">
             <table class="table">

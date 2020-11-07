@@ -13,9 +13,11 @@
                 <h2>{{ person }}</h2>{% if person.role != 'N' %}
                 <h5 class="text-muted pull-left">({{ person.get_role_display }})</h5> {% endif %}
             </div>
-            <div class="btn-group align-self-center col-sm-1">
-                <button type="button" id="editPersonButton" class="btn btn-primary">{% translate "Edit" %}</button>
-            </div>
+            {% if request.user.write_access %}
+                <div class="btn-group align-self-center col-sm-1">
+                    <button type="button" id="editPersonButton" class="btn btn-primary">{% translate "Edit" %}</button>
+                </div>
+            {% endif %}
         </div>
         <div class="card-body">
             {% if person.unit %}<p class="text-muted">{{ person.unit }}</p>{% endif %}
@@ -58,7 +60,7 @@
     </div>
     <br>
     <div class="card">
-        <div class="card-header"><h3>Isolations</h3></div>
+        <div class="card-header"><h3>{% translate "Isolations" %}</h3></div>
         <div class="card-body">
             {% if person.isolationroom %}
                 <p class="text-danger text-center h3">{% translate "Currently in DS4 room" %} {{ person.isolationroom.number }}.</p>
@@ -69,10 +71,11 @@
                     <thead class="thead-dark">
                     <tr>
                         <th scope="col">{% translate "Ordered by" %}</th>
+                        <th scope="col">{% translate "Order date" %}</th>
                         <th scope="col">{% translate "Start date" %}</th>
                         <th scope="col">{% translate "End date" %}</th>
-                        <th scope="col">{% translate "Order date" %}</th>
                         <th scope="col">{% translate "Whereabouts" %}</th>
+                        <th scope="col">{% translate "Cause" %}</th>
                         <th scope="col">{% translate "Health state" %}</th>
                     </tr>
                     </thead>
@@ -88,10 +91,11 @@
                                     table-active
                                 {% endif %}">
                             <td>{{ isolation.ordered_by }}</td>
+                            <td>{{ isolation.ordered_on }}</td>
                             <td>{{ isolation.start_date }}</td>
                             <td>{{ isolation.end_date }}</td>
-                            <td>{{ isolation.ordered_on }}</td>
                             <td>{{ isolation.get_whereabouts_display }}</td>
+                            <td>{{ isolation.cause }}</td>
                             <td>{{ isolation.person.health_state }}</td>
                         </tr>
                     {% endfor %}
@@ -104,7 +108,7 @@
     <br>
     <div class="card">
         <div class="card-header actions-add d-flex justify-content-between align-items-center">
-            <h2>{% translate "Incoming contacts" %}</h2>
+            <h3>{% translate "Incoming contacts" %}</h3>
         </div>
         <div class="card-body">
             {% if actions %}

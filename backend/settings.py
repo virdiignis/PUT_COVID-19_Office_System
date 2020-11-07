@@ -124,14 +124,8 @@ LOCALE_PATHS = [
     BASE_DIR / "locale",
 ]
 
-DATE_INPUT_FORMATS = [
-    '%d.%m.%Y', '%d.%m.%y'  # '25.10.2006', '25.10.06'
-]
-DATETIME_INPUT_FORMATS = [
-    '%d.%m.%Y %H:%i:%S',
-    '%d.%m.%Y %H:%i:%S:%f',
-    '%d.%m.%y %H:%i:%S',
-    '%d.%m.%y %H:%i:%S:%f',
+FORMAT_MODULE_PATH = [
+    'backend.formats',
 ]
 
 TIME_ZONE = 'Europe/Warsaw'
