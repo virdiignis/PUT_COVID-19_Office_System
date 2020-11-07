@@ -327,18 +327,19 @@ def prepare_report(start_date, end_date):
                                                               datetime__gte=start_date,
                                                               datetime__lte=end_date,
                                                               person__role="S").count(),
-        "employees_sick_new": HealthStateChange.objects.filter(change_to__considered_sick=True,
-                                                               datetime__gte=start_date,
-                                                               datetime__lte=end_date,
-                                                               person__role="E").count(),
         "students_quarantined_new": Isolation.objects.filter(ordered_by__official=True,
                                                              ordered_on__gte=start_date,
                                                              ordered_on__lte=end_date,
                                                              person__role="S").count(),
+        "employees_sick_new": HealthStateChange.objects.filter(change_to__considered_sick=True,
+                                                               datetime__gte=start_date,
+                                                               datetime__lte=end_date,
+                                                               person__role="E").count(),
         "employees_quarantined_new": Isolation.objects.filter(ordered_by__official=True,
                                                               ordered_on__gte=start_date,
                                                               ordered_on__lte=end_date,
                                                               person__role="E").count(),
+        "actions": Action.objects.filter(datetime__date__range=(start_date, end_date)),
     }
 
 
@@ -349,7 +350,8 @@ def reports(request):
             start_date = form.cleaned_data["start_date"]
             end_date = form.cleaned_data["end_date"]
 
-            return JsonResponse(prepare_report(start_date, end_date))
+            context = prepare_report(start_date, end_date)
+            context["show_form"] = False
         else:
             context = {
                 "form": form,

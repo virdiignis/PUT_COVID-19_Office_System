@@ -32,6 +32,90 @@
             });
         </script>
     {% else %}
+        <a href="{{ request.get_full_path }}">back</a>
+        <div class="card">
+            <div class="card-header"><h2>{% translate "Report" %}</h2></div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <thead class="thead">
+                    <tr>
+                        <th scope="col">{% translate "New students' infections" %}</th>
+                        <th scope="col">{% translate "New students' quarantines" %}</th>
+                        <th scope="col">{% translate "New employees' infections" %}</th>
+                        <th scope="col">{% translate "New employees' quarantines" %}</th>
+                    </tr>
+                    </thead>
+                    <tr>
+                        <td><p class="text-center">{{ students_sick_new }}</p></td>
+                        <td><p class="text-center">{{ students_quarantined_new }}</p></td>
+                        <td><p class="text-center">{{ employees_sick_new }}</p></td>
+                        <td><p class="text-center">{{ employees_quarantined_new }}</p></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <br>
+        <div class="card">
+            <div class="card-header"><h3>{% translate "Office actions during that time" %}</h3></div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <thead class="thead">
+                    <tr>
+                        <th>{% translate "Datetime" %}</th>
+                        <th>{% translate "Made by" %}</th>
+                        <th>{% translate "Based on" %}</th>
+                        <th>{% translate "Contact from" %}</th>
+                        <th>{% translate "Incoming contact content" %}</th>
+                        <th>{% translate "Description" %}</th>
+                        <th>{% translate "Notes" %}</th>
+                        <th>{% translate "Case" %}</th>
+                    </tr>
+                    </thead>
 
+                    {% for action in actions %}
+                        <tr>
+                            <td><p class="text-center">
+                                {{ action.datetime }}
+                            </p></td>
+                            <td><p class="text-center">
+                                <a href={% url "worker_details" action.made_by_id %}>
+                                    {{ action.made_by }}
+                                </a>
+                            </p></td>
+                            <td>{{ action.get_based_on_display }}</td>
+                            <td><p class="text-center">
+                                {% if action.contact_from %}
+                                    <a href="{% url 'person_details' action.contact_from_id %}">{{ action.contact_from }}</a>
+                                {% else %}
+                                    —
+                                {% endif %}
+                            </p></td>
+                            <td><p class="text-justify">
+                                {% if action.contact_content %}
+                                    {{ action.contact_content }}
+                                {% else %}
+                                    —
+                                {% endif %}
+                            </p></td>
+                            <td><p class="text-justify">{{ action.action_description }}</p></td>
+                            <td><p class="text-justify">
+                                {% if action.notes %}
+                                    {{ action.notes }}
+                                {% else %}
+                                    —
+                                {% endif %}
+                            </p></td>
+                            <td><p class="text-center">
+                                {% if action.case %}
+                                    <a href="{% url 'case_details' action.case.id %}">{{ action.case.title }}</a>
+                                {% else %}
+                                    —
+                                {% endif %}
+                            </p></td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
     {% endif %}
 {% endblock %}
