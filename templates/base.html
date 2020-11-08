@@ -26,9 +26,9 @@
     <div class="d-flex btn-group align-self-center col-sm-2">
         {% get_current_language as LANGUAGE_CODE %}
         {% if LANGUAGE_CODE == 'en' %}
-            <a class="btn btn-light" href="#" onclick="window.location.href = window.location.href.replace('en', 'pl')">English</a>
+            <a class="btn btn-light" href="#" onclick="window.location.href = window.location.href.replace('en/', 'pl/')">English</a>
         {% else %}
-            <a class="btn btn-light" href="#" onclick="window.location.href = window.location.href.replace('pl', 'en')">Polski</a>
+            <a class="btn btn-light" href="#" onclick="window.location.href = window.location.href.replace('pl/', 'en/')">Polski</a>
         {% endif %}
 
 
