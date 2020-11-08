@@ -10,3 +10,4 @@ uwsgitop
 redis
 celery
 xlsxwriter
+uwsgi
