@@ -1,0 +1,9 @@
+ls -Z
+cat /var/log/audit/audit.log | audit2allow
+cat /var/log/audit/audit.log | audit2allow -M nginx
+chown nginx /var/www/covid_office
+chown nginx /var/sockets
+getenforce
+setenforce
+semodule -DB
+semodule -B

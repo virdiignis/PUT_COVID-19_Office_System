@@ -27,13 +27,13 @@
 # 27. Tworzenie case'ów sie sypie
 # 28. Zapisywać datę i osobę odklikującą reminder
 # 29. Autoremindery o przejęciu zmian z generowaniem akcji.
-30. Dodać githubowego taga na release
+# 30. Dodać githubowego taga na release
 31. Dodać formularz zmiany hasła
 # 32. Zaktualizować tłumaczenia
 33. Może powrzucać templaty do apek
 # 34. Automatyczne remindery o wyjściu z izolacji DS4
 # 35. Raporty w XLSX
-36. Tłumaczenia kontentu dynamicznego
+36. Tłumaczenia contentu dynamicznego
 37. Po dodawniu grafików dodać do raportu dziennego: "Dzisiaj na zmianie: Osoba A, Osoba B"
 # 38. Pododawać w widokach izolacji, jeśli jest w DS4 to który pokój.
 
