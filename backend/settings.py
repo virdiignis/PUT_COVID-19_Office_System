@@ -173,6 +173,8 @@ MEDIA_URL = '/media/'
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend' #temporal
+EMAIL_FILE_PATH = '/usr/share/nginx/covid_office/email'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.mailtrap.io'
 EMAIL_HOST_USER = 'e4e8bfd419eec9'
