@@ -1,0 +1,22 @@
+[
+  {
+    "model": "office.worker",
+    "pk": 1,
+    "fields": {
+      "password": "",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "AutoReminder",
+      "first_name": "Auto",
+      "last_name": "Reminder",
+      "email": "covid19.office@put.poznan.pl",
+      "is_staff": false,
+      "is_active": false,
+      "date_joined": "2020-11-08T03:27:03.245Z",
+      "phone_number": null,
+      "write_access": false,
+      "groups": [],
+      "user_permissions": []
+    }
+  }
+]
