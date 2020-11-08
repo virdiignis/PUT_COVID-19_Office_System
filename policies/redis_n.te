@@ -1,0 +1,13 @@
+
+module redis_n 1.0;
+
+require {
+	type var_t;
+	type redis_t;
+	class dir remove_name;
+	class sock_file unlink;
+}
+
+#============= redis_t ==============
+allow redis_t var_t:dir remove_name;
+allow redis_t var_t:sock_file unlink;

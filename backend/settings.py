@@ -26,7 +26,7 @@ SECRET_KEY = '=oees2o6!f&a33bk0#l2dk!eyo4+c4^hx%)ej#bt()vr1sg9(g'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'covid-app-dev.prv.put.poznan.pl']
+ALLOWED_HOSTS = ['covid-app-dev.prv.put.poznan.pl']
 
 
 # Application definition
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'bootstrap_pagination',
     'apps.office',
     'apps.covid',
+    'apps.mailing',
 ]
 
 MIDDLEWARE = [
@@ -86,13 +87,13 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'covid_office',
         'USER': 'covid_office',
-        'PASSWORD': 'covid_office',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '',
     }
 }
 
-CELERY_BROKER_URL = 'redis://loclahost:6379'
+CELERY_BROKER_URL = 'redis+socket:///var/sockets/redis.sock'
 CELERY_BEAT_SCHEDULE = {
     'daily_report': {
         'task': 'mailing.daily_report',
