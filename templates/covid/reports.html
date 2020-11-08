@@ -83,7 +83,12 @@
                                 <td><p class="text-center"><b>{{ isolation.ordered_on }}</b></p></td>
                                 <td><p class="text-center">{{ isolation.start_date }}</p></td>
                                 <td><p class="text-center">{{ isolation.end_date }}</p></td>
-                                <td><p class="text-center">{{ isolation.get_whereabouts_display }}</p></td>
+                                <td>
+                                {{ isolation.get_whereabouts_display }}
+                                {% if isolation.whereabouts == 'D' and isolation.person.isolationroom %}
+                                    {{ isolation.person.isolationroom }}
+                                {% endif %}
+                            </td>
                                 <td><p class="text-center">{{ isolation.cause }}</p></td>
                                 <td><p class="text-center">{{ isolation.person.health_state }}</p></td>
                             </tr>

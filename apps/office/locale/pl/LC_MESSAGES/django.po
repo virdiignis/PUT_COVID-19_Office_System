@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-07 21:04+0100\n"
+"POT-Creation-Date: 2020-11-08 03:21+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -67,3 +67,18 @@ msgstr "przypomnienie"
 #: apps/office/models.py:50
 msgid "reminders"
 msgstr "przypomnienia"
+
+#: apps/office/tasks.py:17
+msgid "Shift takeover"
+msgstr "Przejęcie zmiany"
+
+#: apps/office/tasks.py:19
+msgid ""
+"This is automatic reminder.\n"
+"                Accept it to indicate shift takeover.\n"
+"                There is one of us for each of you, to record who was on the "
+"shift when."
+msgstr ""
+"To jest automatyczne przypomnienie.\n"
+"                Wykonaj je, aby oznaczyć przjęcie zmiany."
+"                Jest po jednym dla każdego z Was, aby zapisać kto kiedy był na zmianie."

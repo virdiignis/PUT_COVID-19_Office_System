@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+from celery.schedules import crontab
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
@@ -90,6 +92,28 @@ DATABASES = {
 }
 
 CELERY_BROKER_URL = 'redis://loclahost:6379'
+CELERY_BEAT_SCHEDULE = {
+    'daily_report': {
+        'task': 'mailing.daily_report',
+        'schedule': crontab(minute=0, hour=7),
+    },
+    'isolations_over': {
+        'task': 'covid.isolations_over',
+        'schedule': crontab(minute=0, hour=6),
+    },
+    'weekly_report': {
+        'task': 'mailing.weekly_report',
+        'schedule': crontab(minute=0, hour=0, day_of_week='monday'),
+    },
+    'monthly_report': {
+        'task': 'mailing.monthly_report',
+        'schedule': crontab(minute=0, hour=0, day_of_month='1')
+    },
+    'shifts_takeovers': {
+        'task': 'office.shift_takeover',
+        'schedule': crontab(minute=40, hour='6,14,22')
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators

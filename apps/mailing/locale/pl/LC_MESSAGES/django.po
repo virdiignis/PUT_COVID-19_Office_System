@@ -1,0 +1,136 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-11-08 03:21+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n"
+"%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n"
+"%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+#: apps/mailing/report.py:56
+msgid "Report"
+msgstr "Raport"
+
+#: apps/mailing/report.py:59
+msgid "New students' infections"
+msgstr "Nowe zakażenia studentów"
+
+#: apps/mailing/report.py:60
+msgid "New students' quarantines"
+msgstr "Nowe kwarantanny studentów"
+
+#: apps/mailing/report.py:61
+msgid "New employees' infections"
+msgstr "Nowe zakażenia pracowników"
+
+#: apps/mailing/report.py:62
+msgid "New employees' quarantines"
+msgstr "Nowe kwarantanny pracowników"
+
+#: apps/mailing/report.py:76
+msgid "Isolations ordered"
+msgstr "Nałożone izolacje"
+
+#: apps/mailing/report.py:79
+msgid "Name"
+msgstr "Imię i nazwisko"
+
+#: apps/mailing/report.py:80
+msgid "Ordered by"
+msgstr "Nałożona przez"
+
+#: apps/mailing/report.py:81
+msgid "Order date"
+msgstr "Data nałożenia"
+
+#: apps/mailing/report.py:82
+msgid "Start date"
+msgstr "Data początku"
+
+#: apps/mailing/report.py:83
+msgid "End date"
+msgstr "Data końca"
+
+#: apps/mailing/report.py:84
+msgid "Whereabouts"
+msgstr "Miejsce pobytu"
+
+#: apps/mailing/report.py:85
+msgid "Cause"
+msgstr "Przyczyna"
+
+#: apps/mailing/report.py:86
+msgid "Health state"
+msgstr "Stan zdrowia"
+
+#: apps/mailing/report.py:103
+msgid "New cases opened"
+msgstr "Nowe otwarte sprawy"
+
+#: apps/mailing/report.py:106 apps/mailing/report.py:126
+msgid "Title"
+msgstr "Tytuł"
+
+#: apps/mailing/report.py:107 apps/mailing/report.py:127
+msgid "People involved"
+msgstr "Dotyczy osób"
+
+#: apps/mailing/report.py:108 apps/mailing/report.py:128
+msgid "Date open"
+msgstr "Data otwarcia"
+
+#: apps/mailing/report.py:109 apps/mailing/report.py:129
+msgid "Date closed"
+msgstr "Data zamknięcia"
+
+#: apps/mailing/report.py:123
+msgid "Cases closed"
+msgstr "Zamknięte sprawy"
+
+#: apps/mailing/report.py:143
+msgid "Office actions"
+msgstr "Office actions"
+
+#: apps/mailing/report.py:146
+msgid "Datetime"
+msgstr "Data i czas"
+
+#: apps/mailing/report.py:147
+msgid "Made by"
+msgstr "Wykonane przez"
+
+#: apps/mailing/report.py:148
+msgid "Based on"
+msgstr "Na podstawie"
+
+#: apps/mailing/report.py:149
+msgid "Contact from"
+msgstr "Kontaktujący się"
+
+#: apps/mailing/report.py:150
+msgid "Incoming contact content"
+msgstr "Informacje z kontaktu"
+
+#: apps/mailing/report.py:151
+msgid "Description"
+msgstr "Opis działania"
+
+#: apps/mailing/report.py:152
+msgid "Notes"
+msgstr "Notatki"
+
+#: apps/mailing/report.py:153
+msgid "Case"
+msgstr "Sprawa"
