@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-08 03:21+0100\n"
+"POT-Creation-Date: 2020-11-09 23:28+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,11 +20,46 @@ msgstr ""
 "%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n"
 "%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
-#: apps/covid/forms.py:102
+#: apps/covid/automatic_actions.py:22
+#, python-brace-format
+msgid "Opened the {title} case."
+msgstr "Otwarto sprawę {title}"
+
+#: apps/covid/automatic_actions.py:25
+#, python-brace-format
+msgid "Reopened the {title} case."
+msgstr "Ponownie otwarto sprawę {title}"
+
+#: apps/covid/automatic_actions.py:28
+#, python-brace-format
+msgid "Closed the {title} case."
+msgstr "Zamknięto sprawę {title}"
+
+#: apps/covid/automatic_actions.py:31
+#, python-brace-format
+msgid "Added new person: {person}."
+msgstr "Dodano nową osobę: {person}."
+
+#: apps/covid/automatic_actions.py:34
+#, python-brace-format
+msgid "Set new reminder. \"{reminder}\""
+msgstr "Ustawiono nowe przypomnienie: \"{reminder}\""
+
+#: apps/covid/automatic_actions.py:37
+#, python-brace-format
+msgid "Marked \"{reminder}\" done."
+msgstr "Oznaczono \"{reminder}\" jako wykonany"
+
+#: apps/covid/automatic_actions.py:40
+#, python-brace-format
+msgid "Changed the following information: {data} of {person}."
+msgstr "Zmieniono następujące informacje: {data} osoby {person}"
+
+#: apps/covid/forms.py:100
 msgid "Start date"
 msgstr "Data początku"
 
-#: apps/covid/forms.py:104
+#: apps/covid/forms.py:102
 msgid "End date"
 msgstr "Data końca"
 
@@ -68,6 +103,10 @@ msgstr " (pozytywny wynik testu)"
 #: apps/covid/models.py:38
 msgid " (negative test result)"
 msgstr " (negatywny wynik testu)"
+
+#: apps/covid/models.py:40
+msgid " (no test result)"
+msgstr " (brak wyniku testu)"
 
 #: apps/covid/models.py:45 apps/covid/models.py:98
 msgid "health state"
@@ -271,9 +310,8 @@ msgid "cause"
 msgstr "powód"
 
 #: apps/covid/models.py:167
-#, python-brace-format
-msgid "{self.person}'s isolation in case {self.case}"
-msgstr "Izolacja {self.person} w sprawie {self.case}"
+msgid "{person}'s isolation in case {case}"
+msgstr "Izolacja {person} w sprawie {case}"
 
 #: apps/covid/models.py:170
 msgid "isolation"
@@ -340,9 +378,8 @@ msgid "uploaded by"
 msgstr "przesłane przez"
 
 #: apps/covid/models.py:207
-#, python-brace-format
-msgid "Document {self.name} in case {self.case}"
-msgstr "Dokument {self.name} w sprawie {self.case}"
+msgid "{Document {name} in case {case}"
+msgstr "Dokument {name} w sprawie {case}"
 
 #: apps/covid/models.py:210
 msgid "document"
@@ -378,17 +415,26 @@ msgstr "Upewnij się, aby zaktualizować ich stan zdrowia"
 
 #: apps/covid/tasks.py:17
 #, python-brace-format
-msgid "in DS4 room {isolation.person.isolationroom.number} "
-msgstr "w DS4 pokój {isolation.person.isolationroom.number} "
+msgid "in DS4 room {nr} "
+msgstr "w DS4 pokój {nr}"
 
 #: apps/covid/tasks.py:18
 msgid " and isolation room info."
 msgstr " i informacje o pokoju izolacji."
 
 #: apps/covid/tasks.py:26
-#, python-brace-format
-msgid "{isolation.person} ends their isolation {place}today."
-msgstr "{isolation.person} kończy dzisiaj swoją kwarantannę {place}."
+msgid "{person} ends their isolation {place}today."
+msgstr "{person} kończy dzisiaj swoją kwarantannę {place}."
+
+#: apps/covid/views.py:158
+msgid "Case already closed."
+msgstr "Sprawa jest już zamknięta."
+
+#: apps/covid/views.py:171
+#, fuzzy
+#| msgid "date open"
+msgid "Case is open."
+msgstr "Sprawa jest otwarta."
 
 #: apps/covid/views.py:237
 msgid "Incoming contact content"
@@ -397,6 +443,10 @@ msgstr "Informacje z kontaktu"
 #: apps/covid/views.py:247
 msgid "Notes"
 msgstr "Notatki"
+
+#, python-brace-format
+#~ msgid "in DS4 room {isolation.person.isolationroom.number} "
+#~ msgstr "w DS4 pokój {isolation.person.isolationroom.number} "
 
 #, python-brace-format
 #~ msgid "Room {self.number}"

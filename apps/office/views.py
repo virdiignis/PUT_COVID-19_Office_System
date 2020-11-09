@@ -27,7 +27,7 @@ def home(request):
 
 @cache_page(365 * 24 * 60 * 60)
 def null(request):
-    return JsonResponse({"null": None})
+    return HttpResponse()
 
 
 class WorkerDetailView(LoginRequiredMixin, DetailView):

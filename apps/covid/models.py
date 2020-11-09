@@ -37,9 +37,9 @@ class HealthState(Model):
             else:
                 test = _(" (negative test result)")
         else:
-            test = ""
+            test = _(" (no test result)")
 
-        return f"{self.name}{test}"
+        return f"{_(self.name)}{test}"
 
     class Meta:
         verbose_name = _("health state")
@@ -164,7 +164,7 @@ class Isolation(Model):
         return timezone.now().date() <= self.end_date
 
     def __str__(self):
-        return _(f"{self.person}'s isolation in case {self.case}")
+        return _("{person}'s isolation in case {case}").format(person=self.person, case=self.case)
 
     class Meta:
         verbose_name = _("isolation")
@@ -204,7 +204,7 @@ class Document(Model):
     case = models.ForeignKey(Case, on_delete=models.CASCADE, related_name='documents', verbose_name=_("case"))
 
     def __str__(self):
-        return f"{_('Document')} {self.name} {_('in case')} {self.case}"
+        return _("{Document {name} in case {case}").format(name=self.name, case=self.case)
 
     class Meta:
         verbose_name = _("document")

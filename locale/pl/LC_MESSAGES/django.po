@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-08 03:21+0100\n"
+"POT-Creation-Date: 2020-11-09 23:28+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,7 +32,7 @@ msgstr "Zaloguj"
 msgid "Action details"
 msgstr "Szczegóły akcji"
 
-#: templates/covid/action_detail_modal.html:11 templates/covid/actions.html:28
+#: templates/covid/action_detail_modal.html:11 templates/covid/actions.html:33
 #: templates/covid/case_detail.html:129
 #: templates/covid/dashboard/reminders.html:24
 #: templates/covid/person_detail.html:123 templates/covid/reports.html:173
@@ -40,14 +40,14 @@ msgstr "Szczegóły akcji"
 msgid "Datetime"
 msgstr "Data i czas"
 
-#: templates/covid/action_detail_modal.html:15 templates/covid/actions.html:29
+#: templates/covid/action_detail_modal.html:15 templates/covid/actions.html:34
 #: templates/covid/case_detail.html:130
 #: templates/covid/dashboard/actions.html:14
 #: templates/covid/person_detail.html:124 templates/covid/reports.html:174
 msgid "Made by"
 msgstr "Wykonane przez"
 
-#: templates/covid/action_detail_modal.html:19 templates/covid/actions.html:30
+#: templates/covid/action_detail_modal.html:19 templates/covid/actions.html:35
 #: templates/covid/case_detail.html:131
 #: templates/covid/dashboard/actions.html:15
 #: templates/covid/person_detail.html:125 templates/covid/reports.html:175
@@ -55,12 +55,12 @@ msgstr "Wykonane przez"
 msgid "Based on"
 msgstr "Na podstawie"
 
-#: templates/covid/action_detail_modal.html:23 templates/covid/actions.html:31
+#: templates/covid/action_detail_modal.html:23 templates/covid/actions.html:36
 #: templates/covid/case_detail.html:132 templates/covid/reports.html:176
 msgid "Contact from"
 msgstr "Kontaktujący się"
 
-#: templates/covid/action_detail_modal.html:27 templates/covid/actions.html:32
+#: templates/covid/action_detail_modal.html:27 templates/covid/actions.html:37
 #: templates/covid/case_detail.html:133 templates/covid/person_detail.html:126
 #: templates/covid/reports.html:177 templates/office/worker_detail.html:32
 msgid "Incoming contact content"
@@ -70,7 +70,7 @@ msgstr "Informacje z kontaktu"
 msgid "Action description"
 msgstr "Opis działania"
 
-#: templates/covid/action_detail_modal.html:35 templates/covid/actions.html:34
+#: templates/covid/action_detail_modal.html:35 templates/covid/actions.html:39
 #: templates/covid/case_detail.html:135 templates/covid/person_detail.html:128
 #: templates/covid/reports.html:179 templates/office/worker_detail.html:34
 msgid "Notes"
@@ -79,9 +79,9 @@ msgstr "Notatki"
 #: templates/covid/action_detail_modal.html:41
 #: templates/covid/action_new_modal.html:40
 #: templates/covid/case_new_modal.html:27
-#: templates/covid/person_new_modal.html:29
+#: templates/covid/person_new_modal.html:35
 #: templates/covid/person_update_modal.html:27
-#: templates/covid/text_modal.html:16
+#: templates/covid/text_modal.html:16 templates/covid/unit_new_modal.html:29
 #: templates/office/reminder_new_modal.html:28
 msgid "Close"
 msgstr "Zamknij"
@@ -95,7 +95,8 @@ msgid "To add action linked to case, please go to case edit view."
 msgstr ""
 "Aby dodać działanie związane ze sprawą, przejdź do widoku edycji sprawy."
 
-#: templates/covid/action_new_modal.html:24 templates/covid/case_update.html:42
+#: templates/covid/action_new_modal.html:24 templates/covid/case_update.html:47
+#: templates/covid/person_new_modal.html:21
 msgid "New"
 msgstr "Nowa"
 
@@ -104,28 +105,28 @@ msgstr "Nowa"
 msgid "Create"
 msgstr "Dodaj"
 
-#: templates/covid/actions.html:18 templates/covid/case_update.html:90
+#: templates/covid/actions.html:23 templates/covid/case_update.html:95
 msgid "Actions"
 msgstr "Działania"
 
-#: templates/covid/actions.html:21
+#: templates/covid/actions.html:26
 msgid "New unlinked action"
 msgstr "Nowe działanie niezwiązane"
 
-#: templates/covid/actions.html:33 templates/covid/case_detail.html:134
+#: templates/covid/actions.html:38 templates/covid/case_detail.html:134
 #: templates/covid/dashboard/actions.html:16
 #: templates/covid/person_detail.html:127 templates/covid/reports.html:178
 #: templates/office/worker_detail.html:33
 msgid "Description"
 msgstr "Opis"
 
-#: templates/covid/actions.html:35 templates/covid/case_detail.html:136
+#: templates/covid/actions.html:40 templates/covid/case_detail.html:136
 #: templates/covid/person_detail.html:129 templates/covid/reports.html:180
 #: templates/office/worker_detail.html:35
 msgid "Case"
 msgstr "Sprawa"
 
-#: templates/covid/actions.html:58 templates/covid/actions.html:66
+#: templates/covid/actions.html:63 templates/covid/actions.html:71
 #: templates/covid/case_detail.html:159 templates/covid/case_detail.html:167
 #: templates/covid/person_detail.html:147
 #: templates/covid/person_detail.html:155
@@ -160,7 +161,7 @@ msgstr "Otwarta"
 msgid "Opened"
 msgstr "Otwarta"
 
-#: templates/covid/case_detail.html:30 templates/covid/case_update.html:38
+#: templates/covid/case_detail.html:30 templates/covid/case_update.html:43
 #: templates/covid/cases.html:46 templates/covid/dashboard/cases.html:14
 #: templates/covid/person_detail.html:40 templates/covid/reports.html:110
 #: templates/covid/reports.html:144
@@ -244,7 +245,7 @@ msgstr "Brak izolacji w sprawie."
 msgid "Actions history"
 msgstr "Historia działań"
 
-#: templates/covid/case_detail.html:186 templates/covid/case_update.html:179
+#: templates/covid/case_detail.html:186 templates/covid/case_update.html:188
 msgid "Documents"
 msgstr "Dokumenty"
 
@@ -265,7 +266,7 @@ msgstr "Przesłane przez"
 msgid "Open new case"
 msgstr "Otwórz nową sprawę"
 
-#: templates/covid/case_update.html:16 templates/covid/case_update.html:29
+#: templates/covid/case_update.html:21 templates/covid/case_update.html:34
 #: templates/covid/cases.html:45 templates/covid/dashboard/cases.html:13
 #: templates/covid/dashboard/reminders.html:26
 #: templates/covid/person_detail.html:39 templates/covid/reports.html:109
@@ -273,50 +274,45 @@ msgstr "Otwórz nową sprawę"
 msgid "Title"
 msgstr "Tytuł"
 
-#: templates/covid/case_update.html:20
+#: templates/covid/case_update.html:25
 msgid "Close case"
 msgstr "Zamknij sprawę"
 
-#: templates/covid/case_update.html:25
+#: templates/covid/case_update.html:30
 #: templates/covid/isolation_rooms_update.html:10
 msgid "Cancel"
 msgstr "Anuluj"
 
-#: templates/covid/case_update.html:26
+#: templates/covid/case_update.html:31
 #: templates/covid/isolation_rooms_update.html:11
 msgid "Save"
 msgstr "Zapisz"
 
-#: templates/covid/case_update.html:31
+#: templates/covid/case_update.html:36
 msgid "Reopen case"
 msgstr "Ponownie otwórz sprawę"
 
-#: templates/covid/case_update.html:50
+#: templates/covid/case_update.html:55
 #: templates/covid/dashboard/isolations.html:6
 #: templates/covid/person_detail.html:63
 msgid "Isolations"
 msgstr "Izolacje"
 
-#: templates/covid/case_update.html:106
+#: templates/covid/case_update.html:111
 msgid "Remove"
 msgstr "Usuń"
 
-#: templates/covid/case_update.html:227
+#: templates/covid/case_update.html:236
 msgid "Add isolation"
 msgstr "Dodaj izolację"
 
-#: templates/covid/case_update.html:230 templates/covid/case_update.html:239
-#: templates/covid/case_update.html:248
+#: templates/covid/case_update.html:239 templates/covid/case_update.html:248
 msgid "remove"
 msgstr "usuń"
 
-#: templates/covid/case_update.html:236
+#: templates/covid/case_update.html:245
 msgid "Add action"
 msgstr "Dodaj działanie"
-
-#: templates/covid/case_update.html:245
-msgid "Add document"
-msgstr "Dodaj dokument"
 
 #: templates/covid/cases.html:11
 msgid "Cases"
@@ -391,13 +387,13 @@ msgstr "Ustawione przez"
 msgid "Note"
 msgstr "Notatki"
 
-#: templates/covid/dashboard/reminders.html:28
-#: templates/office/reminders.html:40
+#: templates/covid/dashboard/reminders.html:29
+#: templates/office/reminders.html:41
 msgid "Mark done"
 msgstr "Oznacz wykonanie"
 
-#: templates/covid/dashboard/reminders.html:51
-#: templates/office/reminders.html:64
+#: templates/covid/dashboard/reminders.html:54
+#: templates/office/reminders.html:67
 msgid "done"
 msgstr "wykonano"
 
@@ -442,7 +438,8 @@ msgstr "Nie odnotowano kontaktu ze strony tej osoby."
 msgid "Add new person"
 msgstr "Dodaj nową osobę"
 
-#: templates/covid/person_new_modal.html:31
+#: templates/covid/person_new_modal.html:37
+#: templates/covid/unit_new_modal.html:31
 #: templates/office/reminder_new_modal.html:29
 msgid "Add"
 msgstr "Dodaj"
@@ -507,6 +504,10 @@ msgstr "Zamknięte sprawy"
 msgid "Office actions during selected time"
 msgstr "Działania biura z wybranego okresu"
 
+#: templates/covid/unit_new_modal.html:6
+msgid "Add new unit"
+msgstr "Dodaj nową jednostkę"
+
 #: templates/office/reminder_new_modal.html:6
 msgid "Add new reminder"
 msgstr "Dodaj nowe przypomnienie"
@@ -530,6 +531,9 @@ msgstr "Jesteś już zalogowany."
 #: templates/registration/login.html:6
 msgid "to continue."
 msgstr "aby kontynuować."
+
+#~ msgid "Add document"
+#~ msgstr "Dodaj dokument"
 
 #~ msgid "Office actions"
 #~ msgstr "Działania biura"

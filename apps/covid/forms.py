@@ -6,8 +6,6 @@ from django.utils.translation import gettext_lazy as _
 from apps.covid.models import Case, Action, Person, Isolation, IsolationRoom, Document, Unit
 from bootstrap_modal_forms.forms import BSModalModelForm
 
-from backend import settings
-
 
 class ActionFormSet(inlineformset_factory(Case,
                                           Action,

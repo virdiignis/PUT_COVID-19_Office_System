@@ -155,7 +155,7 @@ class CaseUpdateView(HasWriteAccessMixin, UpdateView):
 def case_close(request, pk: int):
     case = get_object_or_404(Case, pk=pk)
     if case.date_closed is not None:
-        raise SuspiciousOperation("Case already closed.")
+        raise SuspiciousOperation(_("Case already closed."))
     case.date_closed = timezone.now().date()
     case.save()
     AutomaticLogActions(case, request.user).close_case()
@@ -168,7 +168,7 @@ def case_close(request, pk: int):
 def case_reopen(request, pk: int):
     case = get_object_or_404(Case, pk=pk)
     if case.date_closed is None:
-        raise SuspiciousOperation("Case is open.")
+        raise SuspiciousOperation(_("Case is open."))
     case.date_closed = None
     case.save()
     AutomaticLogActions(case, request.user).reopen_case()

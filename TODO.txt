@@ -38,6 +38,7 @@
 # 38. Pododawać w widokach izolacji, jeśli jest w DS4 to który pokój.
 # 39. Dodać interfejs do dodawania jednostek organizacyjnych.
 # 40. Cache na widok nulla, ewentualnie na GET raportów.
+41. Pozmieniać defaultstringi na polski. Jeśli nie wyjdzie 36.
 
 # Raporty:
 #     Liczba nowych zakażonych studentów/doktorantów

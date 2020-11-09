@@ -14,7 +14,7 @@ def isolations_over():
             datetime = localtime(timezone.now()).replace(hour=16, minute=0, second=0)
             notes = _("Make sure to update their health state")
             if isolation.person.isolationroom is not None:
-                place = _(f"in DS4 room {isolation.person.isolationroom.number} ")
+                place = _("in DS4 room {nr} ").format(nr=isolation.person.isolationroom.number)
                 notes += _(" and isolation room info.")
             else:
                 place = ""
@@ -23,6 +23,6 @@ def isolations_over():
             Reminder.objects.create(
                 datetime=datetime,
                 set_by=Worker.objects.get(id=1),
-                title=_(f"{isolation.person} ends their isolation {place}today."),
+                title=_("{person} ends their isolation {place}today.").format(person=isolation.person, place=place),
                 notes=notes
             )
