@@ -25,7 +25,9 @@
                     <th scope="col">{% translate "Set by" %}</th>
                     <th scope="col">{% translate "Title" %}</th>
                     <th scope="col">{% translate "Note" %}</th>
-                    <th scope="col">{% translate "Mark done" %}</th>
+                    {% if request.user.write_access %}
+                        <th scope="col">{% translate "Mark done" %}</th>
+                    {% endif %}
                 </tr>
                 </thead>
                 {% for reminder in page_obj %}
@@ -46,10 +48,12 @@
                         </td>
                         <td>{{ reminder.title }}</td>
                         <td>{{ reminder.notes }}</td>
-                        <td>
-                            <a href="#" type="button" onclick="markResolved(this);"
-                               rno="{{ reminder.id }}">{% translate "done" %}</a>
-                        </td>
+                        {% if request.user.write_access %}
+                            <td>
+                                <a href="#" type="button" onclick="markResolved(this);"
+                                   rno="{{ reminder.id }}">{% translate "done" %}</a>
+                            </td>
+                        {% endif %}
                     </tr>
                 {% endfor %}
             </table>

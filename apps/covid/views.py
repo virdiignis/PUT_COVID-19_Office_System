@@ -15,6 +15,7 @@ from apps.covid.forms import CaseCreateModalForm, PersonCreateUpdateModalForm, C
     ActionFormSet, ActionCreateModalForm, IsolationRoomFormSet, DocumentFormSet, ReportForm
 from apps.covid.models import Case, Action, Isolation, IsolationRoom, Person, HealthStateChange
 from apps.covid.reports import prepare_report_context
+from apps.office.safety import HasWriteAccessMixin, has_write_access
 
 
 class CaseListView(LoginRequiredMixin, ListView):
@@ -69,7 +70,7 @@ class CaseDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
-class CaseCreateModalView(LoginRequiredMixin, BSModalCreateView):
+class CaseCreateModalView(HasWriteAccessMixin, BSModalCreateView):
     model = Case
     form_class = CaseCreateModalForm
     template_name = "covid/case_new_modal.html"
@@ -86,7 +87,7 @@ class CaseCreateModalView(LoginRequiredMixin, BSModalCreateView):
         return reverse_lazy("case_update", args=(self.object.id,))
 
 
-class CaseUpdateView(LoginRequiredMixin, UpdateView):
+class CaseUpdateView(HasWriteAccessMixin, UpdateView):
     model = Case
     form_class = CaseUpdateForm
     template_name = "covid/case_update.html"
@@ -150,6 +151,7 @@ class CaseUpdateView(LoginRequiredMixin, UpdateView):
 
 
 @login_required
+@has_write_access()
 def case_close(request, pk: int):
     case = get_object_or_404(Case, pk=pk)
     if case.date_closed is not None:
@@ -162,6 +164,7 @@ def case_close(request, pk: int):
 
 
 @login_required
+@has_write_access()
 def case_reopen(request, pk: int):
     case = get_object_or_404(Case, pk=pk)
     if case.date_closed is None:
@@ -173,7 +176,7 @@ def case_reopen(request, pk: int):
     return redirect('case_update', pk=pk)
 
 
-class ActionCreateModalView(LoginRequiredMixin, BSModalCreateView):
+class ActionCreateModalView(HasWriteAccessMixin, BSModalCreateView):
     template_name = 'covid/action_new_modal.html'
     form_class = ActionCreateModalForm
     success_url = reverse_lazy("actions")
@@ -186,9 +189,6 @@ class ActionDetailModalView(LoginRequiredMixin, BSModalReadView):
 
 @login_required
 def covid_dashboard(request):
-    # if not request.user.write_access:
-    #     return redirect(reverse_lazy('home'))
-
     return render(request, 'covid/dashboard/dashboard.html')
 
 
@@ -263,7 +263,7 @@ class PersonDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
-class PersonCreateModalView(LoginRequiredMixin, BSModalCreateView):
+class PersonCreateModalView(HasWriteAccessMixin, BSModalCreateView):
     template_name = 'covid/person_new_modal.html'
     form_class = PersonCreateUpdateModalForm
     success_url = reverse_lazy('null')  # this is required, but not used
@@ -277,7 +277,7 @@ class PersonCreateModalView(LoginRequiredMixin, BSModalCreateView):
             return HttpResponse()
 
 
-class PersonUpdateModalView(LoginRequiredMixin, BSModalUpdateView):
+class PersonUpdateModalView(HasWriteAccessMixin, BSModalUpdateView):
     model = Person
     template_name = 'covid/person_update_modal.html'
     form_class = PersonCreateUpdateModalForm
@@ -314,6 +314,7 @@ class IsolationRoomListView(LoginRequiredMixin, ListView):
 
 
 @login_required
+@has_write_access()
 def isolation_rooms_update(request):
     if request.method == 'POST':
         formset = IsolationRoomFormSet(request.POST, request.FILES)
@@ -325,6 +326,7 @@ def isolation_rooms_update(request):
     return render(request, 'covid/isolation_rooms_update.html', {'formset': formset})
 
 
+@login_required
 def reports(request):
     if request.method == 'POST':
         form = ReportForm(request.POST)

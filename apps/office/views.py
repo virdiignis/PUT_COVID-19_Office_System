@@ -11,16 +11,17 @@ from apps.covid.automatic_actions import AutomaticLogActions
 from apps.covid.models import Action
 from apps.office.forms import ReminderCreateModalForm
 from apps.office.models import Worker, Reminder
+from apps.office.safety import HasWriteAccessMixin, has_write_access
 
 
 @login_required
 def home(request):
-    # if request.user.write_access:
-    return redirect(reverse_lazy('covid_dashboard'))
-    # else:
-    #     return redirect(reverse_lazy('reports'))
-    #
-    # return render(request, "home.html")
+    if request.user.write_access:
+        return redirect(reverse_lazy('covid_dashboard'))
+    else:
+        return redirect(reverse_lazy('reports'))
+
+    return render(request, "home.html")
 
 
 def null(request):
@@ -49,6 +50,8 @@ class ReminderListView(ReminderDashboardView):
     template_name = 'office/reminders.html'
 
 
+@login_required
+@has_write_access()
 def reminder_mark_done(request, pk):
     reminder = get_object_or_404(Reminder, id=pk)
     if reminder.read_by is None:
@@ -61,7 +64,7 @@ def reminder_mark_done(request, pk):
         return HttpResponse(status=304)
 
 
-class ReminderCreateModalView(LoginRequiredMixin, BSModalCreateView):
+class ReminderCreateModalView(HasWriteAccessMixin, BSModalCreateView):
     model = Reminder
     form_class = ReminderCreateModalForm
     template_name = "office/reminder_new_modal.html"
