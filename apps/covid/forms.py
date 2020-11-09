@@ -3,7 +3,7 @@ from django.forms import inlineformset_factory, ModelForm, DateTimeInput, DateIn
 from django import forms
 from django.utils.translation import gettext_lazy as _
 
-from apps.covid.models import Case, Action, Person, Isolation, IsolationRoom, Document
+from apps.covid.models import Case, Action, Person, Isolation, IsolationRoom, Document, Unit
 from bootstrap_modal_forms.forms import BSModalModelForm
 
 from backend import settings
@@ -102,3 +102,9 @@ class ReportForm(forms.Form):
                                  label=_("Start date"))
     end_date = forms.DateField(widget=forms.DateInput(format='%d.%m.%Y', attrs={'class': 'form-control datefield'}),
                                label=_("End date"))
+
+
+class UnitCreateModalForm(BSModalModelForm):
+    class Meta:
+        model = Unit
+        fields = ("name", "report_students_email", "report_employees_email")

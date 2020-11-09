@@ -204,7 +204,7 @@ class Document(Model):
     case = models.ForeignKey(Case, on_delete=models.CASCADE, related_name='documents', verbose_name=_("case"))
 
     def __str__(self):
-        return _(f"Document {self.name} in case {self.case}")
+        return f"{_('Document')} {self.name} {_('in case')} {self.case}"
 
     class Meta:
         verbose_name = _("document")

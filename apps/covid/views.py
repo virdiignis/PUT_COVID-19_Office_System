@@ -12,8 +12,8 @@ from django.views.generic import ListView, DetailView, UpdateView
 
 from apps.covid.automatic_actions import AutomaticLogActions
 from apps.covid.forms import CaseCreateModalForm, PersonCreateUpdateModalForm, CaseUpdateForm, IsolationFormSet, \
-    ActionFormSet, ActionCreateModalForm, IsolationRoomFormSet, DocumentFormSet, ReportForm
-from apps.covid.models import Case, Action, Isolation, IsolationRoom, Person, HealthStateChange
+    ActionFormSet, ActionCreateModalForm, IsolationRoomFormSet, DocumentFormSet, ReportForm, UnitCreateModalForm
+from apps.covid.models import Case, Action, Isolation, IsolationRoom, Person, HealthStateChange, Unit
 from apps.covid.reports import prepare_report_context
 from apps.office.safety import HasWriteAccessMixin, has_write_access
 
@@ -353,3 +353,17 @@ def reports(request):
         }
 
     return render(request, 'covid/reports.html', context)
+
+
+class UnitCreateModalView(HasWriteAccessMixin, BSModalCreateView):
+    template_name = 'covid/unit_new_modal.html'
+    form_class = UnitCreateModalForm
+    success_url = reverse_lazy('null')  # this is required, but not used
+
+    def form_valid(self, form):
+        super(UnitCreateModalView, self).form_valid(form)
+        if not self.request.is_ajax() or self.request.POST.get('asyncUpdate') == 'True':
+            name = self.object.name
+            return JsonResponse({"id": name, "name": name})
+        else:
+            return HttpResponse()

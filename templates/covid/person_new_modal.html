@@ -13,8 +13,14 @@
         {% for field in form %}
             <div class="form-group{% if field.errors %} invalid{% endif %}">
                 <div class="d-flex justify-content-between fieldWrapper">
-                    {{ field.label_tag }}
-                    {{ field }}
+                    <div class="col-4">{{ field.label_tag }}</div>
+                    <div class="col-5">{{ field }}</div>
+                    <div class="col-2">
+                        {% if forloop.counter == 9 %}
+                            <button type="button" class="btn btn-primary"
+                                    id="newUnitButton">{% translate "New" %}</button>
+                        {% endif %}
+                    </div>
                 </div>
                 {% for error in field.errors %}
                     <p class="help-block" style="color: red">{{ error }}</p>
@@ -30,7 +36,25 @@
         <button type="button" id="addPersonSubmitButton"
                 class="submit-btn btn btn-primary">{% translate "Add" %}</button>
     </div>
-    <script>
+    <script type="text/javascript">
+        $(function () {
+            function addUnitModal() {
+                $("#newUnitButton").modalForm({
+                    modalID: "#modal-unit",
+                    modalContent: "#modal-unit-content",
+                    modalForm: "#modal-unit-content form",
+                    submitBtn: "#addUnitSubmitButton",
+                    formURL: "{% url 'unit_new_modal' %}",
+                    asyncUpdate: true,
+                    asyncSettings: {
+                        closeOnSubmit: true,
+                        addModalFormFunction: addUnitModal
+                    }
+                });
+            }
+
+            addUnitModal();
+        });
         $('#id_unit').select2({
             dropdownParent: $('.modal-body'),
             allowClear: true,
