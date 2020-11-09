@@ -8,7 +8,7 @@
     </div>
 
     <div class="card">
-        <div class="card-header d-flex justify-content-between">
+        <div class="card-header d-flex justify-content-between align-items-center">
             <div class="d-flex align-items-center justify-content-between col-3">
                 <h2>{{ person }}</h2>{% if person.role != 'N' %}
                 <h5 class="text-muted pull-left">({{ person.get_role_display }})</h5> {% endif %}

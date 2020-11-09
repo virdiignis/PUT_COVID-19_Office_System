@@ -16,7 +16,7 @@
         {% csrf_token %}
         <div class="card">
             {{ form.non_field_errors }}
-            <div class="card-header d-flex justify-content-between">
+            <div class="card-header d-flex justify-content-between align-items-center">
                 {% if is_open %}
                     <h2>{% translate "Title" %}: {{ form.title }} </h2>
                     {{ form.title.errors }}
@@ -51,7 +51,7 @@
         </div>
         <br>
         <div class="card">
-            <div class="card-header isolations-add d-flex justify-content-between">
+            <div class="card-header isolations-add d-flex justify-content-between align-items-center">
                 <h3>{% translate "Isolations" %}</h3>
             </div>
             <div class="card-body">
@@ -91,7 +91,7 @@
 
         <br>
         <div class="card">
-            <div class="card-header actions-add d-flex justify-content-between">
+            <div class="card-header actions-add d-flex justify-content-between align-items-center">
                 <h3>{% translate "Actions" %}</h3>
             </div>
             <div class="card-body">
@@ -121,32 +121,36 @@
                                 {{ hidden }}
                             {% endfor %}
                             <td class="d-flex flex-column justify-content-around">
-                                <div class="d-flex flex-column justify-content-between">
-                                    <b>{{ form.datetime.label }}</b>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    {#                                        <div class="col-4">#}
+                                    <b class="col-4">{{ form.datetime.label }}</b>
                                     {% for error in form.datetime.errors %}
                                         <p class="help-block" style="color: red">{{ error }}</p>
                                     {% endfor %}
+                                    {#                                        </div>#}
+                                    {#                                        <div class="col-8">#}
                                     {{ form.datetime }}
+                                    {#                                        </div>#}
                                 </div>
                                 <br>
-                                <div class="d-flex justify-content-between">
-                                    <b>{{ form.made_by.label }}</b>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <b class="col-4">{{ form.made_by.label }}</b>
                                     {% for error in form.made_by.errors %}
                                         <p class="help-block" style="color: red">{{ error }}</p>
                                     {% endfor %}
                                     {{ form.made_by }}
                                 </div>
                                 <br>
-                                <div class="d-flex justify-content-between">
-                                    <b>{{ form.based_on.label }}</b>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <b class="col-4">{{ form.based_on.label }}</b>
                                     {% for error in form.based_on.errors %}
                                         <p class="help-block" style="color: red">{{ error }}</p>
                                     {% endfor %}
                                     {{ form.based_on }}
                                 </div>
                                 <br>
-                                <div class="d-flex justify-content-between">
-                                    <b>{{ form.contact_from.label }}</b>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <b class="col-4">{{ form.contact_from.label }}</b>
                                     {% for error in form.contact_from.errors %}
                                         <p class="help-block" style="color: red">{{ error }}</p>
                                     {% endfor %}

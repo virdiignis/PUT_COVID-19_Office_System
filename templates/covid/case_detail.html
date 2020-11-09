@@ -9,7 +9,7 @@
 
     <a href="{% url 'cases' %}"><- {% translate "cases" %}</a>
     <div class="card">
-        <div class="card-header d-flex justify-content-between">
+        <div class="card-header d-flex justify-content-between align-items-center">
             <h2>{{ case.title }}</h2>
             {% if request.user.write_access %}
                 <div class="btn-group align-self-center col-sm-1">

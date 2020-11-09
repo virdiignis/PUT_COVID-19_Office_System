@@ -12,7 +12,7 @@
     <div class="modal-body">
         {% for field in form %}
             <div class="form-group{% if field.errors %} invalid{% endif %}">
-                <div class="d-flex justify-content-between fieldWrapper">
+                <div class="d-flex justify-content-between align-items-center fieldWrapper">
                     {{ field.label_tag }}
                     {{ field }}
                 </div>

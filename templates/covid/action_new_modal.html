@@ -15,7 +15,7 @@
     <div id="modal-body" class="modal-body">
         {% for field in form %}
             <div class="form-group{% if field.errors %} invalid{% endif %}">
-                <div class="d-flex justify-content-between fieldWrapper">
+                <div class="d-flex justify-content-between align-items-center fieldWrapper">
                     {{ field.label_tag }}
                     {% if forloop.counter == 4 %}
                         <div class="col-7">

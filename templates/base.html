@@ -19,11 +19,11 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-<div class="card-header d-flex justify-content-between main-header">
+<div class="card-header d-flex justify-content-between align-items-center main-header">
     <a href="{% url "home" %}" class="text-decoration-none align-self-center" style="color: white">
         <h1>PUT COVID-19 Office System</h1>
     </a>
-    <div class="d-flex btn-group align-self-center col-sm-2">
+    <div class="d-flex btn-group align-self-center align-items-center col-sm-2">
         {% get_current_language as LANGUAGE_CODE %}
         {% if LANGUAGE_CODE == 'en' %}
             <a class="btn btn-light" href="#" onclick="window.location.href = window.location.href.replaceAll('/en/', '/pl/')">English</a>
