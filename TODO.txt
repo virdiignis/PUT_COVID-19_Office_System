@@ -23,20 +23,20 @@
 # 23. Lokalizacja językowa # https://pypi.org/project/django-translations/
 # 24. Uzupełnić isolation cause w widokach izolacji.
 # 25. Ustawić w main-header link do zmiany języka.
-26. Walidować uprawnienia do edycji po stronie backendu.
+# 26. Walidować uprawnienia do edycji po stronie backendu.
 # 27. Tworzenie case'ów sie sypie
 # 28. Zapisywać datę i osobę odklikującą reminder
 # 29. Autoremindery o przejęciu zmian z generowaniem akcji.
 # 30. Dodać githubowego taga na release
 31. Dodać formularz zmiany hasła
 # 32. Zaktualizować tłumaczenia
-33. Może powrzucać templaty do apek
+# 33. Może powrzucać templaty do apek # jednak nie
 # 34. Automatyczne remindery o wyjściu z izolacji DS4
 # 35. Raporty w XLSX
 36. Tłumaczenia contentu dynamicznego
 37. Po dodawniu grafików dodać do raportu dziennego: "Dzisiaj na zmianie: Osoba A, Osoba B"
 # 38. Pododawać w widokach izolacji, jeśli jest w DS4 to który pokój.
-39. Dodać interfejs do dodawania jednostek organizacyjnych.
+# 39. Dodać interfejs do dodawania jednostek organizacyjnych.
 # 40. Cache na widok nulla, ewentualnie na GET raportów.
 
 # Raporty:
