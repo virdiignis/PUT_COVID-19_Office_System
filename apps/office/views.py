@@ -5,6 +5,7 @@ from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.utils import timezone
+from django.views.decorators.cache import cache_page
 from django.views.generic import DetailView, ListView
 
 from apps.covid.automatic_actions import AutomaticLogActions
@@ -24,6 +25,7 @@ def home(request):
     return render(request, "home.html")
 
 
+@cache_page(365 * 24 * 60 * 60)
 def null(request):
     return JsonResponse({"null": None})
 
