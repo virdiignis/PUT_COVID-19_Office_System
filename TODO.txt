@@ -36,6 +36,7 @@
 36. Tłumaczenia contentu dynamicznego
 37. Po dodawniu grafików dodać do raportu dziennego: "Dzisiaj na zmianie: Osoba A, Osoba B"
 # 38. Pododawać w widokach izolacji, jeśli jest w DS4 to który pokój.
+39. Dodać interfejs do dodawania jednostek organizacyjnych.
 
 
 # Raporty:
