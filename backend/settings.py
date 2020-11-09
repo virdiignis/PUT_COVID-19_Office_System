@@ -24,10 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '=oees2o6!f&a33bk0#l2dk!eyo4+c4^hx%)ej#bt()vr1sg9(g'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['covid-app-dev.prv.put.poznan.pl', 'localhost']
-
 
 # Application definition
 
@@ -176,7 +175,7 @@ MEDIA_URL = '/media/'
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
-EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend' #temporal
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'  # temporal
 EMAIL_FILE_PATH = '/usr/share/nginx/covid_office/email'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.mailtrap.io'
