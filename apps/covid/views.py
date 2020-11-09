@@ -272,6 +272,11 @@ class PersonCreateModalView(HasWriteAccessMixin, BSModalCreateView):
         super(PersonCreateModalView, self).form_valid(form)
         if not self.request.is_ajax() or self.request.POST.get('asyncUpdate') == 'True':
             AutomaticLogActions(user=self.request.user).add_new_person(self.object)
+            HealthStateChange.objects.create(
+                person=self.object,
+                changed_by=self.request.user,
+                change_to=self.object.health_state
+            )
             return JsonResponse({"id": self.object.id, "name": str(self.object)})
         else:
             return HttpResponse()
