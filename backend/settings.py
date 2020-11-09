@@ -187,10 +187,10 @@ DEFAULT_FROM_EMAIL = "Biuro Covid <biurocovid@put.poznan.pl>"
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "unix:/var/sockets/redis.sock/1",
+        "LOCATION": "unix:/var/sockets/redis.sock",
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient"
         },
-        "KEY_PREFIX": "covid"
+        "KEY_PREFIX": "covidcache"
     }
 }
