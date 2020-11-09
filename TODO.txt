@@ -4,7 +4,7 @@
 4. Dodać do office zarządzanie grafikiem
 # 5. Podłączyć celery
 # 6. Podłączyć postgres
-# 7. Zmigrować na serwer
+# 7. Zmigrować na serwer # https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 # 8. Dodać wysyłkę maili
 # 9. Dodać automatyczne tworzenie akcji przy zmianach dotyczących case'a.
 # 10. Dodać akcje niezwiązane + interfejs

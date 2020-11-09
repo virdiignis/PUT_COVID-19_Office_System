@@ -30,4 +30,14 @@
         <button type="button" id="addPersonSubmitButton"
                 class="submit-btn btn btn-primary">{% translate "Add" %}</button>
     </div>
+    <script>
+        $('#id_unit').select2({
+            dropdownParent: $('.modal-body'),
+            allowClear: true,
+            ajax: {
+                url: '{% url 'unit-autocomplete' %}',
+                dataType: 'json'
+            }
+        });
+    </script>
 </form>
