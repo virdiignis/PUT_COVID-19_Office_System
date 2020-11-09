@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '=oees2o6!f&a33bk0#l2dk!eyo4+c4^hx%)ej#bt()vr1sg9(g'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['covid-app-dev.prv.put.poznan.pl']
+ALLOWED_HOSTS = ['covid-app-dev.prv.put.poznan.pl', 'localhost']
 
 
 # Application definition
@@ -94,6 +94,7 @@ DATABASES = {
 }
 
 CELERY_BROKER_URL = 'redis+socket:///var/sockets/redis.sock'
+CELERY_TIMEZONE = "Europe/Warsaw"
 CELERY_BEAT_SCHEDULE = {
     'daily_report': {
         'task': 'mailing.daily_report',
