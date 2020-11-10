@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '=oees2o6!f&a33bk0#l2dk!eyo4+c4^hx%)ej#bt()vr1sg9(g'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['covid-app-dev.prv.put.poznan.pl', 'localhost']
 
@@ -175,12 +175,7 @@ MEDIA_URL = '/media/'
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
-EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'  # temporal
-EMAIL_FILE_PATH = '/var/www/covid_office/email'
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.mailtrap.io'
-EMAIL_HOST_USER = 'e4e8bfd419eec9'
-EMAIL_HOST_PASSWORD = 'de1b717c1e0bdc'
 EMAIL_PORT = 587
 DEFAULT_FROM_EMAIL = "Biuro Covid <biurocovid@put.poznan.pl>"
 
@@ -195,7 +190,9 @@ CACHES = {
     }
 }
 
-
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 SESSION_ENGINE = "django.contrib.sessions.backends.cached_db"
+
+with open(BASE_DIR / "backend/secrets.py") as F:
+    exec(compile(F.read(), filename="secrets.py", mode="exec"))
