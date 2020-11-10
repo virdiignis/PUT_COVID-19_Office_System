@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+import sendfile
 from celery.schedules import crontab
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -196,6 +197,10 @@ SECURE_HSTS_SECONDS = 3600
 SECURE_HSTS_PRELOAD = True
 
 SESSION_ENGINE = "django.contrib.sessions.backends.cached_db"
+
+SENDFILE_BACKEND = sendfile.backends.nginx
+SENDFILE_ROOT = BASE_DIR / "media"
+SENDFILE_URL = '/media'
 
 with open(BASE_DIR / "backend/secrets.py") as F:
     exec(compile(F.read(), filename="secrets.py", mode="exec"))

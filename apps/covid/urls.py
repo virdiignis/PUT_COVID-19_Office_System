@@ -30,4 +30,5 @@ urlpatterns = [
     path('isolation_rooms/update', views.isolation_rooms_update, name='isolation_rooms_update'),
     path('reports', views.reports, name='reports'),
     path('units/new', views.UnitCreateModalView.as_view(), name='unit_new_modal'),
+    path('docs/<int:id>', views.docs, name='docs'),
 ]

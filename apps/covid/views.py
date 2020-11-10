@@ -1,5 +1,5 @@
 import hashlib
-
+from sendfile import sendfile
 from bootstrap_modal_forms.generic import BSModalCreateView, BSModalReadView, BSModalUpdateView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -15,7 +15,7 @@ from django.views.generic import ListView, DetailView, UpdateView
 from apps.covid.automatic_actions import AutomaticLogActions
 from apps.covid.forms import CaseCreateModalForm, PersonCreateUpdateModalForm, CaseUpdateForm, IsolationFormSet, \
     ActionFormSet, ActionCreateModalForm, IsolationRoomFormSet, DocumentFormSet, ReportForm, UnitCreateModalForm
-from apps.covid.models import Case, Action, Isolation, IsolationRoom, Person, HealthStateChange, Unit
+from apps.covid.models import Case, Action, Isolation, IsolationRoom, Person, HealthStateChange, Unit, Document
 from apps.covid.reports import prepare_report_context
 from apps.office.safety import HasWriteAccessMixin, has_write_access
 
@@ -370,3 +370,9 @@ class UnitCreateModalView(HasWriteAccessMixin, BSModalCreateView):
             return JsonResponse({"id": name, "name": name})
         else:
             return HttpResponse()
+
+
+@login_required
+def docs(request, id):
+    doc = get_object_or_404(Document, id=id)
+    return sendfile(request, doc.file.path, attachment=True, attachment_filename=f"{doc.name}.pdf")

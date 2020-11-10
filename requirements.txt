@@ -12,3 +12,4 @@ celery
 xlsxwriter
 uwsgi
 django-redis
+django-sendfile
