@@ -15,7 +15,7 @@ from django.views.generic import ListView, DetailView, UpdateView
 from apps.covid.automatic_actions import AutomaticLogActions
 from apps.covid.forms import CaseCreateModalForm, PersonCreateUpdateModalForm, CaseUpdateForm, IsolationFormSet, \
     ActionFormSet, ActionCreateModalForm, IsolationRoomFormSet, DocumentFormSet, ReportForm, UnitCreateModalForm
-from apps.covid.models import Case, Action, Isolation, IsolationRoom, Person, HealthStateChange, Unit
+from apps.covid.models import Case, Action, Isolation, IsolationRoom, Person, HealthStateChange, Unit, Document
 from apps.covid.reports import prepare_report_context
 from apps.office.safety import HasWriteAccessMixin, has_write_access
 
@@ -370,3 +370,13 @@ class UnitCreateModalView(HasWriteAccessMixin, BSModalCreateView):
             return JsonResponse({"id": name, "name": name})
         else:
             return HttpResponse()
+
+
+@login_required
+def serve_document(request, id):
+    document = get_object_or_404(Document, id=id)
+
+    response = HttpResponse()
+    response["Content-Disposition"] = f"attachment; filename={document.name}"
+    response["X-Accel-Redirect"] = document.file.path  # path to file
+    return response
