@@ -42,3 +42,4 @@ celerybeat-schedule
 *.lock
 
 /logs/
+/backend/secrets.py
