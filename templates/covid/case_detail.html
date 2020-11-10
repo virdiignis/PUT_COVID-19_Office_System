@@ -196,7 +196,7 @@
                     {% for doc in case.documents.order_by %}
                         <tr>
                             <td>
-                                <a href={{ doc.file.url }}>{{ doc.name }}</a>
+                                <a href="{% url 'docs' doc.id %}">{{ doc.name }}</a>
                             </td>
                             <td>{{ doc.upload_date }}</td>
 
