@@ -137,7 +137,7 @@ class CaseUpdateView(HasWriteAccessMixin, UpdateView):
             for doc in documents:
                 if doc.changed_data:
                     d = doc.save(commit=False)
-                    d.file.name = hashlib.sha512(d.file.read()).hexdigest()
+                    d.file.name = f"{hashlib.sha512(d.file.read()).hexdigest()}.pdf"
                     d.uploaded_by = self.request.user
                     d.save()
 
