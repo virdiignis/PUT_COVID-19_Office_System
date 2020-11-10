@@ -15,7 +15,7 @@ from django.views.generic import ListView, DetailView, UpdateView
 from apps.covid.automatic_actions import AutomaticLogActions
 from apps.covid.forms import CaseCreateModalForm, PersonCreateUpdateModalForm, CaseUpdateForm, IsolationFormSet, \
     ActionFormSet, ActionCreateModalForm, IsolationRoomFormSet, DocumentFormSet, ReportForm, UnitCreateModalForm
-from apps.covid.models import Case, Action, Isolation, IsolationRoom, Person, HealthStateChange, Unit, Document
+from apps.covid.models import Case, Action, Isolation, IsolationRoom, Person, HealthStateChange, Document
 from apps.covid.reports import prepare_report_context
 from apps.office.safety import HasWriteAccessMixin, has_write_access
 
