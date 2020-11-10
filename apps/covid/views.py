@@ -1,3 +1,5 @@
+import hashlib
+
 from bootstrap_modal_forms.generic import BSModalCreateView, BSModalReadView, BSModalUpdateView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -134,7 +136,8 @@ class CaseUpdateView(HasWriteAccessMixin, UpdateView):
             documents.instance = self.object
             for doc in documents:
                 if doc.changed_data:
-                    d = doc.save()
+                    d = doc.save(commit=False)
+                    d.file.name = hashlib.sha512(d.file.read()).hexdigest()
                     d.uploaded_by = self.request.user
                     d.save()
 

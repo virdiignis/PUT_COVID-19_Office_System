@@ -197,7 +197,7 @@ class Action(Model):
 
 
 class Document(Model):
-    file = models.FileField(upload_to="docs", verbose_name=_("file"))
+    file = models.FileField(max_length=300, upload_to="docs/%Y/%m/", verbose_name=_("file"))
     name = models.CharField(max_length=1024, verbose_name=_("name"))
     upload_date = models.DateTimeField(auto_now_add=True, verbose_name=_("upload date"))
     uploaded_by = models.ForeignKey(Worker, on_delete=models.SET_NULL, null=True, blank=False,
