@@ -373,6 +373,12 @@ class UnitCreateModalView(HasWriteAccessMixin, BSModalCreateView):
 
 
 @login_required
-def docs(request, id):
-    doc = get_object_or_404(Document, id=id)
-    return sendfile(request, doc.file.path, attachment=True, attachment_filename=f"{doc.name}.pdf")
+def serve_document(request, id):
+    document = get_object_or_404(Document, id=id)
+    name = document.name
+    if not name.endswith(".pdf"):
+        name += ".pdf"
+    response = HttpResponse()
+    response["Content-Disposition"] = f"attachment; filename={name}"
+    response["X-Accel-Redirect"] = "/media" + document.file.path.split("/media")[1]
+    return response
