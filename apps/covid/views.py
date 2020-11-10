@@ -1,5 +1,5 @@
 import hashlib
-from sendfile import sendfile
+
 from bootstrap_modal_forms.generic import BSModalCreateView, BSModalReadView, BSModalUpdateView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
