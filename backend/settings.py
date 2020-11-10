@@ -92,6 +92,17 @@ DATABASES = {
     }
 }
 
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "unix:/var/sockets/redis.sock",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient"
+        },
+        "KEY_PREFIX": "covidcache"
+    }
+}
+
 CELERY_BROKER_URL = 'redis+socket:///var/sockets/redis.sock'
 CELERY_TIMEZONE = "Europe/Warsaw"
 CELERY_BEAT_SCHEDULE = {
@@ -179,19 +190,11 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 DEFAULT_FROM_EMAIL = "Biuro Covid <biurocovid@put.poznan.pl>"
 
-CACHES = {
-    "default": {
-        "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "unix:/var/sockets/redis.sock",
-        "OPTIONS": {
-            "CLIENT_CLASS": "django_redis.client.DefaultClient"
-        },
-        "KEY_PREFIX": "covidcache"
-    }
-}
-
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
+SECURE_HSTS_SECONDS = 3600
+SECURE_HSTS_PRELOAD = True
+
 SESSION_ENGINE = "django.contrib.sessions.backends.cached_db"
 
 with open(BASE_DIR / "backend/secrets.py") as F:
