@@ -52,7 +52,8 @@ class DocumentFormSet(inlineformset_factory(Case,
                                             Document,
                                             exclude=("uploaded_by",),
                                             extra=1,
-                                            can_delete=False
+                                            can_delete=False,
+                                            widgets={"file": forms.FileInput(attrs={'accept': 'application/pdf'})}
                                             )):
     def get_queryset(self):
         return super(DocumentFormSet, self).get_queryset().order_by("-upload_date")
