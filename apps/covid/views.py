@@ -380,5 +380,5 @@ def serve_document(request, id):
         name += ".pdf"
     response = HttpResponse()
     response["Content-Disposition"] = f"attachment; filename={name}"
-    response["X-Accel-Redirect"] = document.file.path
+    response["X-Accel-Redirect"] = document.file.path.split("media")[1]
     return response
