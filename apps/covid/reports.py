@@ -1,3 +1,5 @@
+from django.db.models import Q
+
 from apps.covid.models import HealthStateChange, Isolation, Case, Action
 
 
@@ -7,20 +9,26 @@ def prepare_report_context(start_date, end_date):
                                                               datetime__gte=start_date,
                                                               datetime__lte=end_date,
                                                               person__role="S").count(),
-        "students_quarantined_new": Isolation.objects.filter(ordered_by__official=True,
-                                                             ordered_on__gte=start_date,
-                                                             ordered_on__lte=end_date,
+        "students_quarantined_new": Isolation.objects.filter(Q(ordered_on__gte=start_date,
+                                                               ordered_on__lte=end_date) |
+                                                             Q(added__gte=start_date,
+                                                               added__lte=end_date),
+                                                             ordered_by__official=True,
                                                              person__role="S").count(),
         "employees_sick_new": HealthStateChange.objects.filter(change_to__considered_sick=True,
                                                                datetime__gte=start_date,
                                                                datetime__lte=end_date,
                                                                person__role="E").count(),
-        "employees_quarantined_new": Isolation.objects.filter(ordered_by__official=True,
-                                                              ordered_on__gte=start_date,
-                                                              ordered_on__lte=end_date,
+        "employees_quarantined_new": Isolation.objects.filter(Q(ordered_on__gte=start_date,
+                                                                ordered_on__lte=end_date) |
+                                                              Q(added__gte=start_date,
+                                                                added__lte=end_date),
+                                                              ordered_by__official=True,
                                                               person__role="E").count(),
-        "isolations": Isolation.objects.filter(ordered_on__gte=start_date,
-                                               ordered_on__lte=end_date).order_by("ordered_on"),
+        "isolations": Isolation.objects.filter(Q(ordered_on__gte=start_date,
+                                                 ordered_on__lte=end_date) |
+                                               Q(added__gte=start_date,
+                                                 added__lte=end_date), ).order_by("ordered_on", "added"),
         "cases_opened": Case.objects.filter(date_open__gte=start_date,
                                             date_open__lte=end_date).order_by("date_open"),
         "cases_closed": Case.objects.filter(date_closed__isnull=False,

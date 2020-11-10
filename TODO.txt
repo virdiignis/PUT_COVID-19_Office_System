@@ -33,12 +33,13 @@
 # 33. Może powrzucać templaty do apek # jednak nie
 # 34. Automatyczne remindery o wyjściu z izolacji DS4
 # 35. Raporty w XLSX
-36. Tłumaczenia contentu dynamicznego
+# 36. Tłumaczenia contentu dynamicznego # nie wyszło :<
 37. Po dodawniu grafików dodać do raportu dziennego: "Dzisiaj na zmianie: Osoba A, Osoba B"
 # 38. Pododawać w widokach izolacji, jeśli jest w DS4 to który pokój.
 # 39. Dodać interfejs do dodawania jednostek organizacyjnych.
 # 40. Cache na widok nulla, ewentualnie na GET raportów.
-41. Pozmieniać defaultstringi na polski. Jeśli nie wyjdzie 36.
+# 41. Pozmieniać defaultstringi na polski. Jeśli nie wyjdzie 36.
+42. A gdyby tak pobierać maile i podpinać do spraw? :thinking emoji:
 
 # Raporty:
 #     Liczba nowych zakażonych studentów/doktorantów

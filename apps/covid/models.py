@@ -159,6 +159,7 @@ class Isolation(Model):
                                    verbose_name=_("whereabouts"))
     cause = models.ForeignKey(IsolationCause, on_delete=models.SET_NULL, null=True, blank=False,
                               verbose_name=_("cause"))
+    added = models.DateField(auto_now_add=True)
 
     def active(self):
         return timezone.now().date() <= self.end_date

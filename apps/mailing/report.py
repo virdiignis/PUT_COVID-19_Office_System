@@ -79,25 +79,27 @@ class Report:
             _("Name"),
             _("Ordered by"),
             _("Order date"),
+            _("Office informed"),
             _("Start date"),
             _("End date"),
             _("Whereabouts"),
             _("Cause"),
             _("Health state"),
         )
-        ws.set_column(0, 5, 20)
-        ws.set_column(6, 7, 40)
+        ws.set_column(0, 6, 20)
+        ws.set_column(7, 8, 40)
         ws.set_row(0, 40)
         ws.write_row(0, 0, headers, self._styles["header"])
         for row, isolation in enumerate(self.__context["isolations"], 1):
             ws.write(row, 0, str(isolation.person), self._styles["center"])
             ws.write(row, 1, str(isolation.ordered_by), self._styles["center"])
             ws.write(row, 2, isolation.ordered_on, self._styles["center_date"])
-            ws.write(row, 3, isolation.start_date, self._styles["center_date"])
-            ws.write(row, 4, isolation.end_date, self._styles["center_date"])
-            ws.write(row, 5, isolation.get_whereabouts_display(), self._styles["center"])
-            ws.write(row, 6, str(isolation.cause), self._styles["center"])
-            ws.write(row, 7, str(isolation.person.health_state), self._styles["center"])
+            ws.write(row, 3, isolation.added, self._styles["center_date"])
+            ws.write(row, 4, isolation.start_date, self._styles["center_date"])
+            ws.write(row, 5, isolation.end_date, self._styles["center_date"])
+            ws.write(row, 6, isolation.get_whereabouts_display(), self._styles["center"])
+            ws.write(row, 7, str(isolation.cause), self._styles["center"])
+            ws.write(row, 8, str(isolation.person.health_state), self._styles["center"])
 
     def __add_new_cases_opened(self):
         ws = self.__wb.add_worksheet(name=_("New cases opened"))

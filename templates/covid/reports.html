@@ -65,6 +65,7 @@
                             <th class="text-center" scope="col">{% translate "Name" %}</th>
                             <th class="text-center" scope="col">{% translate "Ordered by" %}</th>
                             <th class="text-center" scope="col">{% translate "Order date" %}</th>
+                            <th class="text-center" scope="col">{% translate "Office informed" %}</th>
                             <th class="text-center" scope="col">{% translate "Start date" %}</th>
                             <th class="text-center" scope="col">{% translate "End date" %}</th>
                             <th class="text-center" scope="col">{% translate "Whereabouts" %}</th>
@@ -81,6 +82,7 @@
                                 </p></td>
                                 <td><p class="text-center">{{ isolation.ordered_by }}</p></td>
                                 <td><p class="text-center"><b>{{ isolation.ordered_on }}</b></p></td>
+                                <td><p class="text-center">{{ isolation.added }}</p></td>
                                 <td><p class="text-center">{{ isolation.start_date }}</p></td>
                                 <td><p class="text-center">{{ isolation.end_date }}</p></td>
                                 <td><p class="text-center">
