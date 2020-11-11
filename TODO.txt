@@ -40,6 +40,8 @@
 # 40. Cache na widok nulla, ewentualnie na GET raportów.
 # 41. Pozmieniać defaultstringi na polski. Jeśli nie wyjdzie 36.
 42. A gdyby tak pobierać maile i podpinać do spraw? :thinking emoji:
+43. Translacje miesięcy sprawdzić xd
+44. Dodać ustrukturyzowaną formę wywiadów medycznych. dot. 15
 
 # Raporty:
 #     Liczba nowych zakażonych studentów/doktorantów

@@ -28,13 +28,12 @@ def daily_report():
     yesterday = today - timedelta(days=1)
     send_report(
         f"Dzienny raport Biura ds. Covid za {date_filter(yesterday, 'j E Y')}",
-        '''
-        Szanowna Pani Rektor,
-        w załączeniu znajduje się automatycznie wygenerowany dzienny raport sprawozdawczy Biura ds. Covid.
-        
+        '''Szanowna Pani Rektor,
+            
+            w załączeniu znajduje się automatycznie wygenerowany dzienny raport sprawozdawczy Biura ds. Covid.
+                
         Pozdrawiamy
-        Obsada Biura
-        ''',
+        Obsada Biura''',
         yesterday,
         today
     )
@@ -53,13 +52,12 @@ def weekly_report():
 
     send_report(
         f"Tygodniowy raport Biura ds. Covid za {rng}",
-        '''
-        Szanowna Pani Rektor,
-        w załączeniu znajduje się automatycznie wygenerowany tygodniowy raport sprawozdawczy Biura ds. Covid.
-
+        '''Szanowna Pani Rektor,
+            
+            w załączeniu znajduje się automatycznie wygenerowany tygodniowy raport sprawozdawczy Biura ds. Covid.
+        
         Pozdrawiamy
-        Obsada Biura
-        ''',
+        Obsada Biura''',
         last_week,
         yesterday
     )
@@ -73,13 +71,12 @@ def monthly_report():
 
     send_report(
         f"Miesięczny raport Biura ds. Covid za {date_filter(last_month, 'F Y')}",
-        '''
-        Szanowna Pani Rektor,
-        w załączeniu znajduje się automatycznie wygenerowany miesięczny raport sprawozdawczy Biura ds. Covid.
-
+        '''Szanowna Pani Rektor,
+            
+            w załączeniu znajduje się automatycznie wygenerowany miesięczny raport sprawozdawczy Biura ds. Covid.
+        
         Pozdrawiamy
-        Obsada Biura
-        ''',
+        Obsada Biura''',
         last_month,
         yesterday
     )

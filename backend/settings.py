@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '=oees2o6!f&a33bk0#l2dk!eyo4+c4^hx%)ej#bt()vr1sg9(g'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['covid-app-dev.prv.put.poznan.pl', 'localhost']
 
@@ -188,7 +188,8 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-DEFAULT_FROM_EMAIL = "Biuro Covid <biurocovid@put.poznan.pl>"
+DEFAULT_FROM_EMAIL = "Biuro ds. COVID <biurocovid@put.poznan.pl>"
+SERVER_EMAIL = "COVID Office App <biurocovid@put.poznan.pl>"
 
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True

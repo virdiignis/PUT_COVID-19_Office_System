@@ -48,12 +48,12 @@ msgstr "Ustawiono nowe przypomnienie: \"{reminder}\""
 #: apps/covid/automatic_actions.py:37
 #, python-brace-format
 msgid "Marked \"{reminder}\" done."
-msgstr "Oznaczono \"{reminder}\" jako wykonany"
+msgstr "Oznaczono \"{reminder}\" jako wykonany."
 
 #: apps/covid/automatic_actions.py:40
 #, python-brace-format
 msgid "Changed the following information: {data} of {person}."
-msgstr "Zmieniono następujące informacje: {data} osoby {person}"
+msgstr "Zmieniono następujące informacje: {data} osoby {person}."
 
 #: apps/covid/forms.py:100
 msgid "Start date"
