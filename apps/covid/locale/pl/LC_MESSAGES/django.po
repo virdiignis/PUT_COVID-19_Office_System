@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-10 07:22+0100\n"
+"POT-Creation-Date: 2020-11-11 22:07+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -55,11 +55,11 @@ msgstr "Oznaczono \"{reminder}\" jako wykonany."
 msgid "Changed the following information: {data} of {person}."
 msgstr "Zmieniono następujące informacje: {data} osoby {person}."
 
-#: apps/covid/forms.py:100
+#: apps/covid/forms.py:101
 msgid "Start date"
 msgstr "Data początku"
 
-#: apps/covid/forms.py:102
+#: apps/covid/forms.py:103
 msgid "End date"
 msgstr "Data końca"
 
@@ -428,19 +428,19 @@ msgstr " i informacje o pokoju izolacji."
 msgid "{person} ends their isolation {place}today."
 msgstr "{person} kończy dzisiaj swoją kwarantannę {place}."
 
-#: apps/covid/views.py:158
+#: apps/covid/views.py:162
 msgid "Case already closed."
 msgstr "Sprawa jest już zamknięta."
 
-#: apps/covid/views.py:171
+#: apps/covid/views.py:175
 msgid "Case is open."
 msgstr "Sprawa jest otwarta."
 
-#: apps/covid/views.py:237
+#: apps/covid/views.py:241
 msgid "Incoming contact content"
 msgstr "Informacje z kontaktu"
 
-#: apps/covid/views.py:247
+#: apps/covid/views.py:251
 msgid "Notes"
 msgstr "Notatki"
 
