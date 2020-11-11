@@ -17,6 +17,7 @@ from apps.covid.forms import CaseCreateModalForm, PersonCreateUpdateModalForm, C
     ActionFormSet, ActionCreateModalForm, IsolationRoomFormSet, DocumentFormSet, ReportForm, UnitCreateModalForm
 from apps.covid.models import Case, Action, Isolation, IsolationRoom, Person, HealthStateChange, Document
 from apps.covid.reports import prepare_report_context
+from apps.mailing.report import Report
 from apps.office.safety import HasWriteAccessMixin, has_write_access
 
 
@@ -356,6 +357,15 @@ def reports(request):
         }
 
     return render(request, 'covid/reports.html', context)
+
+
+@login_required
+def reports_dl(request, start_date, end_date):
+    report_path = Report(start_date, end_date).get_path()
+    response = HttpResponse()
+    response["Content-Disposition"] = f"attachment;"
+    response["X-Accel-Redirect"] = report_path
+    return response
 
 
 class UnitCreateModalView(HasWriteAccessMixin, BSModalCreateView):

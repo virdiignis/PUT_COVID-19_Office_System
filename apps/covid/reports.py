@@ -5,6 +5,8 @@ from apps.covid.models import HealthStateChange, Isolation, Case, Action
 
 def prepare_report_context(start_date, end_date):
     return {
+        "start_date": start_date,
+        "end_date": end_date,
         "students_sick_new": HealthStateChange.objects.filter(change_to__considered_sick=True,
                                                               datetime__gte=start_date,
                                                               datetime__lte=end_date,

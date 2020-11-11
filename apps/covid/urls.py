@@ -29,6 +29,7 @@ urlpatterns = [
     path('isolation_rooms', views.IsolationRoomListView.as_view(), name='isolation_rooms'),
     path('isolation_rooms/update', views.isolation_rooms_update, name='isolation_rooms_update'),
     path('reports', views.reports, name='reports'),
+    path('reports/dl/<str:start_date>-<str:end_date>', views.reports_dl, name='reports_dl'),
     path('units/new', views.UnitCreateModalView.as_view(), name='unit_new_modal'),
     path('docs/<int:id>', views.serve_document, name='docs'),
 ]
