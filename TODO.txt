@@ -42,7 +42,7 @@
 42. A gdyby tak pobierać maile i podpinać do spraw? :thinking emoji:
 43. Translacje miesięcy sprawdzić xd
 44. Dodać ustrukturyzowaną formę wywiadów medycznych. dot. 15
-
+45. Pobieranie raportów w .xlsx
 # Raporty:
 #     Liczba nowych zakażonych studentów/doktorantów
 #     Liczba nowych zakażonych pracowników                        — liczba zmian stanu zdrowia na positive test

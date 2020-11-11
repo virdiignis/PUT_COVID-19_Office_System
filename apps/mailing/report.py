@@ -86,8 +86,10 @@ class Report:
             _("Cause"),
             _("Health state"),
         )
-        ws.set_column(0, 6, 20)
-        ws.set_column(7, 8, 40)
+        ws.set_column(0, 0, 25)
+        ws.set_column(1, 1, 18)
+        ws.set_column(2, 6, 20)
+        ws.set_column(7, 8, 32)
         ws.set_row(0, 40)
         ws.write_row(0, 0, headers, self._styles["header"])
         for row, isolation in enumerate(self.__context["isolations"], 1):
@@ -155,7 +157,7 @@ class Report:
             _("Case"),
         )
 
-        ws.set_column(0, 0, 20)
+        ws.set_column(0, 0, 21)
         ws.set_column(1, 2, 16)
         ws.set_column(3, 3, 30)
         ws.set_column(4, 6, self.TEXT_COLUMNS_WIDTH)
