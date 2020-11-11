@@ -363,7 +363,7 @@ def reports(request):
 def reports_dl(request, start_date, end_date):
     report_path = Report(start_date, end_date).get_path()
     response = HttpResponse()
-    response["Content-Disposition"] = f"attachment;"
+    response["Content-Disposition"] = f"attachment; filename=report_{start_date}_{end_date}.xlsx"
     response["X-Accel-Redirect"] = report_path
     return response
 
