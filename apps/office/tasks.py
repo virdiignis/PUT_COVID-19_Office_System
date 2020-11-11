@@ -17,7 +17,7 @@ def shift_takeover():
             title=_("Shift takeover"),
             notes=_(
                 '''This is automatic reminder.
-                Accept it to indicate shift takeover.
-                There is one of us for each of you, to record who was on the shift when.'''
+Accept it to indicate shift takeover.
+There is one of us for each of you, to record who was on the shift when.'''
             )
         )
