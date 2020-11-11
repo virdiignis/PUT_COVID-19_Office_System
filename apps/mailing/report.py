@@ -194,8 +194,7 @@ class Report:
 
     def __init__(self, start_date, end_date):
         self.__context = prepare_report_context(start_date, end_date)
-        self.__path = os.path.abspath(
-            os.path.join(settings.MEDIA_ROOT, f"reports/report_{start_date}_{end_date}.xlsx"))
+        self.__path = os.path.join(settings.MEDIA_ROOT, f"reports/report_{start_date}_{end_date}.xlsx")
         self._styles = {}
         self.__create_report()
 
