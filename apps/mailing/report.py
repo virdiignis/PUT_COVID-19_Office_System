@@ -1,8 +1,11 @@
+import os
+
 from apps.covid.reports import prepare_report_context
 import xlsxwriter
 
 from django.utils.timezone import localtime
 from django.utils.translation import gettext as _
+from django.conf import settings
 
 
 class Report:
@@ -191,7 +194,7 @@ class Report:
 
     def __init__(self, start_date, end_date):
         self.__context = prepare_report_context(start_date, end_date)
-        self.__path = f"/tmp/report_{start_date}_{end_date}.xlsx"
+        self.__path = os.path.join(settings.MEDIA_ROOT, f"/reports/report_{start_date}_{end_date}.xlsx")
         self._styles = {}
         self.__create_report()
 
