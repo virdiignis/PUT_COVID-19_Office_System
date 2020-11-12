@@ -39,7 +39,7 @@
 
     {% load compress %}
     {% compress js file %}
-        <script nonce="{{request.csp_nonce}}"type="text/javascript">
+        <script nonce="{{request.csp_nonce}}" type="text/javascript">
             $(function () {
                 $("#actionsHistoryLink").on('click', function () {
                     top.location.href = '{% url 'actions' %}';

@@ -218,9 +218,9 @@
     {% load static %}
     {% load compress %}
     {% compress js file %}
-        <script nonce="{{request.csp_nonce}}"src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
+        <script nonce="{{request.csp_nonce}}" src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
 
-        <script nonce="{{request.csp_nonce}}"type="text/javascript">
+        <script nonce="{{request.csp_nonce}}" type="text/javascript">
             $(function () {
                 function addActionModal() {
                     $(".action-detail").each(function () {

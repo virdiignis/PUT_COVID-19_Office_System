@@ -80,7 +80,7 @@ class CaseUpdateForm(ModelForm):
         model = Case
         fields = "__all__"
         widgets = {
-            "people": autocomplete.ModelSelect2Multiple(url='person-autocomplete', attrs={"style": "width:95%"})
+            "people": autocomplete.ModelSelect2Multiple(url='person-autocomplete')
         }
 
 

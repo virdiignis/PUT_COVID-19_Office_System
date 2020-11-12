@@ -13,8 +13,8 @@
     {% endcompress %}
 
     {% compress js file %}
-        <script nonce="{{request.csp_nonce}}"src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
-        <script nonce="{{request.csp_nonce}}"src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script nonce="{{request.csp_nonce}}" src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+        <script nonce="{{request.csp_nonce}}" src="{% static 'js/bootstrap.min.js' %}"></script>
     {% endcompress %}
 </head>
 <body>
@@ -22,7 +22,7 @@
 {% endblock %}
 {% load compress %}
 {% compress js file %}
-    <script nonce="{{request.csp_nonce}}"type="text/javascript">
+    <script nonce="{{request.csp_nonce}}" type="text/javascript">
         setTimeout(function () {
             window.location.reload(1);
         }, 60000);
