@@ -35,7 +35,7 @@
     {% compress js file %}
         {{ form.media.js }}
 
-        <script nonce="{{request.csp_nonce}}"type="text/javascript">
+        <script nonce="{{request.csp_nonce}}" type="text/javascript">
             $(function () {
                 $('#id_unit').select2({
                     dropdownParent: $('#modal'),

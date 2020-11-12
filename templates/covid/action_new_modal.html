@@ -48,10 +48,10 @@
     {% endcompress %}
     {% compress js file %}
         {{ form.media.js }}
-        <script nonce="{{request.csp_nonce}}"src="{% static 'covid/js/jquery.bootstrap.modal.form.person.js' %}"></script>
-        <script nonce="{{request.csp_nonce}}"src="{% static "js/flatpickr.fields.setup.auto.now.js" %}"></script>
+        <script nonce="{{request.csp_nonce}}" src="{% static 'covid/js/jquery.bootstrap.modal.form.person.js' %}"></script>
+        <script nonce="{{request.csp_nonce}}" src="{% static "js/flatpickr.fields.setup.auto.now.js" %}"></script>
 
-        <script nonce="{{request.csp_nonce}}"type="text/javascript">
+        <script nonce="{{request.csp_nonce}}" type="text/javascript">
             if (typeof setup == 'undefined') {
                 setup = function () {
                     let modal_body = $('#modal-body');
