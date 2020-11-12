@@ -82,7 +82,7 @@ https://github.com/trco/django-bootstrap-modal-forms
                         });
                     }
 
-                    var option = new Option(response["name"], response["id"], true, true);
+                    let option = new Option(response["name"], response["id"], true, true);
                     try {
                         $('#id_people').append(option).trigger('change');
                     } catch (error) {
@@ -140,7 +140,7 @@ https://github.com/trco/django-bootstrap-modal-forms
 
         this.each(function () {
             // Add click event handler to the element with attached modalForm
-            $(this).click(function (event) {
+            $(this).click(function () {
                 // Instantiate new form in modal
                 modalForm(settings);
             });

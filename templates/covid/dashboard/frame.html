@@ -14,11 +14,16 @@
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
+<body>
 {% block table %}
 {% endblock %}
 <script type="text/javascript">
     setTimeout(function () {
         window.location.reload(1);
     }, 60000);
+    window.setHeight = function (height) {
+        $("body").height(height);
+    };
 </script>
+</body>
 </html>

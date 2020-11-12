@@ -59,15 +59,16 @@
             defaultDate: new Date()
 
         });
+        let modal_body = $('#modal-body');
         $('#id_made_by').select2({
-            dropdownParent: $('#modal-body'),
+            dropdownParent: modal_body,
             ajax: {
                 url: '{% url 'worker-autocomplete' %}',
                 dataType: 'json'
             }
         });
         $('#id_contact_from').select2({
-            dropdownParent: $('#modal-body'),
+            dropdownParent: modal_body,
             allowClear: true,
             ajax: {
                 url: '{% url 'person-autocomplete' %}',
@@ -75,7 +76,7 @@
             }
         });
         $('#id_unit').select2({
-            dropdownParent: $('#modal-body'),
+            dropdownParent: modal_body,
             allowClear: true,
             ajax: {
                 url: '{% url 'unit-autocomplete' %}',

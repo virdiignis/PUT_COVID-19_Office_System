@@ -45,7 +45,18 @@
 
     <script type="text/javascript">
         function resizeIframe(iframe) {
-            $(iframe).parent().height(iframe.contentWindow.document.body.scrollHeight + 25);
+            let maxH = 0;
+            let row = $(iframe).closest(".row");
+            let iframes = row.find("iframe");
+            iframes.each(function () {
+                let scrollH = this.contentWindow.document.body.scrollHeight;
+                if (scrollH > maxH)
+                    maxH = scrollH;
+            });
+            row.find(".embed-responsive").height(maxH + 25);
+            iframes.each(function () {
+                this.contentWindow.setHeight(maxH);
+            });
         }
     </script>
 {% endblock %}

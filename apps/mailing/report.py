@@ -108,17 +108,7 @@ class Report:
 
     def __add_new_cases_opened(self):
         ws = self.__wb.add_worksheet(name=_("New cases opened"))
-        ws.set_default_row(20)
-        headers = (
-            _("Title"),
-            _("People involved"),
-            _("Date open"),
-            _("Date closed"),
-        )
-        ws.set_column(0, 1, 40)
-        ws.set_column(2, 3, 20)
-        ws.set_row(0, 40)
-        ws.write_row(0, 0, headers, self._styles["header"])
+        self.__add_cases_header(ws)
         for row, case in enumerate(self.__context["cases_opened"], 1):
             ws.write(row, 0, case.title, self._styles["center"])
             ws.write(row, 1, '\n'.join(map(str, case.people.all())), self._styles["center"])
@@ -128,6 +118,15 @@ class Report:
 
     def __add_cases_closed(self):
         ws = self.__wb.add_worksheet(name=_("Cases closed"))
+        self.__add_cases_header(ws)
+        for row, case in enumerate(self.__context["cases_closed"], 1):
+            ws.write(row, 0, case.title, self._styles["center"])
+            ws.write(row, 1, '\n'.join(map(str, case.people.all())), self._styles["center"])
+            ws.write(row, 2, case.date_open, self._styles["center_date"])
+            ws.write(row, 3, case.date_closed, self._styles["bold_date"])
+            ws.set_row(row, 20 * case.people.count())
+
+    def __add_cases_header(self, ws):
         ws.set_default_row(20)
         headers = (
             _("Title"),
@@ -139,12 +138,6 @@ class Report:
         ws.set_column(2, 3, 20)
         ws.set_row(0, 40)
         ws.write_row(0, 0, headers, self._styles["header"])
-        for row, case in enumerate(self.__context["cases_closed"], 1):
-            ws.write(row, 0, case.title, self._styles["center"])
-            ws.write(row, 1, '\n'.join(map(str, case.people.all())), self._styles["center"])
-            ws.write(row, 2, case.date_open, self._styles["center_date"])
-            ws.write(row, 3, case.date_closed, self._styles["bold_date"])
-            ws.set_row(row, 20 * case.people.count())
 
     def __add_office_actions(self):
         ws = self.__wb.add_worksheet(name=_("Office actions"))

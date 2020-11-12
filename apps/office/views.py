@@ -1,8 +1,8 @@
 from bootstrap_modal_forms.generic import BSModalCreateView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import JsonResponse, HttpResponse
-from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponse
+from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.views.decorators.cache import cache_page
@@ -21,8 +21,6 @@ def home(request):
         return redirect(reverse_lazy('covid_dashboard'))
     else:
         return redirect(reverse_lazy('reports'))
-
-    return render(request, "home.html")
 
 
 @cache_page(365 * 24 * 60 * 60)

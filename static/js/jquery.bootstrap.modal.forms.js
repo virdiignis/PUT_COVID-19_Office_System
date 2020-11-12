@@ -8,7 +8,7 @@ https://github.com/trco/django-bootstrap-modal-forms
 (function ($) {
 
     // Open modal & load the form at formURL to the modalContent element
-    var modalForm = function (settings) {
+    const modalForm = function (settings) {
         $(settings.modalID).find(settings.modalContent).load(settings.formURL, function () {
             $(settings.modalID).modal("show");
             $(settings.modalForm).attr("action", settings.formURL);
@@ -18,7 +18,7 @@ https://github.com/trco/django-bootstrap-modal-forms
 
     var addEventHandlers = function (settings) {
         // submitBtn click handler
-        $(settings.submitBtn).on("click", function (event) {
+        $(settings.submitBtn).on("click", function () {
             isFormValid(settings, submitForm);
         });
         $(settings.modalForm).on("submit", function (e) {
@@ -29,7 +29,7 @@ https://github.com/trco/django-bootstrap-modal-forms
             }
         });
         // Modal close handler
-        $(settings.modalID).on("hidden.bs.modal", function (event) {
+        $(settings.modalID).on("hidden.bs.modal", function () {
             $(settings.modalForm).remove();
         });
     };
@@ -64,8 +64,8 @@ https://github.com/trco/django-bootstrap-modal-forms
         if (!settings.asyncUpdate) {
             $(settings.modalForm).submit();
         } else {
-            var asyncSettingsValid = validateAsyncSettings(settings.asyncSettings);
-            var asyncSettings = settings.asyncSettings;
+            const asyncSettingsValid = validateAsyncSettings(settings.asyncSettings);
+            const asyncSettings = settings.asyncSettings;
 
             if (asyncSettingsValid) {
                 $.ajax({
@@ -73,8 +73,8 @@ https://github.com/trco/django-bootstrap-modal-forms
                     url: $(settings.modalForm).attr("action"),
                     // Add asyncUpdate and check for it in save method of CreateUpdateAjaxMixin
                     data: $(settings.modalForm).serialize() + "&asyncUpdate=True",
-                    success: function (response) {
-                        var body = $("body");
+                    success: function () {
+                        const body = $("body");
                         if (body.length === 0) {
                             console.error("django-bootstrap-modal-forms: <body> element missing in your html.");
                         }
@@ -112,7 +112,7 @@ https://github.com/trco/django-bootstrap-modal-forms
     };
 
     var validateAsyncSettings = function (settings) {
-        var missingSettings = [];
+        const missingSettings = [];
 
         if (!settings.successMessage) {
             missingSettings.push("successMessage");
@@ -135,16 +135,14 @@ https://github.com/trco/django-bootstrap-modal-forms
             console.error("django-bootstrap-modal-forms: 'addModalFormFunction' in asyncSettings is missing.");
         }
 
-        if (missingSettings.length > 0) {
-            return false;
-        }
+        return missingSettings.length <= 0;
 
-        return true;
+
     };
 
     $.fn.modalForm = function (options) {
         // Default settings
-        var defaults = {
+        const defaults = {
             modalID: "#modal",
             modalContent: ".modal-content",
             modalForm: ".modal-content form",
@@ -163,11 +161,11 @@ https://github.com/trco/django-bootstrap-modal-forms
         };
 
         // Extend default settings with provided options
-        var settings = $.extend(defaults, options);
+        const settings = $.extend(defaults, options);
 
         this.each(function () {
             // Add click event handler to the element with attached modalForm
-            $(this).click(function (event) {
+            $(this).click(function () {
                 // Instantiate new form in modal
                 modalForm(settings);
             });

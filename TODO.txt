@@ -40,9 +40,12 @@
 # 40. Cache na widok nulla, ewentualnie na GET raportów.
 # 41. Pozmieniać defaultstringi na polski. Jeśli nie wyjdzie 36.
 42. A gdyby tak pobierać maile i podpinać do spraw? :thinking emoji:
-43. Translacje miesięcy sprawdzić xd
+# 43. Translacje miesięcy sprawdzić xd
 44. Dodać ustrukturyzowaną formę wywiadów medycznych. dot. 15
-45. Pobieranie raportów w .xlsx
+# 45. Pobieranie raportów w .xlsx
+46. Wyrównanie wysokości kart w dashboardzie
+
+
 # Raporty:
 #     Liczba nowych zakażonych studentów/doktorantów
 #     Liczba nowych zakażonych pracowników                        — liczba zmian stanu zdrowia na positive test
