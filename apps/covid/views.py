@@ -187,7 +187,7 @@ class ActionCreateModalView(HasWriteAccessMixin, BSModalCreateView):
     form_class = ActionCreateModalForm
     success_url = reverse_lazy("actions")
 
-    @method_decorator(csp_replace(SCRIPT_SRC_ELEM="'self'"))
+    @method_decorator(csp_replace(SCRIPT_SRC="'self'"))
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
@@ -198,7 +198,7 @@ class ActionDetailModalView(LoginRequiredMixin, BSModalReadView):
 
 
 @login_required
-@csp_replace(SCRIPT_SRC_ELEM="'self'")
+@csp_replace(SCRIPT_SRC="'self'")
 def covid_dashboard(request):
     return render(request, 'covid/dashboard/dashboard.html')
 
@@ -209,7 +209,7 @@ class ActionDashboardView(LoginRequiredMixin, ListView):
     queryset = Action.objects.order_by("-id")
     template_name = 'covid/dashboard/actions.html'
 
-    @method_decorator(csp_replace(SCRIPT_SRC_ELEM="'self'"))
+    @method_decorator(csp_replace(SCRIPT_SRC="'self'"))
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
@@ -221,7 +221,7 @@ class CaseDashboardView(LoginRequiredMixin, ListView):
     allow_empty = True
     template_name = 'covid/dashboard/cases.html'
 
-    @method_decorator(csp_replace(SCRIPT_SRC_ELEM="'self'"))
+    @method_decorator(csp_replace(SCRIPT_SRC="'self'"))
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
@@ -233,7 +233,7 @@ class IsolationDashboardView(LoginRequiredMixin, ListView):
     allow_empty = True
     template_name = 'covid/dashboard/isolations.html'
 
-    @method_decorator(csp_replace(SCRIPT_SRC_ELEM="'self'"))
+    @method_decorator(csp_replace(SCRIPT_SRC="'self'"))
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
@@ -245,7 +245,7 @@ class IsolationRoomDashboardView(LoginRequiredMixin, ListView):
     allow_empty = True
     template_name = 'covid/dashboard/isolation_rooms.html'
 
-    @method_decorator(csp_replace(SCRIPT_SRC_ELEM="'self'"))
+    @method_decorator(csp_replace(SCRIPT_SRC="'self'"))
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
