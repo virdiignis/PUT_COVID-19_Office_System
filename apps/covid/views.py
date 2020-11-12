@@ -1,6 +1,7 @@
 import hashlib
 
 from bootstrap_modal_forms.generic import BSModalCreateView, BSModalReadView, BSModalUpdateView
+from csp.decorators import csp_replace
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import SuspiciousOperation
@@ -8,6 +9,7 @@ from django.http import JsonResponse, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.utils import timezone
+from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
 from django.db.models import Q
 from django.views.generic import ListView, DetailView, UpdateView
@@ -185,6 +187,10 @@ class ActionCreateModalView(HasWriteAccessMixin, BSModalCreateView):
     form_class = ActionCreateModalForm
     success_url = reverse_lazy("actions")
 
+    @method_decorator(csp_replace(SCRIPT_SRC_ELEM="'self'"))
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
 
 class ActionDetailModalView(LoginRequiredMixin, BSModalReadView):
     model = Action
@@ -192,6 +198,7 @@ class ActionDetailModalView(LoginRequiredMixin, BSModalReadView):
 
 
 @login_required
+@csp_replace(SCRIPT_SRC_ELEM="'self'")
 def covid_dashboard(request):
     return render(request, 'covid/dashboard/dashboard.html')
 
@@ -202,6 +209,10 @@ class ActionDashboardView(LoginRequiredMixin, ListView):
     queryset = Action.objects.order_by("-id")
     template_name = 'covid/dashboard/actions.html'
 
+    @method_decorator(csp_replace(SCRIPT_SRC_ELEM="'self'"))
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
 
 class CaseDashboardView(LoginRequiredMixin, ListView):
     model = Case
@@ -209,6 +220,10 @@ class CaseDashboardView(LoginRequiredMixin, ListView):
     queryset = Case.objects.filter(date_closed__isnull=True).order_by("-date_open")
     allow_empty = True
     template_name = 'covid/dashboard/cases.html'
+
+    @method_decorator(csp_replace(SCRIPT_SRC_ELEM="'self'"))
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
 
 
 class IsolationDashboardView(LoginRequiredMixin, ListView):
@@ -218,6 +233,10 @@ class IsolationDashboardView(LoginRequiredMixin, ListView):
     allow_empty = True
     template_name = 'covid/dashboard/isolations.html'
 
+    @method_decorator(csp_replace(SCRIPT_SRC_ELEM="'self'"))
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
 
 class IsolationRoomDashboardView(LoginRequiredMixin, ListView):
     model = IsolationRoom
@@ -226,12 +245,20 @@ class IsolationRoomDashboardView(LoginRequiredMixin, ListView):
     allow_empty = True
     template_name = 'covid/dashboard/isolation_rooms.html'
 
+    @method_decorator(csp_replace(SCRIPT_SRC_ELEM="'self'"))
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
 
 class ActionListView(LoginRequiredMixin, ListView):
     model = Action
     paginate_by = 10
     queryset = Action.objects.order_by("-id")
     template_name = 'covid/actions.html'
+
+    # @method_decorator(csp_replace(SCRIPT_SRC_ELEM="'self'"))
+    # def dispatch(self, request, *args, **kwargs):
+    #     return super().dispatch(request, *args, **kwargs)
 
 
 @login_required

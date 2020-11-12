@@ -208,10 +208,18 @@ STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
 )
 
-CSP_DEFAULT_SRC = ["'strict-dynamic'"]
+CSP_DEFAULT_SRC = ["'self'"]
+CSP_SCRIPT_SRC = ["'strict-dynamic'"]
+CSP_STYLE_SRC = ["'self'"]
 CSP_IMG_SRC = ["'self'"]
 CSP_CONNECT_SRC = ["'self'"]
-CSP_INCLUDE_NONCE_IN = ["default-src", ]
+CSP_FRAME_SRC = ["'self'"]
+CSP_INCLUDE_NONCE_IN = [
+    "default-src",
+    "script-src",
+    "style-src",
+]
+
 COMPRESS_CSP_NONCE = True
 
 with open(BASE_DIR / "backend/secrets.py") as F:
