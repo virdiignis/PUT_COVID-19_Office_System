@@ -44,7 +44,12 @@
 44. Dodać ustrukturyzowaną formę wywiadów medycznych. dot. 15
 # 45. Pobieranie raportów w .xlsx
 # 46. Wyrównanie wysokości kart w dashboardzie
-47. Ogarnać czy inline styles działają z CSP.
+# 47. Ogarnać czy inline styles działają z CSP.
+48. Pełen CRUD przypomnień.
+49. Może zmienić format datetime na H:M (bez sekund).
+50. Brak mieszkańców w edycji pokoji izolacji.
+51. Kosmetyka szczegółów akcji.
+
 
 # Raporty:
 #     Liczba nowych zakażonych studentów/doktorantów

@@ -82,23 +82,21 @@ https://github.com/trco/django-bootstrap-modal-forms
                         });
                     }
 
+
                     let option = new Option(response["name"], response["id"], true, true);
-                    try {
-                        $('#id_people').append(option).trigger('change');
-                    } catch (error) {
-                        console.error(error);
-                    }
-                    option = new Option(response["name"], response["id"], true, true);
-                    try {
-                        $('#id_contact_from').append(option).trigger('change');
-                    } catch (error) {
-                        console.error(error);
-                    }
-                    option = new Option(response["name"], response["id"], true, true);
                     try {
                         $('#id_unit').append(option).trigger("change");
                     } catch (error) {
-                        console.error(error);
+                        option = new Option(response["name"], response["id"], true, true);
+                        try {
+                            $('#id_people').append(option).trigger('change');
+                        } catch (error) {
+                            option = new Option(response["name"], response["id"], true, true);
+                            try {
+                                $('#id_contact_from').append(option).trigger('change');
+                            } catch (error) {
+                            }
+                        }
                     }
 
                 }
