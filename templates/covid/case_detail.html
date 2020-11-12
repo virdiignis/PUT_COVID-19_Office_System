@@ -18,11 +18,11 @@
             {% endif %}
         </div>
         <br>
-        <div style="padding-left: 5em">{% translate "Status" %}: <b>{% if closed %}{% translate "Closed" %}{% else %}
+        <div class="padding-left">{% translate "Status" %}: <b>{% if closed %}{% translate "Closed" %}{% else %}
             {% translate "Open" %}{% endif %}</b></div>
-        <div style="padding-left: 5em">{% translate "Opened" %}: {{ case.date_open }}</div>
+        <div class="padding-left">{% translate "Opened" %}: {{ case.date_open }}</div>
         {% if closed %}
-            <div style="padding-left: 5em">{% translate "Closed" %}: {{ case.date_closed }}</div>{% endif %}
+            <div class="padding-left">{% translate "Closed" %}: {{ case.date_closed }}</div>{% endif %}
         <br>
     </div>
     <br>

@@ -5,3 +5,7 @@
 .modal {
     overflow: auto !important;
 }
+
+.padding-left {
+    padding-left: 5em;
+}

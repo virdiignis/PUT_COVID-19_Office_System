@@ -37,20 +37,20 @@
                             <td>
                                 <input type="hidden">{{ form.number }}</input>
                                 {% for error in form.number.errors %}
-                                    <p class="help-block" style="color: red">{{ error }}</p>
+                                    <p class="help-block text-danger">{{ error }}</p>
                                 {% endfor %}
                                 {{ form.instance.number }}
                             </td>
 
                             <td>
                                 {% for error in form.resident.errors %}
-                                    <p class="help-block" style="color: red">{{ error }}</p>
+                                    <p class="help-block text-danger">{{ error }}</p>
                                 {% endfor %}
                                 {{ form.resident }}
                             </td>
                             <td>
                                 {% for error in form.is_cleaned.errors %}
-                                    <p class="help-block" style="color: red">{{ error }}</p>
+                                    <p class="help-block text-danger">{{ error }}</p>
                                 {% endfor %}
                                 {{ form.is_cleaned }}
                             </td>
