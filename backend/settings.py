@@ -49,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'csp.middleware.CSPMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -206,6 +207,12 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'compressor.finders.CompressorFinder',
 )
+
+CSP_DEFAULT_SRC = ["'strict-dynamic'"]
+CSP_IMG_SRC = ["'self'"]
+CSP_CONNECT_SRC = ["'self'"]
+CSP_INCLUDE_NONCE_IN = ["default-src", ]
+COMPRESS_CSP_NONCE = True
 
 with open(BASE_DIR / "backend/secrets.py") as F:
     exec(compile(F.read(), filename="secrets.py", mode="exec"))

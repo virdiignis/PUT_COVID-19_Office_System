@@ -12,4 +12,5 @@ celery
 xlsxwriter
 uwsgi
 django-redis
-django_compressor
+git+https://github.com/django-compressor/django-compressor.git@refs/pull/989/merge
+django-csp
