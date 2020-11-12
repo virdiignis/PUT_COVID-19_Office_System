@@ -4,7 +4,7 @@
 
     <div class="modal-header">
         <h5 class="modal-title">{% translate "Add new unlinked action" %}</h5>
-        <button type="button" class="close" aria-label="Close" onclick="$('#modal').modal('hide')">
+        <button class="closeModalButton close" type="button" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
@@ -29,67 +29,81 @@
                     {% endif %}
                 </div>
                 {% for error in field.errors %}
-                    <p class="help-block" style="color: red">{{ error }}</p>
+                    <p class="help-block text-danger">{{ error }}</p>
                 {% endfor %}
             </div>
         {% endfor %}
-        {{ form.media }}
     </div>
 
     <div class="modal-footer">
-        <button type="button" class="btn btn-default"
-                onclick="$('#modal').modal('hide')">{% translate "Close" %}</button>
+        <button type="button" class="closeModalButton btn btn-default">{% translate "Close" %}</button>
         <button type="button" id="addActionSubmitButton"
                 class="submit-btn btn btn-primary">{% translate "Create" %}</button>
     </div>
 
     {% load static %}
-    <script src="{% static 'covid/js/jquery.bootstrap.modal.form.person.js' %}"></script>
-    <script src="{% static "js/flatpickr.fields.setup.auto.now" %}"></script>
+    {% load compress %}
+    {% compress css file %}
+        {{ form.media.css }}
+    {% endcompress %}
+    {% compress js file %}
+        {{ form.media.js }}
+        <script nonce="{{request.csp_nonce}}"src="{% static 'covid/js/jquery.bootstrap.modal.form.person.js' %}"></script>
+        <script nonce="{{request.csp_nonce}}"src="{% static "js/flatpickr.fields.setup.auto.now.js" %}"></script>
 
-    <script type="text/javascript">
-        let modal_body = $('#modal-body');
-        $('#id_made_by').select2({
-            dropdownParent: modal_body,
-            ajax: {
-                url: '{% url 'worker-autocomplete' %}',
-                dataType: 'json'
+        <script nonce="{{request.csp_nonce}}"type="text/javascript">
+            if (typeof setup == 'undefined') {
+                setup = function () {
+                    let modal_body = $('#modal-body');
+                    $('#id_made_by').select2({
+                        dropdownParent: modal_body,
+                        ajax: {
+                            url: '{% url 'worker-autocomplete' %}',
+                            dataType: 'json'
+                        }
+                    });
+                    $('#id_contact_from').select2({
+                        dropdownParent: modal_body,
+                        allowClear: true,
+                        ajax: {
+                            url: '{% url 'person-autocomplete' %}',
+                            dataType: 'json'
+                        }
+                    });
+                    $('#id_unit').select2({
+                        dropdownParent: modal_body,
+                        allowClear: true,
+                        ajax: {
+                            url: '{% url 'unit-autocomplete' %}',
+                            dataType: 'json'
+                        }
+                    });
+                }
             }
-        });
-        $('#id_contact_from').select2({
-            dropdownParent: modal_body,
-            allowClear: true,
-            ajax: {
-                url: '{% url 'person-autocomplete' %}',
-                dataType: 'json'
-            }
-        });
-        $('#id_unit').select2({
-            dropdownParent: modal_body,
-            allowClear: true,
-            ajax: {
-                url: '{% url 'unit-autocomplete' %}',
-                dataType: 'json'
-            }
-        });
-        $(function () {
-            function addPersonModal() {
-                $("#newPersonButton").modalForm({
-                    modalID: "#modal-person",
-                    modalContent: "#modal-person-content",
-                    modalForm: "#modal-person-content form",
-                    submitBtn: "#addPersonSubmitButton",
-                    formURL: "{% url 'person_new_modal' %}",
-                    asyncUpdate: true,
-                    asyncSettings: {
-                        closeOnSubmit: true,
-                        addModalFormFunction: addPersonModal
-                    }
+            $(function () {
+                function addPersonModal() {
+                    $("#newPersonButton").modalForm({
+                        modalID: "#modal-person",
+                        modalContent: "#modal-person-content",
+                        modalForm: "#modal-person-content form",
+                        submitBtn: "#addPersonSubmitButton",
+                        formURL: "{% url 'person_new_modal' %}",
+                        asyncUpdate: true,
+                        asyncSettings: {
+                            closeOnSubmit: true,
+                            addModalFormFunction: addPersonModal
+                        }
+                    });
+                }
+
+                addPersonModal();
+            });
+            setup();
+            $(function () {
+                $("button.closeModalButton").on('click', function () {
+                    $('#modal').modal('hide');
                 });
-            }
-
-            addPersonModal();
-        });
-    </script>
-
+            });
+        </script>
+    {% endcompress %}
 </form>

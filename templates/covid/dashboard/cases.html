@@ -3,7 +3,7 @@
 {% block table %}
     <div class="card-header">
         <h3>{% translate "Active" %}
-            <a href="#" onclick="top.location.href = '{% url 'cases' %}';">{% translate "cases" %}</a>
+            <a id="activeCasesLink" href="#">{% translate "cases" %}</a>
         </h3>
     </div>
     <div class="card-body">
@@ -18,9 +18,9 @@
             </thead>
             {% for case in page_obj %}
                 <tr>
-                    <td><a href="#" onclick="top.location.href = '{% url "case_details" case.id %}'">{{ case }}</a></td>
+                    <td><a class="caseDetailsLink" href="#" cid="{{ case.id }}">{{ case }}</a></td>
                     <td>{% for person in case.people.all %}
-                        <a href="#" onclick="top.location.href = '{% url 'person_details' person.id %}'">
+                        <a class="personDetailsLink" href="#" pid="{{ person.id }}">
                             {{ person }}
                         </a><br>
                     {% endfor %}</td>
@@ -34,4 +34,21 @@
             {% bootstrap_paginate page_obj range=10 url_view_name="cases_dashboard" %}
         {% endif %}
     </div>
+
+    {% load compress %}
+    {% compress js file %}
+        <script nonce="{{request.csp_nonce}}"type="text/javascript">
+            $(function () {
+                $("#activeCasesLink").on('click', function () {
+                    top.location.href = '{% url 'cases' %}';
+                });
+                $(".caseDetailsLink").on('click', function () {
+                    top.location.href = '{% url "case_details" 101010 %}'.replace("101010", $(this).attr("cid"));
+                });
+                $(".personDetailsLink").on('click', function () {
+                    top.location.href = '{% url "person_details" 101010 %}'.replace("101010", $(this).attr("pid"));
+                });
+            });
+        </script>
+    {% endcompress %}
 {% endblock %}

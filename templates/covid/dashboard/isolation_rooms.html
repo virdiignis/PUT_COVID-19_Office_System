@@ -2,7 +2,7 @@
 {% load i18n %}
 {% block table %}
     <div class="card-header"><h3>{% translate "Occupied" %}
-        <a href="#" onclick="top.location.href = '{% url 'isolation_rooms' %}';">
+        <a id="isolationRoomsLink" href="#">
             {% translate "isolation rooms" %}
         </a></h3></div>
     <div class="card-body">
@@ -17,8 +17,7 @@
                 <tr class="table-danger">
                     <td>{{ isolation_room.number }}</td>
                     <td>
-                        <a href="#"
-                           onclick="top.location.href = '{% url 'person_details' isolation_room.resident_id %}'">
+                        <a class="residentLink" href="#" pid='{{ isolation_room.resident_id }}'>
                             {{ isolation_room.resident }}
                         </a>
                     </td>
@@ -30,4 +29,17 @@
             {% bootstrap_paginate page_obj range=10 url_view_name="isolationrooms_dashboard" %}
         {% endif %}
     </div>
+    {% load compress %}
+    {% compress js file %}
+        <script nonce="{{request.csp_nonce}}"type="text/javascript">
+            $(function () {
+                $("#isolationRoomsLink").on('click', function () {
+                    top.location.href = '{% url 'isolation_rooms' %}';
+                });
+                $(".residentLink").on('click', function () {
+                    top.location.href = '{% url "person_details" 101010 %}'.replace("101010", $(this).attr("pid"));
+                });
+            });
+        </script>
+    {% endcompress %}
 {% endblock %}

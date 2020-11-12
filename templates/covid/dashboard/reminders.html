@@ -1,18 +1,8 @@
 {% extends 'covid/dashboard/frame.html' %}
 {% load i18n %}
 {% block table %}
-    <script type="text/javascript">
-        function markResolved(obj) {
-            $.ajax({
-                url: "{% url 'reminders_mark_done' 101010 %}".replace("101010", $(obj).attr("rno")),
-                success: function () {
-                    location.reload();
-                }
-            });
-        }
-    </script>
     <div class="card-header d-flex justify-content-between">
-        <h3><a href="#" onclick="top.location.href = '{% url 'reminders' 1 %}';">
+        <h3><a id="remindersLink" href="#">
             {% translate "Reminders" %}
         </a></h3>
     </div>
@@ -42,7 +32,7 @@
                             {{ reminder.datetime }}
                         </td>
                         <td>
-                            <a href="#" onclick="top.location.href = '{% url "worker_details" reminder.set_by_id %}'">
+                            <a class="personDetailsLink" href="#" pid="{{ reminder.set_by_id }}">
                                 {{ reminder.set_by }}
                             </a>
                         </td>
@@ -50,7 +40,7 @@
                         <td>{{ reminder.notes }}</td>
                         {% if request.user.write_access %}
                             <td>
-                                <a href="#" type="button" onclick="markResolved(this);"
+                                <a class="markResolved" href="#" type="button"
                                    rno="{{ reminder.id }}">{% translate "done" %}</a>
                             </td>
                         {% endif %}
@@ -63,4 +53,27 @@
             {% endif %}
         </div>
     {% endif %}
+    {% load compress %}
+    {% compress js file %}
+        <script nonce="{{request.csp_nonce}}"type="text/javascript">
+            function markResolved() {
+                $.ajax({
+                    url: "{% url 'reminders_mark_done' 101010 %}".replace("101010", $(this).attr("rno")),
+                    success: function () {
+                        location.reload();
+                    }
+                });
+            }
+
+            $(function () {
+                $("#remindersLink").on('click', function () {
+                    top.location.href = '{% url 'reminders' 1 %}';
+                });
+                $(".markResolved").on('click', markResolved);
+                $(".personDetailsLink").on('click', function () {
+                    top.location.href = '{% url "person_details" 101010 %}'.replace("101010", $(this).attr("pid"));
+                });
+            });
+        </script>
+    {% endcompress %}
 {% endblock %}

@@ -17,7 +17,7 @@
                     {{ field }}
                 </div>
                 {% for error in field.errors %}
-                    <p class="help-block" style="color: red">{{ error }}</p>
+                    <p class="help-block text-danger">{{ error }}</p>
                 {% endfor %}
             </div>
         {% endfor %}
@@ -27,5 +27,12 @@
         <button type="button" class="btn btn-default" data-dismiss="modal">{% translate "Close" %}</button>
         <button type="button" class="submit-btn btn btn-primary">{% translate "Create" %}</button>
     </div>
+    {% load compress %}
+    {% compress css file %}
+        {{ form.media.css }}
+    {% endcompress %}
+    {% compress js file %}
+        {{ form.media.js }}
+    {% endcompress %}
 
 </form>

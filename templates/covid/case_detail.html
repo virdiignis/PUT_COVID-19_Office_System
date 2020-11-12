@@ -18,11 +18,11 @@
             {% endif %}
         </div>
         <br>
-        <div style="padding-left: 5em">{% translate "Status" %}: <b>{% if closed %}{% translate "Closed" %}{% else %}
+        <div class="padding-left">{% translate "Status" %}: <b>{% if closed %}{% translate "Closed" %}{% else %}
             {% translate "Open" %}{% endif %}</b></div>
-        <div style="padding-left: 5em">{% translate "Opened" %}: {{ case.date_open }}</div>
+        <div class="padding-left">{% translate "Opened" %}: {{ case.date_open }}</div>
         {% if closed %}
-            <div style="padding-left: 5em">{% translate "Closed" %}: {{ case.date_closed }}</div>{% endif %}
+            <div class="padding-left">{% translate "Closed" %}: {{ case.date_closed }}</div>{% endif %}
         <br>
     </div>
     <br>
@@ -216,31 +216,33 @@
     {% endif %}
 
     {% load static %}
-    <script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
+    {% load compress %}
+    {% compress js file %}
+        <script nonce="{{request.csp_nonce}}"src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
 
+        <script nonce="{{request.csp_nonce}}"type="text/javascript">
+            $(function () {
+                function addActionModal() {
+                    $(".action-detail").each(function () {
+                        $(this).modalForm({
+                            formURL: "{% url 'action_details' 101010 %}".replace("101010", $(this).attr("ano")),
+                        });
+                    });
+                    $(".action-contact_content").each(function () {
+                        $(this).modalForm({
+                            formURL: "{% url 'action_contact_content' 101010 %}".replace("101010", $(this).attr("ano")),
+                        });
+                    });
+                    $(".action-notes").each(function () {
+                        $(this).modalForm({
+                            formURL: "{% url 'action_notes' 101010 %}".replace("101010", $(this).attr("ano")),
+                        });
+                    });
+                }
 
-    <script type="text/javascript">
-        $(function () {
-            function addActionModal() {
-                $(".action-detail").each(function () {
-                    $(this).modalForm({
-                        formURL: "{% url 'action_details' 101010 %}".replace("101010", $(this).attr("ano")),
-                    });
-                });
-                $(".action-contact_content").each(function () {
-                    $(this).modalForm({
-                        formURL: "{% url 'action_contact_content' 101010 %}".replace("101010", $(this).attr("ano")),
-                    });
-                });
-                $(".action-notes").each(function () {
-                    $(this).modalForm({
-                        formURL: "{% url 'action_notes' 101010 %}".replace("101010", $(this).attr("ano")),
-                    });
-                });
-            }
-
-            addActionModal();
-        });
-    </script>
+                addActionModal();
+            });
+        </script>
+    {% endcompress %}
 
 {% endblock %}

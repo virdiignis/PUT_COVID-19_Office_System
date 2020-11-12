@@ -17,9 +17,6 @@ from celery.schedules import crontab
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
-
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '=oees2o6!f&a33bk0#l2dk!eyo4+c4^hx%)ej#bt()vr1sg9(g'
 
@@ -41,6 +38,7 @@ INSTALLED_APPS = [
     'dal_select2',
     'bootstrap_modal_forms',
     'bootstrap_pagination',
+    "compressor",
     'apps.office',
     'apps.covid',
     'apps.mailing',
@@ -51,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'csp.middleware.CSPMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -199,6 +198,29 @@ SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 
 SESSION_ENGINE = "django.contrib.sessions.backends.cached_db"
+
+COMPRESS_ENABLED = True
+COMPRESS_URL = "/static/"
+COMPRESS_OUTPUT_DIR = "compressed"
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+)
+
+CSP_DEFAULT_SRC = ["'self'"]
+CSP_SCRIPT_SRC = ["'strict-dynamic'"]
+CSP_STYLE_SRC = ["'self'"]
+CSP_IMG_SRC = ["'self'"]
+CSP_CONNECT_SRC = ["'self'"]
+CSP_FRAME_SRC = ["'self'"]
+CSP_INCLUDE_NONCE_IN = [
+    "default-src",
+    "script-src",
+    "style-src",
+]
+
+COMPRESS_CSP_NONCE = True
 
 with open(BASE_DIR / "backend/secrets.py") as F:
     exec(compile(F.read(), filename="secrets.py", mode="exec"))

@@ -15,22 +15,29 @@
                 </form>
             </div>
         </div>
-        <script type="text/javascript">
-            flatpickr("#id_start_date", {
-                enableTime: false,
-                enableSeconds: false,
-                dateFormat: "d.m.Y",
-                time_24hr: true,
-                defaultDate: new Date(Date.now() - 6 * 24 * 60 * 60 * 1000),
-            });
-            flatpickr("#id_end_date", {
-                enableTime: false,
-                enableSeconds: false,
-                dateFormat: "d.m.Y",
-                time_24hr: true,
-                defaultDate: new Date(),
-            });
-        </script>
+        {% load compress %}
+        {% compress css file %}
+        {{ form.media.css }}
+        {% endcompress %}
+        {% compress js file %}
+            {{ form.media.js }}
+            <script nonce="{{request.csp_nonce}}"type="text/javascript">
+                flatpickr("#id_start_date", {
+                    enableTime: false,
+                    enableSeconds: false,
+                    dateFormat: "d.m.Y",
+                    time_24hr: true,
+                    defaultDate: new Date(Date.now() - 6 * 24 * 60 * 60 * 1000),
+                });
+                flatpickr("#id_end_date", {
+                    enableTime: false,
+                    enableSeconds: false,
+                    dateFormat: "d.m.Y",
+                    time_24hr: true,
+                    defaultDate: new Date(),
+                });
+            </script>
+        {% endcompress %}
     {% else %}
         <div class="d-flex justify-content-between align-items-center">
             <a href="{{ request.get_full_path }}">{% translate "back" %}</a>

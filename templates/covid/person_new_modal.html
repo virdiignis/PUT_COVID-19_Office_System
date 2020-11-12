@@ -4,7 +4,7 @@
 
     <div class="modal-header">
         <h5 class="modal-title">{% translate "Add new person" %}</h5>
-        <button type="button" class="close" onclick="$('#modal-person').modal('hide')" aria-label="Close">
+        <button type="button" class="close closeModalButton" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
@@ -23,45 +23,57 @@
                     </div>
                 </div>
                 {% for error in field.errors %}
-                    <p class="help-block" style="color: red">{{ error }}</p>
+                    <p class="help-block text-danger">{{ error }}</p>
                 {% endfor %}
             </div>
         {% endfor %}
     </div>
-    {{ form.media }}
 
     <div class="modal-footer">
-        <button type="button" class="btn btn-default"
-                onclick="$('#modal-person').modal('hide')">{% translate "Close" %}</button>
+        <button type="button" class="btn btn-default closeModalButton">{% translate "Close" %}</button>
         <button type="button" id="addPersonSubmitButton"
                 class="submit-btn btn btn-primary">{% translate "Add" %}</button>
     </div>
-    <script type="text/javascript">
-        $(function () {
-            function addUnitModal() {
-                $("#newUnitButton").modalForm({
-                    modalID: "#modal-unit",
-                    modalContent: "#modal-unit-content",
-                    modalForm: "#modal-unit-content form",
-                    submitBtn: "#addUnitSubmitButton",
-                    formURL: "{% url 'unit_new_modal' %}",
-                    asyncUpdate: true,
-                    asyncSettings: {
-                        closeOnSubmit: true,
-                        addModalFormFunction: addUnitModal
-                    }
-                });
-            }
 
-            addUnitModal();
-        });
-        $('#id_unit').select2({
-            dropdownParent: $('.modal-body'),
-            allowClear: true,
-            ajax: {
-                url: '{% url 'unit-autocomplete' %}',
-                dataType: 'json'
-            }
-        });
-    </script>
+    {% load compress %}
+    {% compress css file %}
+        {{ from.media.css }}
+    {% endcompress %}
+    {% compress js file %}
+        {{ form.media.js }}
+        <script nonce="{{request.csp_nonce}}"type="text/javascript">
+            $(function () {
+                function addUnitModal() {
+                    $("#newUnitButton").modalForm({
+                        modalID: "#modal-unit",
+                        modalContent: "#modal-unit-content",
+                        modalForm: "#modal-unit-content form",
+                        submitBtn: "#addUnitSubmitButton",
+                        formURL: "{% url 'unit_new_modal' %}",
+                        asyncUpdate: true,
+                        asyncSettings: {
+                            closeOnSubmit: true,
+                            addModalFormFunction: addUnitModal
+                        }
+                    });
+                }
+
+                addUnitModal();
+            });
+            $('#id_unit').select2({
+                dropdownParent: $('.modal-body'),
+                allowClear: true,
+                ajax: {
+                    url: '{% url 'unit-autocomplete' %}',
+                    dataType: 'json'
+                }
+            });
+            $(function () {
+                $("button.closeModalButton").on('click', function () {
+                    $('#modal-person').modal('hide');
+                });
+            })
+        </script>
+    {% endcompress %}
+
 </form>

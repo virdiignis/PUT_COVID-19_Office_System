@@ -6,13 +6,13 @@
         {% translate "to continue." %}
     {% else %}
         <div class="d-flex justify-content-center align-items-center">
-            <div class="card" style="width: 25rem">
+            <div class="card">
                 <h2 class="card-header">Login</h2>
                 <div class="card-body">
                     <form method="post">
                         {% csrf_token %}
                         {% for error in form.non_field_errors %}
-                            <p class="help-block" style="color: red">{{ error }}</p>
+                            <p class="help-block text-danger">{{ error }}</p>
                         {% endfor %}
 
                         {% for hidden in form.hidden_fields %}
@@ -20,7 +20,7 @@
                         {% endfor %}
                         {% for field in form.visible_fields %}
                             {% for error in field.errors %}
-                                <div class="help-block" style="color: red">{{ error }}</div>
+                                <div class="help-block text-danger">{{ error }}</div>
                             {% endfor %}
                             <p class="d-flex justify-content-between fieldWrapper">{{ field.label_tag }}{{ field }}</p>
                         {% endfor %}
@@ -29,6 +29,13 @@
                 </div>
             </div>
         </div>
+        {% load compress %}
+        {% compress css file %}
+            {{ form.media.css }}
+        {% endcompress %}
+        {% compress js file %}
+            {{ form.media.js }}
+        {% endcompress %}
     {% endif %}
 
 {% endblock %}

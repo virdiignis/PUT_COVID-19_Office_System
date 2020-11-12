@@ -17,7 +17,7 @@
                     <div class="col-7">{{ field }}</div>
                 </div>
                 {% for error in field.errors %}
-                    <p class="help-block" style="color: red">{{ error }}</p>
+                    <p class="help-block text-danger">{{ error }}</p>
                 {% endfor %}
             </div>
         {% endfor %}
@@ -28,17 +28,23 @@
         <button type="button" class="submit-btn btn btn-primary">{% translate "Update" %}</button>
     </div>
 
-    {{ form.media }}
+    {% load compress %}
+    {% compress css file %}
+        {{ form.media.css }}
+    {% endcompress %}
+    {% compress js file %}
+        {{ form.media.js }}
 
-    <script type="text/javascript">
-        $(function () {
-            $('#id_unit').select2({
-                dropdownParent: $('#modal'),
-                ajax: {
-                    url: '{% url 'unit-autocomplete' %}',
-                    dataType: 'json'
-                }
+        <script nonce="{{request.csp_nonce}}"type="text/javascript">
+            $(function () {
+                $('#id_unit').select2({
+                    dropdownParent: $('#modal'),
+                    ajax: {
+                        url: '{% url 'unit-autocomplete' %}',
+                        dataType: 'json'
+                    }
+                });
             });
-        });
-    </script>
+        </script>
+    {% endcompress %}
 </form>
