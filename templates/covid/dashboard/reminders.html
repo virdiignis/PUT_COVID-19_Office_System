@@ -55,7 +55,7 @@
     {% endif %}
     {% load compress %}
     {% compress js file %}
-        <script type="text/javascript">
+        <script nonce="{{request.csp_nonce}}"type="text/javascript">
             function markResolved() {
                 $.ajax({
                     url: "{% url 'reminders_mark_done' 101010 %}".replace("101010", $(this).attr("rno")),

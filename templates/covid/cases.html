@@ -70,8 +70,8 @@
     {% load static %}
     {% load compress %}
     {% compress js file %}
-        <script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
-        <script type="text/javascript">
+        <script nonce="{{request.csp_nonce}}"src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
+        <script nonce="{{request.csp_nonce}}"type="text/javascript">
             $(function () {
                 $("#newCaseButton").modalForm({
                     formURL: "{% url 'case_new_modal' %}"

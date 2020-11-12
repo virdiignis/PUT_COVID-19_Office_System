@@ -35,7 +35,7 @@
     {% endcompress %}
     {% compress js file %}
         {{ form.media.js }}
-        <script type="text/javascript">
+        <script nonce="{{request.csp_nonce}}"type="text/javascript">
             $(function () {
                 $("button.closeModalButton").on('click', function () {
                     $('#modal-unit').modal('hide');

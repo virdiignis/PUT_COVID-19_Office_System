@@ -45,7 +45,7 @@
 
     {% load compress %}
     {% compress js file %}
-        <script type="text/javascript">
+        <script nonce="{{request.csp_nonce}}"type="text/javascript">
             function resizeIframe() {
                 let maxH = 0;
                 let row = $(this).closest(".row");

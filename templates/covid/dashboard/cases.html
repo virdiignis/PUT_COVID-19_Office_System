@@ -37,7 +37,7 @@
 
     {% load compress %}
     {% compress js file %}
-        <script type="text/javascript">
+        <script nonce="{{request.csp_nonce}}"type="text/javascript">
             $(function () {
                 $("#activeCasesLink").on('click', function () {
                     top.location.href = '{% url 'cases' %}';

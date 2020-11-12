@@ -35,6 +35,6 @@
     {% endcompress %}
     {% compress js file %}
         {{ form.media.js }}
-        <script src="{% static "js/flatpickr.fields.setup.auto.now.js" %}"></script>
+        <script nonce="{{request.csp_nonce}}"src="{% static "js/flatpickr.fields.setup.auto.now.js" %}"></script>
     {% endcompress %}
 </form>

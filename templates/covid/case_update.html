@@ -217,9 +217,9 @@
         {{ isolations.media.js }}
         {{ actions.media.js }}
         {{ form.media.js }}
-        <script src="{% static 'covid/js/jquery.bootstrap.modal.form.person.js' %}"></script>
+        <script nonce="{{request.csp_nonce}}"src="{% static 'covid/js/jquery.bootstrap.modal.form.person.js' %}"></script>
 
-        <script type="text/javascript">
+        <script nonce="{{request.csp_nonce}}"type="text/javascript">
             $(function () {
                 function addPersonModal() {
                     $("#newPersonButton").modalForm({
@@ -236,10 +236,10 @@
                 addPersonModal();
             });
         </script>
-        <script src="{% static 'js/jquery.formset.js' %}"></script>
-        <script src="{% static 'covid/js/select2.isolations.actions.to.involved.people.js' %}"></script>
+        <script nonce="{{request.csp_nonce}}"src="{% static 'js/jquery.formset.js' %}"></script>
+        <script nonce="{{request.csp_nonce}}"src="{% static 'covid/js/select2.isolations.actions.to.involved.people.js' %}"></script>
 
-        <script type="text/javascript">
+        <script nonce="{{request.csp_nonce}}"type="text/javascript">
             $(function () {
                 $(".formset_row.{{ isolations.prefix }}").formset({
                     addText: '{% translate 'Add isolation' %}',
