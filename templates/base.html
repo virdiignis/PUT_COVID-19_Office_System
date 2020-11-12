@@ -17,6 +17,7 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="{% static 'js/flatpickr.fields.setup.js' %}"></script>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <script src="{% static 'js/language_change.js' %}"></script>
 </head>
 <body>
 <div class="card-header d-flex justify-content-between align-items-center main-header">
@@ -26,12 +27,10 @@
     <div class="d-flex btn-group align-self-center align-items-center col-sm-2">
         {% get_current_language as LANGUAGE_CODE %}
         {% if LANGUAGE_CODE == 'en' %}
-            <a class="btn btn-light" href="#" onclick="window.location.href = window.location.href.replaceAll('/en/', '/pl/')">English</a>
+            <a id="languageChangeButtonEN" class="btn btn-light" href="#">English</a>
         {% else %}
-            <a class="btn btn-light" href="#" onclick="window.location.href = window.location.href.replaceAll('/pl/', '/en/')">Polski</a>
+            <a id="languageChangeButtonPL" class="btn btn-light" href="#">Polski</a>
         {% endif %}
-
-
 
         {% if request.user.is_authenticated %}
             <a class="btn btn-primary" href="{% url 'logout' %}">{% translate "Logout" %}</a>

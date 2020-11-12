@@ -28,22 +28,6 @@
         <button type="button" class="btn btn-default" data-dismiss="modal">{% translate "Close" %}</button>
         <button type="button" class="submit-btn btn btn-primary">{% translate "Add" %}</button>
     </div>
-
-    <script type="text/javascript">
-        flatpickr(".datetimefield", {
-            enableTime: true,
-            enableSeconds: true,
-            dateFormat: "d.m.Y H:i:S",
-            time_24hr: true,
-            defaultDate: new Date()
-        });
-        flatpickr(".datefield", {
-            enableTime: false,
-            enableSeconds: false,
-            dateFormat: "d.m.Y",
-            time_24hr: true,
-            defaultDate: new Date()
-
-        });
-    </script>
+    {% load static %}
+    <script src="{% static "js/flatpickr.fields.setup.auto.now" %}"></script>
 </form>

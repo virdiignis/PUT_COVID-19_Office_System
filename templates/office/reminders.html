@@ -7,9 +7,9 @@
         </div>
     </div>
     <script type="text/javascript">
-        function markResolved(obj) {
+        function markResolved() {
             $.ajax({
-                url: "{% url 'reminders_mark_done' 101010 %}".replace("101010", $(obj).attr("rno")),
+                url: "{% url 'reminders_mark_done' 101010 %}".replace("101010", $(this).attr("rno")),
                 success: function () {
                     location.reload();
                 }
@@ -54,8 +54,7 @@
                                 {{ reminder.datetime }}
                             </td>
                             <td>
-                                <a href="#"
-                                   onclick="top.location.href = '{% url "worker_details" reminder.set_by_id %}'">
+                                <a href='{% url "worker_details" reminder.set_by_id %}'>
                                     {{ reminder.set_by }}
                                 </a>
                             </td>
@@ -63,7 +62,7 @@
                             <td>{{ reminder.notes }}</td>
                             {% if request.user.write_access %}
                                 <td>
-                                    <a href="#" type="button" onclick="markResolved(this);"
+                                    <a href="#" type="button" class="mark-done"
                                        rno="{{ reminder.id }}">{% translate "done" %}</a>
                                 </td>
                             {% endif %}
@@ -91,6 +90,8 @@
             }
 
             addReminderModal();
+
+            $("a.mark-done").on('click', markResolved);
         });
     </script>
 {% endblock %}
