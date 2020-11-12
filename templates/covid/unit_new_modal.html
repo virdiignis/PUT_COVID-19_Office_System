@@ -4,7 +4,7 @@
 
     <div class="modal-header">
         <h5 class="modal-title">{% translate "Add new unit" %}</h5>
-        <button type="button" class="close" onclick="$('#modal-unit').modal('hide')" aria-label="Close">
+        <button type="button" class="close closeModalButton" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
@@ -22,12 +22,25 @@
             </div>
         {% endfor %}
     </div>
-    {{ form.media }}
 
     <div class="modal-footer">
-        <button type="button" class="btn btn-default"
-                onclick="$('#modal-unit').modal('hide')">{% translate "Close" %}</button>
+        <button type="button" class="btn btn-default closeModalButton">{% translate "Close" %}</button>
         <button type="button" id="addUnitSubmitButton"
                 class="submit-btn btn btn-primary">{% translate "Add" %}</button>
     </div>
+
+    {% load compress %}
+    {% compress css file %}
+        {{ form.media.css }}
+    {% endcompress %}
+    {% compress js file %}
+        {{ form.media.js }}
+        <script type="text/javascript">
+            $(function () {
+                $("button.closeModalButton").on('click', function () {
+                    $('#modal-unit').modal('hide');
+                });
+            })
+        </script>
+    {% endcompress %}
 </form>

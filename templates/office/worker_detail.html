@@ -74,28 +74,31 @@
     </div>
 
     {% load static %}
-    <script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
-    <script type="text/javascript">
-        $(function () {
-            function addActionModal() {
-                $(".action-contact_content").each(function () {
-                    $(this).modalForm({
-                        formURL: "{% url 'action_contact_content' 101010 %}".replace("101010", $(this).attr("ano")),
+    {% load compress %}
+    {% compress js file %}
+        <script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
+        <script type="text/javascript">
+            $(function () {
+                function addActionModal() {
+                    $(".action-contact_content").each(function () {
+                        $(this).modalForm({
+                            formURL: "{% url 'action_contact_content' 101010 %}".replace("101010", $(this).attr("ano")),
+                        });
                     });
-                });
-                $(".action-notes").each(function () {
-                    $(this).modalForm({
-                        formURL: "{% url 'action_notes' 101010 %}".replace("101010", $(this).attr("ano")),
+                    $(".action-notes").each(function () {
+                        $(this).modalForm({
+                            formURL: "{% url 'action_notes' 101010 %}".replace("101010", $(this).attr("ano")),
+                        });
                     });
-                });
-                $(".action-detail").each(function () {
-                    $(this).modalForm({
-                        formURL: "{% url 'action_details' 101010 %}".replace("101010", $(this).attr("ano")),
+                    $(".action-detail").each(function () {
+                        $(this).modalForm({
+                            formURL: "{% url 'action_details' 101010 %}".replace("101010", $(this).attr("ano")),
+                        });
                     });
-                });
-            }
+                }
 
-            addActionModal();
-        });
-    </script>
+                addActionModal();
+            });
+        </script>
+    {% endcompress %}
 {% endblock %}

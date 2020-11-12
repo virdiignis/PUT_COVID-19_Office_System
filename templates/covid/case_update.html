@@ -200,68 +200,81 @@
                     {% endfor %}
                 </div>
             </div>
-            {{ documents.media }}
         </div>
     </form>
 
 
 
     {% load static %}
-    <script src="{% static 'covid/js/jquery.bootstrap.modal.form.person.js' %}"></script>
+    {% load compress %}
+    {% compress css file %}
+        {{ documents.media.css }}
+        {{ isolations.media.css }}
+        {{ actions.media.css }}
+        {{ form.media.css }}
+    {% endcompress %}
+    {% compress js file %}
+        {{ documents.media.js }}
+        {{ isolations.media.js }}
+        {{ actions.media.js }}
+        {{ form.media.js }}
+        <script src="{% static 'covid/js/jquery.bootstrap.modal.form.person.js' %}"></script>
 
+        <script type="text/javascript">
+            $(function () {
+                function addPersonModal() {
+                    $("#newPersonButton").modalForm({
+                        modalID: "#modal-person",
+                        formURL: "{% url 'person_new_modal' %}",
+                        asyncUpdate: true,
+                        asyncSettings: {
+                            closeOnSubmit: true,
+                            addModalFormFunction: addPersonModal
+                        }
+                    });
+                }
 
-    <script type="text/javascript">
-        $(function () {
-            function addPersonModal() {
-                $("#newPersonButton").modalForm({
-                    modalID: "#modal-person",
-                    formURL: "{% url 'person_new_modal' %}",
-                    asyncUpdate: true,
-                    asyncSettings: {
-                        closeOnSubmit: true,
-                        addModalFormFunction: addPersonModal
-                    }
+                addPersonModal();
+            });
+        </script>
+        <script src="{% static 'js/jquery.formset.js' %}"></script>
+        <script src="{% static 'covid/js/select2.isolations.actions.to.involved.people.js' %}"></script>
+
+        <script type="text/javascript">
+            $(function () {
+                $(".formset_row.{{ isolations.prefix }}").formset({
+                    addText: '{% translate 'Add isolation' %}',
+                    addCssClass: 'add-row btn btn-primary',
+                    addContainerClass: 'isolations-add',
+                    deleteText: '{% translate 'remove' %}',
+                    deleteCssClass: 'delete-row',
+                    prefix: "{{ isolations.prefix }}",
+                    insert_first: true
                 });
-            }
+                $(".formset_row.{{ actions.prefix }}").formset({
+                    addText: '{% translate 'Add action' %}',
+                    addCssClass: 'add-row btn btn-primary',
+                    addContainerClass: 'actions-add',
+                    deleteText: '{% translate 'remove' %}',
+                    deleteCssClass: 'delete-row',
+                    prefix: "{{ actions.prefix }}",
+                    insert_first: true,
+                });
+                {#$(".formset_row.{{ documents.prefix }}").formset({#}
+                {#    addText: '{% translate "Add document" %}',#}
+                {#    addCssClass: 'add-row btn btn-primary',#}
+                {#    addContainerClass: 'documents-add',#}
+                {#    deleteText: '{% translate 'remove' %}',#}
+                {#    deleteCssClass: 'delete-row',#}
+                {#    prefix: "{{ documents.prefix }}",#}
+                {#    insert_first: false#}
+                {# });#}
+            })
+        </script>
+        {{ form.media.js }}
+    {% endcompress %}
 
-            addPersonModal();
-        });
-    </script>
-    <script src="{% static 'js/jquery.formset.js' %}"></script>
-    <script src="{% static 'covid/js/select2.isolations.actions.to.involved.people.js' %}"></script>
-
-    <script type="text/javascript">
-        $(function () {
-            $(".formset_row.{{ isolations.prefix }}").formset({
-                addText: '{% translate 'Add isolation' %}',
-                addCssClass: 'add-row btn btn-primary',
-                addContainerClass: 'isolations-add',
-                deleteText: '{% translate 'remove' %}',
-                deleteCssClass: 'delete-row',
-                prefix: "{{ isolations.prefix }}",
-                insert_first: true
-            });
-            $(".formset_row.{{ actions.prefix }}").formset({
-                addText: '{% translate 'Add action' %}',
-                addCssClass: 'add-row btn btn-primary',
-                addContainerClass: 'actions-add',
-                deleteText: '{% translate 'remove' %}',
-                deleteCssClass: 'delete-row',
-                prefix: "{{ actions.prefix }}",
-                insert_first: true,
-            });
-            {#$(".formset_row.{{ documents.prefix }}").formset({#}
-            {#    addText: '{% translate "Add document" %}',#}
-            {#    addCssClass: 'add-row btn btn-primary',#}
-            {#    addContainerClass: 'documents-add',#}
-            {#    deleteText: '{% translate 'remove' %}',#}
-            {#    deleteCssClass: 'delete-row',#}
-            {#    prefix: "{{ documents.prefix }}",#}
-            {#    insert_first: false#}
-            {# });#}
-        })
-    </script>
-
-
-    {{ form.media }}
+    {% compress css file %}
+        {{ form.media.css }}
+    {% endcompress %}
 {% endblock %}

@@ -29,6 +29,13 @@
                 </div>
             </div>
         </div>
+        {% load compress %}
+        {% compress css file %}
+            {{ form.media.css }}
+        {% endcompress %}
+        {% compress js file %}
+            {{ form.media.js }}
+        {% endcompress %}
     {% endif %}
 
 {% endblock %}

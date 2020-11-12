@@ -29,5 +29,12 @@
         <button type="button" class="submit-btn btn btn-primary">{% translate "Add" %}</button>
     </div>
     {% load static %}
-    <script src="{% static "js/flatpickr.fields.setup.auto.now" %}"></script>
+    {% load compress %}
+    {% compress css file %}
+        {{ form.media.css }}
+    {% endcompress %}
+    {% compress js file %}
+        {{ form.media.js }}
+        <script src="{% static "js/flatpickr.fields.setup.auto.now.js" %}"></script>
+    {% endcompress %}
 </form>

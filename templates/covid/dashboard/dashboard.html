@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-xl w-100">
                 <div class="embed-responsive">
-                    <iframe class="embed-responsive-item" onload="resizeIframe(this);"
+                    <iframe class="embed-responsive-item"
                             src="{% url 'reminders_dashboard' 1 %}"></iframe>
                 </div>
             </div>
@@ -14,13 +14,13 @@
         <div class="row">
             <div class="col-xl">
                 <div class="embed-responsive">
-                    <iframe class="embed-responsive-item" onload="resizeIframe(this);"
+                    <iframe class="embed-responsive-item"
                             src="{% url 'actions_dashboard' 1 %}"></iframe>
                 </div>
             </div>
             <div class="col-xl">
                 <div class="embed-responsive">
-                    <iframe class="embed-responsive-item" onload="resizeIframe(this);"
+                    <iframe class="embed-responsive-item"
                             src="{% url 'cases_dashboard' 1 %}"></iframe>
                 </div>
             </div>
@@ -30,33 +30,42 @@
         <div class="row">
             <div class="col-xl">
                 <div class="embed-responsive">
-                    <iframe class="embed-responsive-item" onload="resizeIframe(this);"
+                    <iframe class="embed-responsive-item"
                             src="{% url 'isolations_dashboard' 1 %}"></iframe>
                 </div>
             </div>
             <div class="col-xl">
                 <div class="embed-responsive">
-                    <iframe class="embed-responsive-item" onload="resizeIframe(this);"
+                    <iframe class="embed-responsive-item"
                             src="{% url 'isolationrooms_dashboard' 1 %}"></iframe>
                 </div>
             </div>
         </div>
     </div>
 
-    <script type="text/javascript">
-        function resizeIframe(iframe) {
-            let maxH = 0;
-            let row = $(iframe).closest(".row");
-            let iframes = row.find("iframe");
-            iframes.each(function () {
-                let scrollH = this.contentWindow.document.body.scrollHeight;
-                if (scrollH > maxH)
-                    maxH = scrollH;
+    {% load compress %}
+    {% compress js file %}
+        <script type="text/javascript">
+            function resizeIframe() {
+                let maxH = 0;
+                let row = $(this).closest(".row");
+                let iframes = row.find("iframe");
+                iframes.each(function () {
+                    let scrollH = this.contentWindow.document.body.scrollHeight;
+                    if (scrollH > maxH)
+                        maxH = scrollH;
+                });
+                row.find(".embed-responsive").height(maxH + 25);
+                iframes.each(function () {
+                    this.contentWindow.setHeight(maxH);
+                });
+            }
+
+            $(function () {
+                $("iframe").on('load', resizeIframe);
             });
-            row.find(".embed-responsive").height(maxH + 25);
-            iframes.each(function () {
-                this.contentWindow.setHeight(maxH);
-            });
-        }
-    </script>
+        </script>
+    {% endcompress %}
+
+
 {% endblock %}

@@ -20,13 +20,16 @@
 <body>
 {% block table %}
 {% endblock %}
-<script type="text/javascript">
-    setTimeout(function () {
-        window.location.reload(1);
-    }, 60000);
-    window.setHeight = function (height) {
-        $("body").height(height);
-    };
-</script>
+{% load compress %}
+{% compress js file %}
+    <script type="text/javascript">
+        setTimeout(function () {
+            window.location.reload(1);
+        }, 60000);
+        window.setHeight = function (height) {
+            $("body").height(height);
+        };
+    </script>
+{% endcompress %}
 </body>
 </html>

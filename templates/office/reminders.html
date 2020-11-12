@@ -6,16 +6,7 @@
             <div class="modal-content"></div>
         </div>
     </div>
-    <script type="text/javascript">
-        function markResolved() {
-            $.ajax({
-                url: "{% url 'reminders_mark_done' 101010 %}".replace("101010", $(this).attr("rno")),
-                success: function () {
-                    location.reload();
-                }
-            });
-        }
-    </script>
+
 
 
     <div class="card">
@@ -80,18 +71,31 @@
 
 
     {% load static %}
-    <script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
-    <script type="text/javascript">
-        $(function () {
-            function addReminderModal() {
-                $("#addReminderButton").modalForm({
-                    formURL: "{% url 'reminder_new_modal' %}"
+    {% load compress %}
+    {% compress js file %}
+        <script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
+
+        <script type="text/javascript">
+            function markResolved() {
+                $.ajax({
+                    url: "{% url 'reminders_mark_done' 101010 %}".replace("101010", $(this).attr("rno")),
+                    success: function () {
+                        location.reload();
+                    }
                 });
             }
 
-            addReminderModal();
+            $(function () {
+                function addReminderModal() {
+                    $("#addReminderButton").modalForm({
+                        formURL: "{% url 'reminder_new_modal' %}"
+                    });
+                }
 
-            $("a.mark-done").on('click', markResolved);
-        });
-    </script>
+                addReminderModal();
+
+                $("a.mark-done").on('click', markResolved);
+            });
+        </script>
+    {% endcompress %}
 {% endblock %}

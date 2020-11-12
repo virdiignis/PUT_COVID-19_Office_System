@@ -28,17 +28,23 @@
         <button type="button" class="submit-btn btn btn-primary">{% translate "Update" %}</button>
     </div>
 
-    {{ form.media }}
+    {% load compress %}
+    {% compress css file %}
+        {{ form.media.css }}
+    {% endcompress %}
+    {% compress js file %}
+        {{ form.media.js }}
 
-    <script type="text/javascript">
-        $(function () {
-            $('#id_unit').select2({
-                dropdownParent: $('#modal'),
-                ajax: {
-                    url: '{% url 'unit-autocomplete' %}',
-                    dataType: 'json'
-                }
+        <script type="text/javascript">
+            $(function () {
+                $('#id_unit').select2({
+                    dropdownParent: $('#modal'),
+                    ajax: {
+                        url: '{% url 'unit-autocomplete' %}',
+                        dataType: 'json'
+                    }
+                });
             });
-        });
-    </script>
+        </script>
+    {% endcompress %}
 </form>

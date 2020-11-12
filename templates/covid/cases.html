@@ -68,12 +68,15 @@
 
 
     {% load static %}
-    <script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#newCaseButton").modalForm({
-                formURL: "{% url 'case_new_modal' %}"
+    {% load compress %}
+    {% compress js file %}
+        <script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
+        <script type="text/javascript">
+            $(function () {
+                $("#newCaseButton").modalForm({
+                    formURL: "{% url 'case_new_modal' %}"
+                });
             });
-        });
-    </script>
+        </script>
+    {% endcompress %}
 {% endblock %}

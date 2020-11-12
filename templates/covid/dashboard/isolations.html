@@ -2,7 +2,6 @@
 {% load i18n %}
 {% block table %}
     <div class="card-header"><h3>
-        {#<a href=#" onclick="top.location.href = '{% url 'isolations_dashboard' 1 %}';">Isolations</a>#}
         {% translate "Isolations" %}
     </h3></div>
     <div class="card-body">
@@ -30,7 +29,7 @@
                             table-active
                         {% endif %}">
                     <td>
-                        <a href="#" onclick="top.location.href = '{% url 'person_details' isolation.person_id %}'">
+                        <a class="personDetailsLink" href="#" pid="{{ isolation.person_id }}">
                             {{ isolation.person }}
                         </a><br>
                     </td>
@@ -39,11 +38,11 @@
                     <td>{{ isolation.end_date }}</td>
                     <td>{{ isolation.ordered_on }}</td>
                     <td>
-                                {{ isolation.get_whereabouts_display }}
-                                {% if isolation.whereabouts == 'D' and isolation.person.isolationroom %}
-                                    {{ isolation.person.isolationroom }}
-                                {% endif %}
-                            </td>
+                        {{ isolation.get_whereabouts_display }}
+                        {% if isolation.whereabouts == 'D' and isolation.person.isolationroom %}
+                            {{ isolation.person.isolationroom }}
+                        {% endif %}
+                    </td>
                     <td>{{ isolation.person.health_state }}</td>
                 </tr>
             {% endfor %}
@@ -53,4 +52,14 @@
             {% bootstrap_paginate page_obj range=10 url_view_name="isolations_dashboard" %}
         {% endif %}
     </div>
+    {% load compress %}
+    {% compress js file %}
+        <script type="text/javascript">
+            $(function () {
+                $(".personDetailsLink").on('click', function () {
+                    top.location.href = '{% url "person_details" 101010 %}'.replace("101010", $(this).attr("pid"));
+                });
+            });
+        </script>
+    {% endcompress %}
 {% endblock %}

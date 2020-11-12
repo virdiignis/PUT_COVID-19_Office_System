@@ -3,7 +3,7 @@
 {% block table %}
     <div class="card-header d-flex justify-content-between">
         <h3>
-            <a href="#" onclick="top.location.href = '{% url 'actions' %}';">{% translate "Actions</a> history" %}
+            <a id="actionsHistoryLink" href="#">{% translate "Actions</a> history" %}
         </h3>
     </div>
     <div class="card-body">
@@ -22,7 +22,7 @@
                         {{ action.datetime }}
                     </td>
                     <td>
-                        <a href="#" onclick="top.location.href = '{% url "worker_details" action.made_by_id %}'">
+                        <a class="workerLink" wid="{{ action.made_by_id }}" href="#">
                             {{ action.made_by }}
                         </a>
                     </td>
@@ -36,4 +36,18 @@
             {% bootstrap_paginate page_obj range=10 url_view_name="actions_dashboard" %}
         {% endif %}
     </div>
+
+    {% load compress %}
+    {% compress js file %}
+        <script type="text/javascript">
+            $(function () {
+                $("#actionsHistoryLink").on('click', function () {
+                    top.location.href = '{% url 'actions' %}';
+                });
+                $(".workerLink").on('click', function () {
+                    top.location.href = '{% url "worker_details" 101010 %}'.replace("101010", $(this).attr("wid"));
+                });
+            });
+        </script>
+    {% endcompress %}
 {% endblock %}

@@ -173,22 +173,25 @@
     </div>
 
     {% load static %}
-    <script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
+    {% load compress %}
+    {% compress js file %}
+        <script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
 
-    <script type="text/javascript">
-        $(function () {
-            function personEditModal() {
-                $("#editPersonButton").modalForm({
-                    formURL: "{% url 'person_update_modal' person.id %}",
-                });
-                $(".action-detail").each(function () {
-                    $(this).modalForm({
-                        formURL: "{% url 'action_details' 101010 %}".replace("101010", $(this).attr("ano")),
+        <script type="text/javascript">
+            $(function () {
+                function personEditModal() {
+                    $("#editPersonButton").modalForm({
+                        formURL: "{% url 'person_update_modal' person.id %}",
                     });
-                });
-            }
+                    $(".action-detail").each(function () {
+                        $(this).modalForm({
+                            formURL: "{% url 'action_details' 101010 %}".replace("101010", $(this).attr("ano")),
+                        });
+                    });
+                }
 
-            personEditModal();
-        });
-    </script>
+                personEditModal();
+            });
+        </script>
+    {% endcompress %}
 {% endblock %}

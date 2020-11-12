@@ -43,8 +43,8 @@
 # 43. Translacje miesięcy sprawdzić xd
 44. Dodać ustrukturyzowaną formę wywiadów medycznych. dot. 15
 # 45. Pobieranie raportów w .xlsx
-46. Wyrównanie wysokości kart w dashboardzie
-
+# 46. Wyrównanie wysokości kart w dashboardzie
+47. Ogarnać czy inline styles działają z CSP.
 
 # Raporty:
 #     Liczba nowych zakażonych studentów/doktorantów
