@@ -9,10 +9,10 @@ from bootstrap_modal_forms.forms import BSModalModelForm
 
 class ActionFormSet(inlineformset_factory(Case,
                                           Action,
-                                          fields=(
-                                                  "datetime", "made_by", "based_on", "contact_from", "contact_content",
+                                          fields=("datetime", "made_by", "based_on", "contact_from", "contact_content",
                                                   "action_description", "notes"),
-                                          extra=0,
+                                          extra=1,
+                                          can_delete=True,
                                           widgets={
                                               "datetime": DateTimeInput(format='%d.%m.%Y %H:%M:%S',
                                                                         attrs={'class': 'form-control datetimefield'}),
@@ -29,6 +29,7 @@ IsolationFormSet = inlineformset_factory(Case,
                                              "person", "ordered_by", "ordered_on", "start_date", "end_date",
                                              "whereabouts", "cause"),
                                          extra=1,
+                                         can_delete=True,
                                          widgets={
                                              "start_date": DateInput(format='%d.%m.%Y',
                                                                      attrs={'class': 'form-control datefield'}),
@@ -52,7 +53,7 @@ class DocumentFormSet(inlineformset_factory(Case,
                                             Document,
                                             exclude=("uploaded_by",),
                                             extra=1,
-                                            can_delete=False,
+                                            can_delete=True,
                                             widgets={"file": forms.FileInput(attrs={'accept': 'application/pdf'})}
                                             )):
     def get_queryset(self):

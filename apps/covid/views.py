@@ -102,15 +102,14 @@ class CaseUpdateView(HasWriteAccessMixin, UpdateView):
         context["is_open"] = self.object.date_closed is None
 
         if self.request.POST:
-            context["isolations"] = IsolationFormSet(self.request.POST, instance=self.object)
-            context["actions"] = ActionFormSet(self.request.POST, instance=self.object)
-            context["documents"] = DocumentFormSet(self.request.POST, self.request.FILES, instance=self.object)
+            context["isolations"] = IsolationFormSet(self.request.POST, instance=self.object, prefix="isolations")
+            context["actions"] = ActionFormSet(self.request.POST, instance=self.object, prefix="actions")
+            context["documents"] = DocumentFormSet(self.request.POST, self.request.FILES, instance=self.object,
+                                                   prefix="documents")
         else:
-            context["isolations"] = IsolationFormSet(instance=self.object)
-            if self.object.isolations.exists():
-                context["isolations"].extra = 0
-            context["actions"] = ActionFormSet(instance=self.object)
-            context["documents"] = DocumentFormSet(instance=self.object)
+            context["isolations"] = IsolationFormSet(instance=self.object, prefix="isolations")
+            context["actions"] = ActionFormSet(instance=self.object, prefix="actions")
+            context["documents"] = DocumentFormSet(instance=self.object, prefix="documents")
 
         return context
 
@@ -143,6 +142,7 @@ class CaseUpdateView(HasWriteAccessMixin, UpdateView):
                     d.file.name = f"{hashlib.sha512(d.file.read()).hexdigest()}.pdf"
                     d.uploaded_by = self.request.user
                     d.save()
+            documents.save()
 
         else:
             valid = False
