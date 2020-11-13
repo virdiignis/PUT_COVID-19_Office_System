@@ -36,6 +36,9 @@ class AutomaticLogActions:
     def mark_reminder_done(self, reminder: Reminder):
         self.__create_action(_('Marked "{reminder}" done.').format(reminder=reminder))
 
+    def delete_reminder(self, reminder: Reminder):
+        self.__create_action(_('Deleted "{reminder}".').format(reminder=reminder))
+
     def change_person(self, person_new, changed_data):
         self.__create_action(_("Changed the following information: {data} of {person}.").format(
             data=', '.join(changed_data), person=person_new))

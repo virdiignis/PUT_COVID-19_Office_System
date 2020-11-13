@@ -64,6 +64,18 @@ def reminder_mark_done(request, pk):
         return HttpResponse(status=304)
 
 
+@login_required
+@has_write_access()
+def reminder_delete(request, pk):
+    reminder = get_object_or_404(Reminder, id=pk)
+    if reminder.read_by is None:
+        reminder.delete()
+        AutomaticLogActions(user=request.user).delete_reminder(reminder)
+        return HttpResponse()
+    else:
+        return HttpResponse(status=403)
+
+
 class ReminderCreateModalView(HasWriteAccessMixin, BSModalCreateView):
     model = Reminder
     form_class = ReminderCreateModalForm

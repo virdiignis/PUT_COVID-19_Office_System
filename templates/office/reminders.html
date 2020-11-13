@@ -29,6 +29,7 @@
                         <th scope="col">{% translate "Title" %}</th>
                         <th scope="col">{% translate "Note" %}</th>
                         {% if request.user.write_access %}
+                            <th scope="col">{% translate "Delete" %}</th>
                             <th scope="col">{% translate "Mark done" %}</th>
                         {% endif %}
                     </tr>
@@ -53,7 +54,11 @@
                             <td>{{ reminder.notes }}</td>
                             {% if request.user.write_access %}
                                 <td>
-                                    <a href="#" type="button" class="mark-done"
+                                    <a href="#" type="button" class="delete-button btn btn-link btn-danger"
+                                       rno="{{ reminder.id }}">{% translate "delete" %}</a>
+                                </td>
+                                <td>
+                                    <a href="#" type="button" class="mark-done btn btn-link"
                                        rno="{{ reminder.id }}">{% translate "done" %}</a>
                                 </td>
                             {% endif %}
@@ -73,12 +78,21 @@
     {% load static %}
     {% load compress %}
     {% compress js file %}
-        <script nonce="{{request.csp_nonce}}" src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
+        <script nonce="{{ request.csp_nonce }}" src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
 
-        <script nonce="{{request.csp_nonce}}" type="text/javascript">
+        <script nonce="{{ request.csp_nonce }}" type="text/javascript">
             function markResolved() {
                 $.ajax({
                     url: "{% url 'reminders_mark_done' 101010 %}".replace("101010", $(this).attr("rno")),
+                    success: function () {
+                        location.reload();
+                    }
+                });
+            }
+
+            function deleteReminder() {
+                $.ajax({
+                    url: "{% url 'reminders_delete' 101010 %}".replace("101010", $(this).attr("rno")),
                     success: function () {
                         location.reload();
                     }
@@ -95,6 +109,7 @@
                 addReminderModal();
 
                 $("a.mark-done").on('click', markResolved);
+                $("a.delete-button").on('click', deleteReminder);
             });
         </script>
     {% endcompress %}
