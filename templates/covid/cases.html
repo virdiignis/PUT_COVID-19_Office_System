@@ -9,33 +9,40 @@
     <div class="card">
         <div class="card-header">
             <h2>{% translate "Cases" %}</h2>
-            <div class="d-flex align-items-center">
-                <div class="col-xl-4 col-5 mr-auto">
-                    <form id="searchForm" method="get" class="flex-fill">
-                        <div class="form-group">
-                            <label class="col-form-label col-2" for="searchBar">
-                                {% translate "Search" %}:
-                            </label>
-                            <input id="searchBar" type="text" name="search" class="col-6" value="{{ search }}"/>
-                            <button type="submit"
-                                    class="btn btn-primary col-xl-2 col-3">{% translate "Search" %}</button>
-                        </div>
-                    </form>
-                </div>
-                <div class="btn-group col-xl-3 col-5 pull-right">
-                    <a class="col-4 btn {% if open == None %}btn-success disabled{% else %}btn-primary{% endif %}"
-                       href="{{ request.path }}?open=None&search={{ search }}">{% translate "All" %}</a>
-                    <a class="col-4 btn {% if open == True %}btn-success disabled{% else %}btn-primary{% endif %}"
-                       href="{{ request.path }}?open=true&search={{ search }}">{% translate "Open" %}</a>
-                    <a class="col-4 btn {% if open == False %}btn-success disabled{% else %}btn-primary{% endif %}"
-                       href="{{ request.path }}?open=false&search={{ search }}">{% translate "Closed" %}</a>
-                </div>
-                {% if request.user.write_access %}
-                    <div class="col-xl-1 col-2 btn-group pull-right">
-                        <button id="newCaseButton" class="btn btn-danger" type="button"
-                                name="button">{% translate "Open new" %}</button>
+            <div class="container-fluid align-items-center">
+                <div class="row justify-content-between">
+                    <div class="col-xl-5 col-lg-4 col-3 mr-auto">
+                        <form id="searchForm" method="get" class="flex-fill">
+                            <div class="form-group">
+                                <label class="col-form-label" for="searchBar">
+                                    {% translate "Search" %}:
+                                </label>
+                                <input id="searchBar" type="text" name="search" class="col-xl-5 col-12 col-lg-7"
+                                       value="{{ search }}"/>
+                                <button type="submit"
+                                        class="btn btn-primary col-xl-3 col-lg-4 col-12">{% translate "Search" %}</button>
+                            </div>
+                        </form>
                     </div>
-                {% endif %}
+                    <div class="col-9 col-sm-8 col-md-7 col-lg-5 col-xl-4">
+                        <div class="btn-group col-12">
+                            <a class="col-4 btn {% if open == None %}btn-success disabled{% else %}btn-primary{% endif %}"
+                               href="{{ request.path }}?open=None&search={{ search }}">{% translate "All" %}</a>
+                            <a class="col-4 btn {% if open == True %}btn-success disabled{% else %}btn-primary{% endif %}"
+                               href="{{ request.path }}?open=true&search={{ search }}">{% translate "Open" %}</a>
+                            <a class="col-4 btn {% if open == False %}btn-success disabled{% else %}btn-primary{% endif %}"
+                               href="{{ request.path }}?open=false&search={{ search }}">{% translate "Closed" %}</a>
+                        </div>
+                    </div>
+                    {% if request.user.write_access %}
+                        <div class="w-100 col-lg"></div>
+                        <div class="w-75 col-lg"></div>
+                        <div class="col-4 col-md-3 col-lg-2">
+                            <button id="newCaseButton" class="btn btn-danger col-12" type="button"
+                                    name="button">{% translate "Open new" %}</button>
+                        </div>
+                    {% endif %}
+                </div>
             </div>
         </div>
         <div class="card-body">
@@ -70,8 +77,8 @@
     {% load static %}
     {% load compress %}
     {% compress js file %}
-        <script nonce="{{request.csp_nonce}}" src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
-        <script nonce="{{request.csp_nonce}}" type="text/javascript">
+        <script nonce="{{ request.csp_nonce }}" src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
+        <script nonce="{{ request.csp_nonce }}" type="text/javascript">
             $(function () {
                 $("#newCaseButton").modalForm({
                     formURL: "{% url 'case_new_modal' %}"
