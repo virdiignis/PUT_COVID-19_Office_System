@@ -1,7 +1,7 @@
 import hashlib
 
 from bootstrap_modal_forms.generic import BSModalCreateView, BSModalReadView, BSModalUpdateView
-from csp.decorators import csp_update
+from csp.decorators import csp_replace
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import SuspiciousOperation
@@ -9,7 +9,6 @@ from django.http import JsonResponse, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.utils import timezone
-from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
 from django.db.models import Q
 from django.views.generic import ListView, DetailView, UpdateView
@@ -326,7 +325,7 @@ class IsolationRoomListView(LoginRequiredMixin, ListView):
 
 @login_required
 @has_write_access()
-@csp_update(SCRIPT_SRC="'self'")
+@csp_replace(SCRIPT_SRC="'self'")
 def isolation_rooms_update(request):
     if request.method == 'POST':
         formset = IsolationRoomFormSet(request.POST, request.FILES)
