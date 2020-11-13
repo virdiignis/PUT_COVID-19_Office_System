@@ -1,6 +1,7 @@
 import hashlib
 
 from bootstrap_modal_forms.generic import BSModalCreateView, BSModalReadView, BSModalUpdateView
+from csp.decorators import csp_update
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import SuspiciousOperation
@@ -325,6 +326,7 @@ class IsolationRoomListView(LoginRequiredMixin, ListView):
 
 @login_required
 @has_write_access()
+@csp_update(SCRIPT_SRC="'self'")
 def isolation_rooms_update(request):
     if request.method == 'POST':
         formset = IsolationRoomFormSet(request.POST, request.FILES)

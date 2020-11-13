@@ -47,9 +47,11 @@
 # 47. Ogarnać czy inline styles działają z CSP.
 48. Pełen CRUD przypomnień.
 49. Może zmienić format datetime na H:M (bez sekund).
-50. Brak mieszkańców w edycji pokoji izolacji.
+# 50. Brak mieszkańców w edycji pokoji izolacji.
 51. Kosmetyka szczegółów akcji.
-
+52. Uniemożliwić nadpisanie pliku.
+53. Action formset w casach.
+54. Kontaktujacy się formset actions w case update.
 
 # Raporty:
 #     Liczba nowych zakażonych studentów/doktorantów
