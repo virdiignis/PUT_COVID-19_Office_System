@@ -46,12 +46,12 @@
 # 46. Wyrównanie wysokości kart w dashboardzie
 # 47. Ogarnać czy inline styles działają z CSP.
 # 48. Usuwanie przypomnień.
-49. Może zmienić format datetime na H:M (bez sekund).
+# 49. Może zmienić format datetime na H:M (bez sekund). — bez sensu bo widget i tak wyświetla sekundy
 # 50. Brak mieszkańców w edycji pokoji izolacji.
 # 51. Kosmetyka szczegółów akcji.
-52. Uniemożliwić nadpisanie pliku?
+# 52. Uniemożliwić nadpisanie pliku?
 # 53. Action formset w casach.
-54. Kontaktujacy się formset actions w case update.
+# 54. Kontaktujacy się formset actions w case update.
 
 # Raporty:
 #     Liczba nowych zakażonych studentów/doktorantów

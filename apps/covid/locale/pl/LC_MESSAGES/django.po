@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-11 22:07+0100\n"
+"POT-Creation-Date: 2020-11-13 06:10+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -51,15 +51,20 @@ msgid "Marked \"{reminder}\" done."
 msgstr "Oznaczono \"{reminder}\" jako wykonany."
 
 #: apps/covid/automatic_actions.py:40
+#| msgid "Marked \"{reminder}\" done."
+msgid "Deleted \"{reminder}\"."
+msgstr "Usunięto \"{reminder}\"."
+
+#: apps/covid/automatic_actions.py:43
 #, python-brace-format
 msgid "Changed the following information: {data} of {person}."
 msgstr "Zmieniono następujące informacje: {data} osoby {person}."
 
-#: apps/covid/forms.py:101
+#: apps/covid/forms.py:102
 msgid "Start date"
 msgstr "Data początku"
 
-#: apps/covid/forms.py:103
+#: apps/covid/forms.py:104
 msgid "End date"
 msgstr "Data końca"
 
@@ -410,37 +415,37 @@ msgstr "pokój izolacji"
 msgid "isolation rooms"
 msgstr "pokoje izolacji"
 
-#: apps/covid/tasks.py:15
+#: apps/covid/tasks.py:18
 msgid "Make sure to update their health state"
 msgstr "Upewnij się, aby zaktualizować ich stan zdrowia"
 
-#: apps/covid/tasks.py:17
+#: apps/covid/tasks.py:20
 #, python-brace-format
 msgid "in DS4 room {nr} "
 msgstr "w DS4 pokój {nr}"
 
-#: apps/covid/tasks.py:18
+#: apps/covid/tasks.py:21
 msgid " and isolation room info."
 msgstr " i informacje o pokoju izolacji."
 
-#: apps/covid/tasks.py:26
+#: apps/covid/tasks.py:29
 #, python-brace-format
 msgid "{person} ends their isolation {place}today."
 msgstr "{person} kończy dzisiaj swoją kwarantannę {place}."
 
-#: apps/covid/views.py:162
+#: apps/covid/views.py:163
 msgid "Case already closed."
 msgstr "Sprawa jest już zamknięta."
 
-#: apps/covid/views.py:175
+#: apps/covid/views.py:176
 msgid "Case is open."
 msgstr "Sprawa jest otwarta."
 
-#: apps/covid/views.py:241
+#: apps/covid/views.py:242
 msgid "Incoming contact content"
 msgstr "Informacje z kontaktu"
 
-#: apps/covid/views.py:251
+#: apps/covid/views.py:252
 msgid "Notes"
 msgstr "Notatki"
 
