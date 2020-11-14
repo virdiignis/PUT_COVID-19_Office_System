@@ -52,7 +52,8 @@
                                 <a href="{% url 'person_details' person.id %}">{{ person }}</a><br>
                             {% endfor %}</td>
                             <td class="align-middle">{{ case.date_open }}</td>
-                            <td class="align-middle">{% if case.date_closed %}{{ case.date_closed }}{% else %}—{% endif %}</td>
+                            <td class="align-middle">
+                                {% if case.date_closed %}{{ case.date_closed }}{% else %}—{% endif %}</td>
                         </tr>
                     {% endfor %}
                 </table>
@@ -189,6 +190,16 @@
                     $(".action-detail").each(function () {
                         $(this).modalForm({
                             formURL: "{% url 'action_details' 101010 %}".replace("101010", $(this).attr("ano")),
+                        });
+                    });
+                    $(".action-contact_content").each(function () {
+                        $(this).modalForm({
+                            formURL: "{% url 'action_contact_content' 101010 %}".replace("101010", $(this).attr("ano")),
+                        });
+                    });
+                    $(".action-notes").each(function () {
+                        $(this).modalForm({
+                            formURL: "{% url 'action_notes' 101010 %}".replace("101010", $(this).attr("ano")),
                         });
                     });
                 }
