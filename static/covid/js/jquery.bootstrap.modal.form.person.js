@@ -74,6 +74,9 @@ https://github.com/trco/django-bootstrap-modal-forms
                     // Update page without refresh
                     if (asyncSettings.closeOnSubmit) {
                         $(settings.modalID).modal("hide");
+
+                        asyncSettings.onSuccess(response);
+
                     } else {
                         // Reload form
                         $(settings.modalID).find(settings.modalContent).load(settings.formURL, function () {
@@ -81,24 +84,6 @@ https://github.com/trco/django-bootstrap-modal-forms
                             addEventHandlers(settings);
                         });
                     }
-
-
-                    let option = new Option(response["name"], response["id"], true, true);
-                    try {
-                        $('#id_unit').append(option).trigger("change");
-                    } catch (error) {
-                        option = new Option(response["name"], response["id"], true, true);
-                        try {
-                            $('#id_people').append(option).trigger('change');
-                        } catch (error) {
-                            option = new Option(response["name"], response["id"], true, true);
-                            try {
-                                $('#id_contact_from').append(option).trigger('change');
-                            } catch (error) {
-                            }
-                        }
-                    }
-
                 }
             });
 
@@ -129,7 +114,8 @@ https://github.com/trco/django-bootstrap-modal-forms
             asyncUpdate: false,
             asyncSettings: {
                 closeOnSubmit: false,
-                addModalFormFunction: null
+                addModalFormFunction: null,
+                onSuccess: function (r){},
             }
         };
 

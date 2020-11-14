@@ -91,7 +91,11 @@
                         asyncUpdate: true,
                         asyncSettings: {
                             closeOnSubmit: true,
-                            addModalFormFunction: addPersonModal
+                            addModalFormFunction: addPersonModal,
+                            onSuccess: function (response) {
+                                let option = new Option(response["name"], response["id"], true, true);
+                                $('#id_contact_from').append(option).trigger('change');
+                            },
                         }
                     });
                 }
