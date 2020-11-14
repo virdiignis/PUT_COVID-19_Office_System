@@ -41,6 +41,7 @@ class CaseListView(LoginRequiredMixin, ListView):
             q = q.filter(
                 Q(title__icontains=search) |
                 Q(people__first_name__istartswith=search) |
+                Q(people__middle_name__istartswith=search) |
                 Q(people__last_name__istartswith=search)
             )
 
