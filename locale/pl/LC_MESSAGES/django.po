@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-13 06:10+0100\n"
+"POT-Creation-Date: 2020-11-14 11:12+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,11 +20,11 @@ msgstr ""
 "%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n"
 "%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
-#: templates/base.html:40 templates/registration/login.html:5
+#: templates/base.html:43 templates/registration/login.html:5
 msgid "Logout"
 msgstr "Wyloguj"
 
-#: templates/base.html:42 templates/registration/login.html:27
+#: templates/base.html:45 templates/registration/login.html:27
 msgid "Login"
 msgstr "Zaloguj"
 
@@ -66,17 +66,17 @@ msgstr "Kontaktujący się"
 msgid "Incoming contact content"
 msgstr "Informacje z kontaktu"
 
-#: templates/covid/action_detail_modal.html:31
+#: templates/covid/action_detail_modal.html:33
 msgid "Action description"
 msgstr "Opis działania"
 
-#: templates/covid/action_detail_modal.html:35 templates/covid/actions.html:39
+#: templates/covid/action_detail_modal.html:38 templates/covid/actions.html:39
 #: templates/covid/case_detail.html:135 templates/covid/person_detail.html:131
 #: templates/covid/reports.html:191 templates/office/worker_detail.html:34
 msgid "Notes"
 msgstr "Notatki"
 
-#: templates/covid/action_detail_modal.html:41
+#: templates/covid/action_detail_modal.html:44
 #: templates/covid/action_new_modal.html:39
 #: templates/covid/case_new_modal.html:27
 #: templates/covid/person_new_modal.html:33
@@ -302,20 +302,20 @@ msgstr "Izolacje"
 msgid "Remove"
 msgstr "Usuń"
 
-#: templates/covid/case_update.html:242
+#: templates/covid/case_update.html:246
 msgid "Add isolation"
 msgstr "Dodaj izolację"
 
-#: templates/covid/case_update.html:245 templates/covid/case_update.html:256
-#: templates/covid/case_update.html:267
+#: templates/covid/case_update.html:249 templates/covid/case_update.html:260
+#: templates/covid/case_update.html:271
 msgid "remove"
 msgstr "usuń"
 
-#: templates/covid/case_update.html:253
+#: templates/covid/case_update.html:257
 msgid "Add action"
 msgstr "Dodaj działanie"
 
-#: templates/covid/case_update.html:264
+#: templates/covid/case_update.html:268
 msgid "Add document"
 msgstr "Dodaj dokument"
 

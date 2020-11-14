@@ -219,7 +219,7 @@ class IsolationRoom(Model):
     is_cleaned = models.BooleanField(default=True, verbose_name=_("is cleaned"))
 
     def __str__(self):
-        return f"{_('Room')} {self.number}"
+        return _("Room {number}").format(number=self.number)
 
     class Meta:
         verbose_name = _("isolation room")

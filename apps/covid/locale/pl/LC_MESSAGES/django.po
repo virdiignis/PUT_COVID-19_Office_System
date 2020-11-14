@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-13 06:10+0100\n"
+"POT-Creation-Date: 2020-11-14 11:12+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -51,7 +51,7 @@ msgid "Marked \"{reminder}\" done."
 msgstr "Oznaczono \"{reminder}\" jako wykonany."
 
 #: apps/covid/automatic_actions.py:40
-#| msgid "Marked \"{reminder}\" done."
+#, python-brace-format
 msgid "Deleted \"{reminder}\"."
 msgstr "Usunięto \"{reminder}\"."
 
@@ -407,6 +407,12 @@ msgstr "mieszkaniec"
 msgid "is cleaned"
 msgstr "posprzątany"
 
+#: apps/covid/models.py:222
+#, fuzzy, python-brace-format
+#| msgid "Room {self.number}"
+msgid "Room {number}"
+msgstr "Pokój {number}"
+
 #: apps/covid/models.py:225
 msgid "isolation room"
 msgstr "pokój izolacji"
@@ -433,26 +439,22 @@ msgstr " i informacje o pokoju izolacji."
 msgid "{person} ends their isolation {place}today."
 msgstr "{person} kończy dzisiaj swoją kwarantannę {place}."
 
-#: apps/covid/views.py:163
+#: apps/covid/views.py:166
 msgid "Case already closed."
 msgstr "Sprawa jest już zamknięta."
 
-#: apps/covid/views.py:176
+#: apps/covid/views.py:179
 msgid "Case is open."
 msgstr "Sprawa jest otwarta."
 
-#: apps/covid/views.py:242
+#: apps/covid/views.py:245
 msgid "Incoming contact content"
 msgstr "Informacje z kontaktu"
 
-#: apps/covid/views.py:252
+#: apps/covid/views.py:255
 msgid "Notes"
 msgstr "Notatki"
 
 #, python-brace-format
 #~ msgid "in DS4 room {isolation.person.isolationroom.number} "
 #~ msgstr "w DS4 pokój {isolation.person.isolationroom.number} "
-
-#, python-brace-format
-#~ msgid "Room {self.number}"
-#~ msgstr "Pokój {self.number}"
