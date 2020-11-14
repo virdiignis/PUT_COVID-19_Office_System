@@ -42,22 +42,22 @@
                         {% elif reminder.urgency == 1 %}
                         table-primary
                     {% endif %}">
-                            <td>
+                            <td class="align-middle">
                                 {{ reminder.datetime }}
                             </td>
-                            <td>
+                            <td class="align-middle">
                                 <a href='{% url "worker_details" reminder.set_by_id %}'>
                                     {{ reminder.set_by }}
                                 </a>
                             </td>
-                            <td>{{ reminder.title }}</td>
-                            <td>{{ reminder.notes|linebreaks }}</td>
+                            <td class="align-middle">{{ reminder.title }}</td>
+                            <td class="align-middle">{{ reminder.notes|linebreaks }}</td>
                             {% if request.user.write_access %}
-                                <td>
+                                <td class="align-middle">
                                     <a href="#" type="button" class="delete-button btn btn-link text-danger"
                                        rno="{{ reminder.id }}">{% translate "delete" %}</a>
                                 </td>
-                                <td>
+                                <td class="align-middle">
                                     <a href="#" type="button" class="mark-done btn btn-link"
                                        rno="{{ reminder.id }}">{% translate "done" %}</a>
                                 </td>

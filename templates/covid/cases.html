@@ -57,14 +57,14 @@
                 </thead>
                 {% for case in page_obj %}
                     <tr>
-                        <td><a href={% url "case_details" case.id %}>{{ case }}</a></td>
-                        <td>{% for person in case.people.all %}
+                        <td class="align-middle"><a href={% url "case_details" case.id %}>{{ case }}</a></td>
+                        <td class="align-middle">{% for person in case.people.all %}
                             <a href={% url "person_details" person.id %}>
                                 {{ person }}
                             </a><br>
                         {% endfor %}</td>
-                        <td>{{ case.date_open }}</td>
-                        <td>{% if case.date_closed %}{{ case.date_closed }}{% else %}—{% endif %}</td>
+                        <td class="align-middle">{{ case.date_open }}</td>
+                        <td class="align-middle">{% if case.date_closed %}{{ case.date_closed }}{% else %}—{% endif %}</td>
                     </tr>
                 {% endfor %}
             </table>

@@ -28,22 +28,22 @@
                         {% else %}
                             table-active
                         {% endif %}">
-                    <td>
+                    <td class="align-middle">
                         <a class="personDetailsLink" href="#" pid="{{ isolation.person_id }}">
                             {{ isolation.person }}
                         </a><br>
                     </td>
-                    <td>{{ isolation.ordered_by }}</td>
-                    <td>{{ isolation.start_date }}</td>
-                    <td>{{ isolation.end_date }}</td>
-                    <td>{{ isolation.ordered_on }}</td>
-                    <td>
+                    <td class="align-middle">{{ isolation.ordered_by }}</td>
+                    <td class="align-middle">{{ isolation.start_date }}</td>
+                    <td class="align-middle">{{ isolation.end_date }}</td>
+                    <td class="align-middle">{{ isolation.ordered_on }}</td>
+                    <td class="align-middle">
                         {{ isolation.get_whereabouts_display }}
                         {% if isolation.whereabouts == 'D' and isolation.person.isolationroom %}
                             {{ isolation.person.isolationroom }}
                         {% endif %}
                     </td>
-                    <td>{{ isolation.person.health_state }}</td>
+                    <td class="align-middle">{{ isolation.person.health_state }}</td>
                 </tr>
             {% endfor %}
         </table>

@@ -38,26 +38,26 @@
 
                     {% for action in actions %}
                         <tr>
-                            <td>
+                            <td class="align-middle">
                                 <button type="button" class="btn btn-link action-detail"
                                         ano="{{ action.id }}">{{ action.datetime }}</button>
                             </td>
-                            <td>{{ action.get_based_on_display }}</td>
-                            <td>{% if action.contact_content %}
+                            <td class="align-middle">{{ action.get_based_on_display }}</td>
+                            <td class="align-middle">{% if action.contact_content %}
                                 <button type="button" class="action-contact_content btn btn-link" ano="{{ action.id }}">
                                     {% translate "open" %}
                                 </button>
                             {% else %}
                                 —
                             {% endif %}</td>
-                            <td>{{ action.action_description|linebreaks }}</td>
-                            <td>{% if action.notes %}
+                            <td class="align-middle">{{ action.action_description|linebreaks }}</td>
+                            <td class="align-middle">{% if action.notes %}
                                 <button type="button" class="action-notes btn btn-link"
                                         ano="{{ action.id }}">{% translate "open" %}</button>
                             {% else %}
                                 —
                             {% endif %}</td>
-                            <td>
+                            <td class="align-middle">
                                 {% if action.case %}
                                     <a href="{% url 'case_details' action.case.id %}">{{ action.case.title }}</a>
                                 {% else %}

@@ -56,10 +56,10 @@
                     </tr>
                     </thead>
                     <tr>
-                        <td><p class="text-center">{{ students_sick_new }}</p></td>
-                        <td><p class="text-center">{{ students_quarantined_new }}</p></td>
-                        <td><p class="text-center">{{ employees_sick_new }}</p></td>
-                        <td><p class="text-center">{{ employees_quarantined_new }}</p></td>
+                        <td class="align-middle"><p class="text-center">{{ students_sick_new }}</p></td>
+                        <td class="align-middle"><p class="text-center">{{ students_quarantined_new }}</p></td>
+                        <td class="align-middle"><p class="text-center">{{ employees_sick_new }}</p></td>
+                        <td class="align-middle"><p class="text-center">{{ employees_quarantined_new }}</p></td>
                     </tr>
                 </table>
             </div>
@@ -85,24 +85,24 @@
                         </thead>
                         {% for isolation in isolations %}
                             <tr>
-                                <td><p class="text-center">
+                                <td class="align-middle"><p class="text-center">
                                     <a href={% url "person_details" isolation.person_id %}>
                                         {{ isolation.person }}
                                     </a>
                                 </p></td>
-                                <td><p class="text-center">{{ isolation.ordered_by }}</p></td>
-                                <td><p class="text-center"><b>{{ isolation.ordered_on }}</b></p></td>
-                                <td><p class="text-center">{{ isolation.added }}</p></td>
-                                <td><p class="text-center">{{ isolation.start_date }}</p></td>
-                                <td><p class="text-center">{{ isolation.end_date }}</p></td>
-                                <td><p class="text-center">
+                                <td class="align-middle"><p class="text-center">{{ isolation.ordered_by }}</p></td>
+                                <td class="align-middle"><p class="text-center"><b>{{ isolation.ordered_on }}</b></p></td>
+                                <td class="align-middle"><p class="text-center">{{ isolation.added }}</p></td>
+                                <td class="align-middle"><p class="text-center">{{ isolation.start_date }}</p></td>
+                                <td class="align-middle"><p class="text-center">{{ isolation.end_date }}</p></td>
+                                <td class="align-middle"><p class="text-center">
                                     {{ isolation.get_whereabouts_display }}
                                     {% if isolation.whereabouts == 'D' and isolation.person.isolationroom %}
                                         {{ isolation.person.isolationroom }}
                                     {% endif %}</p>
                                 </td>
-                                <td><p class="text-center">{{ isolation.cause }}</p></td>
-                                <td><p class="text-center">{{ isolation.person.health_state }}</p></td>
+                                <td class="align-middle"><p class="text-center">{{ isolation.cause }}</p></td>
+                                <td class="align-middle"><p class="text-center">{{ isolation.person.health_state }}</p></td>
                             </tr>
                         {% endfor %}
                     </table>
@@ -126,14 +126,14 @@
                     </thead>
                     {% for case in cases_opened %}
                         <tr>
-                            <td><p class="text-center"><a href={% url "case_details" case.id %}>{{ case }}</a></p></td>
-                            <td><p class="text-center">{% for person in case.people.all %}
+                            <td class="align-middle"><p class="text-center"><a href={% url "case_details" case.id %}>{{ case }}</a></p></td>
+                            <td class="align-middle"><p class="text-center">{% for person in case.people.all %}
                                 <a href={% url "person_details" person.id %}>
                                     {{ person }}
                                 </a><br>
                             {% endfor %}</p></td>
-                            <td><p class="text-center"><b>{{ case.date_open }}</b></p></td>
-                            <td><p class="text-center">
+                            <td class="align-middle"><p class="text-center"><b>{{ case.date_open }}</b></p></td>
+                            <td class="align-middle"><p class="text-center">
                                 {% if case.date_closed %}
                                     {{ case.date_closed }}
                                 {% else %}
@@ -160,14 +160,14 @@
                     </thead>
                     {% for case in cases_closed %}
                         <tr>
-                            <td><p class="text-center"><a href={% url "case_details" case.id %}>{{ case }}</a></p></td>
-                            <td><p class="text-center">{% for person in case.people.all %}
+                            <td class="align-middle"><p class="text-center"><a href={% url "case_details" case.id %}>{{ case }}</a></p></td>
+                            <td class="align-middle"><p class="text-center">{% for person in case.people.all %}
                                 <a href={% url "person_details" person.id %}>
                                     {{ person }}
                                 </a><br>
                             {% endfor %}</p></td>
-                            <td><p class="text-center">{{ case.date_open }}</p></td>
-                            <td><p class="text-center">
+                            <td class="align-middle"><p class="text-center">{{ case.date_open }}</p></td>
+                            <td class="align-middle"><p class="text-center">
                                 <b>{{ case.date_closed }}</b>
                             </p></td>
                         </tr>
@@ -195,38 +195,38 @@
 
                     {% for action in actions %}
                         <tr>
-                            <td><p class="text-center">
+                            <td class="align-middle"><p class="text-center">
                                 {{ action.datetime }}
                             </p></td>
-                            <td><p class="text-center">
+                            <td class="align-middle"><p class="text-center">
                                 <a href={% url "worker_details" action.made_by_id %}>
                                     {{ action.made_by }}
                                 </a>
                             </p></td>
-                            <td>{{ action.get_based_on_display }}</td>
-                            <td><p class="text-center">
+                            <td class="align-middle">{{ action.get_based_on_display }}</td>
+                            <td class="align-middle"><p class="text-center">
                                 {% if action.contact_from %}
                                     <a href="{% url 'person_details' action.contact_from_id %}">{{ action.contact_from }}</a>
                                 {% else %}
                                     —
                                 {% endif %}
                             </p></td>
-                            <td><p class="text-justify">
+                            <td class="align-middle"><p class="text-justify">
                                 {% if action.contact_content %}
                                     {{ action.contact_content|linebreaks }}
                                 {% else %}
                                     —
                                 {% endif %}
                             </p></td>
-                            <td><p class="text-justify">{{ action.action_description|linebreaks }}</p></td>
-                            <td><p class="text-justify">
+                            <td class="align-middle"><p class="text-justify">{{ action.action_description|linebreaks }}</p></td>
+                            <td class="align-middle"><p class="text-justify">
                                 {% if action.notes %}
                                     {{ action.notes|linebreaks }}
                                 {% else %}
                                     —
                                 {% endif %}
                             </p></td>
-                            <td><p class="text-center">
+                            <td class="align-middle"><p class="text-center">
                                 {% if action.case %}
                                     <a href="{% url 'case_details' action.case.id %}">{{ action.case.title }}</a>
                                 {% else %}

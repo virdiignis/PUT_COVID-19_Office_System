@@ -20,12 +20,12 @@
 
                 {% for isolation_room in isolationroom_list %}
                     <tr class="{% if isolation_room.resident %}table-danger{% elif not isolation_room.is_cleaned %}table-warning{% else %}table-success{% endif %}">
-                        <td>{{ isolation_room.number }}</td>
-                        <td>{% if isolation_room.resident %}
+                        <td class="align-middle">{{ isolation_room.number }}</td>
+                        <td class="align-middle">{% if isolation_room.resident %}
                             <a href={% url "person_details" isolation_room.resident_id %}>
                             {{ isolation_room.resident }}{% else %}—{% endif %}
                             </a></td>
-                        <td>{% if isolation_room.resident %}{% else %}{{ isolation_room.is_cleaned }}{% endif %}</td>
+                        <td class="align-middle">{% if isolation_room.resident %}{% else %}{{ isolation_room.is_cleaned }}{% endif %}</td>
                     </tr>
                 {% endfor %}
             </table>

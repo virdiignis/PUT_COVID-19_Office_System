@@ -47,12 +47,12 @@
                     </thead>
                     {% for case in cases %}
                         <tr>
-                            <td><a href={% url "case_details" case.id %}>{{ case }}</a></td>
-                            <td>{% for person in case.people.all %}
+                            <td class="align-middle"><a href={% url "case_details" case.id %}>{{ case }}</a></td>
+                            <td class="align-middle">{% for person in case.people.all %}
                                 <a href="{% url 'person_details' person.id %}">{{ person }}</a><br>
                             {% endfor %}</td>
-                            <td>{{ case.date_open }}</td>
-                            <td>{% if case.date_closed %}{{ case.date_closed }}{% else %}—{% endif %}</td>
+                            <td class="align-middle">{{ case.date_open }}</td>
+                            <td class="align-middle">{% if case.date_closed %}{{ case.date_closed }}{% else %}—{% endif %}</td>
                         </tr>
                     {% endfor %}
                 </table>
@@ -93,18 +93,18 @@
                                 {% else %}
                                     table-active
                                 {% endif %}">
-                            <td>{{ isolation.ordered_by }}</td>
-                            <td>{{ isolation.ordered_on }}</td>
-                            <td>{{ isolation.start_date }}</td>
-                            <td>{{ isolation.end_date }}</td>
-                            <td>
+                            <td class="align-middle">{{ isolation.ordered_by }}</td>
+                            <td class="align-middle">{{ isolation.ordered_on }}</td>
+                            <td class="align-middle">{{ isolation.start_date }}</td>
+                            <td class="align-middle">{{ isolation.end_date }}</td>
+                            <td class="align-middle">
                                 {{ isolation.get_whereabouts_display }}
                                 {% if isolation.whereabouts == 'D' and isolation.person.isolationroom %}
                                     {{ isolation.person.isolationroom }}
                                 {% endif %}
                             </td>
-                            <td>{{ isolation.cause }}</td>
-                            <td>{{ isolation.person.health_state }}</td>
+                            <td class="align-middle">{{ isolation.cause }}</td>
+                            <td class="align-middle">{{ isolation.person.health_state }}</td>
                         </tr>
                     {% endfor %}
                 </table>
@@ -135,31 +135,31 @@
 
                     {% for action in actions %}
                         <tr>
-                            <td>
+                            <td class="align-middle">
                                 <button type="button" class="btn btn-link action-detail"
                                         ano="{{ action.id }}">{{ action.datetime }}</button>
                             </td>
-                            <td>
+                            <td class="align-middle">
                                 <a href={% url "worker_details" action.made_by_id %}>
                                     {{ action.made_by }}
                                 </a>
                             </td>
-                            <td>{{ action.get_based_on_display }}</td>
-                            <td>{% if action.contact_content %}
+                            <td class="align-middle">{{ action.get_based_on_display }}</td>
+                            <td class="align-middle">{% if action.contact_content %}
                                 <button type="button" class="action-contact_content btn btn-link" ano="{{ action.id }}">
                                     {% translate "open" %}
                                 </button>
                             {% else %}
                                 —
                             {% endif %}</td>
-                            <td>{{ action.action_description|linebreaks }}</td>
-                            <td>{% if action.notes %}
+                            <td class="align-middle">{{ action.action_description|linebreaks }}</td>
+                            <td class="align-middle">{% if action.notes %}
                                 <button type="button" class="action-notes btn btn-link"
                                         ano="{{ action.id }}">{% translate "open" %}</button>
                             {% else %}
                                 —
                             {% endif %}</td>
-                            <td>
+                            <td class="align-middle">
                                 {% if action.case %}
                                     <a href="{% url 'case_details' action.case.id %}">{{ action.case.title }}</a>
                                 {% else %}

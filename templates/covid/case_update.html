@@ -147,25 +147,25 @@
                                 </div>
                             </td>
 
-                            <td>
+                            <td class="align-middle">
                                 {% for error in form.contact_content.errors %}
                                     <p class="help-block text-danger">{{ error }}</p>
                                 {% endfor %}
                                 {{ form.contact_content }}
                             </td>
-                            <td>
+                            <td class="align-middle">
                                 {% for error in form.action_description.errors %}
                                     <p class="help-block text-danger">{{ error }}</p>
                                 {% endfor %}
                                 {{ form.action_description }}
                             </td>
-                            <td>
+                            <td class="align-middle">
                                 {% for error in form.notes.errors %}
                                     <p class="help-block text-danger">{{ error }}</p>
                                 {% endfor %}
                                 {{ form.notes }}
                             </td>
-                            <td>{{ form.DELETE }}</td>
+                            <td class="align-middle">{{ form.DELETE }}</td>
                         </tr>
                     {% endfor %}
                 </table>

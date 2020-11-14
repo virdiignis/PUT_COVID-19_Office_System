@@ -18,16 +18,16 @@
             </thead>
             {% for action in page_obj %}
                 <tr>
-                    <td>
+                    <td class="align-middle">
                         {{ action.datetime }}
                     </td>
-                    <td>
+                    <td class="align-middle">
                         <a class="workerLink" wid="{{ action.made_by_id }}" href="#">
                             {{ action.made_by }}
                         </a>
                     </td>
-                    <td>{{ action.get_based_on_display }}</td>
-                    <td>{{ action.action_description|linebreaks }}</td>
+                    <td class="align-middle">{{ action.get_based_on_display }}</td>
+                    <td class="align-middle">{{ action.action_description|linebreaks }}</td>
                 </tr>
             {% endfor %}
         </table>
