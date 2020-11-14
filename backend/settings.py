@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'apps.office',
     'apps.covid',
     'apps.mailing',
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [

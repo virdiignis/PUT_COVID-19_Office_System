@@ -53,9 +53,9 @@
 # 53. Action formset w casach.
 # 54. Kontaktujacy się formset actions w case update.
 55. Dodać lewe menu.
-56. Sypie się dodawanie dokumentów.
+# 56. Sypie się dodawanie dokumentów.
 # 57. Nie działa autododawanie osób do pola involved w edycji sprawy
-58. Wyszukiwanie spraw po middle name
+# 58. Wyszukiwanie spraw po middle name
 
 # Raporty:
 #     Liczba nowych zakażonych studentów/doktorantów
