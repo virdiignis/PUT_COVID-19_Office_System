@@ -25,18 +25,18 @@
     </div>
     <div class="d-flex justify-content-between align-items-center">
         <b>{% translate "Incoming contact content" %}:</b>
-        <div class="col-8 border">
+        <div class="col-8 border text-justify">
             {% if action.contact_content %}{{ action.contact_content|linebreaks }}{% else %}—{% endif %}</div>
     </div>
     <br>
     <div class="d-flex justify-content-between align-items-center">
         <b>{% translate "Action description" %}:</b>
-        <div class="col-8 border">{{ action.action_description|linebreaks }}</div>
+        <div class="col-8 border text-justify">{{ action.action_description|linebreaks }}</div>
     </div>
     <br>
     <div class="d-flex justify-content-between align-items-center">
         <b>{% translate "Notes" %}:</b>
-        <div class="col-8 border"> {% if action.notes %}{{ action.notes|linebreaks }}{% else %}—{% endif %}</div>
+        <div class="col-8 border text-justify"> {% if action.notes %}{{ action.notes|linebreaks }}{% else %}—{% endif %}</div>
     </div>
 </div>
 
