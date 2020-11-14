@@ -27,7 +27,7 @@
                         </a>
                     </td>
                     <td>{{ action.get_based_on_display }}</td>
-                    <td>{{ action.action_description }}</td>
+                    <td>{{ action.action_description|linebreaks }}</td>
                 </tr>
             {% endfor %}
         </table>

@@ -2,7 +2,7 @@
 {% load i18n %}
 {% block content %}
     <div class="modal fade" tabindex="-1" role="dialog" id="modal">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content"></div>
         </div>
     </div>
@@ -161,7 +161,7 @@
                         {% else %}
                             —
                         {% endif %}</td>
-                        <td>{{ action.action_description }}</td>
+                        <td>{{ action.action_description|linebreaks }}</td>
                         <td>{% if action.notes %}
                             <button type="button" class="action-notes btn btn-link"
                                     ano="{{ action.id }}">{% translate "open" %}</button>

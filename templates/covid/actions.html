@@ -12,7 +12,7 @@
         </div>
     </div>
     <div class="modal fade" role="dialog" id="modal-unit">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div id="modal-unit-content" class="modal-content"></div>
         </div>
     </div>
@@ -65,7 +65,7 @@
                         {% else %}
                             —
                         {% endif %}</td>
-                        <td>{{ action.action_description }}</td>
+                        <td>{{ action.action_description|linebreaks }}</td>
                         <td>{% if action.notes %}
                             <button type="button" class="action-notes btn btn-link"
                                     ano="{{ action.id }}">{% translate "open" %}</button>

@@ -50,7 +50,7 @@
                             {% else %}
                                 —
                             {% endif %}</td>
-                            <td>{{ action.action_description }}</td>
+                            <td>{{ action.action_description|linebreaks }}</td>
                             <td>{% if action.notes %}
                                 <button type="button" class="action-notes btn btn-link"
                                         ano="{{ action.id }}">{% translate "open" %}</button>

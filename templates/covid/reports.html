@@ -213,15 +213,15 @@
                             </p></td>
                             <td><p class="text-justify">
                                 {% if action.contact_content %}
-                                    {{ action.contact_content }}
+                                    {{ action.contact_content|linebreaks }}
                                 {% else %}
                                     —
                                 {% endif %}
                             </p></td>
-                            <td><p class="text-justify">{{ action.action_description }}</p></td>
+                            <td><p class="text-justify">{{ action.action_description|linebreaks }}</p></td>
                             <td><p class="text-justify">
                                 {% if action.notes %}
-                                    {{ action.notes }}
+                                    {{ action.notes|linebreaks }}
                                 {% else %}
                                     —
                                 {% endif %}

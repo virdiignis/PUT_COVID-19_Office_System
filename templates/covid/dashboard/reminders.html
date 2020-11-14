@@ -37,7 +37,7 @@
                             </a>
                         </td>
                         <td>{{ reminder.title }}</td>
-                        <td>{{ reminder.notes }}</td>
+                        <td>{{ reminder.notes|linebreaks }}</td>
                         {% if request.user.write_access %}
                             <td>
                                 <a class="markResolved" href="#" type="button"
