@@ -57,6 +57,7 @@
                     let modal_body = $('#modal-body');
                     $('#id_made_by').select2({
                         dropdownParent: modal_body,
+                        allowClear: true,
                         ajax: {
                             url: '{% url 'worker-autocomplete' %}',
                             dataType: 'json'

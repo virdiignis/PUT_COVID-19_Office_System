@@ -9,7 +9,7 @@ from django.utils.translation import gettext_lazy as _
 @shared_task(name="office.shift_takeover")
 def shift_takeover():
     now = localtime(timezone.now())
-    takeover_deadline = now.replace(hour=now.hour + 1, minute=5, second=0)
+    takeover_deadline = now.replace(hour=now.hour + 1, minute=10, second=0)
     for i in range(2):
         Reminder.objects.create(
             datetime=takeover_deadline,
