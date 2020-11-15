@@ -20,7 +20,36 @@
         <script nonce="{{ request.csp_nonce }}" src="{% static 'js/flatpickr.js' %}"></script>
         <script nonce="{{ request.csp_nonce }}" src="{% static 'js/flatpickr.fields.setup.js' %}"></script>
         <script nonce="{{ request.csp_nonce }}" src="{% static 'js/language_change.js' %}"></script>
-        <script nonce="{{ request.csp_nonce }}" src="{% static 'js/sidebar.js' %}"></script>
+        <script nonce="{{ request.csp_nonce }}" src="{% static 'js/getCookie.js' %}"></script>
+        <script nonce="{{ request.csp_nonce }}" type="text/javascript">
+            $(function () {
+                let sidebar = $("#sidebar-wrapper");
+                if (getCookie('menu') === 'close') {
+                    $("#wrapper").toggleClass("toggled");
+                    $("#menu-toggle img").attr("src", "{% static 'img/arrow_right.png' %}")
+                }
+
+                if (getCookie("sessionid") === null) {
+                    sidebar.css("visibility", "visible");
+                }
+                setTimeout(function () {
+                    sidebar.toggleClass("transition");
+                }, 800);
+
+                $("#menu-toggle").click(function (e) {
+                    e.preventDefault();
+                    $("#wrapper").toggleClass("toggled");
+                    let img = $("#menu-toggle img");
+                    if (img.attr("src").includes("left")) {
+                        img.attr("src", "{% static 'img/arrow_right.png' %}")
+                        document.cookie = 'menu=close; path=/';
+                    } else {
+                        img.attr("src", "{% static 'img/arrow_left.png' %}")
+                        document.cookie = 'menu=open; path=/';
+                    }
+                });
+            })
+        </script>
     {% endcompress %}
 
 </head>
