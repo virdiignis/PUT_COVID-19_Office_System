@@ -1,5 +1,6 @@
 .main-header {
     background-color: #005675;
+    height: 8vh;
 }
 
 .modal {
@@ -19,7 +20,7 @@
 }
 
 #sidebar-wrapper {
-    min-height: 100vh;
+    min-height: 92vh;
     margin-left: -15rem;
     visibility: hidden;
 }
