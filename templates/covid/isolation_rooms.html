@@ -25,7 +25,15 @@
                             <a href={% url "person_details" isolation_room.resident_id %}>
                             {{ isolation_room.resident }}{% else %}—{% endif %}
                             </a></td>
-                        <td class="align-middle">{% if isolation_room.resident %}{% else %}{{ isolation_room.is_cleaned }}{% endif %}</td>
+                        <td class="align-middle">
+                            {% if not isolation_room.resident %}
+                                {% if isolation_room.is_cleaned %}
+                                    {% translate 'Yes' %}
+                                {% else %}
+                                    {% translate 'No' %}
+                                {% endif %}
+                            {% endif %}
+                        </td>
                     </tr>
                 {% endfor %}
             </table>
