@@ -12,7 +12,7 @@ def send_report(subject: str, content: str, start_date, end_date):
     email = EmailMessage(
         subject,
         content,
-        'Biuro Covid <biurocovid@put.poznan.pl>',
+        settings.DEFAULT_FROM_EMAIL,
         settings.REPORT_TO,
         settings.DW,
         reply_to=['covid19.office@put.poznan.pl'],
