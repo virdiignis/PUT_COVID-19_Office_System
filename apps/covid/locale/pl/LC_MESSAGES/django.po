@@ -408,8 +408,6 @@ msgid "is cleaned"
 msgstr "posprzątany"
 
 #: apps/covid/models.py:222
-#, fuzzy, python-brace-format
-#| msgid "Room {self.number}"
 msgid "Room {number}"
 msgstr "Pokój {number}"
 

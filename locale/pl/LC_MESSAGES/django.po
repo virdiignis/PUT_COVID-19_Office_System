@@ -52,8 +52,6 @@ msgid "Isolation rooms"
 msgstr "Pokoje izolacji"
 
 #: templates/base.html:101
-#, fuzzy
-#| msgid "Report"
 msgid "Reports"
 msgstr "Raporty"
 
