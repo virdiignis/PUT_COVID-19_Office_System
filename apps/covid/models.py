@@ -47,7 +47,7 @@ class HealthState(Model):
 
 
 class IsolationIssuer(Model):
-    name = models.CharField(max_length=16, primary_key=True, verbose_name=_("name"))
+    name = models.CharField(max_length=32, primary_key=True, verbose_name=_("name"))
     official = models.BooleanField(default=False, verbose_name=_("official"))
 
     def __str__(self):
