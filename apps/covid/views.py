@@ -203,7 +203,7 @@ def covid_dashboard(request):
 class ActionDashboardView(LoginRequiredMixin, ListView):
     model = Action
     paginate_by = 5
-    queryset = Action.objects.order_by("-id")
+    queryset = Action.objects.order_by("-datetime")
     template_name = 'covid/dashboard/actions.html'
 
 
@@ -218,7 +218,7 @@ class CaseDashboardView(LoginRequiredMixin, ListView):
 class IsolationDashboardView(LoginRequiredMixin, ListView):
     model = Isolation
     paginate_by = 5
-    queryset = Isolation.objects.order_by("-id")
+    queryset = Isolation.objects.order_by("-ordered_on", "-start_date")
     allow_empty = True
     template_name = 'covid/dashboard/isolations.html'
 
