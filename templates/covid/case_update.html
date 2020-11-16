@@ -239,7 +239,7 @@
         <script nonce="{{ request.csp_nonce }}" type="text/javascript">
             $(function () {
                 $("#saveButton").on('click', function (e) {
-                    $(".add-row").click();
+                    $(".isolations-add .add-row").click();
                 });
                 $(".formset_row.{{ isolations.prefix }}").formset({
                     formCssClass: 'isolations-formset',
@@ -271,7 +271,7 @@
                     deleteText: '{% translate 'remove' %}',
                     deleteCssClass: 'delete-row',
                     prefix: "{{ documents.prefix }}",
-                    insert_first: false
+                    insert_first: true
                 });
                 $("#id_people").width('94%');
                 $("#newPersonButton").width('4%');
