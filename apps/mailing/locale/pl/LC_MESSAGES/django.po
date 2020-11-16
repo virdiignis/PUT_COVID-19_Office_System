@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-16 03:55+0100\n"
+"POT-Creation-Date: 2020-11-16 21:20+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,113 +29,125 @@ msgid "New students' infections"
 msgstr "Nowe zakażenia studentów"
 
 #: apps/mailing/report.py:63
+#, fuzzy
+#| msgid "New students' infections"
+msgid "New students' infections at the dorms"
+msgstr "Nowe zakażenia studentów w domach studenckich"
+
+#: apps/mailing/report.py:64
 msgid "New students' quarantines"
 msgstr "Nowe kwarantanny studentów"
 
-#: apps/mailing/report.py:64
+#: apps/mailing/report.py:65
+#, fuzzy
+#| msgid "New students' quarantines"
+msgid "New students' quarantines at the dorms"
+msgstr "Nowe kwarantanny studentów w domach studenckich"
+
+#: apps/mailing/report.py:66
 msgid "New employees' infections"
 msgstr "Nowe zakażenia pracowników"
 
-#: apps/mailing/report.py:65
+#: apps/mailing/report.py:67
 msgid "New employees' quarantines"
 msgstr "Nowe kwarantanny pracowników"
 
-#: apps/mailing/report.py:79
+#: apps/mailing/report.py:83
 msgid "Isolations ordered"
 msgstr "Nałożone izolacje"
 
-#: apps/mailing/report.py:82
+#: apps/mailing/report.py:86
 msgid "Name"
 msgstr "Imię i nazwisko"
 
-#: apps/mailing/report.py:83
+#: apps/mailing/report.py:87
 msgid "Ordered by"
 msgstr "Nałożona przez"
 
-#: apps/mailing/report.py:84
+#: apps/mailing/report.py:88
 msgid "Order date"
 msgstr "Data nałożenia"
 
-#: apps/mailing/report.py:85
+#: apps/mailing/report.py:89
 msgid "Office informed"
 msgstr "Poinformowano biuro"
 
-#: apps/mailing/report.py:86
+#: apps/mailing/report.py:90
 msgid "Start date"
 msgstr "Data początku"
 
-#: apps/mailing/report.py:87
+#: apps/mailing/report.py:91
 msgid "End date"
 msgstr "Data końca"
 
-#: apps/mailing/report.py:88
+#: apps/mailing/report.py:92
 msgid "Whereabouts"
 msgstr "Miejsce pobytu"
 
-#: apps/mailing/report.py:89
+#: apps/mailing/report.py:93
 msgid "Cause"
 msgstr "Przyczyna"
 
-#: apps/mailing/report.py:90
+#: apps/mailing/report.py:94
 msgid "Health state"
 msgstr "Stan zdrowia"
 
-#: apps/mailing/report.py:110
+#: apps/mailing/report.py:114
 msgid "New cases opened"
 msgstr "Nowe otwarte sprawy"
 
-#: apps/mailing/report.py:120
+#: apps/mailing/report.py:124
 msgid "Cases closed"
 msgstr "Zamknięte sprawy"
 
-#: apps/mailing/report.py:132
+#: apps/mailing/report.py:136
 msgid "Title"
 msgstr "Tytuł"
 
-#: apps/mailing/report.py:133
+#: apps/mailing/report.py:137
 msgid "People involved"
 msgstr "Dotyczy osób"
 
-#: apps/mailing/report.py:134
+#: apps/mailing/report.py:138
 msgid "Date open"
 msgstr "Data otwarcia"
 
-#: apps/mailing/report.py:135
+#: apps/mailing/report.py:139
 msgid "Date closed"
 msgstr "Data zamknięcia"
 
-#: apps/mailing/report.py:143
+#: apps/mailing/report.py:147
 msgid "Office actions"
 msgstr "Działania biura"
 
-#: apps/mailing/report.py:146
+#: apps/mailing/report.py:150
 msgid "Datetime"
 msgstr "Data i czas"
 
-#: apps/mailing/report.py:147
+#: apps/mailing/report.py:151
 msgid "Made by"
 msgstr "Wykonane przez"
 
-#: apps/mailing/report.py:148
+#: apps/mailing/report.py:152
 msgid "Based on"
 msgstr "Na podstawie"
 
-#: apps/mailing/report.py:149
+#: apps/mailing/report.py:153
 msgid "Contact from"
 msgstr "Kontaktujący się"
 
-#: apps/mailing/report.py:150
+#: apps/mailing/report.py:154
 msgid "Incoming contact content"
 msgstr "Informacje z kontaktu"
 
-#: apps/mailing/report.py:151
+#: apps/mailing/report.py:155
 msgid "Description"
 msgstr "Opis działania"
 
-#: apps/mailing/report.py:152
+#: apps/mailing/report.py:156
 msgid "Notes"
 msgstr "Notatki"
 
-#: apps/mailing/report.py:153
+#: apps/mailing/report.py:157
 msgid "Case"
 msgstr "Sprawa"

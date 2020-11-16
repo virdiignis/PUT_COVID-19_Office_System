@@ -60,17 +60,21 @@ class Report:
         ws.set_default_row(20)
         headers = (
             _("New students' infections"),
+            _("New students' infections at the dorms"),
             _("New students' quarantines"),
+            _("New students' quarantines at the dorms"),
             _("New employees' infections"),
             _("New employees' quarantines"),
         )
-        ws.set_column(0, 3, 40)
+        ws.set_column(0, 5, 40)
         ws.set_row(0, 40)
         ws.set_row(1, 40)
         ws.write_row(0, 0, headers, self._styles["header"])
         ws.write_row(1, 0, [
             self.__context["students_sick_new"],
+            self.__context["students_sick_dorms_new"],
             self.__context["students_quarantined_new"],
+            self.__context["students_quarantined_dorms_new"],
             self.__context["employees_sick_new"],
             self.__context["employees_quarantined_new"],
         ], self._styles["center"])

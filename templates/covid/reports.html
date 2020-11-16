@@ -50,14 +50,18 @@
                     <thead class="thead thead-dark">
                     <tr>
                         <th class="text-center" scope="col">{% translate "New students' infections" %}</th>
+                        <th class="text-center" scope="col">{% translate "New students' infections at the dorms" %}</th>
                         <th class="text-center" scope="col">{% translate "New students' quarantines" %}</th>
+                        <th class="text-center" scope="col">{% translate "New students' quarantines at the dorms" %}</th>
                         <th class="text-center" scope="col">{% translate "New employees' infections" %}</th>
                         <th class="text-center" scope="col">{% translate "New employees' quarantines" %}</th>
                     </tr>
                     </thead>
                     <tr>
                         <td class="align-middle"><p class="text-center">{{ students_sick_new }}</p></td>
+                        <td class="align-middle"><p class="text-center">{{ students_sick_dorms_new }}</p></td>
                         <td class="align-middle"><p class="text-center">{{ students_quarantined_new }}</p></td>
+                        <td class="align-middle"><p class="text-center">{{ students_quarantined_dorms_new }}</p></td>
                         <td class="align-middle"><p class="text-center">{{ employees_sick_new }}</p></td>
                         <td class="align-middle"><p class="text-center">{{ employees_quarantined_new }}</p></td>
                     </tr>
