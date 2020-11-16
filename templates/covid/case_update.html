@@ -271,7 +271,8 @@
                     deleteText: '{% translate 'remove' %}',
                     deleteCssClass: 'delete-row',
                     prefix: "{{ documents.prefix }}",
-                    insert_first: true
+                    insert_first: false,
+                    hideLastAddForm: true,
                 });
                 $("#id_people").width('94%');
                 $("#newPersonButton").width('4%');

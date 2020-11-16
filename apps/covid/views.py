@@ -137,7 +137,7 @@ class CaseUpdateView(HasWriteAccessMixin, UpdateView):
         if documents.is_valid():
             documents.instance = self.object
             for doc in documents:
-                if doc.changed_data:
+                if doc.is_valid() and doc.changed_data:
                     d = doc.save(commit=False)
                     file_path = d.file.name.split("/")
                     file_path[-1] = f"{hashlib.sha512(d.file.read()).hexdigest()}.pdf"
@@ -145,7 +145,6 @@ class CaseUpdateView(HasWriteAccessMixin, UpdateView):
                     d.uploaded_by = self.request.user
                     d.save()
             documents.save()
-
         else:
             valid = False
 
