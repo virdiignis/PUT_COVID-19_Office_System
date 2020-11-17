@@ -19,13 +19,11 @@ def prepare_report_context(start_date, end_date):
                                                                ordered_on__lte=end_date) |
                                                              Q(added__gte=start_date,
                                                                added__lte=end_date),
-                                                             ordered_by__official=True,
                                                              person__role="S").count(),
         "students_quarantined_dorms_new": Isolation.objects.filter(Q(ordered_on__gte=start_date,
                                                                      ordered_on__lte=end_date) |
                                                                    Q(added__gte=start_date,
                                                                      added__lte=end_date),
-                                                                   ordered_by__official=True,
                                                                    person__role="S").exclude(person__dorm=0).count(),
         "employees_sick_new": HealthStateChange.objects.filter(change_to__considered_sick=True,
                                                                datetime__gte=start_date,
@@ -35,7 +33,6 @@ def prepare_report_context(start_date, end_date):
                                                                 ordered_on__lte=end_date) |
                                                               Q(added__gte=start_date,
                                                                 added__lte=end_date),
-                                                              ordered_by__official=True,
                                                               person__role="E").count(),
         "isolations": Isolation.objects.filter(Q(ordered_on__gte=start_date,
                                                  ordered_on__lte=end_date) |
