@@ -34,9 +34,9 @@
                         </a><br>
                     </td>
                     <td class="align-middle">{{ isolation.ordered_by }}</td>
+                    <td class="align-middle">{{ isolation.ordered_on }}</td>
                     <td class="align-middle">{{ isolation.start_date }}</td>
                     <td class="align-middle">{{ isolation.end_date }}</td>
-                    <td class="align-middle">{{ isolation.ordered_on }}</td>
                     <td class="align-middle">
                         {{ isolation.get_whereabouts_display }}
                         {% if isolation.whereabouts == 'D' and isolation.person.isolationroom %}

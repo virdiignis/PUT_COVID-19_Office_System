@@ -12,6 +12,7 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.db.models import Q
 from django.views.generic import ListView, DetailView, UpdateView
+from unidecode import unidecode
 
 from apps.covid.automatic_actions import AutomaticLogActions
 from apps.covid.forms import CaseCreateModalForm, PersonCreateUpdateModalForm, CaseUpdateForm, IsolationFormSet, \
@@ -393,6 +394,8 @@ def serve_document(request, id):
     if not name.endswith(".pdf"):
         name += ".pdf"
     response = HttpResponse()
-    response["Content-Disposition"] = f"attachment; filename={name}"
+    ascii_name = unidecode(name)
+    encoded_name = name if name == ascii_name else str(name.encode()).replace('\\x', '%')
+    response["Content-Disposition"] = f"attachment; filename={ascii_name}; filename*=utf-8''{encoded_name}"
     response["X-Accel-Redirect"] = "/media" + document.file.path.split("/media")[1]
     return response
