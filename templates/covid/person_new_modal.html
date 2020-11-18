@@ -40,8 +40,8 @@
         {{ from.media.css }}
     {% endcompress %}
     {% compress js file %}
-        {{ form.media.js }}
-        <script nonce="{{request.csp_nonce}}" type="text/javascript">
+        {#        {{ form.media.js }} adding this actually breaks case update form >.< #}
+        <script nonce="{{ request.csp_nonce }}" type="text/javascript">
             $(function () {
                 function addUnitModal() {
                     $("#newUnitButton").modalForm({
