@@ -58,12 +58,13 @@
 # 58. Wyszukiwanie spraw po middle name
 # 59. Chronologia działań w dashboardzie
 60. Formularze zgłoszeniowe — przyemyślieć i zaimplementować
+61. Wywalają się pola select2, jeśli wcześniej był otwarty modal — widok aktualizacji sprawy.
 
 Instruklcja:
 1. Przypomnienia nieoczywiste
 2. Przytpomnienia o końcach kwarantanny
 3. Stany zdrowia są *ważne*
-
+4. Nie wszystkie powiadomienia musza być czerwone
 
 # Raporty:
 #     Liczba nowych zakażonych studentów/doktorantów

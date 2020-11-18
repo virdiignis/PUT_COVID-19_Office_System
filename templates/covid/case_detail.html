@@ -133,7 +133,6 @@
                     <th>{% translate "Incoming contact content" %}</th>
                     <th>{% translate "Description" %}</th>
                     <th>{% translate "Notes" %}</th>
-                    <th>{% translate "Case" %}</th>
                 </tr>
                 </thead>
 
@@ -168,13 +167,6 @@
                         {% else %}
                             —
                         {% endif %}</td>
-                        <td class="align-middle">
-                            {% if action.case %}
-                                <a href="{% url 'case_details' action.case.id %}">{{ action.case.title }}</a>
-                            {% else %}
-                                —
-                            {% endif %}
-                        </td>
                     </tr>
                 {% endfor %}
             </table>
