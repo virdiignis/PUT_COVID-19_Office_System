@@ -12,7 +12,7 @@ from django.utils.translation import gettext_lazy as _
 @shared_task(name='covid.isolations_over')
 def isolations_over():
     yesterday = timezone.now().date() - timedelta(days=1)
-    if Isolation.objects.filter(end_date=timezone.now().date()).exists():
+    if Isolation.objects.filter(end_date=yesterday).exists():
         for isolation in Isolation.objects.filter(end_date=yesterday):
             datetime = localtime(timezone.now()).replace(hour=16, minute=0, second=0)
             notes = _("Make sure to update their health state")

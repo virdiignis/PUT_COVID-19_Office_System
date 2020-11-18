@@ -33,7 +33,7 @@ class CaseListView(LoginRequiredMixin, ListView):
         if open == "None":
             q = Case.objects.order_by('-date_open', '-date_closed')
         elif open == "true":
-            q = Case.objects.filter(Q(date_closed__isnull=True)).order_by('-date_open')
+            q = Case.objects.filter(date_closed__isnull=True).order_by('-date_open')
         else:
             q = Case.objects.filter(date_closed__isnull=False).order_by('-date_closed')
 
