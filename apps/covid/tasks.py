@@ -4,7 +4,7 @@ from celery import shared_task
 from django.utils import timezone
 from django.utils.timezone import localtime
 
-from apps.covid.models import Isolation
+from apps.covid.models import Isolation, Person
 from apps.office.models import Reminder, Worker
 from django.utils.translation import gettext_lazy as _
 
@@ -16,10 +16,11 @@ def isolations_over():
         for isolation in Isolation.objects.filter(end_date=yesterday):
             datetime = localtime(timezone.now()).replace(hour=16, minute=0, second=0)
             notes = _("Make sure to update their health state")
-            if isolation.person.isolationroom is not None:
-                place = _("in DS4 room {nr} ").format(nr=isolation.person.isolationroom.number)
+            try:
+                room = isolation.person.isolationroom
+                place = _("in DS4 room {nr} ").format(nr=room.number)
                 notes += _(" and isolation room info.")
-            else:
+            except Person.isolationroom.RelatedObjectDoesNotExist:
                 place = ""
                 notes += "."
 
