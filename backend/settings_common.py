@@ -23,8 +23,6 @@ SECRET_KEY = '=oees2o6!f&a33bk0#l2dk!eyo4+c4^hx%)ej#bt()vr1sg9(g'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['covid-app-dev.prv.put.poznan.pl', 'localhost']
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -34,6 +32,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'dal',
     'dal_select2',
     'bootstrap_modal_forms',
@@ -76,15 +75,13 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'backend.wsgi.application'
-
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'covid_office',
+        'NAME': 'covid_office_sites',
         'USER': 'covid_office',
         'PASSWORD': '',
         'HOST': '',
@@ -92,41 +89,17 @@ DATABASES = {
     }
 }
 
-CACHES = {
-    "default": {
-        "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "unix:/var/sockets/redis.sock",
-        "OPTIONS": {
-            "CLIENT_CLASS": "django_redis.client.DefaultClient"
-        },
-        "KEY_PREFIX": "covidcache"
-    }
-}
+# CACHES = {
+#     "default": {
+#         "BACKEND": "django_redis.cache.RedisCache",
+#         "LOCATION": "unix:/var/sockets/redis.sock",
+#         "OPTIONS": {
+#             "CLIENT_CLASS": "django_redis.client.DefaultClient"
+#         },
+#         "KEY_PREFIX": "covidcache"
+#     }
+# }
 
-CELERY_BROKER_URL = 'redis+socket:///var/sockets/redis.sock'
-CELERY_TIMEZONE = "Europe/Warsaw"
-CELERY_BEAT_SCHEDULE = {
-    'daily_report': {
-        'task': 'mailing.daily_report',
-        'schedule': crontab(minute=0, hour=7),
-    },
-    'isolations_over': {
-        'task': 'covid.isolations_over',
-        'schedule': crontab(minute=0, hour=6),
-    },
-    'weekly_report': {
-        'task': 'mailing.weekly_report',
-        'schedule': crontab(minute=0, hour=0, day_of_week='monday'),
-    },
-    'monthly_report': {
-        'task': 'mailing.monthly_report',
-        'schedule': crontab(minute=0, hour=0, day_of_month='1')
-    },
-    'shifts_takeovers': {
-        'task': 'office.shift_takeover',
-        'schedule': crontab(minute=40, hour='6,14,22')
-    }
-}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -159,6 +132,7 @@ LANGUAGES = (  # supported languages
 
 LOCALE_PATHS = [
     BASE_DIR / "apps/covid/locale",
+    BASE_DIR / "apps/mailing/locale",
     BASE_DIR / "apps/office/locale",
     BASE_DIR / "locale",
 ]
@@ -184,21 +158,19 @@ LOGOUT_REDIRECT_URL = '/'
 MEDIA_ROOT = 'media'
 MEDIA_URL = '/media/'
 
-X_FRAME_OPTIONS = 'SAMEORIGIN'
-
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-DEFAULT_FROM_EMAIL = "Biuro ds. COVID <biurocovid@put.poznan.pl>"
+DEFAULT_FROM_EMAIL = "Biuro ds. COVID-19 <biurocovid@put.poznan.pl>"
 SERVER_EMAIL = "COVID Office App <biurocovid@put.poznan.pl>"
 
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
+# SESSION_COOKIE_SECURE = True
 SECURE_HSTS_SECONDS = 31536000
 SECURE_HSTS_PRELOAD = True
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 
-SESSION_ENGINE = "django.contrib.sessions.backends.cached_db"
+# SESSION_ENGINE = "django.contrib.sessions.backends.cached_db"
 
 COMPRESS_ENABLED = True
 COMPRESS_URL = "/static/"
@@ -223,5 +195,4 @@ CSP_INCLUDE_NONCE_IN = [
 
 COMPRESS_CSP_NONCE = True
 
-with open(BASE_DIR / "backend/secrets.py") as F:
-    exec(compile(F.read(), filename="secrets.py", mode="exec"))
+from .secrets import *

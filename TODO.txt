@@ -58,7 +58,7 @@
 # 58. Wyszukiwanie spraw po middle name
 # 59. Chronologia działań w dashboardzie
 60. Formularze zgłoszeniowe — przyemyślieć i zaimplementować
-61. Wywalają się pola select2, jeśli wcześniej był otwarty modal — widok aktualizacji sprawy.
+# 61. Wywalają się pola select2, jeśli wcześniej był otwarty modal — widok aktualizacji sprawy.
 
 Instruklcja:
 1. Przypomnienia nieoczywiste

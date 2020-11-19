@@ -16,14 +16,9 @@ Including another URLconf
 from django.conf.urls.i18n import i18n_patterns
 from django.conf.urls.static import static
 
-from . import settings
-from .admin import covid_admin_site, office_admin_site
+from django.conf import settings
 from django.urls import path, include
 
 urlpatterns = [path('i18n/', include('django.conf.urls.i18n'))] + i18n_patterns(
-    path('', include("apps.office.urls")),
-    path('', include("apps.covid.urls")),
-    path('admin/covid/', covid_admin_site.urls),
-    path('admin/office/', office_admin_site.urls),
-    path('accounts/', include('django.contrib.auth.urls')),
+    path('', include("apps.forms.urls")),
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
