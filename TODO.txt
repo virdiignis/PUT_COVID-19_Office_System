@@ -62,6 +62,7 @@
 62. Przepisać jednostki ze struktury organizacyjnej.
 # 63. Suwak w izolacjach w edycji sprawy.
 64. Dodać screeny do instrukcji.
+65. Usunąć z PROV ten test od czasu XD.
 
 Instrukcja:
 1. Przypomnienia nieoczywiste
