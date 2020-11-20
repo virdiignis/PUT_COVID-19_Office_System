@@ -28,7 +28,7 @@
     <br>
     <div class="card">
         <div class="card-header"><h3>{% translate "People involved" %}</h3></div>
-        <div class="card-body">
+        <div class="card-body table-responsive">
             <table class="table">
                 <thead class="thead-dark">
                 <tr>
@@ -68,7 +68,7 @@
     <br>
     <div class="card">
         <div class="card-header"><h3>{% translate "Isolations in case" %}</h3></div>
-        <div class="card-body">
+        <div class="card-body table-responsive">
             {% if isolations %}
                 <table class="table">
                     <thead class="thead-dark">
@@ -122,7 +122,7 @@
     <br>
     <div class="card">
         <div class="card-header"><h3>{% translate "Actions history" %}</h3></div>
-        <div class="card-body">
+        <div class="card-body table-responsive">
             <table class="table">
                 <thead class="thead-dark">
                 <tr>
@@ -176,7 +176,7 @@
     {% if case.documents.exists %}
         <div class="card">
             <div class="card-header"><h3>{% translate "Documents" %}</h3></div>
-            <div class="card-body">
+            <div class="card-body table-responsive">
                 <table class="table">
                     <thead class="thead-dark">
                     <tr>
