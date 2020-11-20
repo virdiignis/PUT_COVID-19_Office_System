@@ -10,11 +10,13 @@ def prepare_report_context(start_date, end_date):
         "students_sick_new": HealthStateChange.objects.filter(change_to__considered_sick=True,
                                                               datetime__gte=start_date,
                                                               datetime__lte=end_date,
-                                                              person__role="S").count(),
+                                                              person__role="S").exclude(
+            change_from__considered_sick=True).count(),
         "students_sick_dorms_new": HealthStateChange.objects.filter(change_to__considered_sick=True,
                                                                     datetime__gte=start_date,
                                                                     datetime__lte=end_date,
-                                                                    person__role="S", ).exclude(person__dorm=0).count(),
+                                                                    person__role="S", ).exclude(
+            person__dorm=0, change_from__considered_sick=True).count(),
         "students_quarantined_new": Isolation.objects.filter(Q(ordered_on__gte=start_date,
                                                                ordered_on__lte=end_date) |
                                                              Q(added__gte=start_date,
@@ -28,7 +30,8 @@ def prepare_report_context(start_date, end_date):
         "employees_sick_new": HealthStateChange.objects.filter(change_to__considered_sick=True,
                                                                datetime__gte=start_date,
                                                                datetime__lte=end_date,
-                                                               person__role="E").count(),
+                                                               person__role="E").exclude(
+            change_from__considered_sick=True).count(),
         "employees_quarantined_new": Isolation.objects.filter(Q(ordered_on__gte=start_date,
                                                                 ordered_on__lte=end_date) |
                                                               Q(added__gte=start_date,
