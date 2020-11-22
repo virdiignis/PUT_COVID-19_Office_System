@@ -6,7 +6,7 @@ from django.utils.timezone import localtime
 
 from apps.covid.models import Isolation, Person
 from apps.office.models import Reminder, Worker
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import gettext as _
 
 
 @shared_task(name='covid.isolations_over')

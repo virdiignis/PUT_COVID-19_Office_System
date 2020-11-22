@@ -39,7 +39,6 @@ class WorkerDetailView(LoginRequiredMixin, DetailView):
 
 class ReminderDashboardView(LoginRequiredMixin, ListView):
     model = Reminder
-    paginate_by = 3
     queryset = Reminder.objects.filter(read_by__isnull=True).order_by("datetime")
     allow_empty = True
     template_name = 'covid/dashboard/reminders.html'

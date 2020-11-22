@@ -64,6 +64,7 @@
 64. Dodać screeny do instrukcji.
 65. Usunąć z PROV ten test od czasu XD.
 # 66. Nie zliczać zmian chory -> chory!
+# 67. Niech wszystkie przypomnienia się wyświetlają w dashboardzie bez paginacji.
 
 
 Instrukcja:
