@@ -24,7 +24,7 @@ def send_report(subject: str, content: str, start_date, end_date):
 
 @shared_task(name='mailing.daily_report')
 def daily_report():
-    today = timezone.now().date()
+    today = timezone.localdate()
     yesterday = today - timedelta(days=1)
     send_report(
         f"Dzienny raport Biura ds. Covid za {date_filter(yesterday, 'j E Y')}",
@@ -41,7 +41,7 @@ Obsada Biura''',
 
 @shared_task(name='mailing.weekly_report')
 def weekly_report():
-    today = timezone.now().date()
+    today = timezone.localdate()
     yesterday = today - timedelta(days=1)
     last_week = yesterday - timedelta(days=6)
 
@@ -65,7 +65,7 @@ Obsada Biura''',
 
 @shared_task(name='mailing.monthly_report')
 def monthly_report():
-    today = timezone.now().date()
+    today = timezone.localdate()
     yesterday = today - timedelta(days=1)
     last_month = date(year=yesterday.year, month=yesterday.month, day=1)
 

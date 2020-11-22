@@ -162,7 +162,7 @@ class Isolation(Model):
     added = models.DateField(auto_now_add=True)
 
     def active(self):
-        return timezone.now().date() <= self.end_date
+        return timezone.localdate() <= self.end_date
 
     def __str__(self):
         return _("{person}'s isolation in case {case}").format(person=self.person, case=self.case)

@@ -11,10 +11,10 @@ from django.utils.translation import gettext as _
 
 @shared_task(name='covid.isolations_over')
 def isolations_over():
-    yesterday = timezone.now().date() - timedelta(days=1)
+    yesterday = timezone.localdate() - timedelta(days=1)
     if Isolation.objects.filter(end_date=yesterday).exists():
         for isolation in Isolation.objects.filter(end_date=yesterday):
-            datetime = localtime(timezone.now()).replace(hour=16, minute=0, second=0)
+            datetime = localtime().replace(hour=16, minute=0, second=0)
             notes = _("Make sure to update their health state")
             try:
                 room = isolation.person.isolationroom
