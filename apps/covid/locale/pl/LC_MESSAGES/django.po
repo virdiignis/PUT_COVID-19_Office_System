@@ -427,7 +427,7 @@ msgstr "Upewnij się, aby zaktualizować stan zdrowia i sprawę"
 #: apps/covid/tasks.py:20
 #, python-brace-format
 msgid "in DS4 room {nr} "
-msgstr "w DS4 pokój {nr}"
+msgstr "w DS4 pokój {nr} "
 
 #: apps/covid/tasks.py:21
 msgid " and isolation room info."
@@ -436,7 +436,7 @@ msgstr " i informacje o pokoju izolacji."
 #: apps/covid/tasks.py:29
 #, python-brace-format
 msgid "{person} ends their isolation {place}today."
-msgstr "{person} kończy dzisiaj swoją kwarantannę{place}."
+msgstr "{person} kończy dzisiaj swoją kwarantannę {place}."
 
 #: apps/covid/views.py:166
 msgid "Case already closed."
