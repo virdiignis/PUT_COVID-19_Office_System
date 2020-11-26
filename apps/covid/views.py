@@ -313,7 +313,8 @@ class PersonUpdateModalView(HasWriteAccessMixin, BSModalUpdateView):
                     ).save()
 
                 new.save()
-                AutomaticLogActions(user=self.request.user).change_person(new, changed_data)
+                verbose_changed_data = map(lambda x: str(form.fields[x].label), changed_data)
+                AutomaticLogActions(user=self.request.user).change_person(new, verbose_changed_data)
 
             return redirect(self.get_success_url())
         else:
