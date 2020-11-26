@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'apps.office',
     'apps.covid',
     'apps.mailing',
-    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [
@@ -223,5 +222,4 @@ CSP_INCLUDE_NONCE_IN = [
 
 COMPRESS_CSP_NONCE = True
 
-with open(BASE_DIR / "backend/secrets.py") as F:
-    exec(compile(F.read(), filename="secrets.py", mode="exec"))
+from .secrets import *
