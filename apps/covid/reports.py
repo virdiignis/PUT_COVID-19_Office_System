@@ -16,7 +16,7 @@ def prepare_report_context(start_date, end_date):
                                                                     datetime__gte=start_date,
                                                                     datetime__lte=end_date,
                                                                     person__role="S", ).exclude(
-            person__dorm=0, change_from__considered_sick=True).count(),
+            change_from__considered_sick=True).exclude(person__dorm=0).count(),
         "students_quarantined_new": Isolation.objects.filter(Q(ordered_on__gte=start_date,
                                                                ordered_on__lte=end_date) |
                                                              Q(added__gte=start_date,
