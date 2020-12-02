@@ -67,7 +67,7 @@
                 });
                 $(".markResolved").on('click', markResolved);
                 $(".personDetailsLink").on('click', function () {
-                    top.location.href = '{% url "person_details" 101010 %}'.replace("101010", $(this).attr("pid"));
+                    top.location.href = '{% url "worker_details" 101010 %}'.replace("101010", $(this).attr("pid"));
                 });
             });
         </script>
