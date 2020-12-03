@@ -31,11 +31,11 @@ class CaseListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         open = self.request.GET.get('open', "None")
         if open == "None":
-            q = Case.objects.order_by('-date_open', '-date_closed')
+            q = Case.objects
         elif open == "true":
-            q = Case.objects.filter(date_closed__isnull=True).order_by('-date_open')
+            q = Case.objects.filter(date_closed__isnull=True)
         else:
-            q = Case.objects.filter(date_closed__isnull=False).order_by('-date_closed')
+            q = Case.objects.filter(date_closed__isnull=False)
 
         search = self.request.GET.get('search', None)
         if search is not None:
@@ -46,7 +46,7 @@ class CaseListView(LoginRequiredMixin, ListView):
                 Q(people__last_name__istartswith=search)
             )
 
-        q = q.distinct()
+        q = q.distinct().order_by('-last_edit')
         return q
 
     def get_context_data(self, **kwargs):
@@ -211,7 +211,7 @@ class ActionDashboardView(LoginRequiredMixin, ListView):
 class CaseDashboardView(LoginRequiredMixin, ListView):
     model = Case
     paginate_by = 5
-    queryset = Case.objects.filter(date_closed__isnull=True).order_by("-date_open")
+    queryset = Case.objects.filter(date_closed__isnull=True).order_by("-last_edit")
     allow_empty = True
     template_name = 'covid/dashboard/cases.html'
 

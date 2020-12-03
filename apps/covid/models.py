@@ -137,6 +137,7 @@ class Case(Model):
     people = models.ManyToManyField(Person, related_name="cases", blank=True, verbose_name=_("people"))
     date_open = models.DateField(auto_now_add=True, verbose_name=_("date open"))
     date_closed = models.DateField(null=True, blank=True, verbose_name=_("date closed"))
+    last_edit = models.DateTimeField(auto_now=True, verbose_name=_("last edit"))
 
     def __str__(self):
         return self.title

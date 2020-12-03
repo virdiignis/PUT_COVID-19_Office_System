@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-17 14:44+0100\n"
+"POT-Creation-Date: 2020-12-04 00:41+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -69,7 +69,7 @@ msgid "End date"
 msgstr "Data końca"
 
 #: apps/covid/models.py:11 apps/covid/models.py:24 apps/covid/models.py:50
-#: apps/covid/models.py:62 apps/covid/models.py:201
+#: apps/covid/models.py:62 apps/covid/models.py:202
 msgid "name"
 msgstr "Nazwa"
 
@@ -237,7 +237,7 @@ msgstr "rola"
 msgid "dorm"
 msgstr "DS"
 
-#: apps/covid/models.py:116 apps/covid/models.py:122 apps/covid/models.py:150
+#: apps/covid/models.py:116 apps/covid/models.py:122 apps/covid/models.py:151
 msgid "person"
 msgstr "osoba"
 
@@ -245,7 +245,7 @@ msgstr "osoba"
 msgid "people"
 msgstr "osoby"
 
-#: apps/covid/models.py:121 apps/covid/models.py:176
+#: apps/covid/models.py:121 apps/covid/models.py:177
 msgid "datetime"
 msgstr "data i czas"
 
@@ -277,146 +277,151 @@ msgstr "data otwarcia"
 msgid "date closed"
 msgstr "data zamknięcia"
 
-#: apps/covid/models.py:145 apps/covid/models.py:151 apps/covid/models.py:189
-#: apps/covid/models.py:205
+#: apps/covid/models.py:140
+#| msgid "last name"
+msgid "last edit"
+msgstr "ostatnio edytowano"
+
+#: apps/covid/models.py:146 apps/covid/models.py:152 apps/covid/models.py:190
+#: apps/covid/models.py:206
 msgid "case"
 msgstr "sprawa"
 
-#: apps/covid/models.py:146
+#: apps/covid/models.py:147
 msgid "cases"
 msgstr "sprawy"
 
-#: apps/covid/models.py:153
+#: apps/covid/models.py:154
 msgid "ordered by"
 msgstr "nałożona przez"
 
-#: apps/covid/models.py:154
+#: apps/covid/models.py:155
 msgid "ordered on"
 msgstr "data nałożenia"
 
-#: apps/covid/models.py:155
+#: apps/covid/models.py:156
 msgid "start date"
 msgstr "data początku"
 
-#: apps/covid/models.py:156
+#: apps/covid/models.py:157
 msgid "end date"
 msgstr "data zakończenia"
 
-#: apps/covid/models.py:157
+#: apps/covid/models.py:158
 msgid "Home"
 msgstr "Dom"
 
-#: apps/covid/models.py:159
+#: apps/covid/models.py:160
 msgid "whereabouts"
 msgstr "miejsce przebywania"
 
-#: apps/covid/models.py:161
+#: apps/covid/models.py:162
 msgid "cause"
 msgstr "powód"
 
-#: apps/covid/models.py:168
+#: apps/covid/models.py:169
 #, python-brace-format
 msgid "{person}'s isolation in case {case}"
 msgstr "Izolacja {person} w sprawie {case}"
 
-#: apps/covid/models.py:171
+#: apps/covid/models.py:172
 msgid "isolation"
 msgstr "izolacja"
 
-#: apps/covid/models.py:172
+#: apps/covid/models.py:173
 msgid "isolations"
 msgstr "izolacje"
 
-#: apps/covid/models.py:177
+#: apps/covid/models.py:178
 msgid "made by"
 msgstr "wykonane przez"
 
-#: apps/covid/models.py:178
+#: apps/covid/models.py:179
 msgid "Own action"
 msgstr "Własne działanie"
 
-#: apps/covid/models.py:179
+#: apps/covid/models.py:180
 msgid "Email"
 msgstr "Email"
 
-#: apps/covid/models.py:180
+#: apps/covid/models.py:181
 msgid "Phone call"
 msgstr "Telefon"
 
-#: apps/covid/models.py:181
+#: apps/covid/models.py:182
 msgid "based on"
 msgstr "na podstawie"
 
-#: apps/covid/models.py:184
+#: apps/covid/models.py:185
 msgid "contact from"
 msgstr "kontaktujący się"
 
-#: apps/covid/models.py:185
+#: apps/covid/models.py:186
 msgid "incoming contact content"
 msgstr "informacje z kontaktu"
 
-#: apps/covid/models.py:186
+#: apps/covid/models.py:187
 msgid "action description"
 msgstr "opis działania"
 
-#: apps/covid/models.py:187
+#: apps/covid/models.py:188
 msgid "notes"
 msgstr "notatki"
 
-#: apps/covid/models.py:195
+#: apps/covid/models.py:196
 msgid "action"
 msgstr "działanie"
 
-#: apps/covid/models.py:196
+#: apps/covid/models.py:197
 msgid "actions"
 msgstr "działania"
 
-#: apps/covid/models.py:200
+#: apps/covid/models.py:201
 msgid "file"
 msgstr "plik"
 
-#: apps/covid/models.py:202
+#: apps/covid/models.py:203
 msgid "upload date"
 msgstr "data przesłania"
 
-#: apps/covid/models.py:204
+#: apps/covid/models.py:205
 msgid "uploaded by"
 msgstr "przesłane przez"
 
-#: apps/covid/models.py:208
+#: apps/covid/models.py:209
 msgid "{Document {name} in case {case}"
 msgstr "Dokument {name} w sprawie {case}"
 
-#: apps/covid/models.py:211
+#: apps/covid/models.py:212
 msgid "document"
 msgstr "dokument"
 
-#: apps/covid/models.py:212
+#: apps/covid/models.py:213
 msgid "documents"
 msgstr "dokumenty"
 
-#: apps/covid/models.py:216
+#: apps/covid/models.py:217
 msgid "number"
 msgstr "numer"
 
-#: apps/covid/models.py:218
+#: apps/covid/models.py:219
 msgid "resident"
 msgstr "mieszkaniec"
 
-#: apps/covid/models.py:219
+#: apps/covid/models.py:220
 msgid "is cleaned"
 msgstr "posprzątany"
 
-#: apps/covid/models.py:222
+#: apps/covid/models.py:223
 #, python-brace-format
 msgid "Room {number}"
 msgstr "Pokój {number}"
 
-#: apps/covid/models.py:225
+#: apps/covid/models.py:226
 msgid "isolation room"
 msgstr "pokój izolacji"
 
-#: apps/covid/models.py:226
+#: apps/covid/models.py:227
 msgid "isolation rooms"
 msgstr "pokoje izolacji"
 
@@ -424,33 +429,33 @@ msgstr "pokoje izolacji"
 msgid "Make sure to update their health state"
 msgstr "Upewnij się, aby zaktualizować stan zdrowia i sprawę"
 
-#: apps/covid/tasks.py:20
+#: apps/covid/tasks.py:21
 #, python-brace-format
 msgid "in DS4 room {nr} "
-msgstr "w DS4 pokój {nr} "
+msgstr " w DS4 pokój {nr}"
 
-#: apps/covid/tasks.py:21
+#: apps/covid/tasks.py:22
 msgid " and isolation room info."
 msgstr " i informacje o pokoju izolacji."
 
-#: apps/covid/tasks.py:29
+#: apps/covid/tasks.py:30
 #, python-brace-format
 msgid "{person} ends their isolation {place}today."
-msgstr "{person} kończy dzisiaj swoją kwarantannę {place}."
+msgstr "{person} kończy dzisiaj swoją kwarantannę{place}."
 
-#: apps/covid/views.py:166
+#: apps/covid/views.py:167
 msgid "Case already closed."
 msgstr "Sprawa jest już zamknięta."
 
-#: apps/covid/views.py:179
+#: apps/covid/views.py:180
 msgid "Case is open."
 msgstr "Sprawa jest otwarta."
 
-#: apps/covid/views.py:245
+#: apps/covid/views.py:246
 msgid "Incoming contact content"
 msgstr "Informacje z kontaktu"
 
-#: apps/covid/views.py:255
+#: apps/covid/views.py:256
 msgid "Notes"
 msgstr "Notatki"
 

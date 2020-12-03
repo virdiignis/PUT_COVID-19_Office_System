@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-17 14:44+0100\n"
+"POT-Creation-Date: 2020-12-04 00:41+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,38 +20,38 @@ msgstr ""
 "%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n"
 "%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
-#: templates/base.html:74 templates/registration/login.html:10
+#: templates/base.html:101 templates/registration/login.html:10
 msgid "Logout"
 msgstr "Wyloguj"
 
-#: templates/base.html:76 templates/registration/login.html:32
+#: templates/base.html:103 templates/registration/login.html:32
 msgid "Login"
 msgstr "Zaloguj"
 
-#: templates/base.html:91
+#: templates/base.html:119
 msgid "Dashboard"
 msgstr "Dashboard"
 
-#: templates/base.html:93 templates/covid/dashboard/reminders.html:6
+#: templates/base.html:121 templates/covid/dashboard/reminders.html:6
 #: templates/office/reminders.html:15
 msgid "Reminders"
 msgstr "Przypomnienia"
 
-#: templates/base.html:95 templates/covid/actions.html:23
+#: templates/base.html:123 templates/covid/actions.html:23
 #: templates/covid/case_update.html:94
 msgid "Actions"
 msgstr "Działania"
 
-#: templates/base.html:97 templates/covid/cases.html:11
+#: templates/base.html:125 templates/covid/cases.html:11
 msgid "Cases"
 msgstr "Sprawy"
 
-#: templates/base.html:99 templates/covid/isolation_rooms.html:6
+#: templates/base.html:127 templates/covid/isolation_rooms.html:6
 #: templates/covid/isolation_rooms_update.html:8
 msgid "Isolation rooms"
 msgstr "Pokoje izolacji"
 
-#: templates/base.html:101
+#: templates/base.html:129
 msgid "Reports"
 msgstr "Raporty"
 
@@ -143,14 +143,13 @@ msgstr "Nowe działanie niezwiązane"
 msgid "Description"
 msgstr "Opis"
 
-#: templates/covid/actions.html:40 templates/covid/case_detail.html:136
-#: templates/covid/person_detail.html:133 templates/covid/reports.html:196
-#: templates/office/worker_detail.html:35
+#: templates/covid/actions.html:40 templates/covid/person_detail.html:133
+#: templates/covid/reports.html:196 templates/office/worker_detail.html:35
 msgid "Case"
 msgstr "Sprawa"
 
 #: templates/covid/actions.html:63 templates/covid/actions.html:71
-#: templates/covid/case_detail.html:159 templates/covid/case_detail.html:167
+#: templates/covid/case_detail.html:158 templates/covid/case_detail.html:166
 #: templates/covid/person_detail.html:151
 #: templates/covid/person_detail.html:159
 #: templates/office/worker_detail.html:48
@@ -268,20 +267,20 @@ msgstr "Brak izolacji w sprawie."
 msgid "Actions history"
 msgstr "Historia działań"
 
-#: templates/covid/case_detail.html:186 templates/covid/case_update.html:178
+#: templates/covid/case_detail.html:178 templates/covid/case_update.html:178
 msgid "Documents"
 msgstr "Dokumenty"
 
-#: templates/covid/case_detail.html:191
+#: templates/covid/case_detail.html:183
 msgctxt "document"
 msgid "Name"
 msgstr "Nazwa"
 
-#: templates/covid/case_detail.html:192
+#: templates/covid/case_detail.html:184
 msgid "Upload date"
 msgstr "Data przesłania"
 
-#: templates/covid/case_detail.html:193
+#: templates/covid/case_detail.html:185
 msgid "Uploaded by"
 msgstr "Przesłane przez"
 
@@ -425,7 +424,6 @@ msgid "Yes"
 msgstr "Tak"
 
 #: templates/covid/isolation_rooms.html:33
-#, fuzzy
 #| msgid "Note"
 msgid "No"
 msgstr "Nie"
