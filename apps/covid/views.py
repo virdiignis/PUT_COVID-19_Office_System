@@ -46,6 +46,7 @@ class CaseListView(LoginRequiredMixin, ListView):
                 Q(people__last_name__istartswith=search)
             )
 
+        q = q.distinct()
         return q
 
     def get_context_data(self, **kwargs):
