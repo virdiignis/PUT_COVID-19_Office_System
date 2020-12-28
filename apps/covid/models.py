@@ -156,7 +156,8 @@ class Isolation(Model):
     start_date = models.DateField(verbose_name=_("start date"))
     end_date = models.DateField(verbose_name=_("end date"))
     whereabouts = models.CharField(max_length=1, null=True, blank=False, default="H", choices=(("H", _("Home")),
-                                                                                               ("D", "DS4")),
+                                                                                               ("D", "DS4"),
+                                                                                               ("S", _("Hospital"))),
                                    verbose_name=_("whereabouts"))
     cause = models.ForeignKey(IsolationCause, on_delete=models.SET_NULL, null=True, blank=False,
                               verbose_name=_("cause"))

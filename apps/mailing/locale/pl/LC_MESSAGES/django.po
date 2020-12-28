@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-04 00:41+0100\n"
+"POT-Creation-Date: 2020-12-28 23:19+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,7 +29,6 @@ msgid "New students' infections"
 msgstr "Nowe zakażenia studentów"
 
 #: apps/mailing/report.py:63
-#| msgid "New students' infections"
 msgid "New students' infections at the dorms"
 msgstr "Nowe zakażenia studentów w domach studenckich"
 
@@ -38,7 +37,6 @@ msgid "New students' quarantines"
 msgstr "Nowe kwarantanny studentów"
 
 #: apps/mailing/report.py:65
-#| msgid "New students' quarantines"
 msgid "New students' quarantines at the dorms"
 msgstr "Nowe kwarantanny studentów w domach studenckich"
 
