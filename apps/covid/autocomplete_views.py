@@ -30,9 +30,9 @@ class UnitAutocomplete(autocomplete.Select2QuerySetView):
 
         if self.q:
             qs = qs.filter(
-                Q(name__istartswith=self.q) |
-                Q(report_students_email__istartswith=self.q) |
-                Q(report_employees_email__istartswith=self.q)
+                Q(name__icontains=self.q) |
+                Q(report_students_email__icontains=self.q) |
+                Q(report_employees_email__icontains=self.q)
             )
 
         return qs
