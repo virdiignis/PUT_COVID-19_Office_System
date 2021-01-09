@@ -65,6 +65,7 @@
 # 65. Nie zliczać zmian chory -> chory!
 # 66. Niech wszystkie przypomnienia się wyświetlają w dashboardzie bez paginacji.
 # 67. Dodać last edit do spraw.
+68. Dodać klasę form-control do inputów, form-control-file do file-inputów itd.
 
 # Instrukcja:
 # 1. Przypomnienia nieoczywiste

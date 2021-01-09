@@ -7,3 +7,12 @@ getenforce
 setenforce
 semodule -DB
 semodule -B
+
+
+sudo su postgres
+psql
+CREATE DATABASE collaborative_platform;
+CREATE USER collaborative_platform WITH PASSWORD 'here_insert_the_password';
+GRANT ALL PRIVILEGES ON DATABASE collaborative_platform TO collaborative_platform;
+\q
+exit
