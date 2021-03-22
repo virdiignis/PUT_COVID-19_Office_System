@@ -92,7 +92,8 @@ class Person(Model):
     email = models.EmailField(null=True, blank=True, unique=True)
     phone_number = PhoneNumberField(null=True, blank=True, unique=True, verbose_name=_("phone number"))
     role = models.CharField(max_length=1, default="N", choices=(("S", _("Student")),
-                                                                ("E", _("Employee")),
+                                                                ("E", _("Non-teacher Employee")),
+                                                                ("T", _("Teacher Employee")),
                                                                 ("N", _("None"))), verbose_name=_("role"))
     health_state = models.ForeignKey(HealthState, on_delete=models.SET_NULL, null=True, blank=False,
                                      verbose_name=_("health state"))

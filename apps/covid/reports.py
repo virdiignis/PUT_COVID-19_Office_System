@@ -37,6 +37,16 @@ def prepare_report_context(start_date, end_date):
                                                               Q(added__gte=start_date,
                                                                 added__lte=end_date),
                                                               person__role="E").count(),
+        "teachers_sick_new": HealthStateChange.objects.filter(change_to__considered_sick=True,
+                                                               datetime__gte=start_date,
+                                                               datetime__lte=end_date,
+                                                               person__role="T").exclude(
+            change_from__considered_sick=True).count(),
+        "teachers_quarantined_new": Isolation.objects.filter(Q(ordered_on__gte=start_date,
+                                                                ordered_on__lte=end_date) |
+                                                              Q(added__gte=start_date,
+                                                                added__lte=end_date),
+                                                              person__role="T").count(),
         "isolations": Isolation.objects.filter(Q(ordered_on__gte=start_date,
                                                  ordered_on__lte=end_date) |
                                                Q(added__gte=start_date,
